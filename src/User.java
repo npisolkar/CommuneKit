@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class User {
     private int userID;
     private String userName;
@@ -9,8 +11,9 @@ public class User {
     private boolean isBanned;
     private boolean isAdmin;
     private boolean isOwner;
+    private ArrayList<Review> reviews;
 
-    public User(int userID, String userName, String password, String email, String phone, String address, String bio) {
+    public User(int userID, String userName, String password, String email, String phone, String address, String bio, Review[] reviews) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -21,6 +24,7 @@ public class User {
         this.isBanned = false;
         this.isAdmin = false;
         this.isOwner = false;
+        this.reviews = new ArrayList<Review>();
     }
 
     public User(int userID, String userName, String password, String email, String phone, String address, String bio, boolean isBanned, boolean isAdmin, boolean isOwner) {
