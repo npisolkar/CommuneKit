@@ -12,8 +12,12 @@ public class User {
     private boolean isAdmin;
     private boolean isOwner;
     private ArrayList<Review> reviews;
+    private float rating;
+    private ArrayList<Item> items;
+    private ArrayList<Item> lentItems
+    private ArrayList<Item> borrowedItems;
 
-    public User(int userID, String userName, String password, String email, String phone, String address, String bio, Review[] reviews) {
+    public User(int userID, String userName, String password, String email, String phone, String address, String bio) {
         this.userID = userID;
         this.userName = userName;
         this.password = password;
@@ -25,6 +29,11 @@ public class User {
         this.isAdmin = false;
         this.isOwner = false;
         this.reviews = new ArrayList<Review>();
+        this.rating = 0;
+        this.items = new ArrayList<Item>();
+        this.lentItems = new ArrayList<Item>();
+        this.borrowedItems = new ArrayList<Item>();
+
     }
 
     public User(int userID, String userName, String password, String email, String phone, String address, String bio, boolean isBanned, boolean isAdmin, boolean isOwner) {
@@ -101,7 +110,32 @@ public class User {
         isOwner = owner;
     }
 
-    public void
+    public float getRating() {
+        return rating;
+    }
+
+
+    public void updateRating() {
+        if (reviews.size() == 0) {
+            return;
+        }
+
+        float sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+        rating = sum / reviews.size();
+    }
+
+    public void addReview(Review review) {
+        reviews.add(review);
+    }
+
+    public ArrayList<Review> getReviews() {
+        return reviews;
+    }
+
+
 
 
 
