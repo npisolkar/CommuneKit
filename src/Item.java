@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+
 public class Item {
     private String itemName;
     private String itemDescription;
     private String itemID;
     private String itemCategory;
-    private int itemRating;
+    private float itemRating;
     private boolean itemStatus;
     private ArrayList<Review> reviews;
 
@@ -14,6 +16,8 @@ public class Item {
         this.itemCategory = itemCategory;
         this.itemRating = itemRating;
         this.itemStatus = false;
+        this.reviews = new ArrayList<>();
+
     }
 
     public String getItemName() {
@@ -65,6 +69,6 @@ public class Item {
         for (Review review : reviews) {
             sum += review.getRating();
         }
-        rating = sum / reviews.size();
+        itemRating = sum / reviews.size();
     }
 }
