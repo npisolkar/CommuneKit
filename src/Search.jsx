@@ -1,3 +1,5 @@
+/* Search: The page handling all searching for items. The select drop-downs
+*  allow one to sort or filter by all the methods listed. */
 import './styles.css'
 import { useState } from 'react'
 import {ToggleTextField} from "./Profile.jsx";

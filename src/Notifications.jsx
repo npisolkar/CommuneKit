@@ -1,3 +1,4 @@
+/* Notifications: The page containing an account's notifications */
 import './styles.css'
 import { useState } from 'react'
 
