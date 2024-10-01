@@ -2,14 +2,13 @@
 *  allow one to sort or filter by all the methods listed. */
 import './styles.css'
 import { useState } from 'react'
-import {ToggleTextField} from "./Profile.jsx";
 
 export default function Search() {
     return (
         <>
             <div className="search-bar">
                 <div>
-                    <ToggleTextField height={"50px"} width={"1000px"} className="search-input"/>
+                    <input type="text" style={{height:"50px", width:"1000px"}} className="search-input"/>
                 </div>
                 <div>
                     <button>Search</button>
