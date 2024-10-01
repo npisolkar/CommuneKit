@@ -1,0 +1,13 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  "include": [
+    "vine-env.d.ts"
+  ],
+  "compilerOptions": {
+    "allowJS": true
+  }
+}

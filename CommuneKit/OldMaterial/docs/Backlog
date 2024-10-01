@@ -1,0 +1,180 @@
+Project Backlog - CommuneKit
+Team 35 - Edward Bi, Rohan Gaddam, Nikhil Pisolkar, Ash Wang, Mingfan Xie
+Problem Statement
+“Over the course of a month, I might expect to need a large fold-out table once, maybe twice. My neighbors probably do the same, which begs the question: do both of us need our own folding tables? There are a variety of goods whose patterns of use make individual ownership unnecessarily expensive, redundant, and inefficient. Lawnmowers, steam cleaners, party supplies, tools, and a variety of other items. CommuneKit provides a platform for members of the same community to list items that would otherwise be collecting dust. Users can create an account and list items, and register prices of things, borrow from friends, and search within a radius to find items near them. Unlike Craigslist/Facebook Marketplace, CommuneKit is tailored towards use within smaller communities, so there is not a focus on shipping/long range borrowing, and works on reviews and community consensus to work as a primarily a free to use site.”
+Background Information
+Anyone who might run into the aforementioned problem of having large items they rarely use and would be willing to lend out to of the community, or of being loth to buy items they might not get much use out of, may be counted as part of our audience.
+
+While apps like Craigslist and NextDoor may allow for such functionality, that is not their primary purpose, and they are not built especially to handle it. Craigslist includes many listed items that are not items for purchase/lending including jobs and housing while facebook marketplace does not support the idea of temporary borrowing, and is mainly for purchasing items. CommuneKit will fill that gap. This project will be a specialized product for a specific scenario. CommuneKit will be structured exclusively around the lending and borrowing functionality.
+
+Functional Requirements
+As a User, I would like to:
+Login and Account Management
+Land on a screen prompting for login or account creation.
+Create a new account.
+Log in to the website with a password-protected account.
+Log in and use the site concurrently with other users.
+Edit my user profile, including username, email, profile picture, address, and bio.
+Upload a profile picture via file upload.
+Have a default profile picture if none is uploaded.
+Delete my account.
+Log out of my account.
+Profile Features
+Upload profile pictures of any size with compression (optional).
+Upload a profile picture using the camera (optional).
+View another user's profile by clicking on it.
+Send messages to other users.
+Receive messages from other users.
+See the message history between me and another user.
+View reviews that other users have given me.
+Block messages from other users (optional).
+Rate and review other users.
+Report other users for abusive behavior.
+View admin warnings about my account or items.
+Be notified when suspended or blocked, and have my account impacted accordingly.
+Item Browsing and Interaction
+View a general map area where items or users are located (optional).
+View items available within my community (optional).
+Click on a home button to navigate to the homepage.
+See a menu at the top of the screen for site navigation.
+Click a back button to return to the previous page.
+Click on a specific item to view more details.
+Refresh the page to view any updated information.
+After clicking on a specific item, save my place on the page/scrollbar when returning to the previous page.
+As a Borrower, I would like to:
+Search and Sort Items
+View all items within a 1-10 mile radius.
+Sort items by map distance.
+Sort items by exact keyword match.
+Sort items by 'best' match.
+Sort items by ratings.
+View how many times an item has been borrowed.
+Sort by driving distance/drive time (optional).
+Filter items by category.
+Scroll easily through a list of items that match my search criteria.
+View Item Details
+See ratings for a listed item.
+See images for a listed item.
+Read descriptions for a listed item.
+See when the listed item was posted.
+Read reviews for a listed item.
+Read reviews for the lender of a listed item.
+See the delivery/pickup preferences of the lender.
+Save and Manage Items
+Save items of interest.
+Unsave items.
+View saved items in a 'saved' folder.
+Remove all items from my saved folder with one button press.
+Borrowing Management
+See the items I am currently borrowing.
+See the date when I started borrowing an item.
+View items I have borrowed in the past.
+Communication and Reviews
+Send messages to the lender (optional).
+Receive messages from the lender (optional).
+Review items after I borrow them.
+Review lenders after borrowing from them.
+Report accounts that engage in inappropriate behavior.
+Report inappropriate items.
+Notifications and Reimbursements
+Reimburse the lender for damages (optional).
+Receive a notification if an item I am looking for is listed (optional).
+Receive a notification if an item I am looking for has been borrowed by another user (optional).
+As a Lender, I would like to:
+Item Posting and Management
+Post items that I’d like to lend.
+Upload images for my posts.
+Create descriptions for my posts.
+Edit the descriptions of my posts.
+Delete my posts.
+Edit or update a listing for an item.
+Upload multiple images for an item at once.
+Upload images of any size, compressing when necessary (optional).
+Add a security deposit requirement for an item (optional).
+Borrower and Item Tracking
+See a current list of users borrowing my items.
+See which user is borrowing which item.
+View the history of items I have lent in the past.
+View items I am currently lending out.
+Borrower Interaction and Reviews
+Review borrowers after lending them an item.
+Report borrowers who interact inappropriately.
+Receive notifications when a report I filed has been received.
+Receive notifications when a report I filed has been processed or acted on.
+Item Organization and Sorting
+View all my listed items with their information and status on one page.
+Sort lent items by lend date.
+Sort lent items by expected return date.
+Sort items in search by listing date.
+Sort items in search by last lend date.
+Sort items in search by last return date.
+Notifications and Reimbursement
+Receive notifications if my item has been reported or taken down.
+Arrange for reimbursement for damages to my items (optional).
+Receive payment for deposits or reimbursements (optional).
+Receive automated reminders when an item is due to be returned soon.
+Send automated reminders to borrowers if the return date is approaching or has passed.
+Receive a notification if an item has been requested for extension by the borrower (optional).
+Be notified if an item is marked as unavailable temporarily or during specific time frames.
+Be notified of any user feedback or ratings on my items, including suggestions for improving listings.
+      As an Admin, I would like to:
+Account and Report Management
+Log in to an admin account.
+View a list of all reports.
+Sort the report list by date and time (ascending and descending).
+Take down inappropriate posts.
+Suspend user accounts.
+Permanently ban user accounts.
+Delete user accounts.
+Create and send a message to a user when their account is removed.
+Create and send a message to a user when an item is removed.
+Be notified when an account or item is reported.
+Receive email notifications for critical reports.
+Look up a user by their username.
+View messages sent by reporters explaining the reasons for reports.
+Search for specific users.
+View all reports submitted by a specific user.
+See a history of reports made against a user or an item.
+Post and User Moderation
+Temporarily disable user accounts pending investigation, with an option to restore.
+      As a Project Owner/Manager, I would like to:
+Admin Management
+Log in with an owner username and password.
+View a list of all admin accounts.
+Create new admin accounts.
+Update admin account information.
+Delete admin accounts.
+View the actions taken by all admin accounts.
+      As a Developer, I would like to:
+Code Testing and Version Control
+Have unit tests for critical features and components.
+Establish secure and consistent communication protocols between the server and client-side of the application.
+Maintain consistent version control for the codebase.
+Use encryption for storing sensitive user information.
+Implement input validation to prevent security vulnerabilities.
+
+
+
+Non-functional Requirements
+Architecture
+The backend will be constructed using Java with JDBC to connect to a MySQL database. The frontend will be built with React and HTML/CSS. The system architecture will be designed to allow the frontend and backend to work independently, with clear API contracts ensuring seamless communication between the two.
+The codebase will be maintained in a private GitHub repository, ensuring proper version control. Branching strategies like feature branches and pull requests will be used to manage code updates efficiently.
+Security
+Auth0 will be used for handling authentication and securing user sign-in information such as username, email, and password. It will also manage secure API access for authenticated users.
+Prepared statements and input validation will be utilized throughout the application to prevent security risks like SQL injection and XSS attacks.
+Database permissions will be properly set to control access to sensitive data, ensuring that only authorized users can view or edit specific data fields.
+A password hashing mechanism (e.g., bcrypt or similar) will be used to securely store user passwords in the database, making sure no plain-text passwords are saved.
+Performance
+The web application should be able to handle multiple concurrent queries, with a target of up to 50 queries per second under normal load conditions.
+When an item is officially borrowed, deleted, or updated, the system should reflect these changes on newly loaded pages within 2000ms to ensure a responsive user experience.
+A performance monitoring plan will be in place to periodically test and optimize system response times, ensuring consistent performance as the platform scales.
+User Experience
+The web app will focus on providing a simple, easy-to-navigate interface. Key actions, such as listing, borrowing, and searching for items, will be intuitive, even for users with limited technical experience.
+Buttons and other interactive elements will be clearly labeled and easily accessible. Form inputs will provide clear feedback in case of errors or missing information, improving the overall user experience.
+Consistency in design will be ensured throughout the platform to avoid user confusion. The flow from one page to another will be logically structured to minimize user friction.
+If time allows, the design will be refined for a more visually appealing interface, though the focus remains on functionality over aesthetics.
+Hosting
+Initially, the system will be hosted locally to support development and testing. Detailed instructions will be provided for setting up and running the local environment, including configuration files and environment variables.
+Environment-specific configurations will be maintained to easily switch between local development and production environments when scaling to a cloud platform (such as Google Cloud App Engine) in the future, if required.
+The system will include basic backup procedures to ensure that data is regularly saved and can be restored in the event of an unexpected system failure or crash.
+
