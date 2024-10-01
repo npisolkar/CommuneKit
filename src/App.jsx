@@ -20,7 +20,7 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/profile" id="profile-button"><button>Profile</button></Link>
-                  <MenuButton />
+                  <OptionsMenu />
               </div>
 
               <Routes>
@@ -36,10 +36,36 @@ export default function App() {
   )
 }
 
-function MenuButton() {
+/* These two functions are what allow the menu bar, which is hidden
+*  until the menu bar is clicked, to exist. */
+function OptionsMenu() {
+    const [isClicked, setIsClicked] = useState(false);
+    function handleClick() {
+        setIsClicked(!isClicked);
+    }
     return (
         <>
-            <button id="menu-button">Menu</button>
+            {isClicked ? <button id="menu-button" onClick={handleClick}>Menu</button>
+                 :
+                <div>
+                    <MenuBar />
+                    <button id="close-menu" onClick={handleClick}>X</button>
+                    <div id="overlay"></div>
+                </div>
+            }
+        </>
+    )
+}
+
+function MenuBar() {
+    return (
+        <>
+            <div id="menu-popup">
+                <ul>
+                    <li><button>Sign Out</button></li>
+                    <li><button>Delete Account</button></li>
+                </ul>
+            </div>
         </>
     )
 }
