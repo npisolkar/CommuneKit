@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.CommuneKit2</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>CommuneKit</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <name>CommuneKit</name>
     <description>demo</description>
     <url/>
     <licenses>
