@@ -39,7 +39,7 @@ export default function App() {
 /* These two functions are what allow the menu bar, which is hidden
 *  until the menu bar is clicked, to exist. */
 function OptionsMenu() {
-    const [isClicked, setIsClicked] = useState(false);
+    const [isClicked, setIsClicked] = useState(true);
     function handleClick() {
         setIsClicked(!isClicked);
     }

@@ -4,12 +4,12 @@
 import './styles.css'
 import { useState } from 'react'
 import ItemTable from "./ItemTable.jsx";
-import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
+import { BrowserRouter as Link} from "react-router-dom";
 
-function EditButton({isOwn}) {
+function EditButton({isOwn, handleClick}) {
     if (isOwn) {
         return (
-            <button>Edit</button>
+            <button onClick={handleClick}>Edit</button>
         )
     }
     else {
@@ -26,6 +26,11 @@ export function ToggleTextField({height, width, placeholder}) {
 }
 
 export default function Profile({isOwn}) {
+    const [isClicked, setClicked] = useState(false);
+
+    function onClick() {
+        setClicked(!isClicked);
+    }
     return (
         <>
             <div className="about-box">
@@ -37,12 +42,12 @@ export default function Profile({isOwn}) {
                 </div>
             </div>
             <div id="edit-profile">
-                <EditButton isOwn={isOwn}/>
+                <EditButton isOwn={isOwn} handleClick={onClick}/>
             </div>
             <div id="my-items-button">
                 <Link to="/profile/my-items"><button>View My Items</button></Link>
             </div>
-            <div>
+            <div id="my-rating">
                 <h2>Rating</h2>
             </div>
             <script>
