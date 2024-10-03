@@ -194,3 +194,23 @@ ul {
 .item-table {
     text-align:left;
 }
+
+/* individual item's page */
+#item-page-header {
+    position:absolute;
+    top:150px;
+    left:700px;
+}
+
+#edit-item-button {
+    position:absolute;
+    top:150px;
+    left:900px;
+}
+
+.item-column {
+    display:inline-block;
+    text-align:center;
+    margin-left:300px;
+    width:200px;
+}

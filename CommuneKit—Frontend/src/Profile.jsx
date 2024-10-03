@@ -5,14 +5,38 @@ import './styles.css'
 import { useState } from 'react'
 import {Link} from "react-router-dom";
 
-function EditButton({isOwn, handleClick}) {
+function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
         return (
-            <button onClick={handleClick}>Edit</button>
+            <button onClick={handleClick}>{bodyText}</button>
         )
     }
     else {
         return null
+    }
+}
+
+function ItemsButton({isOwn, handleClick}) {
+    if (isOwn) {
+        return (
+            <>
+                <div id="my-items-button">
+                    <Link to="/profile/my-items">
+                        <button>View My Items</button>
+                    </Link>
+                </div>
+            </>
+        )
+    } else {
+        return (
+            <>
+                <div id="my-items-button">
+                    <Link to="/profile/my-items">
+                        <button>View Items</button>
+                    </Link>
+                </div>
+            </>
+        )
     }
 }
 
@@ -22,8 +46,10 @@ export default function Profile({isOwn}) {
     function onClick() {
         setClicked(!isClicked);
     }
+
     return (
         <>
+            <div id="profile-image" className="about-box"></div>
             {isClicked ?
                 <div className="about-box">
                     <div>
@@ -43,13 +69,9 @@ export default function Profile({isOwn}) {
                 </div>
             }
             <div id="edit-profile">
-                <EditButton isOwn={isOwn} handleClick={onClick}/>
+                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Profile"}/>
             </div>
-            <div id="my-items-button">
-                <Link to="/profile/my-items">
-                    <button>View My Items</button>
-                </Link>
-            </div>
+            <ItemsButton isOwn={isOwn}/>
             <div id="my-rating">
                 <h2>Rating</h2>
             </div>
