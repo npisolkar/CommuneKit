@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a0917e40-80e7-424f-a856-8574959658b2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/CommuneKitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/CommuneKitApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/docs/Backlog" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/docs/Backlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/docs/Design Document" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/docs/Design Document" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/docs/Gantt chart link" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/docs/Gantt chart link" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/docs/Project Charter Community sharing.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/docs/Project Charter Community sharing.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/docs/Sprint 1 Planning link" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/docs/Sprint 1 Planning link" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/public/CommuneKit Logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/public/CommuneKit Logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/public/vite.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/public/vite.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/ItemPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/ItemTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/ItemTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/MyItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/MyItems.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Notifications.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Owner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Owner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/Search.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/assets/react.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/assets/react.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/src/vite-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/src/vite-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OldMaterial/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/OldMaterial/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/communekit/communekit/CommuneKitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/src/main/java/com/communekit/communekit/CommuneKitApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/communekit/communekit/CommuneKitApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitBackend/src/test/java/com/communekit/communekit/CommuneKitApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/CommuneKitApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/CommuneKitApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/docs/Backlog" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/docs/Backlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/docs/Design Document" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/docs/Design Document" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/docs/Gantt chart link" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/docs/Gantt chart link" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/docs/Project Charter Community sharing.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/docs/Project Charter Community sharing.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/docs/Sprint 1 Planning link" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/docs/Sprint 1 Planning link" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/eslint.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/public/CommuneKit Logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/public/CommuneKit Logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/public/vite.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/public/vite.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Item.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/ItemPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/ItemTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/ItemTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/MyItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/MyItems.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Notifications.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Owner.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Owner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/Search.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/assets/react.svg" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/assets/react.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/mvnw.cmd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/src/vite-env.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/src/vite-env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/tsconfig.app.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/tsconfig.app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/tsconfig.node.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OldMaterial/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKitFrontend/vite.config.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2mqRxkdjS6OJE1UzCBDcfedlswm" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.CommuneKitApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="CommuneKitApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="demo" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.communekit.communekit.CommuneKitApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a0917e40-80e7-424f-a856-8574959658b2" name="Changes" comment="" />
+      <created>1727802368796</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727802368796</updated>
+      <workItem from="1727802369981" duration="2075000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
