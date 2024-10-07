@@ -43,6 +43,9 @@ public class User {
 
     private boolean isOwner;
 
+   @OneToMany(mappedBy = "reviewer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ArrayList<Review> reviews = new ArrayList<>();
+
 
 
 }

@@ -16,7 +16,8 @@ public class UserMapper {
                 user.getBio(),
                 user.isBanned(),
                 user.isAdmin(),
-                user.isOwner()
+                user.isOwner(),
+                user.getReviews()
         );
     }
 
@@ -31,7 +32,8 @@ public class UserMapper {
                 userDto.getBio(),
                 userDto.isBanned(),
                 userDto.isAdmin(),
-                userDto.isOwner()
+                userDto.isOwner(),
+                userDto.getReviews()
         );
     }
 }

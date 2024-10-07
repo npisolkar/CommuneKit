@@ -1,9 +1,12 @@
 package com.example.CommuneKitBackendTest.dto;
 
+import com.example.CommuneKitBackendTest.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -20,4 +23,5 @@ public class UserDto {
     private boolean isBanned;
     private boolean isAdmin;
     private boolean isOwner;
+    private ArrayList<Review> reviews;
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.example.CommuneKitBackendTest.entity.User;
 
 @Getter
 @Setter
@@ -16,10 +17,11 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int reviewID;
+    private long reviewID;
 
-    @Column(nullable = false)
-    private int reviewerID;
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    private User reviewer;
 
     @Column(nullable = false)
     private int rating;

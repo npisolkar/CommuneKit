@@ -8,7 +8,7 @@ public class ReviewMapper {
     public static ReviewDto mapToReviewDto(Review review) {
         return new ReviewDto(
                 review.getReviewID(),
-                review.getReviewerID(),
+                review.getReviewer(),
                 review.getRating(),
                 review.getReviewText(),
                 review.isItem(),
@@ -18,8 +18,8 @@ public class ReviewMapper {
 
     public static Review mapToReview(ReviewDto reviewDto) {
         return new Review(
-                reviewDto.getReviewId(),
-                reviewDto.getReviewerID(),
+                reviewDto.getReviewID(),
+                reviewDto.getReviewer(),
                 reviewDto.getRating(),
                 reviewDto.getReviewText(),
                 reviewDto.isItem(),
