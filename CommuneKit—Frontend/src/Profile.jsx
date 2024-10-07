@@ -2,8 +2,11 @@
 *  certain user. The page's behavior should change based on
 *  whether one is accessing one's own page or another's. */
 import './styles.css'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom";
+import axios from 'axios';
+
+axios.defaults.baseURL = "http://localhost:8080"
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
@@ -40,15 +43,51 @@ function ItemsButton({isOwn, handleClick}) {
     }
 }
 
-export default function Profile({isOwn}) {
+export default function Profile({isOwn, userID}) {
     const [isClicked, setClicked] = useState(false);
+    const [data, setData] = useState([]);
 
     function onClick() {
         setClicked(!isClicked);
     }
 
+    function getProfileInfo() {
+        axios(
+            {
+                method:'GET',
+                url: '/api/users/' + userID,
+                responseType:'json',
+            }
+        )
+            .then(function (response) {
+                setData(response.data);
+                console.log(response);
+            })
+    }
+
+    function uploadImage({image}) {
+        axios ({
+            method:'POST',
+            url:'/api/users/' + userID,
+            data: {
+                image:image,
+            }
+        });
+    }
+
+    function uploadProfileInfo() {
+        axios ({
+            method:'POST',
+            url:'/api/users/' + userID,
+            data: {
+
+            }
+        })
+    }
+
     return (
         <>
+            <div>Test {data[1]}</div>
             <div id="profile-image" className="about-box"></div>
             {isClicked ?
                 <div className="about-box">

@@ -2,6 +2,7 @@
    This is also the page that appears when creating and editing items
 *  isMine: determines whether the item is your own item or another's */
 import {useEffect, useState} from 'react';
+import axios from 'axios';
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
@@ -26,7 +27,7 @@ function ReviewBox(isClicked) {
     )
 }
 
-export default function ItemPage({isOwn, itemID}) {
+export default function ItemPage({isOwn, itemID}){
     const [isClicked, setClicked] = useState(false);
 
     function onClick() {
