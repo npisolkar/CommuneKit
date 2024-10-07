@@ -8,6 +8,6 @@
     "vine-env.d.ts"
   ],
   "compilerOptions": {
-    "allowJS": true
+    "allowJs": true
   }
 }

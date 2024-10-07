@@ -8,35 +8,44 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
+import AppContentLoginTest from "./components/AppContentLoginTest.jsx";
 
 export default function App() {
   return (
       <>
-      <Router>
-          <div>
-              <div className="menu-bar" id="navbar">
-                  <Link id="logo" to="/">
-                      <img src="/CommuneKit Logo.png" alt="logo"></img>
-                  </Link>
-                  <Link to="/search" id="search-button"><button>Search</button></Link>
-                  <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to="/profile" id="profile-button"><button>Profile</button></Link>
-                  <OptionsMenu />
-              </div>
-
-              <Routes>
-                  <Route path="/search" element={<Search />}/>
-                  <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true}/>} />
-                  <Route path="/profile/my-items" element={<MyItems />} />
-                  <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
-                  <Route path="/" element={<Home />}/>
-              </Routes>
-          </div>
-          </Router>
+          <h2>header</h2>
+          <p>router stuff was her before login development edits</p>
+          <AppContentLoginTest/>
       </>
-  )
+  );
 }
+//
+// function RouterStuff() {
+//     return (
+//         <Router>
+//             <div>
+//                 <div className="menu-bar" id="navbar">
+//                     <Link id="logo" to="/">
+//                         <img src="/CommuneKit Logo.png" alt="logo"></img>
+//                     </Link>
+//                     <Link to="/search" id="search-button"><button>Search</button></Link>
+//                     <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
+//                     <Link to="/profile" id="profile-button"><button>Profile</button></Link>
+//                     <OptionsMenu />
+//                 </div>
+//
+//                 <Routes>
+//                     <Route path="/search" element={<Search />}/>
+//                     <Route path="/notifications" element={<Notifications />} />
+//                     <Route path="/profile" element={<Profile isOwn={true}/>} />
+//                     <Route path="/profile/my-items" element={<MyItems />} />
+//                     <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
+//                     <Route path="/" element={<Home />}/>
+//                 </Routes>
+//             </div>
+//         </Router>
+//     );
+// }
 
 /* These two functions are what allow the menu bar, which is hidden
 *  until the menu bar is clicked, to exist. */
