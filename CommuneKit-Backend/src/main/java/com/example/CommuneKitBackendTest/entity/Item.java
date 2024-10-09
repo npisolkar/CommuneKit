@@ -13,21 +13,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "items")
 public class Item {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long itemID;
+    private Long itemID;
 
-    @Column(nullable = false)
+    @Column(name = "item_name", nullable = false)
     private String itemName;
 
-    @Column(nullable = false)
+    @Column(name = "item_description", nullable = false)
     private String itemDescription;
 
-    @Column(nullable = false)
+    @Column(name = "item_category", nullable = false)
     private String itemCategory;
-
-    @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
-    private User user;
 }

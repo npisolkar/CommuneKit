@@ -2,13 +2,14 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
 public class ItemController {
@@ -19,5 +20,23 @@ public class ItemController {
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto) {
         ItemDto savedItem = itemService.createItem(itemDto);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ItemDto> getItemById(@PathVariable("id") Long itemID) {
+        ItemDto itemDto = itemService.getItemById(itemID);
+        return ResponseEntity.ok(itemDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ItemDto>> getAllItems() {
+        List<ItemDto> items = itemService.getAllItems();
+        return ResponseEntity.ok(items);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteItem(@PathVariable("id") Long itemID) {
+        itemService.deleteItem(itemID);
+        return ResponseEntity.ok("Item deleted successfully");
     }
 }
