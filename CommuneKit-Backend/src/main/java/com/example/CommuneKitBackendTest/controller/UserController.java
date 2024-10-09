@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserController {
     private UserService userService;
 
@@ -24,6 +24,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") long UserID) {
         UserDto userDto = userService.getUserById(UserID);
         return ResponseEntity.ok(userDto);
