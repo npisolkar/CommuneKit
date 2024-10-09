@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.controller;
 
+import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
 import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,13 @@ public class UserController {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/info/{id}")
+    public ResponseEntity<BasicUserDto> getUserInfoById(@PathVariable("id") long userId) {
+        BasicUserDto basicUserDto = userService.getBasicUserInfoById(userId);
+        return ResponseEntity.ok(basicUserDto);
+    }
+
 
     @PutMapping("{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userID, @RequestBody UserDto updatedUser) {

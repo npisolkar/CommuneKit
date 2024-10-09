@@ -40,6 +40,19 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public ItemDto updateItem(Long itemID, ItemDto updatedItem) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+
+        item.setItemName(updatedItem.getItemName());
+        item.setItemDescription(updatedItem.getItemDescription());
+        item.setItemCategory(updatedItem.getItemCategory());
+
+        Item updatedItemObj = itemRepository.save(item);
+
+        return ItemMapper.mapToItemDto(updatedItemObj);
+    }
+
+    @Override
     public void deleteItem(Long itemID) {
         Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
         itemRepository.deleteById(itemID);

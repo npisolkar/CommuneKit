@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.mapper;
 
+import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
 import com.example.CommuneKitBackendTest.entity.User;
 
@@ -38,4 +39,21 @@ public class UserMapper {
                 userDto.getItems()
         );
     }
+
+    public static BasicUserDto mapToBasicUserDto(User user) {
+        return new BasicUserDto(
+                user.getUserID(),
+                user.getUserName(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPassword(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getAddress(),
+                user.getBio(),
+                user.isBanned(),
+                user.getRole()
+        );
+    }
+
 }
