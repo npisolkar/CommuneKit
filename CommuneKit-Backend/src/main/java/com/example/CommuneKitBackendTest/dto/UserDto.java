@@ -1,3 +1,4 @@
+/*
 package com.example.CommuneKitBackendTest.dto;
 
 import lombok.AllArgsConstructor;
@@ -24,3 +25,4 @@ public class UserDto {
     //private String role;
     private boolean isOwner;
 }
+*/

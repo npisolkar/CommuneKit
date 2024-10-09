@@ -1,3 +1,4 @@
+/*
 package com.example.CommuneKitBackendTest.controller;
 
 import org.springframework.http.ResponseEntity;
@@ -21,3 +22,4 @@ public class MessagesController {
         return ResponseEntity.ok(Arrays.asList("Buenos Aires", "Córdoba", "La Plata"));
     }
 }
+*/

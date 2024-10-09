@@ -17,18 +17,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
-//package com.example.CommuneKitBackendTest.config;
-//
-//import org.springframework.context.annotation.Bean;
-//import org.springframework.context.annotation.Configuration;
-//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-//import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-//import org.springframework.security.web.SecurityFilterChain;
-//
-//
-//import static org.springframework.security.config.Customizer.withDefaults;
-//
+import java.util.Arrays;
+
+//CAME FROM Phegon
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -41,25 +37,15 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
-                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "public/**").permitAll()
+                .authorizeHttpRequests(request -> request.requestMatchers("/auth/**", "/public/**").permitAll()
                     .requestMatchers("/user/**").hasAnyAuthority("USER")
-                    .requestMatchers("/admin/**").hasAnyAuthority("ADMIN, USER")
+                    .requestMatchers("/admin/**").hasAnyAuthority("ADMIN", "USER")
                     .requestMatchers("/owner/**").hasAnyAuthority("OWNER", "ADMIN", "USER")
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
-//        return http
-//                .authorizeHttpRequests( auth ->  {
-//                auth.requestMatchers("/").permitAll();  // Publicly accessible paths
-//                auth.anyRequest().authenticated();            // All other paths require authentication
-//
-//        })
-//                .oauth2Login(withDefaults())
-//                .formLogin(withDefaults())
-//                //.defaultSuccessUrl("/home", true)
-//                .build();
         return http.build();
     }
 

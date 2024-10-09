@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+//Came from phegon
 @RestController
 public class UserManagementController {
     @Autowired
@@ -39,14 +40,14 @@ public class UserManagementController {
 
 
     @GetMapping("user/get-user/{userId}")
-    public ResponseEntity<RequestResponse> getUserById(@PathVariable int userId) {
+    public ResponseEntity<RequestResponse> getUserById(@PathVariable long userId) {
         //TODO: make this only get users with role as "ADMIN"
         return ResponseEntity.ok(userManagementService.getUsersById(userId));
     }
 
 
-    @GetMapping("user/update/{userId}")
-    public ResponseEntity<RequestResponse> updateUser(@PathVariable int userId, @RequestBody User reg) {
+    @PutMapping("user/update/{userId}")
+    public ResponseEntity<RequestResponse> updateUser(@PathVariable long userId, @RequestBody User reg) {
         //TODO: make this only get users with role as "ADMIN"
         return ResponseEntity.ok(userManagementService.updateUser(userId, reg));
     }
@@ -58,4 +59,11 @@ public class UserManagementController {
         RequestResponse response = userManagementService.getMyInfo(username);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
+
+    @DeleteMapping("user/delete/{userId}")
+    public ResponseEntity<RequestResponse> deleteUser(@PathVariable long userId) {
+        //TODO: make this only get users with role as "ADMIN"
+        return ResponseEntity.ok(userManagementService.deleteUser(userId));
+    }
+
 }

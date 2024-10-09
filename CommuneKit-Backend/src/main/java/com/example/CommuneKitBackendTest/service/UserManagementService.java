@@ -26,8 +26,8 @@ public class UserManagementService {
     private AuthenticationManager authenticationManager;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @Autowired
-    private RequestContextFilter requestContextFilter;
+    //@Autowired
+    //private RequestContextFilter requestContextFilter;
 
     public RequestResponse register(RequestResponse registrationRequest) {
         RequestResponse response = new RequestResponse();
@@ -35,6 +35,7 @@ public class UserManagementService {
         try {
             User user = new User();
             user.setEmail(registrationRequest.getEmail());
+            user.setUsername(registrationRequest.getUsername());
             user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
             user.setFirstName(registrationRequest.getFirstName());
             user.setLastName(registrationRequest.getLastName());
@@ -61,10 +62,10 @@ public class UserManagementService {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            loginRequest.getUserName(),
+                            loginRequest.getUsername(),
                             loginRequest.getPassword()
                     ));
-            var user = userRepository.findByUsername(loginRequest.getUserName()).orElseThrow();
+            var user = userRepository.findByUsername(loginRequest.getUsername()).orElseThrow();
             var jwt = jwtUtils.generateToken(user);
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), user);
             response.setStatusCode(200);
@@ -123,7 +124,7 @@ public class UserManagementService {
         }
     }
 
-    public RequestResponse getUsersById(Integer id) {
+    public RequestResponse getUsersById(Long id) {
         RequestResponse response = new RequestResponse();
         try {
             User usersById = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not found"));
@@ -138,7 +139,7 @@ public class UserManagementService {
     }
 
 
-    public RequestResponse deleteUser(Integer userID) {
+    public RequestResponse deleteUser(Long userID) {
         RequestResponse response = new RequestResponse();
         try {
             Optional<User> user = userRepository.findById(userID);
@@ -157,7 +158,7 @@ public class UserManagementService {
         return response;
     }
 
-    public RequestResponse updateUser(Integer userID, User updatedUser) {
+    public RequestResponse updateUser(Long userID, User updatedUser) {
         RequestResponse response = new RequestResponse();
         try {
             Optional<User> userop = userRepository.findById(userID);
@@ -209,10 +210,10 @@ public class UserManagementService {
         }
         return response;
     }
-    public RequestResponse getMyInfo(long userId){
+   /* public RequestResponse getMyInfo(long userId){
         RequestResponse response = new RequestResponse();
         try {
-            Optional<User> userOptional = userRepository.findByUserID(userId);
+            Optional<User> userOptional = userRepository.findByUserId(userId);
             if (userOptional.isPresent()) {
                 response.setUser(userOptional.get());
                 response.setStatusCode(200);
@@ -226,6 +227,6 @@ public class UserManagementService {
             response.setMessage("Error occurred while getting user info: " + e.getMessage());
         }
         return response;
-    }
+    }*/
 
 }

@@ -1,3 +1,4 @@
+/*
 package com.example.CommuneKitBackendTest.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -41,3 +42,4 @@ public class WebConfig {
     }
 }
 
+*/

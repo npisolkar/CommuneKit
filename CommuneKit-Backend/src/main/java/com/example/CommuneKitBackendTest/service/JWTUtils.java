@@ -20,13 +20,14 @@ import java.util.function.Function;
 @Component
 public class JWTUtils {
 
-    private SecretKey key;
-    private static final long EXPIRATION_TIME = 60 * 60 * 24 * 7; //smdw
+    private final SecretKey key;
+    private static final long EXPIRATION_TIME = (60 * 60 * 24 * 7L); //smdw
 
     public JWTUtils() {
-        String secreteString = "secretkeyblahblahblah where did he get this";
+        //THIS IS phegon's secrete string
+        String secreteString = "843567893696976453275974432697R634976R738467TR678T34865R6834R8763T478378637664538745673865783678548735687R3";
         byte[] keyBytes = Base64.getDecoder().decode(secreteString.getBytes(StandardCharsets.UTF_8));
-        this.key = new SecretKeySpec(keyBytes, "AES");
+        this.key = new SecretKeySpec(keyBytes, "HmacSHA256");
     }
 
     public String generateToken(UserDetails userDetails) {

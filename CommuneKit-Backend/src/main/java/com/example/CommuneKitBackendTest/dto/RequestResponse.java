@@ -20,7 +20,7 @@ public class RequestResponse {
     private String expirationTime;
 
     private int userId;
-    private String userName;
+    private String username;
     private String password;
     private String email;
     //private String phone;

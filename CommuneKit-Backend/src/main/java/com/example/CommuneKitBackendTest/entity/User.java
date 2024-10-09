@@ -1,7 +1,7 @@
 package com.example.CommuneKitBackendTest.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +14,8 @@ import java.util.List;
 //@NoArgsConstructor
 //@AllArgsConstructor
 
+
+//Nikhil version using Phegon stuff
 @Entity
 @Table(name = "user")
 @Data
@@ -22,32 +24,22 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userID;
-
-    @Column(unique = true, nullable = false)
-    private String userName;
-
+    //@Column(unique = true, nullable = false)
+    private String username;
     //@Column(nullable = false)
     private String password;
-
     //@Column(unique = true, nullable = false)
     private String email;
-
     //@Column(unique = true, nullable = false)
-    private String phone;
-
+    //private String phone;
     //@Column(nullable = false)
     private String firstName;
-
     //@Column(nullable = false)
     private String lastName;
-
     //@Column(nullable = false)
     private String address;
-
     private String bio;
-
     private boolean isBanned;
-
     private String role;
 
     //@Column(nullable = false)
@@ -63,7 +55,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
