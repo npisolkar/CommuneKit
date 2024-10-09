@@ -1,18 +1,15 @@
 package com.example.CommuneKitBackendTest.dto;
 
-import com.example.CommuneKitBackendTest.entity.Item;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class BasicUserDto {
     private long userId;
     private String userName;
     private String firstName;
@@ -24,5 +21,4 @@ public class UserDto {
     private String bio;
     private boolean isBanned;
     private String role;
-    private List<Item> items;
 }
