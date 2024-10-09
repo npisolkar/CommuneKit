@@ -15,9 +15,12 @@ public class UserDto {
     private String password;
     private String email;
     private String phone;
+    //private String firstName;
+    //private String lastName;
     private String address;
     private String bio;
     private boolean isBanned;
     private boolean isAdmin;
+    //private String role;
     private boolean isOwner;
 }
