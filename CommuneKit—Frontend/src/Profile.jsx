@@ -47,7 +47,7 @@ export default function Profile({isOwn, userID}) {
     const [data, setData] = useState({});
 
     useEffect(() => {
-        getUserById({userID})
+        getUserById(userID)
             .then (res => {
                 setData(res.data);
                 console.log(res);
@@ -90,6 +90,7 @@ export default function Profile({isOwn, userID}) {
     return (
         <>
             <div>{userID}</div>
+            <div>{data.email}</div>
             <div id="profile-image" className="about-box"></div>
             {isClicked ?
                 <div className="about-box">

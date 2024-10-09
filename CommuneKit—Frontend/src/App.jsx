@@ -27,7 +27,7 @@ export default function App() {
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true} userID={'1'}/>} />
+                  <Route path="/profile" element={<Profile isOwn={true} userID={1}/>} />
                   <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/" element={<Home />}/>
