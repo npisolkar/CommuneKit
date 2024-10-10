@@ -8,10 +8,10 @@ export default function ItemTable({headName}) {
                 <table className="item-table">
                     <tbody>
                     <tr>
-                        <td>Do you remember</td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>The twenty-first night of September</td>
+                        <td></td>
                     </tr>
                     </tbody>
                 </table>

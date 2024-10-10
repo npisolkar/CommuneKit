@@ -5,7 +5,7 @@ import './styles.css'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import {getUserById} from "./UserService.jsx";
+import {getUserById} from "./services/UserService.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users"
 
@@ -47,11 +47,14 @@ export default function Profile({isOwn, userID}) {
     const [data, setData] = useState({});
 
     useEffect(() => {
-        getUserById({userID})
+        getUserById({userId:'1'})
             .then (res => {
                 setData(res.data);
-                console.log(res);
+                console.log(JSON.stringify(res.data));
             })
+            .catch(function (error) {
+                console.log(error);
+            });
     }, [])
 
     function onClick() {
@@ -70,17 +73,18 @@ export default function Profile({isOwn, userID}) {
 
     function uploadProfileInfo(formData) {
         axios.post(url + "/" + userID, {
-            name: formData.get("name"),
-            password: data[2],
-            email: formData.get("email"),
-            phone: formData.get("phone"),
-            address: formData.get("address"),
+            name: formData.userName,
+            password: data.password,
+            email: formData.email,
+            phone: formData.phone,
+            address: formData.address,
             isBanned:false,
             isAdmin:false,
             isOwner:false,
         })
             .then(function (response) {
-                console.log(response);
+                console.log("post response" + response.data);
+                setData(formData);
             })
             .catch(function (error) {
                 console.log(error);
@@ -89,26 +93,29 @@ export default function Profile({isOwn, userID}) {
 
     return (
         <>
-            <div>{userID}</div>
             <div id="profile-image" className="about-box"></div>
             {isClicked ?
                 <div className="about-box">
-                    <form action={uploadProfileInfo}>
+                    <form onSubmit={uploadProfileInfo}>
                     <div>
-                            <input type="text" name="userName" id="profile-username" placeholder={"Firstname Lastname"}/>
+                            <input type="text" defaultValue={data.userName} name="userName" id="profile-username" placeholder={data.userName}
+                                   onChange={(e) => setData({...data, [e.target.userName]: e.target.value})}/>
                     </div>
                     <div>
                         <label>
                             Bio
-                            <input id="profile-bio" name="bio" type="text" placeholder={"Bio..."}/>
+                            <input id="profile-bio" defaultValue={data.bio} name="bio" type="text"
+                            onChange={(e) => setData({...data, [e.target.bio]: e.target.value})}/>
                         </label>
                         <label>
                             Address
-                            <input id="profile-address" name="address" type="text" placeholder={"Address"}/>
+                            <input id="profile-address" defaultValue={data.address} name="address" type="text"
+                                   onChange={(e) => setData({...data, [e.target.address]: e.target.value})}/>
                         </label>
                         <label>
                             Phone Number
-                            <input id="profile-phone" type="text" name="phone" placeholder={"Phone Number"}/>
+                            <input id="profile-phone" defaultValue={data.phone} type="text" name="phone"
+                                   onChange={(e) => setData({...data, [e.target.phone]: e.target.value})}/>
                         </label>
                     </div>
                     <div id="edit-profile">
@@ -121,19 +128,19 @@ export default function Profile({isOwn, userID}) {
                 </div> :
                 <div className="about-box">
                     <div>
-                        {data[1]}
+                        {data.userName}
                     </div>
                     <label>
                         Bio
-                        <div id="profile-bio">{data[6]}</div>
+                        <div id="profile-bio">{data.bio}</div>
                     </label>
                     <label>
                         Address
-                        <div id="profile-address">{data[5]}</div>
+                        <div id="profile-address">{data.address}</div>
                     </label>
                     <label>
                         Phone Number
-                        <div id="profile-phone">{data[4]}</div>
+                        <div id="profile-phone">{data.phone}</div>
                     </label>
                     <div id="edit-profile">
                         <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Profile"}/>
