@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
+import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
@@ -36,6 +37,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public BasicUserDto getBasicUserInfoById(long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with given ID does not exist: " + userId));
+        return UserMapper.mapToBasicUserDto(user);
+    }
+
+    @Override
     public UserDto updateUser(Long userID, UserDto updatedUser) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
 
@@ -54,7 +61,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long userID) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
-
         userRepository.deleteById(userID);
     }
 }

@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -24,6 +25,12 @@ public class User {
     private String userName;
 
     @Column(nullable = false)
+    private String firstName;
+
+    @Column(nullable = false)
+    private String lastName;
+
+    @Column(nullable = false)
     private String password;
 
     @Column(unique = true, nullable = false)
@@ -39,11 +46,10 @@ public class User {
 
     private boolean isBanned;
 
-    private boolean isAdmin;
+    private String role;
 
-    private boolean isOwner;
-
-
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "userid")
+    private List<Item> items;
 }
 
