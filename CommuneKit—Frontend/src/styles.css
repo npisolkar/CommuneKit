@@ -53,6 +53,10 @@ ul {
     box-sizing: border-box;
 }
 
+input, label {
+    display:block;
+}
+
 /* menu bar */
 .menu-bar {
     position:fixed;
@@ -180,6 +184,16 @@ ul {
     position:absolute;
     top:150px;
     left:500px;
+
+}
+
+#profile-bio {
+    border:1px solid black;
+    height:200px;
+    width:200px;
+}
+
+#submit-profile {
 
 }
 
