@@ -14,4 +14,5 @@ public class ItemDto {
     private String itemName;
     private String itemDescription;
     private String itemCategory;
+    private int itemRating;
 }

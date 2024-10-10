@@ -25,4 +25,7 @@ public class Item {
 
     @Column(name = "item_category", nullable = false)
     private String itemCategory;
+
+    @Column(name = "item_rating", nullable = false)
+    private int itemRating;
 }
