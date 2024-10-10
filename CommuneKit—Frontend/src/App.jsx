@@ -23,14 +23,15 @@ export default function App() {
                   <Link to="/profile" id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
-
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/profile" element={<Profile isOwn={true} userID={1}/>} />
                   <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
-                  <Route path="/" element={<Home />}/>
+                  <Route path="/home" element={<Home />}/>
+                  <Route path="/login" element={<LoginPage />}/>
+                  <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>
           </Router>

@@ -24,6 +24,18 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToUserDto(savedUser);
     }
 
+    public UserDto loginUser(UserDto userDto) {
+        List<User> users = userRepository.findAll();
+        User attemptingUser = UserMapper.mapToUser(userDto);
+        for (User user : users) {
+            if (user.getUserName().equals(attemptingUser.getUserName())
+                    && user.getPassword().equals(attemptingUser.getPassword())) {
+                return UserMapper.mapToUserDto(user);
+            }
+        }
+        return null;
+    }
+
     @Override
     public UserDto getUserById(long userID) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID does not exist: " + userID));

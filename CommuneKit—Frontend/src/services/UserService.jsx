@@ -12,10 +12,18 @@ export function getUsers(){
     }
 
 export function createUser(user){
-        return axios.post(EMPLOYEE_API_BASE_URL,user);
-    }
+        return axios.post(EMPLOYEE_API_BASE_URL, user);
+}
 
 export function getUserById(userId){
         return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
     }
+
+export function loginUser(userDto){
+    return axios.post(EMPLOYEE_API_BASE_URL + '/login', userDto)
+    //may be good to put this in here:
+    // headers: {
+    //     'Content-Type': 'application/json'
+    // }
+}
 

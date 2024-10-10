@@ -5,7 +5,7 @@ import './styles.css'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import {getUserById} from "./UserService.jsx";
+import {getUserById} from "./services/UserService.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users"
 
