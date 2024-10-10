@@ -1,10 +1,10 @@
 /* My Items: The page which contains all items associated
 *  with your account, both posted and borrowed items. */
 import ItemTable from "./ItemTable.jsx";
-import ItemPage from "./ItemPage.jsx";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {getUserById} from './services/UserService.jsx'
+import ItemComponent from "./ItemComponent.jsx";
 
 export default function MyItems({userID}) {
     const [items, setItems] = useState([]);
@@ -33,12 +33,18 @@ export default function MyItems({userID}) {
                 <table>
                     <thead>
                         <tr>
-                            <th>Item Name</th>
+                            <th>ID</th>
+                            <th>Name</th>
                             <th>Description</th>
+                            <th>Category</th>
                         </tr>
                     </thead>
                     <tbody>
-
+                    {
+                        items.map(item => (
+                            <ItemComponent data={item} />
+                        ))
+                    }
                     </tbody>
                 </table>
             </div>

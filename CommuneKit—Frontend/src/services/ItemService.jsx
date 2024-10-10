@@ -3,7 +3,7 @@ import {useState} from "react";
 
 const USER_API_BASE_URL = "http://localhost:8080/api/users"
 
-export function getItemsByUser() {
+export function getItemsByUser(userID) {
     const [items, setItems] = useState([]);
     axios.get(USER_API_BASE_URL + '/1')
         .then((response) => {
