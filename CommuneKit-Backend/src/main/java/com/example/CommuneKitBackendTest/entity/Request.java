@@ -13,41 +13,20 @@ import lombok.Setter;
 @Entity
 @Table(name = "requests")
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long requestID;
+    private Long requestId;
 
-    @Column(name = "requester_id", nullable = false)
-    private Long requesterID;
-
-    @Column(name = "item_id", nullable = false)
-    private Long itemID;
-
-    @Column(name = "start_year", nullable = false)
-    private int startYear;
-
-    @Column(name = "start_month", nullable = false)
+    private Long borrowingUserId;
+    private Long lendingUserId;
+    private Long itemId;
+    private int startDay;
     private int startMonth;
-
-    @Column(name = "start_date", nullable = false)
-    private int startDate;
-
-    @Column(name = "end_year", nullable = false)
-    private int endYear;
-
-    @Column(name = "end_month", nullable = false)
+    private int startYear;
+    private int endDay;
     private int endMonth;
-
-    @Column(name = "end_date", nullable = false)
-    private int endDate;
-
-    @Column(name = "approved", nullable = false)
-    private boolean approved;
-
-    @Column(name = "returned", nullable = false)
-    private boolean returned;
-
-
-
-
+    private int endYear;
+    private boolean isApproved;
+    private String message;
 }

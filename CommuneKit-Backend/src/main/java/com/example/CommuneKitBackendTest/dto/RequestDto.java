@@ -1,6 +1,5 @@
 package com.example.CommuneKitBackendTest.dto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,15 +10,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RequestDto {
-    private Long requestID;
-    private Long requesterID;
-    private Long itemID;
-    private int startYear;
+    private Long requestId;
+    private Long borrowingUserId;
+    private Long lendingUserId;
+    private Long itemId;
+    private int startDay;
     private int startMonth;
-    private int startDate;
-    private int endYear;
+    private int startYear;
+    private int endDay;
     private int endMonth;
-    private int endDate;
-    private boolean approved;
-    private boolean returned;
+    private int endYear;
+    private boolean isApproved;
+    private String message;
+
 }

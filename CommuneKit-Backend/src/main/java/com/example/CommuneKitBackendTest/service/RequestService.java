@@ -1,22 +1,19 @@
 package com.example.CommuneKitBackendTest.service;
 
 import com.example.CommuneKitBackendTest.dto.RequestDto;
-import com.example.CommuneKitBackendTest.entity.Request;
 
 import java.util.List;
 
 public interface RequestService {
     RequestDto createRequest(RequestDto requestDto);
 
-    RequestDto getRequestById(Long requestID);
+    RequestDto getRequestById(Long requestId);
 
     List<RequestDto> getAllRequests();
 
-    RequestDto approveRequest(Long requestID);
+    RequestDto updateRequest(Long requestId, RequestDto updatedRequest);
 
-    RequestDto returnRequest(Long requestID);
+    List<RequestDto> getRequestsByUserId(Long userId);
 
-    void deleteRequest(Long requestID);
-
-
+    List<RequestDto> getApprovedRequestsByUserId(Long userId);
 }

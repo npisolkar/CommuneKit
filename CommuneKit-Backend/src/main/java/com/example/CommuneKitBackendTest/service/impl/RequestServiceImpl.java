@@ -1,6 +1,5 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
-
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
@@ -8,6 +7,7 @@ import com.example.CommuneKitBackendTest.mapper.RequestMapper;
 import com.example.CommuneKitBackendTest.repository.RequestRepository;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,15 +21,15 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public RequestDto createRequest(RequestDto requestDto) {
+
         Request request = RequestMapper.mapToRequest(requestDto);
         Request savedRequest = requestRepository.save(request);
-
         return RequestMapper.mapToRequestDto(savedRequest);
     }
 
     @Override
-    public RequestDto getRequestById(Long requestID) {
-        Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
+    public RequestDto getRequestById(Long requestId) {
+        Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
         return RequestMapper.mapToRequestDto(request);
     }
 
@@ -40,26 +40,30 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public RequestDto approveRequest(Long requestID) {
-        Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
-        request.setApproved(true);
-        Request updatedRequest = requestRepository.save(request);
+    public RequestDto updateRequest(Long requestId, RequestDto updatedRequest) {
+        Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
+        request.setApproved(updatedRequest.isApproved());
 
-        return RequestMapper.mapToRequestDto(updatedRequest);
+        Request updatedRequestObj = requestRepository.save(request);
+
+        return RequestMapper.mapToRequestDto(updatedRequestObj);
+
     }
-    @Override
-    public RequestDto returnRequest(Long requestID) {
-        Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
-        request.setReturned(true);
-        Request updatedRequest = requestRepository.save(request);
-
-        return RequestMapper.mapToRequestDto(updatedRequest);
-    }
-
 
     @Override
-    public void deleteRequest(Long requestID) {
-        Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
-        requestRepository.deleteById(requestID);
+    public List<RequestDto> getRequestsByUserId(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getLendingUserId().equals(userId)));
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
     }
+
+    @Override
+    public List<RequestDto> getApprovedRequestsByUserId(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
+        requests.removeIf(request -> !(request.isApproved()));
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+
+
 }

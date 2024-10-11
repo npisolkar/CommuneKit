@@ -6,33 +6,35 @@ import com.example.CommuneKitBackendTest.entity.Request;
 public class RequestMapper {
     public static RequestDto mapToRequestDto(Request request) {
         return new RequestDto(
-                request.getRequestID(),
-                request.getRequesterID(),
-                request.getItemID(),
-                request.getStartYear(),
+                request.getRequestId(),
+                request.getBorrowingUserId(),
+                request.getLendingUserId(),
+                request.getItemId(),
+                request.getStartDay(),
                 request.getStartMonth(),
-                request.getStartDate(),
-                request.getEndYear(),
+                request.getStartYear(),
+                request.getEndDay(),
                 request.getEndMonth(),
-                request.getEndDate(),
+                request.getEndYear(),
                 request.isApproved(),
-                request.isReturned()
+                request.getMessage()
         );
     }
 
     public static Request mapToRequest(RequestDto requestDto) {
         return new Request(
-                requestDto.getRequestID(),
-                requestDto.getRequesterID(),
-                requestDto.getItemID(),
-                requestDto.getStartYear(),
+                requestDto.getRequestId(),
+                requestDto.getBorrowingUserId(),
+                requestDto.getLendingUserId(),
+                requestDto.getItemId(),
+                requestDto.getStartDay(),
                 requestDto.getStartMonth(),
-                requestDto.getStartDate(),
-                requestDto.getEndYear(),
+                requestDto.getStartYear(),
+                requestDto.getEndDay(),
                 requestDto.getEndMonth(),
-                requestDto.getEndDate(),
+                requestDto.getEndYear(),
                 requestDto.isApproved(),
-                requestDto.isReturned()
+                requestDto.getMessage()
         );
     }
 }

@@ -23,8 +23,8 @@ public class RequestController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RequestDto> getRequestById(@PathVariable("id") Long requestID) {
-        RequestDto requestDto = requestService.getRequestById(requestID);
+    public ResponseEntity<RequestDto> getRequestById(@PathVariable("id") Long requestId) {
+        RequestDto requestDto = requestService.getRequestById(requestId);
         return ResponseEntity.ok(requestDto);
     }
 
@@ -34,24 +34,23 @@ public class RequestController {
         return ResponseEntity.ok(requests);
     }
 
-    @PutMapping("/approve/{id}")
-    public ResponseEntity<RequestDto> approveRequest(@PathVariable("id") Long requestID) {
-        RequestDto requestDto = requestService.approveRequest(requestID);
+    @PutMapping("{id}")
+    public ResponseEntity<RequestDto> updateRequest(@PathVariable("id") Long requestId, @RequestBody RequestDto updatedRequest) {
+        RequestDto requestDto = requestService.updateRequest(requestId, updatedRequest);
         return ResponseEntity.ok(requestDto);
     }
 
-    @PutMapping("/return/{id}")
-    public ResponseEntity<RequestDto> returnRequest(@PathVariable("id") Long requestID) {
-        RequestDto requestDto = requestService.returnRequest(requestID);
-        return ResponseEntity.ok(requestDto);
+    @GetMapping("/sent-to/{id}")
+    public ResponseEntity<List<RequestDto>> getMyRequests(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getRequestsByUserId(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/approved/{id}")
+    public ResponseEntity<List<RequestDto>> getApprovedRequests(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getApprovedRequestsByUserId(userId);
+        return ResponseEntity.ok(requests);
     }
 
 
-
-
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteRequest(@PathVariable("id") Long requestID) {
-        requestService.deleteRequest(requestID);
-        return ResponseEntity.ok("Request deleted successfully");
-    }
 }
