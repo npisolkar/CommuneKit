@@ -3,7 +3,7 @@
 *  whether one is accessing one's own page or another's. */
 import './styles.css'
 import { useState, useEffect } from 'react'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import {getUserById, updateUser} from "./services/UserService.jsx";
 
@@ -41,16 +41,29 @@ function ItemsButton({isOwn}) {
     }
 }
 
-export default function Profile({isOwn, userID}) {
+export default function Profile({ isOwn }) {
+    const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
     const [url, setUrl] = useState(axios.defaults.baseURL);
-    const [data, setData] = useState({});
+
+    const [formData, setFormData] = useState({
+        userName: '',
+        email: '',
+        password: '',
+        address: '',
+        bio: '',
+        phone: ''
+    });
 
     useEffect(() => {
+        if (!isOwn) {
+            isOwn = true;
+        }
         getUserById({userId:'1'})
             .then (res => {
-                setData(res.data);
-                console.log(JSON.stringify(res.data));
+                setFormData(res.data)
+                console.log("in get:" + JSON.stringify(res.data));
+                console.log("username in get: " + formData.userName)
             })
             .catch(function (error) {
                 console.log(error);
@@ -70,8 +83,15 @@ export default function Profile({isOwn, userID}) {
             }
         });
     }
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
 
     async function uploadProfileInfo(formData) {
+        console.log("username at beginning of upload: " + formData.userName)
+        console.log("upload: " + formData);
         try {
             let profileJson = {
                 name: formData.userName,
@@ -83,6 +103,8 @@ export default function Profile({isOwn, userID}) {
                 isAdmin: false,
                 isOwner: false,
             }
+            console.log("trying to submit " + JSON.stringify(profileJson))
+            console.log("username:" + formData.userName)
             const profileData = await updateUser(userID, JSON.stringify(profileJson));
             console.log("submit:" + profileData);
         }
@@ -98,49 +120,49 @@ export default function Profile({isOwn, userID}) {
                 <div className="about-box">
                     <form onSubmit={uploadProfileInfo}>
                     <div>
-                            <input type="text" defaultValue={data.userName} name="userName" id="profile-username" placeholder={data.userName}
-                                   onChange={(e) => setData({...data, [e.target.userName]: e.target.value})}/>
+                            <input type="text" defaultValue={formData.userName} name="userName" id="profile-username"
+                                  onChange={handleInputChange}/>
                     </div>
                     <div>
                         <label>
                             Bio
-                            <input id="profile-bio" defaultValue={data.bio} name="bio" type="text"
-                            onChange={(e) => setData({...data, [e.target.bio]: e.target.value})}/>
+                            <input id="profile-bio" defaultValue={formData.bio} name="bio" type="text"
+                            onChange={handleInputChange}/>
                         </label>
                         <label>
                             Address
-                            <input id="profile-address" defaultValue={data.address} name="address" type="text"
-                                   onChange={(e) => setData({...data, [e.target.address]: e.target.value})}/>
+                            <input id="profile-address" defaultValue={formData.address} name="address" type="text"
+                                   onChange={handleInputChange}/>
                         </label>
                         <label>
                             Phone Number
-                            <input id="profile-phone" defaultValue={data.phone} type="text" name="phone"
-                                   onChange={(e) => setData({...data, [e.target.phone]: e.target.value})}/>
+                            <input id="profile-phone" defaultValue={formData.phone} type="text" name="phone"
+                                   onChange={handleInputChange}/>
                         </label>
                     </div>
                     <div id="edit-profile">
                         <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Cancel"}/>
                     </div>
                     <div id="submit-profile">
-                        <button type="submit">Save Changes</button>
+                        <button type="submit" >Save Changes</button>
                     </div>
                     </form>
                 </div> :
                 <div className="about-box">
                     <div>
-                        {data.userName}
+                        {formData.userName}
                     </div>
                     <label>
                         Bio
-                        <div id="profile-bio">{data.bio}</div>
+                        <div id="profile-bio">{formData.bio}</div>
                     </label>
                     <label>
                         Address
-                        <div id="profile-address">{data.address}</div>
+                        <div id="profile-address">{formData.address}</div>
                     </label>
                     <label>
                         Phone Number
-                        <div id="profile-phone">{data.phone}</div>
+                        <div id="profile-phone">{formData.phone}</div>
                     </label>
                     <div id="edit-profile">
                         <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Profile"}/>

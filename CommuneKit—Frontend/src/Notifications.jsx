@@ -2,18 +2,18 @@
 import './styles.css'
 import { useState, useEffect } from 'react'
 import RequestComponent from './RequestComponent'
-import {getBorrowingRequests, getLendingRequests} from './services/RequestService.jsx'
+import {getApprovedRequests, getMyRequests} from './services/RequestService.jsx'
 
 export default function Notifications(userId) {
     const [lendingRequests, setLendingRequests] = useState([])
     const [borrowRequests, setBorrowRequests] = useState([])
     useEffect(() => {
-        getBorrowingRequests(userId)
+        getMyRequests(userId)
             .then (res => {
                 setLendingRequests(res.data);
             })
             .catch (err => console.log(err))
-        getLendingRequests(userId)
+        getApprovedRequests(userId)
             .then(res => {
                 setBorrowRequests(res.data);
             })

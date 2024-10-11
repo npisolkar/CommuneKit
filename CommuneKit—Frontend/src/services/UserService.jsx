@@ -16,7 +16,7 @@ export function getUserById(userId){
         return axios.get(USER_API_BASE_URL + '/1');
     }
 
-export function updateUser(userId, {userDto}) {
+export function updateUser(userId, userDto) {
     try {
         return axios.put(USER_API_BASE_URL + "/1", userDto, {
             headers: {

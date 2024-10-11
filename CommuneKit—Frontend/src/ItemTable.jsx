@@ -4,6 +4,7 @@
 import ItemComponent from "./ItemComponent.jsx";
 
 export default function ItemTable({headName, items}) {
+
     return (
         <>
             <h1>{headName}</h1>
@@ -19,7 +20,7 @@ export default function ItemTable({headName, items}) {
                 <tbody>
                 {
                     items.map(item => (
-                        <ItemComponent data={item}/>
+                        <ItemComponent data={item} />
                     ))
                 }
                 </tbody>

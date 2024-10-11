@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 import {updateUser} from "./services/UserService.jsx";
 import {updateItem} from "./services/ItemService.jsx";
+import {createRequest} from "./services/RequestService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
@@ -49,7 +50,9 @@ export default function ItemPage({isOwn, itemID, userID}){
 
     async function handleSubmit(formData) {
         try {
-            let itemJson = {
+            let requestJson = {
+                borrowingUserId:'1',
+                lendingUserId: '1',
                 startDay:formData.startDay,
                 startMonth:formData.startMonth,
                 startYear:formData.startYear,
@@ -58,8 +61,8 @@ export default function ItemPage({isOwn, itemID, userID}){
                 endYear:formData.endYear,
                 message:formData.message
             }
-            const itemData = await updateItem(userID, JSON.stringify(itemJson));
-            console.log("submit:" + itemData);
+            const requestData = await createRequest(JSON.stringify(requestJson));
+            console.log("submit:" + requestData);
         }
         catch (error) {
             console.log(error);
@@ -116,41 +119,41 @@ export default function ItemPage({isOwn, itemID, userID}){
                         <form onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label>Start Day</label>
-                                <input type="text" name="startDay" value={formData.startDay}
+                                <input type="text" name="startDay" value={itemData.startDay}
                                        onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>Start Month</label>
-                                <input type="text" name="startMonth" value={formData.startMonth}
+                                <input type="text" name="startMonth" value={itemData.startMonth}
                                        onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>Start Year</label>
-                                <input type="text" name="startYear" value={formData.startYear}
+                                <input type="text" name="startYear" value={itemData.startYear}
                                        onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>End Day</label>
-                                <input type="text" name="endDay" value={formData.endDay} onChange={handleInputChange}
+                                <input type="text" name="endDay" value={itemData.endDay} onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>End Month</label>
-                                <input type="text" name="endMonth" value={formData.endMonth}
+                                <input type="text" name="endMonth" value={itemData.endMonth}
                                        onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>End Year</label>
-                                <input type="text" name="endYear" value={formData.endYear} onChange={handleInputChange}
+                                <input type="text" name="endYear" value={itemData.endYear} onChange={handleInputChange}
                                        required/>
                             </div>
                             <div className="form-group">
                                 <label>Message</label>
-                                <input type="text" name="message" value={formData.message} onChange={handleInputChange}
+                                <input type="text" name="message" value={itemData.message} onChange={handleInputChange}
                                        required/>
                             </div>
                             <button type="submit">Request This Item</button>
