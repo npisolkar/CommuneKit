@@ -48,8 +48,8 @@ public class User {
 
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "userid")
-    private List<Item> items;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "fk_user_id", referencedColumnName = "userid")
+//    private List<Item> items;
 }
 

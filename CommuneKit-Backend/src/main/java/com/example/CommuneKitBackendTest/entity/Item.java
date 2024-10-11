@@ -26,6 +26,7 @@ public class Item {
     @Column(name = "item_category", nullable = false)
     private String itemCategory;
 
-    @Column(name = "item_rating", nullable = false)
-    private int itemRating;
+    @Column(name = "fk_user_id", nullable = false)
+    private Long userID;
+
 }

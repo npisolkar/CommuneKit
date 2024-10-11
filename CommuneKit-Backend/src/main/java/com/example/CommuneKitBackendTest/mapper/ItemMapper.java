@@ -10,7 +10,7 @@ public class ItemMapper {
                 item.getItemName(),
                 item.getItemDescription(),
                 item.getItemCategory(),
-                item.getItemRating()
+                item.getUserID()
         );
     }
 
@@ -20,7 +20,7 @@ public class ItemMapper {
                 itemDto.getItemName(),
                 itemDto.getItemDescription(),
                 itemDto.getItemCategory(),
-                itemDto.getItemRating()
+                itemDto.getUserID()
         );
     }
 }

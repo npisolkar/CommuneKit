@@ -1,7 +1,11 @@
 package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
+import com.example.CommuneKitBackendTest.entity.User;
+import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
+import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,5 +48,11 @@ public class ItemController {
     public ResponseEntity<String> deleteItem(@PathVariable("id") Long itemID) {
         itemService.deleteItem(itemID);
         return ResponseEntity.ok("Item deleted successfully");
+    }
+
+    @GetMapping("/my/{id}")
+    public ResponseEntity<List<ItemDto>> getMyItems(@PathVariable("id") Long userID) {
+        List<ItemDto> items = itemService.getItemsByUserId(userID);
+        return ResponseEntity.ok(items);
     }
 }
