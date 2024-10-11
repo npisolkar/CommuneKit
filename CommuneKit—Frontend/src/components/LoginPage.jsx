@@ -1,29 +1,44 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import UserService from "../services/UserService.jsx";
+import loginUser from "../services/UserService.jsx";
 
 
 function LoginPage(){
+    localStorage.clear();
+
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate();
 
+    const handleRegistration = () => {
+        navigate('/registration');  // Navigates to /registration when button is clicked
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const userDto = {
-            username: username,
+            userName: username,
             password: password
         };
 
         try {
-            const userData = await UserService.login(userDto)
-            console.log(userData)
+            let loginJson = {
+                userName: userDto.userName,
+                password: userDto.password
+            }
+            //await is necessary, otherwise result will pend forever
+            //JSON.stringify turns the key-value pair object into a JSON string
+            //backend needs it to be a string
+            const userData = await loginUser(JSON.stringify(loginJson))
+            //all the data is in userData.data.<keyname>
+            console.log(userData);
             if (userData.status === 200) {
                 localStorage.setItem('token', "LoggedIn")
-                localStorage.setItem('role', userData.role)
-                localStorage.setItem('user', JSON.stringify(userData))
+                localStorage.setItem('role', userData.data.role) //
+                localStorage.setItem('userID', userData.data.userId)
+                //localStorage.getItem('userID')
                 navigate('/home')
             } else {
                 setError(userData.message)
@@ -46,14 +61,20 @@ function LoginPage(){
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Username: </label>
-                    <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <input type="username" value={username} onChange={(e) => setUsername(e.target.value)}/>
                 </div>
                 <div className="form-group">
                     <label>Password: </label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <h2>Create account</h2>
+            <div>
+                <button onClick={handleRegistration}>
+                    Go to Registration
+                </button>
+            </div>
         </div>
     )
 

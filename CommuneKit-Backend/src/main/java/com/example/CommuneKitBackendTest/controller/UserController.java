@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.*;
-
+import java.lang.Exception;
 import java.util.List;
 
 @AllArgsConstructor
@@ -31,8 +31,18 @@ public class UserController {
     @PostMapping
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-        UserDto savedUser = userService.createUser(userDto);
-        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        UserDto savedUser;
+        try {
+            savedUser = userService.createUser(userDto);
+            if (savedUser == null) {
+                System.out.println("savedUser is null when attempting creation");
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("{id}")

@@ -8,6 +8,8 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
+import LoginPage from "./components/LoginPage.jsx";
+import RegistrationPage from "./components/RegistrationPage.jsx";
 
 export default function App() {
   return (
@@ -31,6 +33,7 @@ export default function App() {
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
+                  <Route path="/registration" element={<RegistrationPage />}/>
                   <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>

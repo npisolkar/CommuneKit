@@ -1,6 +1,7 @@
 /* ItemTable: A class handling the displaying of lists of items.
 *  Up to a certain amount of items should load at once, with
 *  subsequent requests populating more. */
+const userID = localStorage.getItem("userId")
 
 export default function ItemTable({headName, userID}) {
     return (
