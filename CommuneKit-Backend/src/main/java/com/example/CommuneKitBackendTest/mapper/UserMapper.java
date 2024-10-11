@@ -18,8 +18,7 @@ public class UserMapper {
                 user.getAddress(),
                 user.getBio(),
                 user.isBanned(),
-                user.getRole(),
-                user.getItems()
+                user.getRole()
         );
     }
 
@@ -35,8 +34,7 @@ public class UserMapper {
                 userDto.getAddress(),
                 userDto.getBio(),
                 userDto.isBanned(),
-                userDto.getRole(),
-                userDto.getItems()
+                userDto.getRole()
         );
     }
 

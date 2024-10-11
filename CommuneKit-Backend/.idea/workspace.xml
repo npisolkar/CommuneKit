@@ -4,34 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/RequestService.jsx" afterDir="false" />
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added get items by user id api">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/RequestController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/RequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/RequestMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/repository/RequestRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/RequestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/RequestServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/config/WebConfig.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/MessagesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Home.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/MyItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/MyItems.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Notifications.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/RequestComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/RequestComponent.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/RequestService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/AdminPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="RequestIntegration" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -62,7 +65,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.CommuneKitBackendTestApplication.executor": "Run",
-    "git-widget-placeholder": "e-branch",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend",
     "node.js.detected.package.eslint": "true",
@@ -100,9 +103,22 @@
       <updated>1728515968274</updated>
       <workItem from="1728515969314" duration="1082000" />
     </task>
+    <task id="LOCAL-00001" summary="Added get items by user id api">
+      <option name="closed" value="true" />
+      <created>1728608875369</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1728608875369</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added get items by user id api" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added get items by user id api" />
   </component>
 </project>
