@@ -1,17 +1,24 @@
 import axios from "axios";
 import {useState} from "react";
 
-const USER_API_BASE_URL = "http://localhost:8080/api/users"
+const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 
-export function getItemsByUser(userID) {
-    const [items, setItems] = useState([]);
-    axios.get(USER_API_BASE_URL + '/1')
-        .then((response) => {
-            setItems(response.data.items);
-        })
-    return items;
+export function getItemsByUser(userId) {
+    return axios.get(ITEM_API_BASE_URL + "/my/" + JSON.stringify(userId))
+}
+
+export function getMyBorrows(userID) {
+    return axios.get(ITEM_API_BASE_URL + "/my-borrows/1")
 }
 
 export function getAllItems() {
+    return axios.get(ITEM_API_BASE_URL)
+}
 
+export function updateItem(userId, itemDto) {
+    return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
 }

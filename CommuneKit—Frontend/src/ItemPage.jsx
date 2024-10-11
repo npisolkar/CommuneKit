@@ -4,6 +4,8 @@
 import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import axios from 'axios';
+import {updateUser} from "./services/UserService.jsx";
+import {updateItem} from "./services/ItemService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
@@ -31,10 +33,58 @@ function ReviewBox(isClicked) {
 export default function ItemPage({isOwn, itemID, userID}){
     const [isClicked, setClicked] = useState(false);
     let params = useParams();
+    const [itemData, setItemData] = useState({
+        startDay:'',
+        startMonth:'',
+        startYear:'',
+        endDay:'',
+        endMonth:'',
+        endYear:'',
+        message:""
+    });
 
     function onClick() {
         setClicked(!isClicked);
     }
+
+    async function handleSubmit(formData) {
+        try {
+            let itemJson = {
+                startDay:formData.startDay,
+                startMonth:formData.startMonth,
+                startYear:formData.startYear,
+                endDay:formData.endDay,
+                endMonth:formData.endMonth,
+                endYear:formData.endYear,
+                message:formData.message
+            }
+            const itemData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("submit:" + itemData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleUploadItem(formData){
+        try {
+            let itemJson = {
+                itemName:formData.itemName,
+                itemDescription:formData.itemDescription,
+                itemCategory:formData.itemCategory,
+            }
+            const itemData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("submit:" + itemData);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setItemData({ ...itemData, [name]: value });
+    };
     return (
         <>
             <div id="item-page-header">
@@ -44,37 +94,68 @@ export default function ItemPage({isOwn, itemID, userID}){
                 <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
             </div>
             {isClicked ?
-                <div className="item-column">
+                <div>
+                <form onSubmit={handleUploadItem}>
                     <div id="item-image">Item Image</div>
-                    <input type="text" id="item-name" placeholder={"Item Name"}/>
-                    <input type="text" id="item-desc" placeholder={"Item Desc"}/>
-                    <div id="additional-info-header"><h2>Additional Info</h2></div>
-                    <input type="text" id="additional-info" placeholder={"Info"}/>
-                </div> :
-                <div className="item-column">
-                    <div id="item-image">Item Image</div>
-                    <div id="item-name">Item Name</div>
-                    <div id="item-desc">Item Desc</div>
-                    <div id="additional-info-header"><h2>Additional Info</h2></div>
-                    <div id="additional-info">Info</div>
+                    <input type="text" name="itemName" defaultValue={"Item Name"} required/>
+                    <input type="text" name="itemDescription" defaultValue={"Item Desc"} required/>
+                    <input type="text" name="itemCategory" defaultValue={"Category"} required/>
+                    <button type="submit">Submit Changes</button>
+                </form>
                 </div>
-            }
-            {isClicked ?
-                <div className="item-column">
-                    <div id="condition-head"><h2>Condition</h2></div>
-                    <input type="text" id="condition-box" placeholder={"Placeholder"}/>
-                    <div id="start-date-head"><h2>Start Date</h2></div>
-                    <input type="text" id="start-date-box" placeholder={"Placeholder"}/>
-                    <div id="end-date-head"><h2>End Date</h2></div>
-                    <input type="text" id="end-date-box" placeholder={"Placeholder"}/>
-                </div> :
-                <div className="item-column">
-                    <div id="condition-head"><h2>Condition</h2></div>
-                    <div id="condition-box">Placeholder</div>
-                    <div id="start-date-head"><h2>Start Date</h2></div>
-                    <div id="start-date-box">Placeholder</div>
-                    <div id="end-date-head"><h2>End Date</h2></div>
-                    <div id="end-date-box">Placeholder</div>
+                :
+                <div>
+                    <div className="item-column">
+                        <div id="item-image">Item Image</div>
+                        <div id="item-name">Item Name</div>
+                        <div id="item-desc">Item Desc</div>
+                        <div id="additional-info-header"><h2>Additional Info</h2></div>
+                        <div id="additional-info">Info</div>
+                    </div>
+                    <div id="request-form">
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Start Day</label>
+                                <input type="text" name="startDay" value={formData.startDay}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Month</label>
+                                <input type="text" name="startMonth" value={formData.startMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Year</label>
+                                <input type="text" name="startYear" value={formData.startYear}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Day</label>
+                                <input type="text" name="endDay" value={formData.endDay} onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Month</label>
+                                <input type="text" name="endMonth" value={formData.endMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Year</label>
+                                <input type="text" name="endYear" value={formData.endYear} onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Message</label>
+                                <input type="text" name="message" value={formData.message} onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <button type="submit">Request This Item</button>
+                        </form>
+                    </div>
                 </div>
             }
         </>

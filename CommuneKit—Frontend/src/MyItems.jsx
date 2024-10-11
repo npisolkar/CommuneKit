@@ -3,26 +3,35 @@
 import ItemTable from "./ItemTable.jsx";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {getUserById} from './services/UserService.jsx'
 import ItemComponent from "./ItemComponent.jsx";
+import {getItemsByUser, getAllItems} from './services/ItemService.jsx'
 
-export default function MyItems({userID}) {
-    const [items, setItems] = useState([]);
-
+export default function MyItems(userID) {
+    const [postedItems, setPostedItems] = useState([]);
+    const [borrowedItems, setBorrowedItems] = useState([]);
     useEffect(() => {
-        getUserById(userID)
+        getAllItems()
             .then (res => {
-                setItems(res.data.items);
+                setPostedItems(res.data);
+                console.log(JSON.stringify(res.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        getAllItems()
+            .then (res => {
+                setBorrowedItems(res.data);
                 console.log(JSON.stringify(res.data));
             })
             .catch(function (error) {
                 console.log(error);
             });
     })
+
     return (
         <>
             <div className="home-items" id="profile-posted">
-                <ItemTable headName={"My Posted Items"}/>
+                <ItemTable headName={"my posted items"} items={postedItems} />
                 <div className="my-item">
                     <Link to="/profile/my-items/dummypage">
                         <button>Dummy Item</button>
@@ -30,23 +39,7 @@ export default function MyItems({userID}) {
                 </div>
             </div>
             <div className="home-items" id="profile-borrowed">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Category</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        items.map(item => (
-                            <ItemComponent data={item} />
-                        ))
-                    }
-                    </tbody>
-                </table>
+                <ItemTable headName={"my borrowed items"} items={borrowedItems} />
             </div>
         </>
     )

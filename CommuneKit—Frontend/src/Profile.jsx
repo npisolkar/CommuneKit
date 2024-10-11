@@ -5,7 +5,7 @@ import './styles.css'
 import { useState, useEffect } from 'react'
 import {Link} from "react-router-dom";
 import axios from 'axios';
-import {getUserById} from "./services/UserService.jsx";
+import {getUserById, updateUser} from "./services/UserService.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users"
 
@@ -71,24 +71,24 @@ export default function Profile({isOwn, userID}) {
         });
     }
 
-    function uploadProfileInfo(formData) {
-        axios.post(url + "/" + userID, {
-            name: formData.userName,
-            password: data.password,
-            email: formData.email,
-            phone: formData.phone,
-            address: formData.address,
-            isBanned:false,
-            isAdmin:false,
-            isOwner:false,
-        })
-            .then(function (response) {
-                console.log("post response" + response.data);
-                setData(formData);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+    async function uploadProfileInfo(formData) {
+        try {
+            let profileJson = {
+                name: formData.userName,
+                password: formData.password,
+                email: formData.email,
+                phone: formData.phone,
+                address: formData.address,
+                isBanned: false,
+                isAdmin: false,
+                isOwner: false,
+            }
+            const profileData = await updateUser(userID, JSON.stringify(profileJson));
+            console.log("submit:" + profileData);
+        }
+        catch (error) {
+            console.log(error);
+        }
     }
 
     return (
