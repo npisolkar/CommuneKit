@@ -14,7 +14,7 @@ In bash/command line, navigate to the CommuneKit-Backend directory and enter the
 `mvn spring-boot:run`
 This should start the server.
 Then, start the frontend. Navigate to the CommuneKit-Frontend directory and enter the commands
-`npm run build` followed by `npm run dev'
+`npm run build` followed by `npm run dev`
 You should then go to the link that appears, normally `http://localhost:5173`
 
 ### Application details for authorization: (very sensetive, don't share)
