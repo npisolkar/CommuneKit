@@ -1,5 +1,5 @@
 // @ts-ignore
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './styles.css'
 import Home from "./Home.jsx"
 import Search from "./Search.jsx"
@@ -10,6 +10,9 @@ import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
 
 export default function App() {
+    useEffect(() => {
+        localStorage.setItem("userID", "1")
+    })
   return (
       <>
       <Router>
@@ -27,7 +30,7 @@ export default function App() {
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true} userID={1}/>} />
+                  <Route path="/profile" element={<Profile isOwn={true} userID={localStorage.getItem("userID")}/>} />
                   <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/" element={<Home />}/>
