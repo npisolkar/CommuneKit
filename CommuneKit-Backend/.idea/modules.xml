@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/CommuneKit-Backend.iml" filepath="$PROJECT_DIR$/.idea/CommuneKit-Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommuneKitBackendTest.iml" filepath="$PROJECT_DIR$/CommuneKitBackendTest.iml" />
     </modules>
   </component>
 </project>

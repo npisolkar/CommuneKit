@@ -7,6 +7,10 @@ import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.UserMapper;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.UserService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

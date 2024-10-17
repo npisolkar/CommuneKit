@@ -9,6 +9,10 @@ import com.example.CommuneKitBackendTest.mapper.ItemMapper;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -62,7 +66,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getItemsByUserId(Long userId) {
-        List<Item> items = itemRepository.findAll();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPersistenceUnit");
+        EntityManager entityManager = emf.createEntityManager();
+        String jpql = "SELECT i FROM Item i WHERE i.userID = :id";
+        TypedQuery<Item> query = entityManager.createQuery(jpql, Item.class);
+        query.setParameter("id", userId);
+        List<Item> items = query.getResultList();
         items.removeIf(item -> !(item.getUserID().equals(userId)));
         return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
