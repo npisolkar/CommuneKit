@@ -42,7 +42,7 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public RequestDto updateRequest(Long requestId, RequestDto updatedRequest) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
-        request.setApproved(updatedRequest.isApproved());
+        request.setIsApproved(updatedRequest.getIsApproved());
 
         Request updatedRequestObj = requestRepository.save(request);
 
@@ -61,9 +61,26 @@ public class RequestServiceImpl implements RequestService {
     public List<RequestDto> getApprovedRequestsByUserId(Long userId) {
         List<Request> requests = requestRepository.findAll();
         requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
-        requests.removeIf(request -> !(request.isApproved()));
+        requests.removeIf(request -> request.getIsApproved() == null);
+        requests.removeIf(request -> request.getIsApproved() != true);
         return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<RequestDto> getDeniedRequestsByUserId(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
+        requests.removeIf(request -> request.getIsApproved() == null);
+        requests.removeIf(request -> request.getIsApproved() != false);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
 
+    @Override
+    public List<RequestDto> getPendingRequestsByUserId(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
+        requests.removeIf(request -> request.getIsApproved() != null);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+    
 }
