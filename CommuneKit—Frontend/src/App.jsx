@@ -17,7 +17,7 @@ export default function App() {
       <Router>
           <div>
               <div className="menu-bar" id="navbar">
-                  <Link id="logo" to="/">
+                  <Link id="logo" to="/home">
                       <img src="/CommuneKit Logo.png" alt="logo"></img>
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
@@ -69,7 +69,7 @@ function MenuBar() {
             <div id="menu-popup">
                 <ul>
                     <li><button>Sign Out</button></li>
-                    <li><button>Delete Account</button></li>
+                    {/*<li><button>Delete Account</button></li>*/}
                 </ul>
             </div>
         </>
