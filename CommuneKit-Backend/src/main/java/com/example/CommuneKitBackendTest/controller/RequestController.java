@@ -52,5 +52,16 @@ public class RequestController {
         return ResponseEntity.ok(requests);
     }
 
+    @GetMapping("/denied/{id}")
+    public ResponseEntity<List<RequestDto>> getDeniedRequests(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getDeniedRequestsByUserId(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/pending/{id}")
+    public ResponseEntity<List<RequestDto>> getPendingRequests(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getPendingRequestsByUserId(userId);
+        return ResponseEntity.ok(requests);
+    }
 
 }

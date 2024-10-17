@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -20,7 +22,9 @@ public class RequestDto {
     private int endDay;
     private int endMonth;
     private int endYear;
-    private boolean isApproved;
+    private Boolean isApproved;
     private String message;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
 }
