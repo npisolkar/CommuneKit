@@ -15,10 +15,6 @@ export function getAllItems() {
     return axios.get(ITEM_API_BASE_URL)
 }
 
-export function getItemById(id) {
-    return axios.get(`${id}`);
-}
-
 export function updateItem(userId, itemDto) {
     return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
         headers: {

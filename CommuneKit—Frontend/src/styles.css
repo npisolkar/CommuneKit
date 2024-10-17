@@ -193,16 +193,23 @@ input, label {
     width:200px;
 }
 
-#submit-profile {
-
+/* my items page */
+.home-items {
+    font-size:12px;
 }
 
-/* my items page */
+#profile-posted {
+    position:absolute;
+    left:0;
+}
+
+#profile-borrowed {
+    position:absolute;
+    left:800px;
+}
 
 /* notifications */
-#notif-title {
-    top:auto;
-}
+
 
 /* item table */
 .item-table {
@@ -227,4 +234,17 @@ input, label {
     text-align:center;
     margin-left:300px;
     width:200px;
+}
+
+.form-group {
+    display:inline-block;
+}
+
+#request-form {
+    position: absolute;
+    top:700px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
