@@ -44,7 +44,6 @@ function ItemsButton({isOwn}) {
 export default function Profile({ isOwn }) {
     const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
-    const [url, setUrl] = useState(axios.defaults.baseURL);
 
     const [formData, setFormData] = useState({
         userName: '',
@@ -74,22 +73,13 @@ export default function Profile({ isOwn }) {
         setClicked(!isClicked);
     }
 
-    function uploadImage({image}) {
-        axios ({
-            method:'POST',
-            url:url + userID,
-            data: {
-                image:image,
-            }
-        });
-    }
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
 
-    async function uploadProfileInfo(formData) {
+    async function uploadProfileInfo() {
         console.log("username at beginning of upload: " + formData.userName)
         console.log("upload: " + formData);
         try {

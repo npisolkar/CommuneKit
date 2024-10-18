@@ -31,9 +31,9 @@ export default function App() {
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/profile" element={<Profile isOwn={true} />} />
-                  <Route path="/profile/my-items" element={<MyItems userID='1'/>}/>
+                  <Route path="/profile/my-items" element={<MyItems userID={localStorage.getItem("userId")} />}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
-                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>}/>
+                  <Route path="/profile/:userID" element={<Profile isOwn={false}/>}/>
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/" element={<Home />}/>
               </Routes>
