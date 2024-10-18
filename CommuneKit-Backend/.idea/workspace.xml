@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added get items by user id api">
-      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ReportController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ReviewController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/dto/ReportDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/dto/ReviewDto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/entity/Report.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/entity/Review.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/mapper/ReportMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/mapper/ReviewMapper.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/repository/ReportRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/repository/ReviewRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/ReportService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/ReviewService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ReportServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added get items by user id api" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
