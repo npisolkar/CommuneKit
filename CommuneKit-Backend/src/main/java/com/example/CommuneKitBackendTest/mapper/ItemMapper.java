@@ -9,8 +9,7 @@ public class ItemMapper {
                 item.getItemID(),
                 item.getItemName(),
                 item.getItemDescription(),
-                item.getItemCategory(),
-                item.getUserID()
+                item.getItemCategory()
         );
     }
 
@@ -19,8 +18,7 @@ public class ItemMapper {
                 itemDto.getItemID(),
                 itemDto.getItemName(),
                 itemDto.getItemDescription(),
-                itemDto.getItemCategory(),
-                itemDto.getUserID()
+                itemDto.getItemCategory()
         );
     }
 }

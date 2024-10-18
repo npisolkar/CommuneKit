@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -46,15 +48,8 @@ public class User {
 
     private String role;
 
-    @PrePersist
-    protected void onCreate() {
-        if (this.role == null) {
-            this.role = "USER";
-        }
-        if (!this.isBanned) {
-            this.isBanned = false;
-        }
-    }
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "userid")
+    private List<Item> items;
 }
 

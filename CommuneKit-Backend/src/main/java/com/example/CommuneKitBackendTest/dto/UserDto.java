@@ -24,4 +24,5 @@ public class UserDto {
     private String bio;
     private boolean isBanned;
     private String role;
+    private List<Item> items;
 }
