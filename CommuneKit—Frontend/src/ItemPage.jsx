@@ -106,18 +106,12 @@ export default function ItemPage(itemID, userID) {
         message: ""
     });
 
-    useEffect(() => {
-            console.log("userID:" + userID + "local:" + localStorage.getItem("userId"));
-            setIsOwn(true);
-            console.log("set isOwn to true");
-        }
-    )
-
     function onClick() {
         setClicked(!isClicked);
     }
 
     useEffect(() => {
+        setIsOwn(true);
         getItemById({itemID: '1'})
             .then((res) => {
                 setItemData(res.data);
