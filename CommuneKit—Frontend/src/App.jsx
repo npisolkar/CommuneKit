@@ -10,6 +10,9 @@ import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
 
 export default function App() {
+    localStorage.setItem("userId", "/1")
+    const userID = localStorage.getItem("userId")
+    const profileUrl = "/profile"
   return (
       <>
       <Router>
@@ -20,15 +23,17 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to="/profile" id="profile-button"><button>Profile</button></Link>
+                  <Link to={`${profileUrl}${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
 
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true} userID={1}/>} />
-                  <Route path="/profile/my-items" element={<MyItems />} />
+                  <Route path="/profile" element={<Profile isOwn={true} />} />
+                  <Route path="/profile/my-items" element={<MyItems userID={localStorage.getItem("userId")} />}/>
+                  <Route path="/item/:itemID" element={<ItemPage />}/>
+                  <Route path="/profile/:userID" element={<Profile isOwn={false}/>}/>
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/" element={<Home />}/>
               </Routes>
