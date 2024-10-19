@@ -5,7 +5,6 @@ import com.example.CommuneKitBackendTest.dto.ItemDto;
 import java.util.List;
 
 public interface ItemService {
-
     ItemDto createItem(ItemDto itemDto);
 
     ItemDto getItemById(Long itemID);
@@ -15,6 +14,4 @@ public interface ItemService {
     ItemDto updateItem(Long itemID, ItemDto updatedItem);
 
     void deleteItem(Long itemID);
-
-    List<ItemDto> getItemsByUserId(Long userId);
 }
