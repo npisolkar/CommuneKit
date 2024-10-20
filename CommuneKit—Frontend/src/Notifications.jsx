@@ -15,15 +15,15 @@ export default function Notifications() {
                 const sentData = await sentResponse.json();
                 setSentRequests(sentData);
 
-                const approvedResponse = await fetch('http://localhost:8080/api/requests/approved/3');
+                const approvedResponse = await fetch('http://localhost:8080/api/requests/approved/1');
                 const approvedData = await approvedResponse.json();
                 setApprovedRequests(approvedData);
 
-                const deniedResponse = await fetch('http://localhost:8080/api/requests/denied/3');
+                const deniedResponse = await fetch('http://localhost:8080/api/requests/denied/1');
                 const deniedData = await deniedResponse.json();
                 setDeniedRequests(deniedData);
 
-                const pendingResponse = await fetch('http://localhost:8080/api/requests/pending/3');
+                const pendingResponse = await fetch('http://localhost:8080/api/requests/pending/1');
                 const pendingData = await pendingResponse.json();
                 setPendingRequests(pendingData);
             } catch (error) {
@@ -36,12 +36,42 @@ export default function Notifications() {
         fetchRequests();
     }, []); // Empty dependency array to only run this effect on component mount
 
-    if (loading) {
-        return <h2>Loading notifications...</h2>;
-    }
+    const handleApproval = async (requestId, isApproved) => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/requests/${requestId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ isApproved }),
+            });
+
+            if (response.ok) {
+                // Successfully updated, now remove or update the request in the pending list
+                setPendingRequests(pendingRequests.filter(request => request.requestId !== requestId));
+
+                // Optionally, you can add the request to the approved/denied list based on `isApproved`
+                if (isApproved) {
+                    const approvedRequest = pendingRequests.find(req => req.requestId === requestId);
+                    setApprovedRequests([...approvedRequests, approvedRequest]);
+                } else {
+                    const deniedRequest = pendingRequests.find(req => req.requestId === requestId);
+                    setDeniedRequests([...deniedRequests, deniedRequest]);
+                }
+            } else {
+                console.error("Failed to update the request");
+            }
+        } catch (error) {
+            console.error("Error while approving/denying request:", error);
+        }
+    };
 
     const formatRequest = (request) => {
         return `Request ID: ${request.requestId}, Borrowing User ID: ${request.borrowingUserId}, Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
+    };
+
+    if (loading) {
+        return <h2>Loading notifications...</h2>;
     }
 
     return (
@@ -87,7 +117,11 @@ export default function Notifications() {
                 {pendingRequests.length > 0 ? (
                     <ul>
                         {pendingRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>
+                                {formatRequest(request)}
+                                <button onClick={() => handleApproval(request.requestId, true)}>Approve</button>
+                                <button onClick={() => handleApproval(request.requestId, false)}>Deny</button>
+                            </li>
                         ))}
                     </ul>
                 ) : (

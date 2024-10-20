@@ -64,4 +64,16 @@ public class RequestController {
         return ResponseEntity.ok(requests);
     }
 
+    @GetMapping("/approved-by-Id/{itemId}")
+    public ResponseEntity<List<RequestDto>> getApprovedRequestsById(@PathVariable Long itemId) {
+        List<RequestDto> requests = requestService.getApprovedRequestsByItemId(itemId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/current/{itemId}")
+    public ResponseEntity<List<RequestDto>> getCurrentRequests(@PathVariable Long itemId) {
+        List<RequestDto> requests = requestService.getCurrentRequestsByItemId(itemId);
+        return ResponseEntity.ok(requests);
+    }
+
 }
