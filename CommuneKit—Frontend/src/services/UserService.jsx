@@ -21,7 +21,8 @@ export function updateUser(userId, userDto) {
         return axios.put(USER_API_BASE_URL + "/1", userDto, {
             headers: {
                 'Content-Type': 'application/json'
-            }
+            },
+            data: JSON.stringify(userDto)
         })
     }
     catch (error) {

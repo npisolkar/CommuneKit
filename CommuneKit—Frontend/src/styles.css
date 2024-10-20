@@ -248,3 +248,10 @@ input, label {
     right: 0;
     margin: auto;
 }
+
+#item-reviews {
+    position:absolute;
+    margin-top:100px;
+    top:800px;
+    margin-left:700px;
+}

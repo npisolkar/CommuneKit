@@ -23,6 +23,7 @@ export function updateItem(userId, itemDto) {
     return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
         headers: {
             'Content-Type': 'application/json'
-        }
+        },
+        data: JSON.stringify(itemDto)
     })
 }

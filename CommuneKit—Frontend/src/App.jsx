@@ -8,6 +8,7 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
+import ReviewPage from "./ReviewPage.jsx";
 
 export default function App() {
     localStorage.setItem("userId", "/1")
@@ -32,7 +33,9 @@ export default function App() {
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/profile" element={<Profile isOwn={true} />} />
                   <Route path="/profile/my-items" element={<MyItems userID={localStorage.getItem("userId")} />}/>
-                  <Route path="/item/:itemID" element={<ItemPage />}/>
+                  <Route path="/item/:itemID" element={<ItemPage />}>
+                  </Route>
+                  <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
                   <Route path="/profile/:userID" element={<Profile isOwn={true}/>}/>
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/" element={<Home />}/>

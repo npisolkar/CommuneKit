@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="" />
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ReviewPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ReviewService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Owner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Review.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,21 +30,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "RohanGaddam"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RohanGaddam&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/npisolkar/CommuneKit.git",
-    "accountId": "55b68fec-6c8e-4088-83eb-9951d6db1ea4"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/npisolkar/CommuneKit.git&quot;,
+    &quot;accountId&quot;: &quot;55b68fec-6c8e-4088-83eb-9951d6db1ea4&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2nDmLplwWwKUjj8x55BCUBsPEzw" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,7 +52,13 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.CommuneKitBackendTestApplication.executor": "Run",
+    "git-widget-placeholder": "e-branch",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend",
     "node.js.detected.package.eslint": "true",

@@ -44,7 +44,7 @@ function ItemsButton({isOwn}) {
 export default function Profile({ isOwn }) {
     const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
-
+    const {id} = useParams();
     const [formData, setFormData] = useState({
         userName: '',
         email: '',

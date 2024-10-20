@@ -2,7 +2,7 @@
    This is also the page that appears when creating and editing items
 *  isMine: determines whether the item is your own item or another's */
 import {useEffect, useState} from 'react';
-import {useParams} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {updateItem, getItemById} from "./services/ItemService.jsx";
 import {createRequest} from "./services/RequestService.jsx";
 
@@ -73,14 +73,12 @@ function RequestForm({isOwn}, itemData, handleSubmit, handleInputChange) {
     }
 }
 
-function ReviewBox(isClicked) {
+function ReviewBox(itemID) {
     return (
         <>
-            {isClicked ? null :
                 <div id="reviews">
-                    <h1>Reviews</h1>
+                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
                 </div>
-            }
         </>
     )
 }
@@ -111,15 +109,18 @@ export default function ItemPage(itemID, userID) {
     }
 
     useEffect(() => {
-        setIsOwn(true);
+        if (isOwn === false) {
+            setIsOwn(true);
+        }
         getItemById({itemID: '1'})
             .then((res) => {
                 setItemData(res.data);
+                console.log(JSON.stringify(res.data));
             })
             .catch((error) => {
                 console.log(error);
             })
-    })
+    }, [])
 
     async function handleSubmit() {
         try {
@@ -169,6 +170,9 @@ export default function ItemPage(itemID, userID) {
             </div>
             <RequestForm isOwn={isOwn} itemData={itemData} handleSubmit={handleSubmit}
                          handleInputChange={handleInputChange}/>
+            <div id="item-reviews">
+                <ReviewBox itemID={itemID}/>
+            </div>
             {isClicked ?
                 <div id="item-info">
                 <form onSubmit={handleUploadItem}>
