@@ -13,7 +13,7 @@ export function createUser(user){
     }
 
 export function getUserById(userId){
-        return axios.get(USER_API_BASE_URL + '/' + userId);
+        return axios.get(USER_API_BASE_URL + '/1');
     }
 
 export function updateUser(userId, userDto) {

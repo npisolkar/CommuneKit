@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ItemController {
 
     private ItemService itemService;
@@ -35,6 +36,7 @@ public class ItemController {
     }
 
     @PutMapping("{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<ItemDto> updateItem(@PathVariable("id") Long itemID, @RequestBody ItemDto updatedItem) {
         ItemDto itemDto = itemService.updateItem(itemID, updatedItem);
         return ResponseEntity.ok(itemDto);

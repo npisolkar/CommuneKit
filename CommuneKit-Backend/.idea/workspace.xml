@@ -5,23 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/pumal.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/components/ReviewComponent.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/components/ItemComponent.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/ItemTable.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/MyItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/MyItems.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Notifications.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Notifications.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/RequestComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/components/RequestComponent.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ItemService.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ReviewService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/ReviewService.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/services/UserService.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +45,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",

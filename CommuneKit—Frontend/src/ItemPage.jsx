@@ -192,13 +192,16 @@ export default function ItemPage(itemID, userID) {
             </div>
             {isClicked ?
                 <div id="item-info">
-                <form onSubmit={handleUploadItem}>
-                    <div id="item-image">Item Image</div>
-                    <input type="text" name="itemName" defaultValue={itemData.itemName} required/>
-                    <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required/>
-                    <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required/>
-                    <button type="submit">Submit Changes</button>
-                </form>
+                    <form onSubmit={handleUploadItem}>
+                        <div id="item-image">Item Image</div>
+                        <input type="text" name="itemName" defaultValue={itemData.itemName} required/>
+                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required/>
+                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required/>
+                        <button type="submit">Submit Changes</button>
+                    </form>
+                    <div id="delete-button">
+                        <button>Delete Item</button>
+                    </div>
                 </div>
                 :
                 <div>

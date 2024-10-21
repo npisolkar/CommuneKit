@@ -40,6 +40,7 @@ public class UserController {
     }
 
     @GetMapping("/info/{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<BasicUserDto> getUserInfoById(@PathVariable("id") long userId) {
         BasicUserDto basicUserDto = userService.getBasicUserInfoById(userId);
         return ResponseEntity.ok(basicUserDto);

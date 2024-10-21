@@ -24,6 +24,6 @@ export function updateItem(userId, itemDto) {
         headers: {
             'Content-Type': 'application/json'
         },
-        data: JSON.stringify(itemDto)
+        data: itemDto
     })
 }

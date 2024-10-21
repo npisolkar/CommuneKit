@@ -26,7 +26,7 @@ export default function MyItems(userID) {
             .catch(function (error) {
                 console.log(error);
             });
-    })
+    }, [])
 
     return (
         <>
@@ -40,6 +40,9 @@ export default function MyItems(userID) {
             </div>
             <div className="home-items" id="profile-borrowed">
                 <ItemTable headName={"my borrowed items"} items={borrowedItems} />
+            </div>
+            <div>
+                <button>Create New Item</button>
             </div>
         </>
     )
