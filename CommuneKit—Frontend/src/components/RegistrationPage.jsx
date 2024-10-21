@@ -35,16 +35,16 @@ function RegistrationPage() {
 
             //const token = localStorage.getItem('token');
 
-            const fdata = new FormData();
-            fdata.append('firstName', formData.firstName);
-            fdata.append('lastName', formData.lastName);
-            fdata.append('userName', formData.userName);
-            fdata.append('password', formData.password);
-            fdata.append('email', formData.email);
-            fdata.append('password', formData.password);
-            fdata.append('phone', formData.phone);
-            fdata.append('address', formData.address);
-            fdata.append('profilePicture', );
+            // const fdata = new FormData();
+            // fdata.append('firstName', formData.firstName);
+            // fdata.append('lastName', formData.lastName);
+            // fdata.append('userName', formData.userName);
+            // fdata.append('password', formData.password);
+            // fdata.append('email', formData.email);
+            // fdata.append('password', formData.password);
+            // fdata.append('phone', formData.phone);
+            // fdata.append('address', formData.address);
+            // fdata.append('profilePicture', );
 
 
             console.log(JSON.stringify(formData));

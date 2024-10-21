@@ -10,6 +10,21 @@ export function getUsers(){
         return axios.get(EMPLOYEE_API_BASE_URL);
     }
 
+export function updateUser(userId, userDto) {
+    try {
+        console.log("in updateUser:" + userDto)
+        return axios.put(USER_API_BASE_URL + "/1", userDto, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: userDto
+        })
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export function createUser(userDto){
     try {
         return axios.post(EMPLOYEE_API_BASE_URL, userDto, {
