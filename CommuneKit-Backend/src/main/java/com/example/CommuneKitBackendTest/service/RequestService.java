@@ -16,4 +16,14 @@ public interface RequestService {
     List<RequestDto> getRequestsByUserId(Long userId);
 
     List<RequestDto> getApprovedRequestsByUserId(Long userId);
+
+    List<RequestDto> getDeniedRequestsByUserId(Long userId);
+
+    List<RequestDto> getPendingRequestsByUserId(Long userId);
+
+    List<RequestDto> getApprovedRequestsByItemId(Long itemId);
+
+    List<RequestDto> getCurrentRequestsByItemId(Long itemId);
+
+
 }
