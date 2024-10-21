@@ -45,6 +45,8 @@ public class User {
 
     private String role;
 
+    private byte[] profilePicture;
+
     @PrePersist
     protected void onCreate() {
         if (this.role == null) {

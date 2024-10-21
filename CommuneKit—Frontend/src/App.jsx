@@ -10,6 +10,7 @@ import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
 import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
   return (
@@ -28,7 +29,7 @@ export default function App() {
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true} userID={1}/>} />
+                  <Route path="/profile" element={<Profile isOwn={true}/>} />
                   <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/home" element={<Home />}/>
@@ -64,11 +65,16 @@ function OptionsMenu() {
 }
 
 function MenuBar() {
+    const navigate = useNavigate();
+    function handleSignout() {
+        localStorage.clear();
+        navigate("/login");
+    }
     return (
         <>
             <div id="menu-popup">
                 <ul>
-                    <li><button>Sign Out</button></li>
+                    <li><button id="sign-out" onClick={handleSignout}>Sign Out</button></li>
                     {/*<li><button>Delete Account</button></li>*/}
                 </ul>
             </div>

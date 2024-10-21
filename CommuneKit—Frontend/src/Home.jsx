@@ -1,15 +1,24 @@
 /* Home: The home page, containing lists of items. */
 import './styles.css'
 import ItemTable from './ItemTable.jsx'
-import { useState } from 'react'
+import { useEffect }  from 'react'
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
     const navigate = useNavigate();
-    console.log("userID found to be: " + localStorage.getItem("userID"))
-    if ( localStorage.getItem("userID") == null)  {
-        navigate('/login');
-    } else {
+
+    useEffect(() => {
+        const userID = localStorage.getItem("userID");
+        console.log("userID found to be: " + userID);
+
+        if (userID == null) {
+            navigate('/login');
+        }
+    }, [navigate]);
+    // console.log("userID found to be: " + localStorage.getItem("userID"))
+    // if ( localStorage.getItem("userID") == null)  {
+    //     navigate('/login');
+    // } else {
         return (
             <>
                 <div className="home-items" id="posted-header">
@@ -23,5 +32,5 @@ export default function Home() {
                 </div>
             </>
         )
-    }
+   // }
 }

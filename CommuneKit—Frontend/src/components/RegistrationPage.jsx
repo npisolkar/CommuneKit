@@ -4,7 +4,7 @@ import { createUser } from "../services/UserService.jsx";
 
 function RegistrationPage() {
     const navigate = useNavigate();
-
+    const [profilePicture, setProfilePicture] = useState(' ');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -17,6 +17,12 @@ function RegistrationPage() {
 
     });
 
+    //followed this for explanation: https://www.youtube.com/watch?v=YOGgaYUW1OA
+    const handleFileChange = (e) => {
+        console.log(e.target.file)
+        setProfilePicture(e.target.files[0]);
+    }
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -28,6 +34,19 @@ function RegistrationPage() {
             // Call the register method from UserService
 
             //const token = localStorage.getItem('token');
+
+            const fdata = new FormData();
+            fdata.append('firstName', formData.firstName);
+            fdata.append('lastName', formData.lastName);
+            fdata.append('userName', formData.userName);
+            fdata.append('password', formData.password);
+            fdata.append('email', formData.email);
+            fdata.append('password', formData.password);
+            fdata.append('phone', formData.phone);
+            fdata.append('address', formData.address);
+            fdata.append('profilePicture', );
+
+
             console.log(JSON.stringify(formData));
             const userData = await createUser(JSON.stringify(formData));
             console.log(userData)
@@ -62,17 +81,23 @@ function RegistrationPage() {
             <h2>Registration</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
+                    <label>Profile picture:</label>
+                    <input type="file" onChange={handleFileChange}/>
+                </div>
+                <div className="form-group">
                     <label>First Name:</label>
                     <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange}
                            required/>
                 </div>
                 <div className="form-group">
                     <label>Last Name:</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required/>
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label>userName:</label>
-                    <input type="text" name="userName" value={formData.userName} onChange={handleInputChange} required/>
+                    <input type="text" name="userName" value={formData.userName} onChange={handleInputChange}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label>Email:</label>
@@ -102,7 +127,7 @@ function RegistrationPage() {
                 <button type="submit">Register</button>
             </form>
         </div>
-    );
+);
 }
 
 export default RegistrationPage;
