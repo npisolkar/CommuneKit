@@ -1,10 +1,13 @@
 /* ItemPage: The page for viewing an item, that pops up when requested
    This is also the page that appears when creating and editing items
 *  isMine: determines whether the item is your own item or another's */
+
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {updateItem, getItemById} from "./services/ItemService.jsx";
 import {createRequest} from "./services/RequestService.jsx";
+import ReviewComponent from "./components/ReviewComponent.jsx";
+import {getReviewsById} from "./services/ReviewService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
@@ -79,14 +82,16 @@ function ReviewBox(itemID) {
                 <div id="reviews">
                     <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
                 </div>
+
         </>
     )
 }
 
 export default function ItemPage(itemID, userID) {
     const [isClicked, setClicked] = useState(false);
-    let params = useParams();
+    let {id} = useParams();
     const [isOwn, setIsOwn] = useState(false);
+    const [reviews, setReviews] = useState([])
     const [itemData, setItemData] = useState({
         itemID: '',
         itemName: '',
@@ -112,7 +117,7 @@ export default function ItemPage(itemID, userID) {
         if (isOwn === false) {
             setIsOwn(true);
         }
-        getItemById({itemID: '1'})
+        getItemById({itemID: id})
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
@@ -120,6 +125,11 @@ export default function ItemPage(itemID, userID) {
             .catch((error) => {
                 console.log(error);
             })
+        getReviewsById(itemData.itemID)
+            .then(res => {
+                setReviews(res.data)
+            })
+            .catch (err => console.log(err))
     }, [])
 
     async function handleSubmit() {
@@ -172,6 +182,13 @@ export default function ItemPage(itemID, userID) {
                          handleInputChange={handleInputChange}/>
             <div id="item-reviews">
                 <ReviewBox itemID={itemID}/>
+            </div>
+            <div id="reviews-section">
+                {
+                    reviews.map(review => (
+                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
+                    ))
+                }
             </div>
             {isClicked ?
                 <div id="item-info">

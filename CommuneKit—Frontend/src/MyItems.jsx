@@ -3,7 +3,7 @@
 import ItemTable from "./ItemTable.jsx";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import ItemComponent from "./ItemComponent.jsx";
+import ItemComponent from "./components/ItemComponent.jsx";
 import {getItemsByUser, getAllItems} from './services/ItemService.jsx'
 
 export default function MyItems(userID) {

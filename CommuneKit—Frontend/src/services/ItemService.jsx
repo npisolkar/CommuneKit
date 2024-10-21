@@ -7,12 +7,12 @@ export function getItemById(id) {
     return axios.get(ITEM_API_BASE_URL + "/1");
 }
 
-export function getItemsByUser(userId) {
-    return axios.get(ITEM_API_BASE_URL + "/my/" + JSON.stringify(userId))
+export function getItemsByUser(userID) {
+    return axios.get(ITEM_API_BASE_URL + "/my/" + userID)
 }
 
 export function getMyBorrows(userID) {
-    return axios.get(ITEM_API_BASE_URL + "/my-borrows/1")
+    return axios.get(ITEM_API_BASE_URL + "/my-borrows/" + userID)
 }
 
 export function getAllItems() {

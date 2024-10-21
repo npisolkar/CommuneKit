@@ -13,16 +13,17 @@ export function createUser(user){
     }
 
 export function getUserById(userId){
-        return axios.get(USER_API_BASE_URL + '/1');
+        return axios.get(USER_API_BASE_URL + '/' + userId);
     }
 
 export function updateUser(userId, userDto) {
     try {
+        console.log("in updateUser:" + userDto)
         return axios.put(USER_API_BASE_URL + "/1", userDto, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: JSON.stringify(userDto)
+            data: userDto
         })
     }
     catch (error) {

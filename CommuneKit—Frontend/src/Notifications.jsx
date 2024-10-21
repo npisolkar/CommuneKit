@@ -1,7 +1,7 @@
 /* Notifications: The page containing an account's notifications */
 import './styles.css'
 import { useState, useEffect } from 'react'
-import RequestComponent from './RequestComponent'
+import RequestComponent from './components/RequestComponent.jsx'
 import {getApprovedRequests, getMyRequests} from './services/RequestService.jsx'
 
 export default function Notifications(userId) {

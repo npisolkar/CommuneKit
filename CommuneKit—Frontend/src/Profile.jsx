@@ -58,7 +58,7 @@ export default function Profile({ isOwn }) {
         if (!isOwn) {
             isOwn = true;
         }
-        getUserById({userId:'1'})
+        getUserById({userId:id})
             .then (res => {
                 setFormData(res.data)
                 console.log("in get:" + JSON.stringify(res.data));

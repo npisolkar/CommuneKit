@@ -1,7 +1,7 @@
 /* ItemTable: A class handling the displaying of lists of items.
 *  Up to a certain amount of items should load at once, with
 *  subsequent requests populating more. */
-import ItemComponent from "./ItemComponent.jsx";
+import ItemComponent from "./components/ItemComponent.jsx";
 
 export default function ItemTable({headName, items}) {
 
