@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,5 +84,44 @@ public class RequestServiceImpl implements RequestService {
         requests.removeIf(request -> request.getIsApproved() != null);
         return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
     }
-    
+
+    @Override
+    public List<RequestDto> getApprovedRequestsByItemId(Long itemId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getItemId().equals(itemId)));
+        requests.removeIf(request -> request.getIsApproved() == null);
+        requests.removeIf(request -> request.getIsApproved() != true);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequestDto> getCurrentRequestsByItemId(Long itemId) {
+        List<Request> requests = requestRepository.findAll();
+
+        // Get today's date without time
+        LocalDateTime today = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
+
+        return requests.stream()
+                .filter(request -> request.getItemId().equals(itemId))  // Match the correct item
+                .filter(request -> Boolean.TRUE.equals(request.getIsApproved()))  // Only approved requests
+                .filter(request -> {
+                    // Construct the end date from the entity fields
+                    LocalDateTime endDate = LocalDateTime.of(
+                            request.getEndYear(),
+                            request.getEndMonth(),
+                            request.getEndDay(),
+                            23, 59, 59);
+
+                    // Return only requests where endDate is today or in the future
+                    return !endDate.isBefore(today);
+                })
+                .sorted(Comparator.comparing(request -> LocalDateTime.of(  // Sort by start date
+                        request.getStartYear(),
+                        request.getStartMonth(),
+                        request.getStartDay(),
+                        0, 0)))  // Use the start date for sorting
+                .map(RequestMapper::mapToRequestDto)  // Map to DTO
+                .collect(Collectors.toList());
+    }
+
 }

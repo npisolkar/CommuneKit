@@ -14,7 +14,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "users")
 public class User {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userID;
@@ -45,6 +44,8 @@ public class User {
     private boolean isBanned;
 
     private String role;
+
+    private byte[] profilePicture;
 
     @PrePersist
     protected void onCreate() {

@@ -1,6 +1,7 @@
 package com.example.CommuneKitBackendTest.dto;
 
 import com.example.CommuneKitBackendTest.entity.Item;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,7 @@ public class UserDto {
     private String bio;
     private boolean isBanned;
     private String role;
+    @Lob
+    private byte[] profilePicture;
+
 }
