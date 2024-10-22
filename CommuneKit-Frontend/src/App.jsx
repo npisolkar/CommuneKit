@@ -11,6 +11,8 @@ import ItemPage from "./ItemPage.jsx"
 import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
 import { useNavigate } from 'react-router-dom';
+import ReviewPage from "./ReviewPage.jsx"
+
 
 export default function App() {
   return (
@@ -32,6 +34,8 @@ export default function App() {
                   <Route path="/profile" element={<Profile isOwn={true}/>} />
                   <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
+                  <Route path="/item/:itemID" element={<ItemPage />}/>
+                  <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>
