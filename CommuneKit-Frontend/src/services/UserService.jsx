@@ -8,10 +8,17 @@ export function getUsers(){
         return axios.get(USER_API_BASE_URL);
     }
 
-export function createUser(user){
-        return axios.post(USER_API_BASE_URL,user);
+export function createUser(userDto){
+    try {
+        return axios.post(USER_API_BASE_URL, userDto, {
+            headers: {
+                'Content-Type': 'application/json'
+            }}
+        );
+    } catch (error) {
+        throw error;
     }
-
+}
 export function getUserById(userId){
         return axios.get(USER_API_BASE_URL + '/1');
     }
@@ -31,3 +38,18 @@ export function updateUser(userId, userDto) {
     }
 }
 
+export default function loginUser(userDto){
+    try {
+        return axios.post(USER_API_BASE_URL + '/login', userDto, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (error) {
+        throw error;
+    }
+    //may be good to put this in here:
+    // headers: {
+    //     'Content-Type': 'application/json'
+    // }
+}
