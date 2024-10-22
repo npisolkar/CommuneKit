@@ -8,37 +8,34 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
-import ReviewPage from "./ReviewPage.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import RegistrationPage from "./components/RegistrationPage.jsx";
+import { useNavigate } from 'react-router-dom';
 
 export default function App() {
-    localStorage.setItem("userId", "/1")
-    const userID = localStorage.getItem("userId")
-    const profileUrl = "/profile"
   return (
       <>
       <Router>
           <div>
               <div className="menu-bar" id="navbar">
-                  <Link id="logo" to="/">
+                  <Link id="logo" to="/home">
                       <img src="/CommuneKit Logo.png" alt="logo"></img>
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to={`${profileUrl}${userID}`} id="profile-button"><button>Profile</button></Link>
+                  <Link to="/profile" id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
-
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true} />} />
-                  <Route path="/profile/my-items" element={<MyItems userID={localStorage.getItem("userId")} />}/>
-                  <Route path="/item/:itemID" element={<ItemPage />}>
-                  </Route>
-                  <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
-                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>}/>
+                  <Route path="/profile" element={<Profile isOwn={true}/>} />
+                  <Route path="/profile/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
-                  <Route path="/" element={<Home />}/>
+                  <Route path="/home" element={<Home />}/>
+                  <Route path="/login" element={<LoginPage />}/>
+                  <Route path="/registration" element={<RegistrationPage />}/>
+                  <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>
           </Router>
@@ -68,12 +65,17 @@ function OptionsMenu() {
 }
 
 function MenuBar() {
+    const navigate = useNavigate();
+    function handleSignout() {
+        localStorage.clear();
+        navigate("/login");
+    }
     return (
         <>
             <div id="menu-popup">
                 <ul>
-                    <li><button>Sign Out</button></li>
-                    <li><button>Delete Account</button></li>
+                    <li><button id="sign-out" onClick={handleSignout}>Sign Out</button></li>
+                    {/*<li><button>Delete Account</button></li>*/}
                 </ul>
             </div>
         </>

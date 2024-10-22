@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -22,6 +23,17 @@ public class ItemController {
         ItemDto savedItem = itemService.createItem(itemDto);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
+
+    /*@GetMapping("/my/{id}")
+    public ResponseEntity<List<ItemDto>> getMyItems(@PathVariable("id") Long userId) {
+        List<ItemDto> items = itemService.getAllItems();
+        List<ItemDto> userItems = new ArrayList<>();
+        for (ItemDto itemDto : items) {
+            if itemDto.getUserId = userId
+                    add to userItems
+        }
+        return ResponseEntity.ok(itemDto);
+    }*/
 
     @GetMapping("{id}")
     public ResponseEntity<ItemDto> getItemById(@PathVariable("id") Long itemID) {

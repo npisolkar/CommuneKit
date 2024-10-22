@@ -16,8 +16,10 @@ public class RequestMapper {
                 request.getEndDay(),
                 request.getEndMonth(),
                 request.getEndYear(),
-                request.isApproved(),
-                request.getMessage()
+                request.getIsApproved(),
+                request.getMessage(),
+                request.getCreatedAt(),
+                request.getUpdatedAt()
         );
     }
 
@@ -33,8 +35,10 @@ public class RequestMapper {
                 requestDto.getEndDay(),
                 requestDto.getEndMonth(),
                 requestDto.getEndYear(),
-                requestDto.isApproved(),
-                requestDto.getMessage()
+                requestDto.getIsApproved(),
+                requestDto.getMessage(),
+                requestDto.getCreatedAt(),
+                requestDto.getUpdatedAt()
         );
     }
 }
