@@ -46,21 +46,40 @@ public class RequestController {
         return ResponseEntity.ok(requests);
     }
 
-    @GetMapping("/approved/{id}")
-    public ResponseEntity<List<RequestDto>> getApprovedRequests(@PathVariable("id") Long userId) {
-        List<RequestDto> requests = requestService.getApprovedRequestsByUserId(userId);
+    @GetMapping("/lender/approved/{id}")
+    public ResponseEntity<List<RequestDto>> getApprovedRequestsByLender(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getApprovedRequestsByLender(userId);
         return ResponseEntity.ok(requests);
     }
 
-    @GetMapping("/denied/{id}")
-    public ResponseEntity<List<RequestDto>> getDeniedRequests(@PathVariable("id") Long userId) {
-        List<RequestDto> requests = requestService.getDeniedRequestsByUserId(userId);
+    @GetMapping("/lender/denied/{id}")
+    public ResponseEntity<List<RequestDto>> getDeniedRequestsByLender(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getDeniedRequestsByLender(userId);
         return ResponseEntity.ok(requests);
     }
 
-    @GetMapping("/pending/{id}")
-    public ResponseEntity<List<RequestDto>> getPendingRequests(@PathVariable("id") Long userId) {
-        List<RequestDto> requests = requestService.getPendingRequestsByUserId(userId);
+    @GetMapping("/lender/pending/{id}")
+    public ResponseEntity<List<RequestDto>> getPendingRequestsByLender(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getPendingRequestsByLender(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+
+    @GetMapping("/borrower/approved/{id}")
+    public ResponseEntity<List<RequestDto>> getApprovedRequestsByBorrower(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getApprovedRequestsByBorrower(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/borrower/denied/{id}")
+    public ResponseEntity<List<RequestDto>> getDeniedRequestsByBorrower(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getDeniedRequestsByBorrower(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/borrower/pending/{id}")
+    public ResponseEntity<List<RequestDto>> getPendingRequestsByBorrower(@PathVariable("id") Long userId) {
+        List<RequestDto> requests = requestService.getPendingRequestsByBorrower(userId);
         return ResponseEntity.ok(requests);
     }
 

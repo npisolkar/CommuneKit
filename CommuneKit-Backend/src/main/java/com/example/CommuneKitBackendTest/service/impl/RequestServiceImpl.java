@@ -60,7 +60,33 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestDto> getApprovedRequestsByUserId(Long userId) {
+    public List<RequestDto> getApprovedRequestsByLender(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getLendingUserId().equals(userId)));
+        requests.removeIf(request -> request.getIsApproved() == null);
+        requests.removeIf(request -> request.getIsApproved() != true);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequestDto> getDeniedRequestsByLender(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getLendingUserId().equals(userId)));
+        requests.removeIf(request -> request.getIsApproved() == null);
+        requests.removeIf(request -> request.getIsApproved() != false);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequestDto> getPendingRequestsByLender(Long userId) {
+        List<Request> requests = requestRepository.findAll();
+        requests.removeIf(request -> !(request.getLendingUserId().equals(userId)));
+        requests.removeIf(request -> request.getIsApproved() != null);
+        return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequestDto> getApprovedRequestsByBorrower(Long userId) {
         List<Request> requests = requestRepository.findAll();
         requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
         requests.removeIf(request -> request.getIsApproved() == null);
@@ -69,7 +95,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestDto> getDeniedRequestsByUserId(Long userId) {
+    public List<RequestDto> getDeniedRequestsByBorrower(Long userId) {
         List<Request> requests = requestRepository.findAll();
         requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
         requests.removeIf(request -> request.getIsApproved() == null);
@@ -78,7 +104,7 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestDto> getPendingRequestsByUserId(Long userId) {
+    public List<RequestDto> getPendingRequestsByBorrower(Long userId) {
         List<Request> requests = requestRepository.findAll();
         requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
         requests.removeIf(request -> request.getIsApproved() != null);

@@ -15,11 +15,17 @@ public interface RequestService {
 
     List<RequestDto> getRequestsByUserId(Long userId);
 
-    List<RequestDto> getApprovedRequestsByUserId(Long userId);
+    List<RequestDto> getApprovedRequestsByLender(Long userId);
 
-    List<RequestDto> getDeniedRequestsByUserId(Long userId);
+    List<RequestDto> getDeniedRequestsByLender(Long userId);
 
-    List<RequestDto> getPendingRequestsByUserId(Long userId);
+    List<RequestDto> getPendingRequestsByLender(Long userId);
+
+    List<RequestDto> getApprovedRequestsByBorrower(Long userId);
+
+    List<RequestDto> getDeniedRequestsByBorrower(Long userId);
+
+    List<RequestDto> getPendingRequestsByBorrower(Long userId);
 
     List<RequestDto> getApprovedRequestsByItemId(Long itemId);
 
