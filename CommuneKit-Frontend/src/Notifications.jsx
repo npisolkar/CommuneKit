@@ -2,30 +2,45 @@ import './styles.css'
 import { useState, useEffect } from 'react'
 
 export default function Notifications() {
-    const [sentRequests, setSentRequests] = useState([]);
-    const [approvedRequests, setApprovedRequests] = useState([]);
-    const [deniedRequests, setDeniedRequests] = useState([]);
-    const [pendingRequests, setPendingRequests] = useState([]);
+    const [borrowerPendingRequests, setBorrowerPendingRequests] = useState([]);
+    const [borrowerApprovedRequests, setBorrowerApprovedRequests] = useState([]);
+    const [borrowerDeniedRequests, setBorrowerDeniedRequests] = useState([]);
+    const [lenderPendingRequests, setLenderPendingRequests] = useState([]);
+    const [lenderApprovedRequests, setLenderApprovedRequests] = useState([]);
+    const [lenderDeniedRequests, setLenderDeniedRequests] = useState([]);
     const [loading, setLoading] = useState(true); // To show a loading state while fetching
+
+    // Get the userID from localStorage
+    const userID = localStorage.getItem("userID");
 
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const sentResponse = await fetch('http://localhost:8080/api/requests/sent-to/1');
-                const sentData = await sentResponse.json();
-                setSentRequests(sentData);
+                // Borrower APIs (sent by me)
+                const borrowerPendingResponse = await fetch(`http://localhost:8080/api/requests/borrower/pending/${userID}`);
+                const borrowerPendingData = await borrowerPendingResponse.json();
+                setBorrowerPendingRequests(borrowerPendingData);
 
-                const approvedResponse = await fetch('http://localhost:8080/api/requests/approved/1');
-                const approvedData = await approvedResponse.json();
-                setApprovedRequests(approvedData);
+                const borrowerApprovedResponse = await fetch(`http://localhost:8080/api/requests/borrower/approved/${userID}`);
+                const borrowerApprovedData = await borrowerApprovedResponse.json();
+                setBorrowerApprovedRequests(borrowerApprovedData);
 
-                const deniedResponse = await fetch('http://localhost:8080/api/requests/denied/1');
-                const deniedData = await deniedResponse.json();
-                setDeniedRequests(deniedData);
+                const borrowerDeniedResponse = await fetch(`http://localhost:8080/api/requests/borrower/denied/${userID}`);
+                const borrowerDeniedData = await borrowerDeniedResponse.json();
+                setBorrowerDeniedRequests(borrowerDeniedData);
 
-                const pendingResponse = await fetch('http://localhost:8080/api/requests/pending/1');
-                const pendingData = await pendingResponse.json();
-                setPendingRequests(pendingData);
+                // Lender APIs (sent to me)
+                const lenderPendingResponse = await fetch(`http://localhost:8080/api/requests/lender/pending/${userID}`);
+                const lenderPendingData = await lenderPendingResponse.json();
+                setLenderPendingRequests(lenderPendingData);
+
+                const lenderApprovedResponse = await fetch(`http://localhost:8080/api/requests/lender/approved/${userID}`);
+                const lenderApprovedData = await lenderApprovedResponse.json();
+                setLenderApprovedRequests(lenderApprovedData);
+
+                const lenderDeniedResponse = await fetch(`http://localhost:8080/api/requests/lender/denied/${userID}`);
+                const lenderDeniedData = await lenderDeniedResponse.json();
+                setLenderDeniedRequests(lenderDeniedData);
             } catch (error) {
                 console.error("Failed to fetch requests:", error);
             } finally {
@@ -34,7 +49,7 @@ export default function Notifications() {
         };
 
         fetchRequests();
-    }, []); // Empty dependency array to only run this effect on component mount
+    }, [userID]); // Add userID as a dependency so it re-fetches if the userID changes
 
     const handleApproval = async (requestId, isApproved) => {
         try {
@@ -48,15 +63,15 @@ export default function Notifications() {
 
             if (response.ok) {
                 // Successfully updated, now remove or update the request in the pending list
-                setPendingRequests(pendingRequests.filter(request => request.requestId !== requestId));
+                setLenderPendingRequests(lenderPendingRequests.filter(request => request.requestId !== requestId));
 
                 // Optionally, you can add the request to the approved/denied list based on `isApproved`
                 if (isApproved) {
-                    const approvedRequest = pendingRequests.find(req => req.requestId === requestId);
-                    setApprovedRequests([...approvedRequests, approvedRequest]);
+                    const approvedRequest = lenderPendingRequests.find(req => req.requestId === requestId);
+                    setLenderApprovedRequests([...lenderApprovedRequests, approvedRequest]);
                 } else {
-                    const deniedRequest = pendingRequests.find(req => req.requestId === requestId);
-                    setDeniedRequests([...deniedRequests, deniedRequest]);
+                    const deniedRequest = lenderPendingRequests.find(req => req.requestId === requestId);
+                    setLenderDeniedRequests([...lenderDeniedRequests, deniedRequest]);
                 }
             } else {
                 console.error("Failed to update the request");
@@ -79,22 +94,26 @@ export default function Notifications() {
             <div id="notif-title">
                 <h1>Notifications</h1>
             </div>
+
+            {/* Section for Requests Sent by Me (Borrower) */}
             <div>
-                <h2>Sent Requests:</h2>
-                {sentRequests.length > 0 ? (
+                <h2>Sent by Me (Borrower)</h2>
+
+                <h3>Pending Requests:</h3>
+                {borrowerPendingRequests.length > 0 ? (
                     <ul>
-                        {sentRequests.map(request => (
+                        {borrowerPendingRequests.map(request => (
                             <li key={request.requestId}>{formatRequest(request)}</li>
                         ))}
                     </ul>
                 ) : (
-                    <p>No sent requests.</p>
+                    <p>No pending requests.</p>
                 )}
 
-                <h2>Approved Requests:</h2>
-                {approvedRequests.length > 0 ? (
+                <h3>Approved Requests:</h3>
+                {borrowerApprovedRequests.length > 0 ? (
                     <ul>
-                        {approvedRequests.map(request => (
+                        {borrowerApprovedRequests.map(request => (
                             <li key={request.requestId}>{formatRequest(request)}</li>
                         ))}
                     </ul>
@@ -102,21 +121,26 @@ export default function Notifications() {
                     <p>No approved requests.</p>
                 )}
 
-                <h2>Denied Requests:</h2>
-                {deniedRequests.length > 0 ? (
+                <h3>Denied Requests:</h3>
+                {borrowerDeniedRequests.length > 0 ? (
                     <ul>
-                        {deniedRequests.map(request => (
+                        {borrowerDeniedRequests.map(request => (
                             <li key={request.requestId}>{formatRequest(request)}</li>
                         ))}
                     </ul>
                 ) : (
                     <p>No denied requests.</p>
                 )}
+            </div>
 
-                <h2>Pending Requests:</h2>
-                {pendingRequests.length > 0 ? (
+            {/* Section for Requests Sent to Me (Lender) */}
+            <div>
+                <h2>Sent to Me (Lender)</h2>
+
+                <h3>Pending Requests:</h3>
+                {lenderPendingRequests.length > 0 ? (
                     <ul>
-                        {pendingRequests.map(request => (
+                        {lenderPendingRequests.map(request => (
                             <li key={request.requestId}>
                                 {formatRequest(request)}
                                 <button onClick={() => handleApproval(request.requestId, true)}>Approve</button>
@@ -126,6 +150,28 @@ export default function Notifications() {
                     </ul>
                 ) : (
                     <p>No pending requests.</p>
+                )}
+
+                <h3>Approved Requests:</h3>
+                {lenderApprovedRequests.length > 0 ? (
+                    <ul>
+                        {lenderApprovedRequests.map(request => (
+                            <li key={request.requestId}>{formatRequest(request)}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No approved requests.</p>
+                )}
+
+                <h3>Denied Requests:</h3>
+                {lenderDeniedRequests.length > 0 ? (
+                    <ul>
+                        {lenderDeniedRequests.map(request => (
+                            <li key={request.requestId}>{formatRequest(request)}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>No denied requests.</p>
                 )}
             </div>
         </>
