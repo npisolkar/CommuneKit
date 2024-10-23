@@ -3,7 +3,7 @@
 import ItemTable from "./ItemTable.jsx";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
-import {getItemsByUser, getMyBorrows} from './services/ItemService.jsx'
+import {getItemsByUser, getMyBorrows, createItem} from './services/ItemService.jsx'
 
 export default function MyItems() {
     const [postedItems, setPostedItems] = useState([]);
@@ -41,7 +41,7 @@ export default function MyItems() {
                 <ItemTable headName={"my borrowed items"} items={borrowedItems} />
             </div>
             <div>
-                <button>Create New Item</button>
+                <Link to="/newitem"><button>Create New Item</button></Link>
             </div>
         </>
     )

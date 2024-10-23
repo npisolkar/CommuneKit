@@ -10,7 +10,7 @@ import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
-    if (isOwn) {
+    if (isOwn === true) {
         return (
             <div>
             <button onClick={handleClick}>{bodyText}</button>
@@ -24,7 +24,7 @@ function EditButton({isOwn, handleClick, bodyText}) {
 }
 
 function RequestForm(isOwn, itemData, handleSubmit, handleInputChange) {
-    if (isOwn) {
+    if (!isOwn) {
         return (
                 <div id="request-form">
                     <form onSubmit={handleSubmit}>
@@ -76,19 +76,27 @@ function RequestForm(isOwn, itemData, handleSubmit, handleInputChange) {
     }
 }
 
-function ReviewBox(itemID) {
+function ReviewBox(itemID, reviews, isOwn) {
     return (
         <>
+            {isOwn ?
                 <div id="reviews">
                     <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
+                    //TODO: populate with reviews by mapping
                 </div>
+                :
+                <div id="reviews">
+
+                </div>
+            }
 
         </>
     )
 }
 
 export default function ItemPage(itemID) {
-    const [isClicked, setClicked] = useState(false);
+    const [isClicked, setClicked] = useState(false)
+    const [isNew, setIsNew] = useState(false)
     let {id} = useParams();
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
@@ -115,14 +123,20 @@ export default function ItemPage(itemID) {
     }
 
     useEffect(() => {
-        if (isOwn === false) {
-            setIsOwn(true);
-        }
+        console.log("itemId:" + id)
         getItemById({itemID: id})
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
                 setUserID(res.data.userID)
+                console.log("local storage " + localStorage.getItem("userID"))
+                if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
+                    setIsOwn(true);
+                    console.log("isown:" + isOwn)
+                }
+                else {
+                    console.log("not is own")
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -183,7 +197,7 @@ export default function ItemPage(itemID) {
             <RequestForm isOwn={isOwn} itemData={itemData} handleSubmit={handleSubmit}
                          handleInputChange={handleInputChange}/>
             <div id="item-reviews">
-                <ReviewBox itemID={itemID}/>
+                <ReviewBox itemID={itemID} isOwn={isOwn}/>
             </div>
             <div id="reviews-section">
                 {

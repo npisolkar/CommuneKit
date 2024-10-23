@@ -36,6 +36,7 @@ export default function App() {
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
+                  <Route path="/newitem" element={<ItemPage />}/>
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>

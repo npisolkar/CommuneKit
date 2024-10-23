@@ -1,7 +1,10 @@
 import axios from "axios";
-import {useState} from "react";
 
 const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
+
+export function createItem(itemDto) {
+    return axios.post(ITEM_API_BASE_URL, itemDto)
+}
 
 export function getItemById(id) {
     return axios.get(ITEM_API_BASE_URL + "/1");
@@ -26,4 +29,8 @@ export function updateItem(userId, itemDto) {
         },
         data: itemDto
     })
+}
+
+export function deleteItem(itemID) {
+    return axios.delete(ITEM_API_BASE_URL + "/" + itemID);
 }

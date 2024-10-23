@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 public class ItemController {
 
     private ItemService itemService;
@@ -57,6 +58,7 @@ public class ItemController {
     }
 
     @DeleteMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> deleteItem(@PathVariable("id") Long itemID) {
         itemService.deleteItem(itemID);
         return ResponseEntity.ok("Item deleted successfully");

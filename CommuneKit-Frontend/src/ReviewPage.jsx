@@ -37,6 +37,13 @@ export default function ReviewPage() {
         <>
             <div>
                 <h1>Leave A Review</h1>
+                <div id="rating-stars">
+                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                </div>
                 <form onSubmit={onSubmit}>
                     <input onChange={handleInputChange} name="rating" defaultValue={review.rating}></input>
                     <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText}></input>
