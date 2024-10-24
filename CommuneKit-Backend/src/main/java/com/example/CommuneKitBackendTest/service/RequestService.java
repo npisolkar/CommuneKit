@@ -7,6 +7,10 @@ import java.util.List;
 public interface RequestService {
     RequestDto createRequest(RequestDto requestDto);
 
+    RequestDto approveRequest(Long requestId);
+
+    RequestDto denyRequest(Long requestId);
+
     RequestDto getRequestById(Long requestId);
 
     List<RequestDto> getAllRequests();
