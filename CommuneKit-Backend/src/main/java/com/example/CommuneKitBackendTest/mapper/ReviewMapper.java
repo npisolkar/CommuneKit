@@ -8,22 +8,20 @@ public class ReviewMapper {
     public static ReviewDto mapToReviewDto(Review review) {
         return new ReviewDto(
                 review.getReviewID(),
-                review.getReviewer(),
+                review.getReviewerID(),
                 review.getRating(),
                 review.getReviewText(),
-                review.isItem(),
-                review.getTargetID()
+                review.getItemID()
         );
     }
 
     public static Review mapToReview(ReviewDto reviewDto) {
         return new Review(
                 reviewDto.getReviewID(),
-                reviewDto.getReviewer(),
+                reviewDto.getReviewerID(),
                 reviewDto.getRating(),
                 reviewDto.getReviewText(),
-                reviewDto.isItem(),
-                reviewDto.getTargetID()
+                reviewDto.getItemID()
         );
     }
 }

@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added requests for when user is lender and borrower and updated notifications page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/RequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/RequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/RequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/RequestService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/RequestServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/RequestServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReviewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ReviewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ReviewDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Review.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ReviewMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ReviewMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ReviewService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
     </list>
@@ -95,6 +98,15 @@
       <workItem from="1729122118601" duration="1151000" />
       <workItem from="1729540610973" duration="1075000" />
     </task>
+    <task id="LOCAL-00001" summary="Added requests for when user is lender and borrower and updated notifications page">
+      <option name="closed" value="true" />
+      <created>1729620434828</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1729620434828</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +136,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="Added requests for when user is lender and borrower and updated notifications page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added requests for when user is lender and borrower and updated notifications page" />
   </component>
 </project>
