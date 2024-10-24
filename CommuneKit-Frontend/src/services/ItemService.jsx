@@ -1,9 +1,29 @@
+import axios from "axios";
+import {useState} from "react";
 
-// get itsm ive posted
+const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 
-//get items ive borrowed ever
+export function getItemById(id) {
+    return axios.get(ITEM_API_BASE_URL + "/1");
+}
 
-//get All items in teh DB
+export function getItemsByUser(userID) {
+    return axios.get(ITEM_API_BASE_URL + "/my/" + userID)
+}
 
+export function getMyBorrows(userID) {
+    return axios.get(ITEM_API_BASE_URL + "/my-borrows/" + userID)
+}
 
-//ITEM COMPONENET: name item, description, link to user's page
+export function getAllItems() {
+    return axios.get(ITEM_API_BASE_URL)
+}
+
+export function updateItem(userId, itemDto) {
+    return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: itemDto
+    })
+}

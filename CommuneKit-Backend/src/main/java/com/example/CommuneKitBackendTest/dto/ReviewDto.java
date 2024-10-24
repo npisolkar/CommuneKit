@@ -12,11 +12,10 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ReviewDto {
     private long reviewID;
-    private User reviewer;
+    private long reviewerID;
     private int rating;
     private String reviewText;
-    private boolean isItem;
-    private int targetID;
+    private long itemID;
 
 
 }

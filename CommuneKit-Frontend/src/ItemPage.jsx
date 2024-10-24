@@ -1,13 +1,21 @@
 /* ItemPage: The page for viewing an item, that pops up when requested
    This is also the page that appears when creating and editing items
 *  isMine: determines whether the item is your own item or another's */
+
 import {useEffect, useState} from 'react';
-import axios from 'axios';
+import {Link, useParams} from 'react-router-dom';
+import {updateItem, getItemById} from "./services/ItemService.jsx";
+import {createRequest} from "./services/RequestService.jsx";
+import ReviewComponent from "./components/ReviewComponent.jsx";
+import {getReviewsById} from "./services/ReviewService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
         return (
+            <div>
             <button onClick={handleClick}>{bodyText}</button>
+            <button>Delete</button>
+            </div>
         )
     }
     else {
@@ -15,64 +23,195 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-function ReviewBox(isClicked) {
+function RequestForm(isOwn, itemData, handleSubmit, handleInputChange) {
+    if (isOwn) {
+        return (
+                <div id="request-form">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Start Day</label>
+                            <input type="text" name="startDay" value={itemData.startDay}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Month</label>
+                            <input type="text" name="startMonth" value={itemData.startMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Year</label>
+                            <input type="text" name="startYear" value={itemData.startYear}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Day</label>
+                            <input type="text" name="endDay" value={itemData.endDay} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Month</label>
+                            <input type="text" name="endMonth" value={itemData.endMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Year</label>
+                            <input type="text" name="endYear" value={itemData.endYear} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Message</label>
+                            <input type="text" name="message" value={itemData.message} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <button type="submit">Request This Item</button>
+                    </form>
+                </div>
+        )}
+    else {
+        return null
+    }
+}
+
+function ReviewBox(itemID) {
     return (
         <>
-            {isClicked ? null :
-            <div id="reviews">
-                <h1>Reviews</h1>
-            </div>
-            }
+                <div id="reviews">
+                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
+                </div>
+
         </>
     )
 }
 
-export default function ItemPage({isOwn, itemID}){
+export default function ItemPage(itemID) {
     const [isClicked, setClicked] = useState(false);
+    let {id} = useParams();
+    const [isOwn, setIsOwn] = useState(false);
+    const [reviews, setReviews] = useState([])
+    const [userID, setUserID] = useState('')
+    const [itemData, setItemData] = useState({
+        itemID: '',
+        itemName: '',
+        itemDescription: '',
+        itemCategory: '',
+        userID: '',
+    })
+    const [requestData, setRequestData] = useState({
+        startDay: '',
+        startMonth: '',
+        startYear: '',
+        endDay: '',
+        endMonth: '',
+        endYear: '',
+        message: ""
+    });
 
     function onClick() {
         setClicked(!isClicked);
     }
+
+    useEffect(() => {
+        if (isOwn === false) {
+            setIsOwn(true);
+        }
+        getItemById({itemID: id})
+            .then((res) => {
+                setItemData(res.data);
+                console.log(JSON.stringify(res.data));
+                setUserID(res.data.userID)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+        getReviewsById(itemData.itemID)
+            .then(res => {
+                setReviews(res.data)
+            })
+            .catch (err => console.log(err))
+    }, [])
+
+    async function handleSubmit() {
+        try {
+            let requestJson = {
+                borrowingUserId: localStorage.getItem('userID'),
+                lendingUserId: userID,
+                startDay: requestData.startDay,
+                startMonth: requestData.startMonth,
+                startYear: requestData.startYear,
+                endDay: requestData.endDay,
+                endMonth: requestData.endMonth,
+                endYear: requestData.endYear,
+                message: requestData.message
+            }
+            const requestData = await createRequest(JSON.stringify(requestJson));
+            console.log("submit:" + requestData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function handleUploadItem() {
+        try {
+            let itemJson = {
+                itemName: itemData.itemName,
+                itemDescription: itemData.itemDescription,
+                itemCategory: itemData.itemCategory,
+            }
+            const responseData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("submit:" + responseData);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setRequestData({...requestData, [name]: value});
+    };
     return (
         <>
-            <div id="item-page-header">
+        <div id="item-page-header">
                 <h2>Item Page</h2>
             </div>
             <div id="edit-item-button">
                 <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
             </div>
+            <RequestForm isOwn={isOwn} itemData={itemData} handleSubmit={handleSubmit}
+                         handleInputChange={handleInputChange}/>
+            <div id="item-reviews">
+                <ReviewBox itemID={itemID}/>
+            </div>
+            <div id="reviews-section">
+                {
+                    reviews.map(review => (
+                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
+                    ))
+                }
+            </div>
             {isClicked ?
-                <div className="item-column">
-                    <div id="item-image">Item Image</div>
-                    <input type="text" id="item-name" placeholder={"Item Name"}/>
-                    <input type="text" id="item-desc" placeholder={"Item Desc"}/>
-                    <div id="additional-info-header"><h2>Additional Info</h2></div>
-                    <input type="text" id="additional-info" placeholder={"Info"}/>
-                </div> :
-                <div className="item-column">
-                    <div id="item-image">Item Image</div>
-                    <div id="item-name">Item Name</div>
-                    <div id="item-desc">Item Desc</div>
-                    <div id="additional-info-header"><h2>Additional Info</h2></div>
-                    <div id="additional-info">Info</div>
+                <div id="item-info">
+                    <form onSubmit={handleUploadItem}>
+                        <div id="item-image">Item Image</div>
+                        <input type="text" name="itemName" defaultValue={itemData.itemName} required/>
+                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required/>
+                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required/>
+                        <button type="submit">Submit Changes</button>
+                    </form>
+                    <div id="delete-button">
+                        <button>Delete Item</button>
+                    </div>
                 </div>
-            }
-            {isClicked ?
-                <div className="item-column">
-                    <div id="condition-head"><h2>Condition</h2></div>
-                    <input type="text" id="condition-box" placeholder={"Placeholder"}/>
-                    <div id="start-date-head"><h2>Start Date</h2></div>
-                    <input type="text" id="start-date-box" placeholder={"Placeholder"}/>
-                    <div id="end-date-head"><h2>End Date</h2></div>
-                    <input type="text" id="end-date-box" placeholder={"Placeholder"}/>
-                </div> :
-                <div className="item-column">
-                    <div id="condition-head"><h2>Condition</h2></div>
-                    <div id="condition-box">Placeholder</div>
-                    <div id="start-date-head"><h2>Start Date</h2></div>
-                    <div id="start-date-box">Placeholder</div>
-                    <div id="end-date-head"><h2>End Date</h2></div>
-                    <div id="end-date-box">Placeholder</div>
+                :
+                <div>
+                    <div className="item-column">
+                        <div id="item-image">{itemData.itemName}</div>
+                        <div id="item-name">{itemData.itemDescription}</div>
+                        <div id="item-desc">{itemData.itemCategory}</div>
+                    </div>
                 </div>
             }
         </>

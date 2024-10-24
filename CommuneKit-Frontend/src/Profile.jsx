@@ -20,7 +20,7 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-function ItemsButton({isOwn}) {
+function ItemsButton(isOwn) {
     if (isOwn) {
         return (
             <div id="my-items-button">
@@ -31,13 +31,7 @@ function ItemsButton({isOwn}) {
 
         )
     } else {
-        return (
-            <div id="my-items-button">
-                <Link to="/profile/my-items">
-                    <button>View Items</button>
-                </Link>
-            </div>
-        )
+        return null
     }
 }
 
@@ -56,10 +50,10 @@ export default function Profile({ isOwn }) {
     });
 
     useEffect(() => {
-        if (!isOwn) {
+        if (id === localStorage.getItem("userID")) {
             isOwn = true;
         }
-        getUserById({userId:'1'})
+        getUserById(localStorage.getItem("userID"))
             .then (res => {
                 setFormData(res.data)
                 console.log("in get:" + JSON.stringify(res.data));
