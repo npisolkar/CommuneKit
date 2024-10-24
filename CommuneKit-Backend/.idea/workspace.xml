@@ -4,23 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added requests for when user is lender and borrower and updated notifications page">
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added apis to get reviews by item and rating for an item">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/GeocodingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/GeocodingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReviewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReviewController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ReviewDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ReviewDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Review.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Review.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ReviewMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ReviewMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ReviewService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ReviewService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/dto/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/mapper/UserMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/mapper/UserMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -48,25 +67,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CommuneKitBackendTestApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.CommuneKitBackendTestApplication.executor": "Run",
+    "git-widget-placeholder": "Distance-Integration",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="CommuneKitBackendTestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="CommuneKitBackendTest" />
@@ -106,7 +125,15 @@
       <option name="project" value="LOCAL" />
       <updated>1729620434828</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added apis to get reviews by item and rating for an item">
+      <option name="closed" value="true" />
+      <created>1729787650449</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1729787650449</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,6 +164,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added requests for when user is lender and borrower and updated notifications page" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added requests for when user is lender and borrower and updated notifications page" />
+    <MESSAGE value="Added apis to get reviews by item and rating for an item" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added apis to get reviews by item and rating for an item" />
   </component>
 </project>

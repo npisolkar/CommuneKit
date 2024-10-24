@@ -16,6 +16,4 @@ public class ReviewDto {
     private int rating;
     private String reviewText;
     private long itemID;
-
-
 }
