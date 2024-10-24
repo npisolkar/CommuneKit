@@ -19,9 +19,8 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long reviewID;
 
-    @ManyToOne
-    @JoinColumn(name = "userid")
-    private User reviewer;
+    @Column(nullable = false)
+    private long reviewerID;
 
     @Column(nullable = false)
     private int rating;
@@ -29,10 +28,8 @@ public class Review {
     @Column(nullable = false)
     private String reviewText;
 
-    private boolean isItem;
-
     @Column(nullable = false)
-    private int targetID;
+    private long itemID;
 
 }
 
