@@ -23,77 +23,6 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-function RequestForm(isOwn, itemData, handleSubmit, handleInputChange) {
-    if (!isOwn) {
-        return (
-                <div id="request-form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Start Day</label>
-                            <input type="text" name="startDay" value={itemData.startDay}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Month</label>
-                            <input type="text" name="startMonth" value={itemData.startMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Year</label>
-                            <input type="text" name="startYear" value={itemData.startYear}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Day</label>
-                            <input type="text" name="endDay" value={itemData.endDay} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Month</label>
-                            <input type="text" name="endMonth" value={itemData.endMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Year</label>
-                            <input type="text" name="endYear" value={itemData.endYear} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Message</label>
-                            <input type="text" name="message" value={itemData.message} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <button type="submit">Request This Item</button>
-                    </form>
-                </div>
-        )}
-    else {
-        return null
-    }
-}
-
-function ReviewBox(itemID, reviews, isOwn) {
-    return (
-        <>
-            {isOwn ?
-                <div id="reviews">
-                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
-                    //TODO: populate with reviews by mapping
-                </div>
-                :
-                <div id="reviews">
-
-                </div>
-            }
-
-        </>
-    )
-}
-
 export default function ItemPage(itemID) {
     const [isClicked, setClicked] = useState(false)
     const [isNew, setIsNew] = useState(false)
@@ -188,23 +117,11 @@ export default function ItemPage(itemID) {
     };
     return (
         <>
-        <div id="item-page-header">
+            <div id="item-page-header">
                 <h2>Item Page</h2>
             </div>
             <div id="edit-item-button">
                 <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
-            </div>
-            <RequestForm isOwn={isOwn} itemData={itemData} handleSubmit={handleSubmit}
-                         handleInputChange={handleInputChange}/>
-            <div id="item-reviews">
-                <ReviewBox itemID={itemID} isOwn={isOwn}/>
-            </div>
-            <div id="reviews-section">
-                {
-                    reviews.map(review => (
-                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
-                    ))
-                }
             </div>
             {isClicked ?
                 <div id="item-info">
@@ -228,6 +145,67 @@ export default function ItemPage(itemID) {
                     </div>
                 </div>
             }
+            {isOwn ?
+                null
+                : <div>
+                    <div id="request-form">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Start Day</label>
+                            <input type="text" name="startDay" value={requestData.startDay}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Month</label>
+                            <input type="text" name="startMonth" value={requestData.startMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Year</label>
+                            <input type="text" name="startYear" value={requestData.startYear}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Day</label>
+                            <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Month</label>
+                            <input type="text" name="endMonth" value={requestData.endMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Year</label>
+                            <input type="text" name="endYear" value={requestData.endYear} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Message</label>
+                            <input type="text" name="message" value={requestData.message} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <button type="submit">Request This Item</button>
+                    </form>
+                </div>
+                <div id="reviews-button">
+                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
+                </div>
+                </div>
+            }
+            <div id="reviews-section">
+                <h2>Reviews</h2>
+                {
+                    reviews.map(review => (
+                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
+                    ))
+                }
+                //TODO: populate with reviews by mapping
+            </div>
         </>
     )
 }

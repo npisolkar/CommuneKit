@@ -51,9 +51,5 @@ export default function loginUser(userDto){
     } catch (error) {
         throw error;
     }
-    //may be good to put this in here:
-    // headers: {
-    //     'Content-Type': 'application/json'
-    // }
 }
 

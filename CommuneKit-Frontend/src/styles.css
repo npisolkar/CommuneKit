@@ -242,3 +242,21 @@ input, label {
 .star {
 
 }
+
+.form-group {
+    display:inline-block;
+}
+
+#reviews-button {
+    position:absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#reviews-section {
+    position:absolute;
+    top:80%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
