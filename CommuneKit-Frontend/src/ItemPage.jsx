@@ -4,7 +4,7 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {updateItem, getItemById} from "./services/ItemService.jsx";
+import {updateItem, getItemById, getItemsByUser} from "./services/ItemService.jsx";
 import {createRequest} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
@@ -23,9 +23,8 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-export default function ItemPage(itemID) {
+export default function ItemPage() {
     const [isClicked, setClicked] = useState(false)
-    const [isNew, setIsNew] = useState(false)
     let {id} = useParams();
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
@@ -46,6 +45,11 @@ export default function ItemPage(itemID) {
         endYear: '',
         message: ""
     });
+    const [hasBorrowed, setHasBorrowed] = useState(false)
+    const [userItems, setUserItems] = useState([])
+    function compareItem(currID) {
+        return currID === id
+    }
 
     function onClick() {
         setClicked(!isClicked);
@@ -53,6 +57,8 @@ export default function ItemPage(itemID) {
 
     useEffect(() => {
         console.log("itemId:" + id)
+
+        //fetch single item
         getItemById({itemID: id})
             .then((res) => {
                 setItemData(res.data);
@@ -70,11 +76,22 @@ export default function ItemPage(itemID) {
             .catch((error) => {
                 console.log(error);
             })
+
+        //fetch reviews
         getReviewsById(itemData.itemID)
             .then(res => {
                 setReviews(res.data)
             })
             .catch (err => console.log(err))
+
+        //check if item has been borrowed by user before
+        getItemsByUser(localStorage.getItem("userID"))
+            .then (res => {
+                setUserItems(res.data);
+                setHasBorrowed(userItems.some(compareItem))
+                console.log("hasBorrowed:" + hasBorrowed)
+            })
+            .catch (err =>console.log(err))
     }, [])
 
     async function handleSubmit() {
@@ -115,6 +132,11 @@ export default function ItemPage(itemID) {
         const {name, value} = e.target;
         setRequestData({...requestData, [name]: value});
     };
+
+    const handleItemChange = (e) => {
+        const {name, value} = e.target;
+        setItemData({...itemData, [name]: value})
+    }
     return (
         <>
             <div id="item-page-header">
@@ -127,13 +149,13 @@ export default function ItemPage(itemID) {
                 <div id="item-info">
                     <form onSubmit={handleUploadItem}>
                         <div id="item-image">Item Image</div>
-                        <input type="text" name="itemName" defaultValue={itemData.itemName} required/>
-                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required/>
-                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required/>
+                        <input type="text" name="itemName" defaultValue={itemData.itemName} required onChange={handleItemChange}/>
+                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required onChange={handleItemChange}/>
+                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
                         <button type="submit">Submit Changes</button>
                     </form>
-                    <div id="delete-button">
-                        <button>Delete Item</button>
+                    <div >
+                        <button className="delete-button">Delete Item</button>
                     </div>
                 </div>
                 :
@@ -204,7 +226,6 @@ export default function ItemPage(itemID) {
                         <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
                     ))
                 }
-                //TODO: populate with reviews by mapping
             </div>
         </>
     )

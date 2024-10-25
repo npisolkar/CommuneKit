@@ -24,7 +24,7 @@ function ItemsButton(isOwn) {
     if (isOwn) {
         return (
             <div id="my-items-button">
-                <Link to="/profile/my-items">
+                <Link to={"/profile/" + localStorage.getItem("userID") + "/my-items"}>
                     <button>View My Items</button>
                 </Link>
             </div>
@@ -37,7 +37,6 @@ function ItemsButton(isOwn) {
 
 export default function Profile({ isOwn }) {
 
-    const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
     const {id} = useParams();
     const [formData, setFormData] = useState({
@@ -90,7 +89,7 @@ export default function Profile({ isOwn }) {
             }
             console.log("trying to submit " + JSON.stringify(profileJson))
             console.log("username:" + formData.userName)
-            const profileData = await updateUser(userID, JSON.stringify(profileJson));
+            const profileData = await updateUser(id, JSON.stringify(profileJson));
             console.log("submit:" + profileData);
         }
         catch (error) {

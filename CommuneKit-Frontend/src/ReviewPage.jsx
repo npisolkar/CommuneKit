@@ -20,9 +20,9 @@ export default function ReviewPage() {
                 rating:review.rating,
                 reviewText:review.reviewText,
                 isItem:true,
-                targetID:itemID
+                targetID:JSON.stringify(itemID)
             }
-            await createReview(submit)
+            await createReview(submit, itemID)
         } catch (error) {
             console.log(error);
         }
@@ -45,8 +45,8 @@ export default function ReviewPage() {
                     <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
                 </div>
                 <form onSubmit={onSubmit}>
-                    <input onChange={handleInputChange} name="rating" defaultValue={review.rating}></input>
-                    <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText}></input>
+                    <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
+                    <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></input>
                     <button type="submit">Submit</button>
                 </form>
             </div>

@@ -3,7 +3,11 @@ import axios from "axios";
 const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 
 export function createItem(itemDto) {
-    return axios.post(ITEM_API_BASE_URL, itemDto)
+    return axios.post(ITEM_API_BASE_URL, itemDto, {
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
 }
 
 export function getItemById(id) {

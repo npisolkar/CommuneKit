@@ -31,16 +31,11 @@ export default function MyItems() {
         <>
             <div className="home-items" id="profile-posted">
                 <ItemTable headName={"my posted items"} items={postedItems} />
-                <div className="my-item">
-                    <Link to="/profile/my-items/dummypage">
-                        <button>Dummy Item</button>
-                    </Link>
-                </div>
             </div>
             <div className="home-items" id="profile-borrowed">
                 <ItemTable headName={"my borrowed items"} items={borrowedItems} />
             </div>
-            <div>
+            <div id="create-item">
                 <Link to="/newitem"><button>Create New Item</button></Link>
             </div>
         </>

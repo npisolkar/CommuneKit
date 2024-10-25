@@ -12,6 +12,7 @@ import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
+import NewItem from "./NewItem.jsx"
 
 
 export default function App() {
@@ -25,18 +26,18 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to="/profile" id="profile-button"><button>Profile</button></Link>
+                  <Link to={"/profile/"+ localStorage.getItem("userID")} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true}/>} />
-                  <Route path="/profile/my-items" element={<MyItems />} />
+                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>} />
+                  <Route path="/profile/:userID/my-items" element={<MyItems />} />
                   <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
-                  <Route path="/newitem" element={<ItemPage />}/>
+                  <Route path="/newitem" element={<NewItem />}/>
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>

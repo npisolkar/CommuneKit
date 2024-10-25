@@ -160,16 +160,6 @@ input, label {
 }
 
 /* profile page */
-#profile-posted {
-    position:absolute;
-    left:500px;
-}
-
-#profile-borrowed {
-    position:absolute;
-    left:1000px;
-}
-
 #edit-profile {
     position:absolute;
     z-index:0;
@@ -197,11 +187,12 @@ input, label {
     width:200px;
 }
 
-#submit-profile {
-
-}
-
 /* my items page */
+#create-item {
+    left:50%;
+    padding-top:20px;
+    position:absolute;
+}
 
 /* notifications */
 #notif-title {
@@ -259,4 +250,8 @@ input, label {
     top:80%;
     left:50%;
     transform: translate(-50%, -50%);
+}
+
+.delete-button {
+    color:red;
 }
