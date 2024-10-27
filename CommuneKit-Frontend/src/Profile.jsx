@@ -2,7 +2,7 @@
 *  certain user. The page's behavior should change based on
 *  whether one is accessing one's own page or another's. */
 import './styles.css'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {Link, useParams} from "react-router-dom";
 import axios from 'axios';
 import {getUserById, updateUser} from "./services/UserService.jsx";
@@ -39,6 +39,7 @@ export default function Profile() {
 
     const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
+    const [profilePicture, setProfilePicture] = useState(' ');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -56,6 +57,14 @@ export default function Profile() {
     } else {
         const isOwn = false;
     }
+    /**
+        Image file change handling
+     */
+    const handleFileChange = (e) => {
+        console.log(e.target.file)
+        setProfilePicture(e.target.files[0]);
+    }
+
     useEffect(() => {
        /* if (id === localStorage.getItem("userID")) {
             isOwn = true;
@@ -94,10 +103,23 @@ export default function Profile() {
                 address: formData.address,
                 isBanned: false
             }*/
+            const fdata = new FormData();
+            fdata.append('firstName', formData.firstName);
+            fdata.append('lastName', formData.lastName);
+            fdata.append('userName', formData.userName);
+            fdata.append('password', formData.password);
+            fdata.append('email', formData.email);
+            fdata.append('password', formData.password);
+            fdata.append('phone', formData.phone);
+            fdata.append('address', formData.address);
+            fdata.append('profilePicture', profilePicture);
+
+            console.log("fData: " + JSON.stringify(fData));
             console.log("trying to submit " + JSON.stringify(formData))
-            //console.log("username:" + formData.userName)
+
             const profileResponse = await updateUser(userID, JSON.stringify(formData));
             const profileData = profileResponse.data;
+
             console.log("got this as profileData:" + JSON.stringify(profileData));
             setFormData(profileData);
             onClick();
@@ -114,7 +136,12 @@ export default function Profile() {
                 <div className="about-box">
                     <div> <p>Your username: {formData.userName}</p></div>
                     <form onSubmit={handleSubmit}>
-                        <div>
+                        <div className="form-group">
+                            <label>Profile picture:</label>
+                            <input type="file" onChange={handleFileChange}/>
+                        </div>
+                        <div className="form-group">
+                            <label>Username:</label>
                             <input type="text" value={formData.userName} name="userName" id="profile-username"
                                    onChange={handleInputChange}/>
                         </div>
@@ -123,23 +150,23 @@ export default function Profile() {
                                 Bio
                                 <input id="profile-bio" value={formData.bio} name="bio" type="text"
                                        onChange={handleInputChange}/>
-                            </label>
-                            <label>
-                                Address
-                                <input id="profile-address" value={formData.address} name="address" type="text"
+                            </label></div>
+                        <div className="form-group">
+                            <label>Address</label>
+                            <input id="profile-address" value={formData.address} name="address" type="text"
                                        onChange={handleInputChange}/>
-                            </label>
-                            <label>
-                                Phone Number
+                        </div>
+                        <div className="form-group">
+                            <label>Phone Number</label>
                                 <input id="profile-phone" value={formData.phone} type="text" name="phone"
                                        onChange={handleInputChange}/>
-                            </label>
                         </div>
                         <div id="edit-profile">
-                            <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick} bodyText={"Cancel"}/>
+                            <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick}
+                                        bodyText={"Cancel"}/>
                         </div>
                         <div id="submit-profile">
-                            <button type="submit" >Save Changes</button>
+                            <button type="submit">Save Changes</button>
                         </div>
                     </form>
                 </div> :

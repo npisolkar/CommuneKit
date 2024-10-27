@@ -4,7 +4,7 @@ import { createUser } from "../services/UserService.jsx";
 
 function RegistrationPage() {
     const navigate = useNavigate();
-    const [profilePicture, setProfilePicture] = useState(' ');
+    //const [profilePicture, setProfilePicture] = useState(' ');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -13,15 +13,16 @@ function RegistrationPage() {
         password: '',
         address: '',
         bio: '',
-        phone: ''
+        phone: '',
+        profilePicture: null,
 
     });
 
     //followed this for explanation: https://www.youtube.com/watch?v=YOGgaYUW1OA
-    const handleFileChange = (e) => {
-        console.log(e.target.file)
-        setProfilePicture(e.target.files[0]);
-    }
+    // const handleFileChange = (e) => {
+    //     console.log(e.target.file)
+    //     setProfilePicture(e.target.files[0]);
+    // }
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -35,20 +36,21 @@ function RegistrationPage() {
 
             //const token = localStorage.getItem('token');
 
-            // const fdata = new FormData();
-            // fdata.append('firstName', formData.firstName);
-            // fdata.append('lastName', formData.lastName);
-            // fdata.append('userName', formData.userName);
-            // fdata.append('password', formData.password);
-            // fdata.append('email', formData.email);
-            // fdata.append('password', formData.password);
-            // fdata.append('phone', formData.phone);
-            // fdata.append('address', formData.address);
-            // fdata.append('profilePicture', );
+            const fdata = new FormData();
+            fdata.append('firstName', formData.firstName);
+            fdata.append('lastName', formData.lastName);
+            fdata.append('userName', formData.userName);
+            fdata.append('password', formData.password);
+            fdata.append('email', formData.email);
+            fdata.append('password', formData.password);
+            fdata.append('phone', formData.phone);
+            fdata.append('address', formData.address);
+            fdata.append('profilePicture', profilePicture);
 
 
-            console.log(JSON.stringify(formData));
-            const userData = await createUser(JSON.stringify(formData));
+            console.log("formData: " + JSON.stringify(formData));
+            console.log("fData: " + JSON.stringify(fData));
+            const userData = await createUser(JSON.stringify(fData));
             console.log(userData)
             localStorage.setItem('token', "LoggedIn")
             localStorage.setItem('role', userData.data.role) //

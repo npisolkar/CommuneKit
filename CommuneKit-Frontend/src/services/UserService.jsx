@@ -25,6 +25,21 @@ export function updateUser(userId, userDto) {
     }
 }
 
+export function updateUserImage(userId, image) {
+    try {
+        console.log("trying to update this user's pfp:" + userId)
+        return axios.put(USER_API_BASE_URL + "/"+ String(userId), userDto, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: userDto
+        })
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export function createUser(userDto){
     try {
         return axios.post(EMPLOYEE_API_BASE_URL, userDto, {
