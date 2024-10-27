@@ -22,6 +22,7 @@ public class ItemController {
     private ItemService itemService;
 
     @PostMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto) {
         ItemDto savedItem = itemService.createItem(itemDto);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
@@ -39,32 +40,48 @@ public class ItemController {
     }*/
 
     @GetMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ItemDto> getItemById(@PathVariable("id") Long itemID) {
         ItemDto itemDto = itemService.getItemById(itemID);
         return ResponseEntity.ok(itemDto);
     }
 
     @GetMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> getAllItems() {
         List<ItemDto> items = itemService.getAllItems();
         return ResponseEntity.ok(items);
     }
 
     @PutMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ItemDto> updateItem(@PathVariable("id") Long itemID, @RequestBody ItemDto updatedItem) {
         ItemDto itemDto = itemService.updateItem(itemID, updatedItem);
         return ResponseEntity.ok(itemDto);
     }
 
     @DeleteMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> deleteItem(@PathVariable("id") Long itemID) {
         itemService.deleteItem(itemID);
         return ResponseEntity.ok("Item deleted successfully");
     }
 
     @GetMapping("/my/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> getMyItems(@PathVariable("id") Long userID) {
         List<ItemDto> items = itemService.getItemsByUserId(userID);
+        return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/search")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<ItemDto>> searchItems(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Boolean sortByDistance,
+            @RequestParam Long userID) {
+
+        List<ItemDto> items = itemService.searchItems(keyword, sortByDistance, userID);
         return ResponseEntity.ok(items);
     }
 }
