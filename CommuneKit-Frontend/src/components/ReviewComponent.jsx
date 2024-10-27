@@ -4,13 +4,14 @@
 import {useState, useEffect} from 'react'
 import {getUserById} from "../services/UserService.jsx";
 
-export default function ReviewComponent(userID, itemID, reviewDto) {
+export default function ReviewComponent({reviewDto}) {
     const [name, setName] = useState('')
 
     useEffect(() => {
-        getUserById(userID)
+        getUserById(reviewDto.reviewerID)
             .then (res => {
                 setName(res.data.userName)
+                console.log(JSON.stringify(reviewDto))
             })
             .catch (err => console.log(err))
     }, [])

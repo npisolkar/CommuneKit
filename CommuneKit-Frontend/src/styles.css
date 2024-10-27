@@ -217,13 +217,55 @@ input, label {
     left:900px;
 }
 
-.item-column {
+.form-group {
     display:inline-block;
-    text-align:center;
-    margin-left:300px;
-    width:200px;
 }
 
+#reviews-button {
+    position:relative;
+    left: 50%;
+}
+
+#reviews-header {
+    position:absolute;
+    top:600px;
+    left:50%;
+}
+
+#reviews-section {
+    position:absolute;
+    top:700px;
+    margin-left:50px;
+}
+
+.item-review {
+    border: 1px black solid;
+    height:200px;
+    width:1000px;
+    padding:10px;
+    margin:10px;
+}
+
+.delete-button {
+    color:red;
+}
+
+#item-info {
+    left:50%;
+    padding-bottom:50px;
+    position:relative;
+}
+
+.item-member {
+    border: 1px solid black;
+    width:300px;
+}
+
+#item-desc {
+    height:200px;
+}
+
+/* create reviews page */
 #rating-stars {
     display:flex;
     align-content:center;
@@ -243,26 +285,4 @@ input, label {
 
 .star:hover {
     filter:grayscale(0%)
-}
-
-.form-group {
-    display:inline-block;
-}
-
-#reviews-button {
-    position:absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#reviews-section {
-    position:absolute;
-    top:80%;
-    left:50%;
-    transform: translate(-50%, -50%);
-}
-
-.delete-button {
-    color:red;
 }

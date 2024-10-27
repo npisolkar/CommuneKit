@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 import {createReview} from './services/ReviewService.jsx'
+import {getItemById} from "./services/ItemService.jsx";
 
 export default function ReviewPage() {
     let {itemID} = useParams()
@@ -12,17 +13,27 @@ export default function ReviewPage() {
         targetID:''
     })
     const navigate = useNavigate()
+    const [userID, setUserID] = useState('')
 
-    async function onSubmit() {
-        navigate("/item/" + itemID)
+    useEffect(() => {
+        getItemById(itemID)
+            .then (res => {
+                setUserID(res.data.userID)
+            })
+            .catch (err => console.log(err))
+    }, [])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
         try {
             let submit = {
-                reviewer:'',
+                reviewerID:userID,
                 rating:review.rating,
                 reviewText:review.reviewText,
-                targetID:JSON.stringify(itemID)
-            }
-            await createReview(submit, itemID)
+                itemID:itemID
+            };
+            const thing = await createReview(submit, itemID);
+            navigate("/item/" + String(itemID));
         } catch (error) {
             console.log(error);
         }

@@ -64,8 +64,6 @@ export default function ItemPage() {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
                 setUserID(res.data.userID)
-                console.log("local storage " + localStorage.getItem("userID"))
-                console.log("id: " + itemID)
                 if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
                     setIsOwn(true);
                     console.log("isown:" + isOwn)
@@ -90,7 +88,6 @@ export default function ItemPage() {
             .then (res => {
                 setUserItems(res.data);
                 setHasBorrowed(userItems.some(compareItem))
-                console.log("id: " + itemID)
                 console.log("hasBorrowed:" + hasBorrowed)
             })
             .catch (err =>console.log(err))
@@ -162,10 +159,10 @@ export default function ItemPage() {
                 </div>
                 :
                 <div>
-                    <div className="item-column">
-                        <div id="item-image">{itemData.itemName}</div>
-                        <div id="item-name">{itemData.itemDescription}</div>
-                        <div id="item-desc">{itemData.itemCategory}</div>
+                    <div id="item-info">
+                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
                 </div>
             }
@@ -221,11 +218,13 @@ export default function ItemPage() {
                 </div>
                 </div>
             }
-            <div id="reviews-section">
+            <div id="reviews-header">
                 <h2>Reviews</h2>
+            </div>
+            <div id="reviews-section">
                 {
                     reviews.map(review => (
-                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
+                        <ReviewComponent reviewDto={review}/>
                     ))
                 }
             </div>

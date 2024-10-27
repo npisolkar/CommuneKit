@@ -5,11 +5,10 @@ import axios from 'axios';
 
 const REVIEW_API_BASE_URL = "http://localhost:8080/api/reviews"
 
-export function createReview(review, itemID) {
+export function createReview(review) {
 
-    return axios.post(REVIEW_API_BASE_URL + "/" + itemID, review, {
+    return axios.post(REVIEW_API_BASE_URL, review, {
         headers: {'Content-Type': 'application/json'},
-        data:JSON.stringify(review),
     });
 }
 
