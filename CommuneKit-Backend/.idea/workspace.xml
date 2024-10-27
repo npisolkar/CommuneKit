@@ -5,28 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="fixed issue with url">
-      <change afterPath="$PROJECT_DIR$/CommuneKitBackendTest.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/adminPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/ReportService.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/example/CommuneKitBackendTest/CommuneKitBackendTestApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/example/CommuneKitBackendTest/CommuneKitBackendTestApplicationTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/HELP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/HELP.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Item.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Owner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/Review.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit—Frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit—Frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/App.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,6 +108,7 @@
       <updated>1728515968274</updated>
       <workItem from="1728515969314" duration="1082000" />
       <workItem from="1728855769796" duration="3961000" />
+      <workItem from="1729793900789" duration="408000" />
     </task>
     <task id="LOCAL-00001" summary="Added get items by user id api">
       <option name="closed" value="true" />
