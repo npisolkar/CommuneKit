@@ -10,7 +10,9 @@ import com.example.CommuneKitBackendTest.service.GeocodingService;
 import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -86,5 +88,28 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userID) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
         userRepository.deleteById(userID);
+    }
+
+    @Override
+    public MultipartFile getUserImageById(long userID) { //no idea if this is correct
+
+        return null;
+    }
+
+    @Override
+    public UserDto updateUserImage(Long userID, MultipartFile image) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                user.setProfilePicture(image.getBytes());
+            } catch (IOException e) {
+                System.out.println("IO Exception while updating user profile pic" + e.getMessage());
+            }
+        }
+
+        userRepository.save(user);
+
+        return UserMapper.mapToUserDto(user);
     }
 }

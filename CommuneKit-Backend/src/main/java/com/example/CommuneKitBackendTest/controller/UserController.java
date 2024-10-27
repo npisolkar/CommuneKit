@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.lang.Exception;
 import java.util.List;
 
@@ -65,7 +67,6 @@ public class UserController {
         return ResponseEntity.ok(basicUserDto);
     }
 
-
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userID, @RequestBody UserDto updatedUser) {
@@ -78,6 +79,20 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("id") long UserID) {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
+    }
+
+    @PutMapping("/image/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<MultipartFile> updateUserImage(@PathVariable("id") Long userID) {
+        //UserDto userDto = userService.updateUserImage(userID, image);
+        return ResponseEntity.ok(null);
+    }
+
+    @GetMapping("/image/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<UserDto> getUserImage(@PathVariable("id") Long userID, @RequestParam MultipartFile image) {
+        UserDto userDto = userService.updateUserImage(userID, image);
+        return ResponseEntity.ok(userDto);
     }
 }
 

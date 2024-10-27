@@ -2,6 +2,7 @@ package com.example.CommuneKitBackendTest.service;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -13,6 +14,10 @@ public interface UserService {
     List<UserDto> getAllUsers();
 
     BasicUserDto getBasicUserInfoById(long userId);
+
+    UserDto updateUserImage(Long userID, MultipartFile file);
+
+    MultipartFile getUserImageById(long userID);
 
     UserDto updateUser(Long userID, UserDto updatedUser);
 
