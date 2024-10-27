@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import {createReview} from './services/ReviewService.jsx'
 
 export default function ReviewPage() {
@@ -9,17 +9,17 @@ export default function ReviewPage() {
         reviewer:'',
         rating:'',
         reviewText:'',
-        isItem:'',
         targetID:''
     })
+    const navigate = useNavigate()
 
     async function onSubmit() {
+        navigate("/item/" + itemID)
         try {
             let submit = {
                 reviewer:'',
                 rating:review.rating,
                 reviewText:review.reviewText,
-                isItem:true,
                 targetID:JSON.stringify(itemID)
             }
             await createReview(submit, itemID)
@@ -33,22 +33,29 @@ export default function ReviewPage() {
         setReview({ ...review, [name]: value });
     };
 
+    function cancel() {
+        navigate("/item/" + itemID)
+    }
+
     return (
         <>
             <div>
                 <h1>Leave A Review</h1>
                 <div id="rating-stars">
-                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="./assets/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
                 </div>
                 <form onSubmit={onSubmit}>
                     <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
                     <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></input>
                     <button type="submit">Submit</button>
                 </form>
+            </div>
+            <div>
+                <button onClick={cancel}>Cancel</button>
             </div>
         </>
     )

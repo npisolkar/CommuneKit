@@ -230,8 +230,19 @@ input, label {
     flex-direction:row;
 }
 
-.star {
+.star-filled {
+    height:50px;
+    width:50px;
+}
 
+.star {
+    height:50px;
+    width:50px;
+    filter:grayscale(100%);
+}
+
+.star:hover {
+    filter:grayscale(0%)
 }
 
 .form-group {
@@ -240,7 +251,7 @@ input, label {
 
 #reviews-button {
     position:absolute;
-    top: 60%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
 }

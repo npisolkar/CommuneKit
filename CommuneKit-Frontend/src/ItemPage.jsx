@@ -25,7 +25,7 @@ function EditButton({isOwn, handleClick, bodyText}) {
 
 export default function ItemPage() {
     const [isClicked, setClicked] = useState(false)
-    let {id} = useParams();
+    let {itemID} = useParams();
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
     const [userID, setUserID] = useState('')
@@ -48,7 +48,7 @@ export default function ItemPage() {
     const [hasBorrowed, setHasBorrowed] = useState(false)
     const [userItems, setUserItems] = useState([])
     function compareItem(currID) {
-        return currID === id
+        return currID === itemID
     }
 
     function onClick() {
@@ -56,15 +56,16 @@ export default function ItemPage() {
     }
 
     useEffect(() => {
-        console.log("itemId:" + id)
+        console.log("itemId:" + itemID)
 
         //fetch single item
-        getItemById({itemID: id})
+        getItemById({itemID: itemID})
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
                 setUserID(res.data.userID)
                 console.log("local storage " + localStorage.getItem("userID"))
+                console.log("id: " + itemID)
                 if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
                     setIsOwn(true);
                     console.log("isown:" + isOwn)
@@ -78,7 +79,7 @@ export default function ItemPage() {
             })
 
         //fetch reviews
-        getReviewsById(itemData.itemID)
+        getReviewsById(itemID)
             .then(res => {
                 setReviews(res.data)
             })
@@ -89,6 +90,7 @@ export default function ItemPage() {
             .then (res => {
                 setUserItems(res.data);
                 setHasBorrowed(userItems.some(compareItem))
+                console.log("id: " + itemID)
                 console.log("hasBorrowed:" + hasBorrowed)
             })
             .catch (err =>console.log(err))

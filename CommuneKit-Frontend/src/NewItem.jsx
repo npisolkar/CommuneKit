@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import {createItem} from "./services/ItemService.jsx"
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 export default function NewItem() {
     const [itemData, setItemData] = useState({

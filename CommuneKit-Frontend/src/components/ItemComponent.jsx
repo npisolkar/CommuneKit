@@ -1,6 +1,6 @@
+/* Contains the HTML element that displays an item's information */
 import {Link} from 'react-router-dom'
 import {deleteItem} from "../services/ItemService.jsx"
-import {useEffect, useState} from "react";
 
 export default function ItemComponent({data}, isOwn) {
 
@@ -15,7 +15,7 @@ export default function ItemComponent({data}, isOwn) {
                 <td>{data.itemDescription}</td>
                 <td>{data.itemCategory}</td>
                 <td><Link to={"/item/" + `${data.itemID}`}><button>To Item Page</button></Link></td>
-                <td><Link to="/profile"><button>To User Page</button></Link></td>
+                <td><Link to={"/profile/" + `${data.userID}`}><button>To User Page</button></Link></td>
                 <td><button>Favorite</button></td>
                 {isOwn ?
                     <td>
