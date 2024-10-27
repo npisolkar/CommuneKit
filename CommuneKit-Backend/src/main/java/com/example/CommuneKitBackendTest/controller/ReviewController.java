@@ -6,10 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.UncategorizedSQLException;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -18,7 +15,8 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<ReviewDto> createUser(@RequestBody ReviewDto reviewDto) {
+    @CrossOrigin(origins = "http://localhost:5173")
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto) {
         ReviewDto savedReview = reviewService.createReview(reviewDto);
         return new ResponseEntity<>(savedReview, HttpStatus.CREATED);
     }

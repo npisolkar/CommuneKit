@@ -35,24 +35,31 @@ function ItemsButton(isOwn) {
     }
 }
 
-export default function Profile({ isOwn }) {
+export default function Profile() {
 
     const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
-    const {id} = useParams();
     const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
         userName: '',
         email: '',
-        password: '',
+        //password: '',
         address: '',
         bio: '',
         phone: ''
     });
+    const loggedInUserID = localStorage.getItem('userID');
 
+    if (userID === loggedInUserID) {
+        const isOwn = true;
+    } else {
+        const isOwn = false;
+    }
     useEffect(() => {
-        if (id === localStorage.getItem("userID")) {
+       /* if (id === localStorage.getItem("userID")) {
             isOwn = true;
-        }
+        }*/
         getUserById(localStorage.getItem("userID"))
             .then (res => {
                 setFormData(res.data)
@@ -74,59 +81,62 @@ export default function Profile({ isOwn }) {
     };
 
 
-    async function uploadProfileInfo() {
-        console.log("username at beginning of upload: " + formData.userName)
-        console.log("upload: " + formData);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        //console.log("username at beginning of upload: " + formData.userName)
+        console.log("upload: " + JSON.stringify(formData));
         try {
-            let profileJson = {
+           /* let profileJson = {
                 name: formData.userName,
                 password: formData.password,
                 email: formData.email,
                 phone: formData.phone,
                 address: formData.address,
-                isBanned: false,
-                isAdmin: false,
-                isOwner: false,
-            }
-            console.log("trying to submit " + JSON.stringify(profileJson))
-            console.log("username:" + formData.userName)
-            const profileData = await updateUser(userID, JSON.stringify(profileJson));
-            console.log("submit:" + profileData);
+                isBanned: false
+            }*/
+            console.log("trying to submit " + JSON.stringify(formData))
+            //console.log("username:" + formData.userName)
+            const profileResponse = await updateUser(userID, JSON.stringify(formData));
+            const profileData = profileResponse.data;
+            console.log("got this as profileData:" + JSON.stringify(profileData));
+            setFormData(profileData);
+            onClick();
         }
         catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <>
             <div id="profile-image" className="about-box"></div>
             {isClicked ?
                 <div className="about-box">
-                    <form onSubmit={uploadProfileInfo}>
+                    <div> <p>Your username: {formData.userName}</p></div>
+                    <form onSubmit={handleSubmit}>
                         <div>
-                            <input type="text" defaultValue={formData.userName} name="userName" id="profile-username"
+                            <input type="text" value={formData.userName} name="userName" id="profile-username"
                                    onChange={handleInputChange}/>
                         </div>
                         <div>
                             <label>
                                 Bio
-                                <input id="profile-bio" defaultValue={formData.bio} name="bio" type="text"
+                                <input id="profile-bio" value={formData.bio} name="bio" type="text"
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
                                 Address
-                                <input id="profile-address" defaultValue={formData.address} name="address" type="text"
+                                <input id="profile-address" value={formData.address} name="address" type="text"
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
                                 Phone Number
-                                <input id="profile-phone" defaultValue={formData.phone} type="text" name="phone"
+                                <input id="profile-phone" value={formData.phone} type="text" name="phone"
                                        onChange={handleInputChange}/>
                             </label>
                         </div>
                         <div id="edit-profile">
-                            <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Cancel"}/>
+                            <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick} bodyText={"Cancel"}/>
                         </div>
                         <div id="submit-profile">
                             <button type="submit" >Save Changes</button>
@@ -150,14 +160,11 @@ export default function Profile({ isOwn }) {
                         <div id="profile-phone">{formData.phone}</div>
                     </label>
                     <div id="edit-profile">
-                        <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Profile"}/>
+                        <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick} bodyText={"Edit Profile"}/>
                     </div>
                 </div>
             }
-            <ItemsButton isOwn={isOwn}/>
-            <div id="my-rating">
-                <h2>Rating</h2>
-            </div>
+            <ItemsButton isOwn={userID === localStorage.getItem('userID')}/>
         </>
     )
 }

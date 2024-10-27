@@ -78,6 +78,19 @@ input, label {
     transform: translate(-50%, -50%);
 }
 
+.about-box {
+    max-width: 400px;
+    margin: 20px;
+    padding: 70px;
+    border: 10px solid #22B14C;
+    border-radius: 10px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 /* menu bar */
 .menu-bar {
     position:fixed;
@@ -104,13 +117,22 @@ input, label {
 
 /* home page css */
 .home-items {
+    text-align:center;
+    margin-top:150px;
+    overflow:scroll;
+    height:250px;
+    margin-left:100px;
+    font-size:12px;
+}
+/* OLD home page css //
+.home-items {
     display:inline-block;
     text-align:center;
     top:250px;
     overflow:scroll;
     height:250px;
-}
-
+}*/
+/*
 #posted-header {
     position:absolute;
     left:200px;
@@ -230,7 +252,8 @@ input, label {
     text-align:left;
 }
 
-/* individual item's page */
+/*
+/* individual item's page
 #item-page-header {
     position:absolute;
     top:150px;
@@ -248,4 +271,4 @@ input, label {
     text-align:center;
     margin-left:300px;
     width:200px;
-}
+}*/

@@ -17,11 +17,13 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ItemController {
 
     private ItemService itemService;
 
     @PostMapping
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<ItemDto> createItem(@RequestBody ItemDto itemDto) {
         ItemDto savedItem = itemService.createItem(itemDto);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
@@ -39,6 +41,7 @@ public class ItemController {
     }*/
 
     @GetMapping("{id}")
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<ItemDto> getItemById(@PathVariable("id") Long itemID) {
         ItemDto itemDto = itemService.getItemById(itemID);
         return ResponseEntity.ok(itemDto);
