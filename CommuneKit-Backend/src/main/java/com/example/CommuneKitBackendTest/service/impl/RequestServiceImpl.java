@@ -40,7 +40,6 @@ public class RequestServiceImpl implements RequestService {
         request.setIsApproved(false);
         Request updated = requestRepository.save(request);
         return RequestMapper.mapToRequestDto(updated);
-
     }
 
     @Override
@@ -163,5 +162,4 @@ public class RequestServiceImpl implements RequestService {
                 .map(RequestMapper::mapToRequestDto)  // Map to DTO
                 .collect(Collectors.toList());
     }
-
 }
