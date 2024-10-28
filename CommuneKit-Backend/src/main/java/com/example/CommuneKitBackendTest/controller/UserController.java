@@ -80,7 +80,7 @@ public class UserController {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
     }
-
+/*
     @PutMapping("/image/{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<MultipartFile> updateUserImage(@PathVariable("id") Long userID) {
@@ -93,6 +93,6 @@ public class UserController {
     public ResponseEntity<UserDto> getUserImage(@PathVariable("id") Long userID, @RequestParam MultipartFile image) {
         UserDto userDto = userService.updateUserImage(userID, image);
         return ResponseEntity.ok(userDto);
-    }
+    }*/
 }
 

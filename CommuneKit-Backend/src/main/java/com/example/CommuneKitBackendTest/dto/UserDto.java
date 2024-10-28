@@ -25,8 +25,7 @@ public class UserDto {
     private String bio;
     private boolean isBanned;
     private String role;
-    @Lob
-    private byte[] profilePicture;
+    private Long profilePicture;
     private Double latitude;
     private Double longitude;
 

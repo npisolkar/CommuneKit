@@ -89,13 +89,12 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
         userRepository.deleteById(userID);
     }
-
+/*
     @Override
     public MultipartFile getUserImageById(long userID) { //no idea if this is correct
 
         return null;
     }
-
     @Override
     public UserDto updateUserImage(Long userID, MultipartFile image) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
@@ -111,5 +110,7 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
         return UserMapper.mapToUserDto(user);
-    }
+    }*/
+
+
 }

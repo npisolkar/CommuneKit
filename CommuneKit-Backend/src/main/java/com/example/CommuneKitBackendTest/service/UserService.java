@@ -14,10 +14,12 @@ public interface UserService {
     List<UserDto> getAllUsers();
 
     BasicUserDto getBasicUserInfoById(long userId);
+/*
 
     UserDto updateUserImage(Long userID, MultipartFile file);
 
     MultipartFile getUserImageById(long userID);
+*/
 
     UserDto updateUser(Long userID, UserDto updatedUser);
 

@@ -12,7 +12,7 @@ import java.io.IOException;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("/api/image")
 @RequiredArgsConstructor
 public class ImageController {
 
@@ -24,9 +24,17 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
 
-    @GetMapping("/{fileName}")
+    @GetMapping("/filename/{fileName}")
     public ResponseEntity<?> downloadImage(@PathVariable String fileName) {
         byte[] imageData = imageService.downloadImage(fileName);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf(IMAGE_PNG_VALUE))
+                .body(imageData);
+    }
+
+    @GetMapping("/fileId/{fileId}")
+    public ResponseEntity<?> downloadImage(@PathVariable Long fileId) {
+        byte[] imageData = imageService.downloadImage(fileId);
         return ResponseEntity.status(HttpStatus.OK)
                 .contentType(MediaType.valueOf(IMAGE_PNG_VALUE))
                 .body(imageData);

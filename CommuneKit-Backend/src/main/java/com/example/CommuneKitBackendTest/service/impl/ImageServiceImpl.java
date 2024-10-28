@@ -29,6 +29,21 @@ public class ImageServiceImpl implements ImageService {
         return "file uploaded successfully : " + imageFile.getOriginalFilename();
     }
 
+    public byte[] downloadImage(Long id) {
+        Optional<Image> dbImage = imageRepository.findById(id);
+
+        return dbImage.map(image -> {
+            try {
+                return ImageUtils.decompressImage(image.getImageData());
+            } catch (DataFormatException | IOException exception) {
+                throw new RuntimeException("Error downloading an image Image ID: "
+                        +  image.getId() + " Image Id: " + id, exception);
+                //.addContextValue("Image ID",  image.getId())
+                //.addContextValue("Image name", imageName);
+            }
+        }).orElse(null);
+    }
+
     public byte[] downloadImage(String imageName) {
         Optional<Image> dbImage = imageRepository.findByName(imageName);
 

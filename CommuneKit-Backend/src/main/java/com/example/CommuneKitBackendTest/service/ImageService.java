@@ -12,6 +12,7 @@ public interface ImageService {
     public String uploadImage(MultipartFile imageFile) throws IOException;
 
     public byte[] downloadImage(String imageName);
+    public byte[] downloadImage(Long imageId);
 
 
 }
