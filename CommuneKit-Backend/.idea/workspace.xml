@@ -5,19 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/RegistrationPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/RegistrationPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/UserService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/UserService.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/Utils/ImageUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ImageController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Image.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/repository/ImageRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ImageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ImageServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Interface" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -56,6 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.CommuneKitBackendTestApplication.executor": "Run",
     "git-widget-placeholder": "ProfileFixingAndPics",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend",
     "node.js.detected.package.eslint": "true",
@@ -101,6 +108,7 @@
       <workItem from="1729540610973" duration="1075000" />
       <workItem from="1729787284574" duration="3430000" />
       <workItem from="1730038867614" duration="4977000" />
+      <workItem from="1730127308383" duration="4593000" />
     </task>
     <servers />
   </component>
