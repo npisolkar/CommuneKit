@@ -47,7 +47,7 @@ public class RequestController {
         List<RequestDto> requests = requestService.getAllRequests();
         return ResponseEntity.ok(requests);
     }
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> updateRequest(@PathVariable("id") Long requestId, @RequestBody RequestDto updatedRequest) {

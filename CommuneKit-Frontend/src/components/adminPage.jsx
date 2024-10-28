@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
-import {getReports} from "../services/ReportService.jsx";
+import {getReports, updateReports} from "../services/ReportService.jsx";
+import {updateRequest} from "../services/RequestService.jsx";
 export default function adminPage(){
     const navigate = useNavigate();
     const [pendingReports, setPendingReports] = useState([]);
@@ -9,7 +10,7 @@ export default function adminPage(){
     useEffect(() => {
         const fetchReports = async () => {
             try{
-                const pendingReportResponse = await fetch(`http://localhost:8080/api/reports`);
+                const pendingReportResponse = await fetch(`http://localhost:8080/api/reports/pending`);
                 const pendingReportData = await pendingReportResponse.json();
                 setPendingReports(pendingReportData);
             } catch (error) {
@@ -21,22 +22,78 @@ export default function adminPage(){
 
         }
         fetchReports();
-    })
+    },[])
+    const handleBan = async (reportID, reportedUserID) => {
+        const requestBody = {
+            status: "banned" // field you want to update
+        };
+        try {
+            const response = await updateReports(reportID, requestBody);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Success:', data);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+        try {
+            const response = await BanUser(reportedUserID, requestBody);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Success:', data);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+
+
+    };
+    const handleDismiss = async (reportID) => {
+        const requestBody = {
+            status: "dismissed" // field you want to update
+        };
+        try {
+            const response = await updateReports(reportID, requestBody);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Success:', data);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
     const formatReports = (report) => {
         return(
-            <div style = {{
-                display: 'flex',
-                justifyContent: 'space-between',
-                gap: '10px',
-                border: '2px solid green',
-                margin: '4px'
-            }}>
-                <div>Report ID: {report.reportID}</div>
-                <div><a href={"/profile/"+report.reportingUserID}>Reporting User ID: {report.reportingUserID}</a></div>
-                <div><a href={"/profile/"+report.reportedUserID}>Reported ID: {report.reportedUserID}</a></div>
+            <div>
+                <div style={{
+                    border: '2px solid green',
+                    margin: '4px'
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '10px'
+                    }}>
+                        <div>Report ID: {report.reportID}</div>
+                        <div><a href={"/profile/" + report.reportingUserID}>Reporting User ID: {report.reportingUserID}</a>
+                        </div>
+                        <div><a href={"/profile/" + report.reportedUserID}>Reported ID: {report.reportedUserID}</a></div>
 
-
+                    </div>
+                    <div>Reason: {report.reason}</div>
+                </div>
+                    <button onClick={() => handleBan(report.reportID, report.reportedUserID)}>Ban</button>
+                    <button onClick={() => handleDismiss(report.reportID)}>Dismiss</button>
             </div>
+
+
 
         )
         // Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
