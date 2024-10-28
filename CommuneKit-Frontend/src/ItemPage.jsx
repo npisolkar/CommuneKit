@@ -5,9 +5,10 @@
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {updateItem, getItemById, getItemsByUser} from "./services/ItemService.jsx";
-import {createRequest} from "./services/RequestService.jsx";
+import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
+import RequestComponent from "./components/RequestComponent.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn === true) {
@@ -46,9 +47,13 @@ export default function ItemPage() {
         message: ""
     });
     const [hasBorrowed, setHasBorrowed] = useState(false)
-    const [userItems, setUserItems] = useState([])
-    function compareItem(currID) {
-        return currID === itemID
+    const [currentRequests, setCurrentRequests] = useState([])
+    const [requestedIDs, setRequestedIDs] = useState([])
+    function extractID(request) {
+        return request.borrowingUserId
+    }
+    function compareID(currID) {
+        return currID === localStorage.getItem("userID")
     }
 
     function onClick() {
@@ -83,14 +88,17 @@ export default function ItemPage() {
             })
             .catch (err => console.log(err))
 
-        //check if item has been borrowed by user before
-        getItemsByUser(localStorage.getItem("userID"))
-            .then (res => {
-                setUserItems(res.data);
-                setHasBorrowed(userItems.some(compareItem))
-                console.log("hasBorrowed:" + hasBorrowed)
+        //fetch requests
+        getApprovedRequestsById(itemID)
+            .then(res => {
+                setCurrentRequests(res.data)
+                console.log("requests: " + JSON.stringify(currentRequests))
+                //check if item has been borrowed by user before
+                setRequestedIDs(currentRequests.map(extractID))
+                setHasBorrowed(requestedIDs.some(compareID))
+                console.log("hasborrowed: " + hasBorrowed)
             })
-            .catch (err =>console.log(err))
+            .catch (err => console.log(err))
     }, [])
 
     async function handleSubmit() {
@@ -167,7 +175,23 @@ export default function ItemPage() {
                 </div>
             }
             {isOwn ?
-                null
+                <table id="current-requests">
+                    <thead>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                            <td>Item ID</td>
+                            <td>Message</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        currentRequests.map(request => (
+                            <RequestComponent data={request} isLending={false}/>
+                        ))
+                    }
+                    </tbody>
+                </table>
                 : <div>
                     <div id="request-form">
                     <form onSubmit={handleSubmit}>
