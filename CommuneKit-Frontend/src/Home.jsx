@@ -24,6 +24,7 @@ export default function Home() {
         getAllItems()
             .then (res => {
                 setAllItems(res.data);
+                console.log("all items: " + JSON.stringify(res.data))
             })
             .catch(function (error) {
                 console.log(error);

@@ -69,6 +69,7 @@ export default function ItemPage() {
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
+                console.log("userid:" + JSON.stringify(res.data.userID))
                 setUserID(res.data.userID)
                 if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
                     setIsOwn(true);
@@ -253,6 +254,9 @@ export default function ItemPage() {
                         <ReviewComponent reviewDto={review}/>
                     ))
                 }
+            </div>
+            <div id="item-user">
+                <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
             </div>
         </>
     )

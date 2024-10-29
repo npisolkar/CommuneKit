@@ -20,7 +20,7 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-function ItemsButton(isOwn) {
+function ItemsButton({isOwn}) {
     if (isOwn) {
         return (
             <div id="my-items-button">
@@ -57,7 +57,7 @@ export default function Profile() {
         const isOwn = false;
     }
     useEffect(() => {
-        getUserById(localStorage.getItem("userID"))
+        getUserById(userID)
             .then (res => {
                 setFormData(res.data)
                 console.log("in get:" + JSON.stringify(res.data));
