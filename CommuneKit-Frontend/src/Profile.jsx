@@ -46,7 +46,6 @@ export default function Profile({ isOwn }) {
         if (userID === loggedInUserID) {
             isOwn = true;
         }
-
         getUserById(loggedInUserID)
             .then(res => {
                 setFormData(res.data);
@@ -70,7 +69,7 @@ export default function Profile({ isOwn }) {
                 address: formData.address,
                 isBanned: false
             };
-            const profileResponse = await updateUser(userID, JSON.stringify(profileJson));
+            const profileResponse = await updateUser(userID, profileJson);
             const profileData = profileResponse.data;
             console.log("Profile updated:", profileData);
             setFormData(profileData);
@@ -89,7 +88,7 @@ export default function Profile({ isOwn }) {
             <div id="profile-image" className="about-box"></div>
             {isClicked ? (
                 <div className="about-box">
-                    <div>Your username: {formData.userName}</div>
+                    <div><p>Your username: {formData.userName}</p></div>
                     <form onSubmit={(e) => { e.preventDefault(); uploadProfileInfo(); }}>
                         <div>
                             <label>
@@ -123,20 +122,24 @@ export default function Profile({ isOwn }) {
                 </div>
             ) : (
                 <div className="about-box">
+                    <div>{formData.userName}</div>
+                    <label>Bio<div>{formData.bio}</div></label>
+                    <label>Address<div>{formData.address}</div></label>
+                    <label>Phone Number<div>{formData.phone}</div></label>
                     <EditButton isOwn={isOwn} handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"} />
                     <ItemsButton isOwn={isOwn} />
+                    <div id="reset-password">
+                        {isOwn && (
+                            <button onClick={navigateToResetPassword} className="reset-password-button">
+                                Reset Password
+                            </button>
+                        )}
+                    </div>
+                    <div id="my-rating">
+                        <h2>Rating</h2>
+                    </div>
                 </div>
             )}
-            <div id="reset-password">
-                {isOwn && (
-                    <button onClick={navigateToResetPassword} className="reset-password-button">
-                        Reset Password
-                    </button>
-                )}
-            </div>
-            <div id="my-rating">
-                <h2>Rating</h2>
-            </div>
         </>
     );
 }

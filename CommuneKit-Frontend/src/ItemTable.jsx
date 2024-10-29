@@ -33,10 +33,14 @@ export default function ItemTable({ headName, items, userID }) {
 
     return (
         <>
+            <h1>{headName}</h1>
             <table>
                 <thead>
                 <tr>
-                    <th colSpan="7">{headName}</th>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
                 </tr>
                 </thead>
                 <tbody>

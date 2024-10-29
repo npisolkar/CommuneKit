@@ -1,3 +1,4 @@
+// Home: The home page, containing lists of items.
 import './styles.css';
 import ItemTable from './ItemTable.jsx';
 import { useEffect, useState } from 'react';
@@ -6,6 +7,7 @@ import { getAllItems, getItemsByUser, getMyBorrows } from './services/ItemServic
 
 export default function Home() {
     const navigate = useNavigate();
+
     const [postedItems, setPostedItems] = useState([]);
     const [borrowedItems, setBorrowedItems] = useState([]);
     const [allItems, setAllItems] = useState([]);
@@ -25,25 +27,28 @@ export default function Home() {
         getAllItems()
             .then(res => {
                 setAllItems(res.data);
+                console.log("All items:", res.data);
             })
             .catch(error => {
-                console.log(error);
+                console.log("Error fetching all items:", error);
             });
 
         getItemsByUser(userID)
             .then(res => {
                 setPostedItems(res.data);
+                console.log("Posted items:", res.data);
             })
             .catch(error => {
-                console.log(error);
+                console.log("Error fetching posted items:", error);
             });
 
         getMyBorrows(userID)
             .then(res => {
                 setBorrowedItems(res.data);
+                console.log("Borrowed items:", res.data);
             })
             .catch(error => {
-                console.log(error);
+                console.log("Error fetching borrowed items:", error);
             });
     };
 

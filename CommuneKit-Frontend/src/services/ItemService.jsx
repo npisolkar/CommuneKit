@@ -35,6 +35,7 @@ export function getItemsByPage(page, pageSize) {
     return axios.get(`${ITEM_API_BASE_URL}?page=${page}&size=${pageSize}`);
 }
 
+// 新增或删除收藏的API
 export function favoriteItem(userID, itemID) {
     return axios.post(`${FAVORITE_API_BASE_URL}`, {
         userID,
