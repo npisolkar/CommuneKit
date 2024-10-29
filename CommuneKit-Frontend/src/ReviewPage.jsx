@@ -14,21 +14,22 @@ export default function ReviewPage() {
     })
     const navigate = useNavigate()
     const [userID, setUserID] = useState('')
+    const [rating, setRating] = useState(review.rating)
 
     useEffect(() => {
         getItemById(itemID)
-            .then (res => {
+            .then(res => {
                 setUserID(res.data.userID)
             })
-            .catch (err => console.log(err))
+            .catch(err => console.log(err))
     }, [])
 
     const onSubmit = async (e) => {
         e.preventDefault()
         try {
             let submit = {
-                reviewerID:userID,
-                rating:review.rating,
+                reviewerID: userID,
+                rating: review.rating,
                 reviewText:review.reviewText,
                 itemID:itemID
             };
@@ -52,14 +53,8 @@ export default function ReviewPage() {
         <>
             <div>
                 <h1>Leave A Review</h1>
-                <div id="rating-stars">
-                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                    <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
-                </div>
                 <form onSubmit={onSubmit}>
+                    <Stars/>
                     <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
                     <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></input>
                     <button type="submit">Submit</button>
@@ -69,5 +64,26 @@ export default function ReviewPage() {
                 <button onClick={cancel}>Cancel</button>
             </div>
         </>
+    )
+}
+
+function Star() {
+    return (
+        <>
+            <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+        </>
+    )
+}
+
+function Stars() {
+    let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
+    return (
+        <div id="rating-stars">
+            {
+                stars.map(star => (
+                    star
+                ))
+            }
+        </div>
     )
 }

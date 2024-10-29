@@ -12,19 +12,15 @@ export default function NewItem() {
     })
     const navigate = useNavigate()
 
-    async function handleUploadItem() {
+    const handleUploadItem = async(e) => {
+        e.preventDefault()
         try {
-            console.log("starting")
-            navigate("/profile/" + localStorage.getItem("userID") + "/my-items")
-            let itemJson = {
-                itemName: itemData.itemName,
-                itemDescription: itemData.itemDescription,
-                itemCategory: itemData.itemCategory,
-                userID: localStorage.getItem("userID")
-            }
+            console.log("starting, trying" + JSON.stringify(itemData))
             const responseData =
-                await createItem(JSON.stringify(itemJson));
+                await createItem(JSON.stringify(itemData));
             console.log("submit: " + responseData);
+            setItemData(responseData.data)
+            navigate("/profile/" + String(localStorage.getItem("userID")) + "/my-items")
         } catch (error) {
             console.log(error);
         }
@@ -44,6 +40,8 @@ export default function NewItem() {
                 <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required
                        onChange={handleItemChange}/>
                 <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required
+                       onChange={handleItemChange}/>
+                <input type="text" name="userID" defaultValue={itemData.userID} required
                        onChange={handleItemChange}/>
                 <button type="submit">Submit Changes</button>
             </form>

@@ -5,9 +5,10 @@
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {updateItem, getItemById, getItemsByUser} from "./services/ItemService.jsx";
-import {createRequest} from "./services/RequestService.jsx";
+import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
+import RequestComponent from "./components/RequestComponent.jsx";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn === true) {
@@ -43,12 +44,17 @@ export default function ItemPage() {
         endDay: '',
         endMonth: '',
         endYear: '',
-        message: ""
+        message: "",
+        itemID:''
     });
     const [hasBorrowed, setHasBorrowed] = useState(false)
-    const [userItems, setUserItems] = useState([])
-    function compareItem(currID) {
-        return currID === itemID
+    const [currentRequests, setCurrentRequests] = useState([])
+    const [requestedIDs, setRequestedIDs] = useState([])
+    function extractID(request) {
+        return request.borrowingUserId
+    }
+    function compareID(currID) {
+        return currID === localStorage.getItem("userID")
     }
 
     function onClick() {
@@ -59,7 +65,7 @@ export default function ItemPage() {
         console.log("itemId:" + itemID)
 
         //fetch single item
-        getItemById({itemID: itemID})
+        getItemById(itemID)
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
@@ -83,14 +89,17 @@ export default function ItemPage() {
             })
             .catch (err => console.log(err))
 
-        //check if item has been borrowed by user before
-        getItemsByUser(localStorage.getItem("userID"))
-            .then (res => {
-                setUserItems(res.data);
-                setHasBorrowed(userItems.some(compareItem))
-                console.log("hasBorrowed:" + hasBorrowed)
+        //fetch requests
+        getApprovedRequestsById(itemID)
+            .then(res => {
+                setCurrentRequests(res.data)
+                console.log("requests: " + JSON.stringify(currentRequests))
+                //check if item has been borrowed by user before
+                setRequestedIDs(currentRequests.map(extractID))
+                setHasBorrowed(requestedIDs.some(compareID))
+                console.log("hasborrowed: " + hasBorrowed)
             })
-            .catch (err =>console.log(err))
+            .catch (err => console.log(err))
     }, [])
 
     async function handleSubmit() {
@@ -98,16 +107,19 @@ export default function ItemPage() {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
                 lendingUserId: userID,
+                itemId:itemID,
                 startDay: requestData.startDay,
                 startMonth: requestData.startMonth,
                 startYear: requestData.startYear,
                 endDay: requestData.endDay,
                 endMonth: requestData.endMonth,
                 endYear: requestData.endYear,
-                message: requestData.message
+                message: requestData.message,
+                isApproved:false
             }
-            const requestData = await createRequest(JSON.stringify(requestJson));
-            console.log("submit:" + requestData);
+            console.log("trying to submit request: " + JSON.stringify(requestJson))
+            const responseData = await createRequest(JSON.stringify(requestJson));
+            console.log("submit:" + responseData);
         } catch (error) {
             console.log(error);
         }
@@ -115,13 +127,11 @@ export default function ItemPage() {
 
     async function handleUploadItem() {
         try {
-            let itemJson = {
-                itemName: itemData.itemName,
-                itemDescription: itemData.itemDescription,
-                itemCategory: itemData.itemCategory,
-            }
-            const responseData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("trying to submit " + JSON.stringify(itemData))
+            const responseData = await updateItem(itemID, JSON.stringify(itemData));
             console.log("submit:" + responseData);
+            setItemData(responseData.data)
+            onClick()
         } catch (error) {
             console.log(error);
         }
@@ -167,7 +177,21 @@ export default function ItemPage() {
                 </div>
             }
             {isOwn ?
-                null
+                <table id="current-requests">
+                    <thead>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        currentRequests.map(request => (
+                            <RequestComponent data={request} isLending={false}/>
+                        ))
+                    }
+                    </tbody>
+                </table>
                 : <div>
                     <div id="request-form">
                     <form onSubmit={handleSubmit}>
@@ -213,9 +237,11 @@ export default function ItemPage() {
                         <button type="submit">Request This Item</button>
                     </form>
                 </div>
+                    {hasBorrowed ?
                 <div id="reviews-button">
                     <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
                 </div>
+                        : null }
                 </div>
             }
             <div id="reviews-header">
