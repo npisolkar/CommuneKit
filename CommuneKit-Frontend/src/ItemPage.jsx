@@ -64,7 +64,7 @@ export default function ItemPage() {
         console.log("itemId:" + itemID)
 
         //fetch single item
-        getItemById({itemID: itemID})
+        getItemById(itemID)
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
@@ -106,16 +106,19 @@ export default function ItemPage() {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
                 lendingUserId: userID,
+                itemId:itemID,
                 startDay: requestData.startDay,
                 startMonth: requestData.startMonth,
                 startYear: requestData.startYear,
                 endDay: requestData.endDay,
                 endMonth: requestData.endMonth,
                 endYear: requestData.endYear,
-                message: requestData.message
+                message: requestData.message,
+                isApproved:false
             }
-            const requestData = await createRequest(JSON.stringify(requestJson));
-            console.log("submit:" + requestData);
+            console.log("trying to submit request: " + JSON.stringify(requestJson))
+            const responseData = await createRequest(JSON.stringify(requestJson));
+            console.log("submit:" + responseData);
         } catch (error) {
             console.log(error);
         }
@@ -123,13 +126,11 @@ export default function ItemPage() {
 
     async function handleUploadItem() {
         try {
-            let itemJson = {
-                itemName: itemData.itemName,
-                itemDescription: itemData.itemDescription,
-                itemCategory: itemData.itemCategory,
-            }
-            const responseData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("trying to submit " + JSON.stringify(itemData))
+            const responseData = await updateItem(itemID, JSON.stringify(itemData));
             console.log("submit:" + responseData);
+            setItemData(responseData.data)
+            onClick()
         } catch (error) {
             console.log(error);
         }

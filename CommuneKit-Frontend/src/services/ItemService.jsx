@@ -11,7 +11,7 @@ export function createItem(itemDto) {
 }
 
 export function getItemById(id) {
-    return axios.get(ITEM_API_BASE_URL + "/1");
+    return axios.get(ITEM_API_BASE_URL + "/" + id);
 }
 
 export function getItemsByUser(userID) {
@@ -26,8 +26,8 @@ export function getAllItems() {
     return axios.get(ITEM_API_BASE_URL)
 }
 
-export function updateItem(userId, itemDto) {
-    return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
+export function updateItem(itemId, itemDto) {
+    return axios.put(ITEM_API_BASE_URL + "/" + itemId, itemDto, {
         headers: {
             'Content-Type': 'application/json'
         },

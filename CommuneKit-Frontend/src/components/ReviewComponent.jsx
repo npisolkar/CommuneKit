@@ -11,7 +11,6 @@ export default function ReviewComponent({reviewDto}) {
         getUserById(reviewDto.reviewerID)
             .then (res => {
                 setName(res.data.userName)
-                console.log(JSON.stringify(reviewDto))
             })
             .catch (err => console.log(err))
     }, [])
