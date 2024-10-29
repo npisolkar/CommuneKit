@@ -4,16 +4,16 @@
 import axios from "axios";
 
 const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/users"
-
+const USER_API_BASE_URL = "http://localhost:8080/api/users"
 
 export function getUsers(){
-        return axios.get(EMPLOYEE_API_BASE_URL);
-    }
+    return axios.get(EMPLOYEE_API_BASE_URL);
+}
 
 export function updateUser(userId, userDto) {
     try {
         console.log("in updateUser:" + userDto)
-        return axios.put(USER_API_BASE_URL + "/1", userDto, {
+        return axios.put(USER_API_BASE_URL + "/"+ String(userId), userDto, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -38,8 +38,8 @@ export function createUser(userDto){
 }
 
 export function getUserById(userId){
-        return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
-    }
+    return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
+}
 
 export default function loginUser(userDto){
     try {
@@ -56,4 +56,7 @@ export default function loginUser(userDto){
     //     'Content-Type': 'application/json'
     // }
 }
+export function banUser(userId) {
+    return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
 
+}

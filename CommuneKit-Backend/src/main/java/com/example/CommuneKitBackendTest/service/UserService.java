@@ -21,6 +21,7 @@ public interface UserService {
 
     UserDto loginUser(UserDto userDto);
 
-    boolean resetPassword(PasswordResetDto passwordResetDto);
+    void banUser(Long userId);
 
+    boolean resetPassword(PasswordResetDto passwordResetDto);
 }

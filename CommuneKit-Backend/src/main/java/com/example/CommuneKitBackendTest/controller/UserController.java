@@ -2,12 +2,11 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
-import com.example.CommuneKitBackendTest.service.UserService;
 import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
+import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.*;
 import java.lang.Exception;
@@ -21,6 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/login")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userDto) {
         UserDto user = userService.loginUser(userDto);
         if (user == null) {
@@ -30,6 +30,7 @@ public class UserController {
     }
 
     @PostMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         UserDto savedUser;
         try {
@@ -46,12 +47,14 @@ public class UserController {
     }
 
     @GetMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> getUserById(@PathVariable("id") long UserID) {
         UserDto userDto = userService.getUserById(UserID);
         return ResponseEntity.ok(userDto);
     }
 
     @GetMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<UserDto>> getAllUsers() {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
@@ -65,18 +68,27 @@ public class UserController {
 
 
     @PutMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userID, @RequestBody UserDto updatedUser) {
         UserDto userDto = userService.updateUser(userID, updatedUser);
         return ResponseEntity.ok(userDto);
     }
 
     @DeleteMapping("{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> deleteUser(@PathVariable("id") long UserID) {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
     }
+    @DeleteMapping("/ban/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> banUser(@PathVariable("id") long UserID) {
+        userService.banUser(UserID);
+        return ResponseEntity.ok("User successfully banned");
+    }
 
     @PostMapping("/reset-password")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
     public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
         boolean isReset = userService.resetPassword(passwordResetDto);
 
@@ -86,6 +98,5 @@ public class UserController {
             return new ResponseEntity<>("Password reset failed. Invalid credentials.", HttpStatus.UNAUTHORIZED);
         }
     }
-
 }
 

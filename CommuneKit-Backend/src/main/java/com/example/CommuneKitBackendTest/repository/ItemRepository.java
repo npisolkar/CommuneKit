@@ -9,9 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ItemRepository extends JpaRepository<Item, Long> {
-    @Query("SELECT i FROM Item i WHERE (i.itemName LIKE %:keyword% OR i.itemDescription LIKE %:keyword%) AND i.itemCategory = :category")
-    List<Item> searchByKeywordAndCategory(@Param("keyword") String keyword, @Param("category") String category);
-
     @Query("SELECT i FROM Item i WHERE i.itemName LIKE %:keyword% OR i.itemDescription LIKE %:keyword%")
     List<Item> searchByKeyword(@Param("keyword") String keyword);
 

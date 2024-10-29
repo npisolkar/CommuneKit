@@ -9,7 +9,7 @@ import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;  // 添加这个导入
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;

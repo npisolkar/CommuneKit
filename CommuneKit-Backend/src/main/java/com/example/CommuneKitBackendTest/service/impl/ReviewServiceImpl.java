@@ -43,8 +43,6 @@ public class ReviewServiceImpl implements ReviewService {
         for (Review review : reviews) {
             total += review.getRating();
         }
-
         return num / total;
-
     }
 }

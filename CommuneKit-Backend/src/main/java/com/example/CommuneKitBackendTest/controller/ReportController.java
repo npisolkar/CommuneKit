@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/reports")
@@ -37,7 +37,13 @@ public class ReportController {
         List<ReportDto> reports = reportService.getAllReports();
         return ResponseEntity.ok(reports);
     }
-
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    @GetMapping("/pending")
+    public ResponseEntity<List<ReportDto>> getAllPending() {
+        List<ReportDto> reports = reportService.getAllPending();
+        return ResponseEntity.ok(reports);
+    }
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     @PutMapping("{id}")
     public ResponseEntity<ReportDto> updateReport(@PathVariable("id") Long reportID, @RequestBody ReportDto updatedReport) {
         ReportDto reportDto = reportService.updateReport(reportID, updatedReport);
