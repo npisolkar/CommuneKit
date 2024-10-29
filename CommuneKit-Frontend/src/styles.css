@@ -159,14 +159,14 @@ input, label {
     display:flex;
     justify-content:right;
     align-items:center;
-    top:120px;
+    top:150px;
     position:absolute;
-    padding-left:400px;
+    padding-left:200px;
 }
 
 #search-toggles {
-    top:200px;
-    padding-left:500px;
+    top:230px;
+    padding-left:380px;
     position:absolute;
 }
 
