@@ -1,13 +1,20 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
+import com.example.CommuneKitBackendTest.dto.ItemDto;
+import com.example.CommuneKitBackendTest.dto.RequestDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
+import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.UserMapper;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.GeocodingService;
+import com.example.CommuneKitBackendTest.service.RequestService;
 import com.example.CommuneKitBackendTest.service.UserService;
+import com.example.CommuneKitBackendTest.repository.ItemRepository;
+import com.example.CommuneKitBackendTest.service.ItemService;
+import com.example.CommuneKitBackendTest.service.impl.ItemServiceImpl;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -23,6 +30,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private GeocodingService geocodingService;
+    private ItemRepository itemRepository;
+    private ItemService itemService;
+    private RequestService requestService;
 
     @Override
     public UserDto createUser(UserDto userDto) {
@@ -90,5 +100,21 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userID) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
         userRepository.deleteById(userID);
+    }
+
+    @Override
+    public void banUser(Long userID) {
+        List<ItemDto> items = itemService.getItemsByUserId(userID);
+        for(ItemDto i: items ) {
+            itemService.deleteItem(i.getItemID());
+        }
+        List<RequestDto> requests = requestService.getRequestsByUserId(userID);
+        for(RequestDto r: requests ) {
+            requestService.deleteRequest(r.getRequestId());
+        }
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
+        user.setBanned(true);
+        userRepository.save(user);
+
     }
 }

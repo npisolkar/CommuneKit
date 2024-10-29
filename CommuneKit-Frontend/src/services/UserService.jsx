@@ -56,4 +56,7 @@ export default function loginUser(userDto){
     //     'Content-Type': 'application/json'
     // }
 }
+export function banUser(userId) {
+    return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
 
+}

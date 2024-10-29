@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {getReports, updateReports} from "../services/ReportService.jsx";
 import {updateRequest} from "../services/RequestService.jsx";
+import {banUser} from "../services/UserService.jsx";
 export default function adminPage(){
     const navigate = useNavigate();
     const [pendingReports, setPendingReports] = useState([]);
@@ -39,7 +40,7 @@ export default function adminPage(){
             console.error('Error:', error);
         }
         try {
-            const response = await BanUser(reportedUserID, requestBody);
+            const response = await banUser(reportedUserID, requestBody);
             if (response.ok) {
                 const data = await response.json();
                 console.log('Success:', data);

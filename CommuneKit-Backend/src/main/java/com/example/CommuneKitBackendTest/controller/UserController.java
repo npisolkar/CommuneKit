@@ -79,5 +79,11 @@ public class UserController {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
     }
+    @DeleteMapping("/ban/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> banUser(@PathVariable("id") long UserID) {
+        userService.banUser(UserID);
+        return ResponseEntity.ok("User successfully banned");
+    }
 }
 
