@@ -27,5 +27,7 @@ public class UserDto {
     private String role;
     @Lob
     private byte[] profilePicture;
+    private Double latitude;
+    private Double longitude;
 
 }

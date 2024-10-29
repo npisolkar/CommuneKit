@@ -1,24 +1,30 @@
 /* ItemTable: A class handling the displaying of lists of items.
 *  Up to a certain amount of items should load at once, with
 *  subsequent requests populating more. */
-const userID = localStorage.getItem("userId")
+import ItemComponent from "./components/ItemComponent.jsx";
 
-export default function ItemTable({headName, userID}) {
+export default function ItemTable({headName, items}) {
+
     return (
         <>
             <h1>{headName}</h1>
-                <table className="item-table">
-
-                    <tbody>
-                    <tr>
-
-                        <td>Do you remember</td>
-                    </tr>
-                    <tr>
-                        <td>The twenty-first night of September</td>
-                    </tr>
-                    </tbody>
-                </table>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                </tr>
+                </thead>
+                <tbody>
+                {
+                    items.map(item => (
+                        <ItemComponent data={item} />
+                    ))
+                }
+                </tbody>
+            </table>
         </>
     );
 }

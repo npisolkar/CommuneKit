@@ -6,6 +6,7 @@ import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.UserMapper;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
+import com.example.CommuneKitBackendTest.service.GeocodingService;
 import com.example.CommuneKitBackendTest.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -21,9 +22,19 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
+    private GeocodingService geocodingService;
+
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = UserMapper.mapToUser(userDto);
+
+        try {
+            double[] coordinates = geocodingService.getCoordinates(user.getAddress());
+            user.setLatitude(coordinates[0]);
+            user.setLongitude(coordinates[1]);
+        } catch (Exception e){
+            System.out.println("Error getting coordinates from MapQuest: " + e.getMessage());
+        }
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }
