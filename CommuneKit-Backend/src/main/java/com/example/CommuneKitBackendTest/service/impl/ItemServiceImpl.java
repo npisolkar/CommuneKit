@@ -67,12 +67,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getItemsByUserId(Long userId) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = emf.createEntityManager();
-        String jpql = "SELECT i FROM Item i WHERE i.userID = :id";
-        TypedQuery<Item> query = entityManager.createQuery(jpql, Item.class);
-        query.setParameter("id", userId);
-        List<Item> items = query.getResultList();
+        List<Item> items = itemRepository.findAll();
         items.removeIf(item -> !(item.getUserID().equals(userId)));
         return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
