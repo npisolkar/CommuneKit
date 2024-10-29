@@ -22,6 +22,17 @@ public class RequestController {
         RequestDto savedRequest = requestService.createRequest(requestDto);
         return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
     }
+    @PutMapping("/approve/{id}")
+    public ResponseEntity<RequestDto> approveRequest(@RequestBody Long requestID) {
+        RequestDto savedRequest = requestService.approveRequest(requestID);
+        return ResponseEntity.ok(savedRequest);
+    }
+    @PutMapping("/deny/{id}")
+    public ResponseEntity<RequestDto> denyRequest(@RequestBody Long requestID) {
+        RequestDto savedRequest = requestService.denyRequest(requestID);
+        return ResponseEntity.ok(savedRequest);
+    }
+
 
     @GetMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
@@ -36,7 +47,7 @@ public class RequestController {
         List<RequestDto> requests = requestService.getAllRequests();
         return ResponseEntity.ok(requests);
     }
-
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> updateRequest(@PathVariable("id") Long requestId, @RequestBody RequestDto updatedRequest) {

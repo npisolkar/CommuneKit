@@ -16,7 +16,7 @@ public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    @CrossOrigin(origins = "http://localhost:5173")
     public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto) {
         ReviewDto savedReview = reviewService.createReview(reviewDto);
         return new ResponseEntity<>(savedReview, HttpStatus.CREATED);

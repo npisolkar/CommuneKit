@@ -15,6 +15,8 @@ import ReviewPage from "./ReviewPage.jsx"
 
 
 export default function App() {
+    let userID = localStorage.getItem("userID");
+    console.log("userID found to be: " + userID);
   return (
       <>
       <Router>
@@ -25,15 +27,15 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to="/profile" id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile" element={<Profile isOwn={true}/>} />
-                  <Route path="/profile/my-items" element={<MyItems />} />
-                  <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
+                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>} />
+                  <Route path="/profile/:userID/my-items" element={<MyItems />} />
+                  <Route path="/profile/:userID/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
                   <Route path="/home" element={<Home />}/>
