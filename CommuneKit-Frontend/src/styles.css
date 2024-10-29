@@ -8,36 +8,43 @@ body {
     margin: 20px;
     padding: 0;
     background-color:rgb(247,247,250);
+    color: #000;
 }
 
 h1 {
     margin-top: 0;
     font-size: 22px;
+    color: #000;
 }
 
 h2 {
     margin-top: 0;
     font-size: 20px;
+    color: #000;
 }
 
 h3 {
     margin-top: 0;
     font-size: 18px;
+    color: #000;
 }
 
 h4 {
     margin-top: 0;
     font-size: 16px;
+    color: #000;
 }
 
 h5 {
     margin-top: 0;
     font-size: 14px;
+    color: #000;
 }
 
 h6 {
     margin-top: 0;
     font-size: 12px;
+    color: #000;
 }
 
 code {
@@ -47,6 +54,7 @@ code {
 ul {
     padding-inline-start: 20px;
     list-style-type:none;
+    color: #000;
 }
 
 * {
@@ -58,19 +66,6 @@ input, label {
 }
 /* Login, registration */
 .auth-container {
-    max-width: 400px;
-    margin: 20px;
-    padding: 70px;
-    border: 10px solid #22B14C;
-    border-radius: 10px;
-    background-color: #ffffff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.about-box {
     max-width: 400px;
     margin: 20px;
     padding: 70px;
@@ -116,24 +111,16 @@ input, label {
     margin-left:100px;
     font-size:12px;
 }
-/* OLD home page css //
-.home-items {
-    display:inline-block;
-    text-align:center;
-    top:250px;
-    overflow:scroll;
-    height:250px;
-}*/
-/*
-#posted-header {
-    position:absolute;
-    left:200px;
-}
 
-#borrowed-header {
-    position:absolute;
-    left:800px;
-}
+/*#posted-header {*/
+/*    position:absolute;*/
+/*    left:200px;*/
+/*}*/
+
+/*#borrowed-header {*/
+/*    position:absolute;*/
+/*    left:800px;*/
+/*}*/
 
 #suggested-items {
     position:absolute;
@@ -244,8 +231,7 @@ input, label {
     text-align:left;
 }
 
-/*
-/* individual item's page
+/* individual item's page */
 #item-page-header {
     position:absolute;
     top:150px;
@@ -263,4 +249,4 @@ input, label {
     text-align:center;
     margin-left:300px;
     width:200px;
-}*/
+}
