@@ -12,7 +12,6 @@ import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
 import FavoritePage from "./components/FavoritePage.jsx";
 import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
-import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 
@@ -30,6 +29,7 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
+                  <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
                   <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
