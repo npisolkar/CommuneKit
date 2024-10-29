@@ -47,11 +47,6 @@ public class User {
 
     private byte[] profilePicture;
 
-    private Double latitude;
-
-    private Double longitude;
-
-
     @PrePersist
     protected void onCreate() {
         if (this.role == null) {

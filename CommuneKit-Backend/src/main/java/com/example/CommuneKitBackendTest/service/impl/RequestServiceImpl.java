@@ -28,19 +28,6 @@ public class RequestServiceImpl implements RequestService {
         Request savedRequest = requestRepository.save(request);
         return RequestMapper.mapToRequestDto(savedRequest);
     }
-    public RequestDto approveRequest(Long requestId) {
-        Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
-        request.setIsApproved(true);
-        Request updated = requestRepository.save(request);
-        return RequestMapper.mapToRequestDto(updated);
-
-    }
-    public RequestDto denyRequest(Long requestId) {
-        Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
-        request.setIsApproved(false);
-        Request updated = requestRepository.save(request);
-        return RequestMapper.mapToRequestDto(updated);
-    }
 
     @Override
     public RequestDto getRequestById(Long requestId) {
@@ -162,4 +149,5 @@ public class RequestServiceImpl implements RequestService {
                 .map(RequestMapper::mapToRequestDto)  // Map to DTO
                 .collect(Collectors.toList());
     }
+
 }

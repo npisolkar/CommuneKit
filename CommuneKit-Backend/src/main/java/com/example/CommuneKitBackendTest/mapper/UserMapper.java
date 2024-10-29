@@ -19,9 +19,7 @@ public class UserMapper {
                 user.getBio(),
                 user.isBanned(),
                 user.getRole(),
-                user.getProfilePicture(),
-                user.getLatitude(),
-                user.getLongitude()
+                user.getProfilePicture()
         );
     }
 
@@ -38,9 +36,7 @@ public class UserMapper {
                 userDto.getBio(),
                 userDto.isBanned(),
                 userDto.getRole(),
-                userDto.getProfilePicture(),
-                userDto.getLatitude(),
-                userDto.getLongitude()
+                userDto.getProfilePicture()
         );
     }
 

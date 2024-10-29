@@ -6,12 +6,8 @@ import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.UserMapper;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
-import com.example.CommuneKitBackendTest.service.GeocodingService;
 import com.example.CommuneKitBackendTest.service.UserService;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,20 +17,11 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
-    private GeocodingService geocodingService;
 
+    private UserRepository userRepository;
     @Override
     public UserDto createUser(UserDto userDto) {
         User user = UserMapper.mapToUser(userDto);
-
-        try {
-            double[] coordinates = geocodingService.getCoordinates(user.getAddress());
-            user.setLatitude(coordinates[0]);
-            user.setLongitude(coordinates[1]);
-        } catch (Exception e){
-            System.out.println("Error getting coordinates from MapQuest: " + e.getMessage());
-        }
         User savedUser = userRepository.save(user);
         return UserMapper.mapToUserDto(savedUser);
     }
@@ -90,5 +77,18 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long userID) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
         userRepository.deleteById(userID);
+    }
+
+
+    @Override
+    public boolean resetPassword(PasswordResetDto passwordResetDto) {
+        User user = userRepository.findByEmail(passwordResetDto.getEmail())
+                .orElse(null);
+        if (user != null && user.getPassword().equals(passwordResetDto.getCurrentPassword())) {
+            user.setPassword(passwordResetDto.getNewPassword());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

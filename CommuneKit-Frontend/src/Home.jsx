@@ -1,62 +1,63 @@
-/* Home: The home page, containing lists of items. */
-import './styles.css'
-import ItemTable from './ItemTable.jsx'
-import {useEffect, useState} from 'react'
+import './styles.css';
+import ItemTable from './ItemTable.jsx';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {getAllItems, getItemsByUser, getMyBorrows} from "./services/ItemService.jsx";
+import { getAllItems, getItemsByUser, getMyBorrows } from './services/ItemService.jsx';
 
 export default function Home() {
     const navigate = useNavigate();
+    const [postedItems, setPostedItems] = useState([]);
+    const [borrowedItems, setBorrowedItems] = useState([]);
+    const [allItems, setAllItems] = useState([]);
 
     useEffect(() => {
         const userID = localStorage.getItem("userID");
         console.log("userID found to be: " + userID);
 
-        if (userID == null) {
+        if (!userID) {
             navigate('/login');
+        } else {
+            loadItems(userID);
         }
     }, [navigate]);
 
-    const [postedItems, setPostedItems] = useState([])
-    const [borrowedItems, setBorrowedItems] = useState([])
-    const [allItems, setAllItems] = useState([])
-    useEffect(() => {
+    const loadItems = (userID) => {
         getAllItems()
-            .then (res => {
+            .then(res => {
                 setAllItems(res.data);
-                console.log(JSON.stringify(res.data));
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
             });
 
-        getItemsByUser(localStorage.getItem("userID"))
-            .then (res => {
+        getItemsByUser(userID)
+            .then(res => {
                 setPostedItems(res.data);
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
-            })
-        getMyBorrows(localStorage.getItem("userID"))
-            .then (res => {
+            });
+
+        getMyBorrows(userID)
+            .then(res => {
                 setBorrowedItems(res.data);
             })
-            .catch(function (error) {
+            .catch(error => {
                 console.log(error);
-            })
-    }, [])
+            });
+    };
+
     return (
         <>
             <div className="home-items" id="posted-header">
-                <ItemTable headName="My Posted Items" items={postedItems}/>
+                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")} />
             </div>
             <div className="home-items" id="borrowed-header">
-                <ItemTable headName="My Borrowed Items" items={borrowedItems}/>
+                <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />
             </div>
             <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={allItems}/>
+                <ItemTable headName="Suggested Items" items={allItems} userID={localStorage.getItem("userID")} />
             </div>
         </>
-    )
-   // }
+    );
 }

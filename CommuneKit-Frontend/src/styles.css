@@ -112,22 +112,6 @@ input, label {
     font-size:12px;
 }
 
-/*#posted-header {*/
-/*    position:absolute;*/
-/*    left:200px;*/
-/*}*/
-
-/*#borrowed-header {*/
-/*    position:absolute;*/
-/*    left:800px;*/
-/*}*/
-
-#suggested-items {
-    position:absolute;
-    left:500px;
-    top:700px;
-}
-
 #menu-popup {
     z-index:2;
     height:500px;
