@@ -3,21 +3,21 @@
 
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:8080/api/requests"
+const API_BASE_URL = "http://localhost:8080/api/reports"
 
 
-export function getRequests(){
+export function getReports() {
     return axios.get(API_BASE_URL);
 }
 
-export function updateRequest(requestId, requestDto) {
+export function updateReports(reportId, reportDto) {
     try {
-        console.log("in updateRequest:" + requestDto)
-        return axios.put(API_BASE_URL + "/" + requestId, requestDto, {
+        console.log("in updateReports:" + reportDto)
+        return axios.put(API_BASE_URL + "/" + reportId, reportDto, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            data: requestDto
+            data: reportDto
         })
     }
     catch (error) {
@@ -25,9 +25,9 @@ export function updateRequest(requestId, requestDto) {
     }
 }
 
-export function createRequest(requestDto){
+export function createReport(reportDto){
     try {
-        return axios.post(API_BASE_URL, requestDto, {
+        return axios.post(API_BASE_URL, reportDto, {
             headers: {
                 'Content-Type': 'application/json'
             }}

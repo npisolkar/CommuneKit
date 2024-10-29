@@ -19,4 +19,6 @@ public interface UserService {
     void deleteUser(Long userID);
 
     UserDto loginUser(UserDto userDto);
+
+    void banUser(Long userId);
 }

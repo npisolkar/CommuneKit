@@ -12,10 +12,12 @@ import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
-import NewItem from "./NewItem.jsx"
+import AdminPage from "./components/adminPage.jsx";
 
 
 export default function App() {
+    let userID = localStorage.getItem("userID");
+    console.log("userID found to be: " + userID);
   return (
       <>
       <Router>
@@ -26,7 +28,7 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to={"/profile/"+ localStorage.getItem("userID")} id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -34,13 +36,13 @@ export default function App() {
                   <Route path="/notifications" element={<Notifications />} />
                   <Route path="/profile/:userID" element={<Profile isOwn={true}/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
-                  <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
+                  <Route path="/profile/:userID/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
-                  <Route path="/newitem" element={<NewItem />}/>
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>
+                  <Route path="/admin" element={<AdminPage />}/>
                   <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>
