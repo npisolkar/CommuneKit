@@ -44,7 +44,8 @@ export default function ItemPage() {
         endDay: '',
         endMonth: '',
         endYear: '',
-        message: ""
+        message: "",
+        itemID:''
     });
     const [hasBorrowed, setHasBorrowed] = useState(false)
     const [currentRequests, setCurrentRequests] = useState([])
@@ -181,8 +182,6 @@ export default function ItemPage() {
                         <tr>
                             <td>Start Date</td>
                             <td>End Date</td>
-                            <td>Item ID</td>
-                            <td>Message</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -238,9 +237,11 @@ export default function ItemPage() {
                         <button type="submit">Request This Item</button>
                     </form>
                 </div>
+                    {hasBorrowed ?
                 <div id="reviews-button">
                     <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
                 </div>
+                        : null }
                 </div>
             }
             <div id="reviews-header">

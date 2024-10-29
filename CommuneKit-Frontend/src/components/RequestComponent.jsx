@@ -8,9 +8,6 @@ export default function RequestComponent({data, isLending}) {
                     <tr>
                         <td>{data.startDay}/{data.startMonth}/{data.startYear}</td>
                         <td>{data.endDay}/{data.endMonth}/{data.endYear}</td>
-                        <td>{data.borrowingUserId}</td>
-                        <td>{data.itemId}</td>
-                        <td>{data.message}</td>
                         <td>
                             <button>Accept</button>
                         </td>
@@ -22,10 +19,6 @@ export default function RequestComponent({data, isLending}) {
                     <tr>
                         <td>{data.startDay}/{data.startMonth}/{data.startYear}</td>
                         <td>{data.endDay}/{data.endMonth}/{data.endYear}</td>
-                        <td>{data.lendingUserId}</td>
-                        <td>{data.itemId}</td>
-                        <td>{data.message}</td>
-                        <td><p>Request has been approved</p></td>
                     </tr>
                 }
 

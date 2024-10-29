@@ -21,5 +21,5 @@ export function createRequest(requestDto) {
 }
 
 export function getApprovedRequestsById(itemID) {
-    return axios.get(REQUEST_BASE_URL + "/approved-by-Id/" + itemID)
+    return axios.get(REQUEST_BASE_URL + "/current/" + itemID)
 }

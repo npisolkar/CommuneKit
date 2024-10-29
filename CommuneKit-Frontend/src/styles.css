@@ -317,7 +317,3 @@ input, label {
     width:50px;
     filter:grayscale(100%);
 }
-
-.star:hover {
-    filter:grayscale(0%)
-}

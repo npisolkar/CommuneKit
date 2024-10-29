@@ -16,6 +16,8 @@ import NewItem from "./NewItem.jsx"
 
 
 export default function App() {
+    let userID = localStorage.getItem('userID')
+    console.log("userID found to be: " + userID);
   return (
       <>
       <Router>
@@ -26,7 +28,7 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to={"/profile/"+ localStorage.getItem("userID")} id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>

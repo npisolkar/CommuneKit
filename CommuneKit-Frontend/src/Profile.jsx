@@ -57,14 +57,11 @@ export default function Profile() {
         const isOwn = false;
     }
     useEffect(() => {
-       /* if (id === localStorage.getItem("userID")) {
-            isOwn = true;
-        }*/
         getUserById(localStorage.getItem("userID"))
             .then (res => {
                 setFormData(res.data)
                 console.log("in get:" + JSON.stringify(res.data));
-                console.log("username in get: " + formData.userName)
+                console.log("username in get: " + JSON.stringify(formData))
             })
             .catch(function (error) {
                 console.log(error);
@@ -86,14 +83,15 @@ export default function Profile() {
         //console.log("username at beginning of upload: " + formData.userName)
         console.log("upload: " + JSON.stringify(formData));
         try {
-           /* let profileJson = {
+           let profileJson = {
                 name: formData.userName,
                 password: formData.password,
                 email: formData.email,
                 phone: formData.phone,
                 address: formData.address,
                 isBanned: false
-            }*/
+            }
+            console.log("profileJSON" + JSON.stringify(profileJson))
             console.log("trying to submit " + JSON.stringify(formData))
             //console.log("username:" + formData.userName)
             const profileResponse = await updateUser(userID, JSON.stringify(formData));
