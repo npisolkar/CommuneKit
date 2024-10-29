@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {getReports, updateReports} from "../services/ReportService.jsx";
 import {updateRequest} from "../services/RequestService.jsx";
 import {banUser} from "../services/UserService.jsx";
-export default function adminPage(){
+export default function AdminPage(){
     const navigate = useNavigate();
     const [pendingReports, setPendingReports] = useState([]);
     const [loading, setLoading] = useState(true);

@@ -13,6 +13,7 @@ import RegistrationPage from "./components/RegistrationPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
+import AdminPage from "./components/AdminPage.jsx"
 
 
 export default function App() {
@@ -44,6 +45,7 @@ export default function App() {
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>
                   <Route path="/" element={<LoginPage />}/>
+                  <Route path="/admin" element={<AdminPage />}/>
               </Routes>
           </div>
           </Router>

@@ -115,7 +115,7 @@ export default function ItemPage() {
                 endMonth: requestData.endMonth,
                 endYear: requestData.endYear,
                 message: requestData.message,
-                isApproved:false
+                isApproved:null
             }
             console.log("trying to submit request: " + JSON.stringify(requestJson))
             const responseData = await createRequest(JSON.stringify(requestJson));

@@ -12,6 +12,21 @@ export function getApprovedRequests(userId) {
     return axios.get(REQUEST_BASE_URL + "/approved/" + userId)
 }
 
+export function updateRequest(requestId, requestDto) {
+    try {
+        console.log("in updateRequest:" + requestDto)
+        return axios.put(API_BASE_URL + "/" + requestId, requestDto, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: requestDto
+        })
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
 export function createRequest(requestDto) {
     return axios.post(REQUEST_BASE_URL, requestDto, {
         headers: {
