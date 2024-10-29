@@ -18,6 +18,8 @@ public interface ItemService {
 
     List<ItemDto> getItemsByUserId(Long userId);
 
-    List<ItemDto> searchItems(String keyword, Boolean sortByDistance, Long userID);
+    List<ItemDto> searchItems(String keyword, String sort, Long userID);
+
+    Double getDistance(Long itemID, Long userID);
 
 }

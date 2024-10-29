@@ -73,7 +73,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public List<ItemDto> searchItems(String keyword, Boolean sortByDistance, Long userID) {
+    public List<ItemDto> searchItems(String keyword, String sort, Long userID) {
         List<Item> items;
 
         if (keyword != null) {
@@ -83,7 +83,7 @@ public class ItemServiceImpl implements ItemService {
             items = itemRepository.findAll();
         }
 
-        if (sortByDistance) {
+        if (sort.equals("distance")) {
             User currentUser = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
 
             double userLat = currentUser.getLatitude();
@@ -102,6 +102,20 @@ public class ItemServiceImpl implements ItemService {
         }
 
         return items.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public Double getDistance(Long itemID, Long userID) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+
+        double lat = user.getLatitude();
+        double lon = user.getLongitude();
+
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+
+        User user2 = userRepository.getById(item.getUserID());
+
+        return calculateDistance(lat, lon, user2.getLatitude(), user2.getLongitude());
     }
 
     private ItemDto convertToDto(Item item) {

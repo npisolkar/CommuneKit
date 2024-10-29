@@ -78,10 +78,19 @@ public class ItemController {
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> searchItems(
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Boolean sortByDistance,
+            @RequestParam(required = false) String sort,
             @RequestParam Long userID) {
 
-        List<ItemDto> items = itemService.searchItems(keyword, sortByDistance, userID);
+        List<ItemDto> items = itemService.searchItems(keyword, sort, userID);
         return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/distance/{itemID}/{userID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<Double> getDistance(
+            @PathVariable("itemID") Long itemID,
+            @PathVariable("userID") Long userID) {
+        Double distance = itemService.getDistance(itemID, userID);
+        return ResponseEntity.ok(distance);
     }
 }
