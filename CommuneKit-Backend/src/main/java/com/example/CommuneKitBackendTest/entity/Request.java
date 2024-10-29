@@ -21,16 +21,37 @@ public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long requestId;
 
+    @Column(nullable = false)
     private Long borrowingUserId;
+
+    @Column(nullable = false)
     private Long lendingUserId;
+
+    @Column(nullable = false)
     private Long itemId;
+
+    @Column(nullable = false)
     private int startDay;
+
+    @Column(nullable = false)
     private int startMonth;
+
+    @Column(nullable = false)
     private int startYear;
+
+    @Column(nullable = false)
     private int endDay;
+
+    @Column(nullable = false)
     private int endMonth;
+
+    @Column(nullable = false)
     private int endYear;
+
+    @Column(nullable = false)
     private Boolean isApproved;
+
+    @Column(nullable = false)
     private String message;
 
     @CreationTimestamp

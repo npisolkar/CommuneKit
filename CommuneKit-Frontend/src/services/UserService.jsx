@@ -52,4 +52,7 @@ export default function loginUser(userDto){
         throw error;
     }
 }
+export function banUser(userId) {
+    return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
 
+}

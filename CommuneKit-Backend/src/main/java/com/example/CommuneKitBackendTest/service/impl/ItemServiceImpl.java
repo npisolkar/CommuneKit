@@ -9,6 +9,10 @@ import com.example.CommuneKitBackendTest.mapper.ItemMapper;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

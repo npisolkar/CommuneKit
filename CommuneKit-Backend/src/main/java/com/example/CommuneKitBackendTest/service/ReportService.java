@@ -12,6 +12,8 @@ public interface ReportService {
 
     List<ReportDto> getAllReports();
 
+    List<ReportDto> getAllPending();
+
     ReportDto updateReport(Long reportID, ReportDto updatedReport);
 
     void deleteReport(Long reportID);

@@ -21,14 +21,12 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ReportDto> createReport(@RequestBody ReportDto reportDto) {
         ReportDto savedReport = reportService.createReport(reportDto);
         return new ResponseEntity<>(savedReport, HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ReportDto> getReportById(@PathVariable("id") Long reportID) {
         ReportDto reportDto = reportService.getReportById(reportID);
         return ResponseEntity.ok(reportDto);
@@ -39,7 +37,13 @@ public class ReportController {
         List<ReportDto> reports = reportService.getAllReports();
         return ResponseEntity.ok(reports);
     }
-
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    @GetMapping("/pending")
+    public ResponseEntity<List<ReportDto>> getAllPending() {
+        List<ReportDto> reports = reportService.getAllPending();
+        return ResponseEntity.ok(reports);
+    }
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     @PutMapping("{id}")
     public ResponseEntity<ReportDto> updateReport(@PathVariable("id") Long reportID, @RequestBody ReportDto updatedReport) {
         ReportDto reportDto = reportService.updateReport(reportID, updatedReport);
