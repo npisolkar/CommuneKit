@@ -16,7 +16,7 @@ import ReviewPage from "./ReviewPage.jsx"
 
 export default function App() {
     let userID = localStorage.getItem("userID");
-    console.log("userID found to be: " + userID);
+    console.log("userID on at this render of APP found to be: " + userID);
   return (
       <>
       <Router>

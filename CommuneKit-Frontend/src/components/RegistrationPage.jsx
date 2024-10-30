@@ -24,6 +24,10 @@ function RegistrationPage() {
     //     setProfilePicture(e.target.files[0]);
     // }
 
+    const handleLoginReturn = () => {
+        navigate('/login');  // Navigates to /registration when button is clicked
+    };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -36,7 +40,7 @@ function RegistrationPage() {
 
             //const token = localStorage.getItem('token');
 
-            const fdata = new FormData();
+            /*const fdata = new FormData();
             fdata.append('firstName', formData.firstName);
             fdata.append('lastName', formData.lastName);
             fdata.append('userName', formData.userName);
@@ -45,12 +49,12 @@ function RegistrationPage() {
             fdata.append('password', formData.password);
             fdata.append('phone', formData.phone);
             fdata.append('address', formData.address);
-            fdata.append('profilePicture', profilePicture);
+            //fdata.append('profilePicture', profilePicture);*/
 
 
             console.log("formData: " + JSON.stringify(formData));
-            console.log("fData: " + JSON.stringify(fData));
-            const userData = await createUser(JSON.stringify(fData));
+            //console.log("fData: " + JSON.stringify(fData));
+            const userData = await createUser(JSON.stringify(formData));
             console.log(userData)
             localStorage.setItem('token', "LoggedIn")
             localStorage.setItem('role', userData.data.role) //
@@ -81,6 +85,11 @@ function RegistrationPage() {
     return (
         <div className="auth-container">
             <h2>Registration</h2>
+            <div>
+                <button onClick={handleLoginReturn}>
+                    Go back to Login Page
+                </button>
+            </div>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Profile picture:</label>
@@ -129,7 +138,7 @@ function RegistrationPage() {
                 <button type="submit">Register</button>
             </form>
         </div>
-);
+    );
 }
 
 export default RegistrationPage;

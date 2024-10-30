@@ -14,17 +14,21 @@ import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
 @RestController
 @RequestMapping("/api/image")
 @RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 public class ImageController {
 
     private final ImageService imageService;
 
     @PostMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) throws IOException {
-        String uploadImage = imageService.uploadImage(file);
-        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+        //String uploadImage = imageService.uploadImage(file);
+        Long imageId = imageService.uploadImage(file);
+        return ResponseEntity.status(HttpStatus.OK).body(imageId);
     }
 
     @GetMapping("/filename/{fileName}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<?> downloadImage(@PathVariable String fileName) {
         byte[] imageData = imageService.downloadImage(fileName);
         return ResponseEntity.status(HttpStatus.OK)
@@ -33,6 +37,7 @@ public class ImageController {
     }
 
     @GetMapping("/fileId/{fileId}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<?> downloadImage(@PathVariable Long fileId) {
         byte[] imageData = imageService.downloadImage(fileId);
         return ResponseEntity.status(HttpStatus.OK)

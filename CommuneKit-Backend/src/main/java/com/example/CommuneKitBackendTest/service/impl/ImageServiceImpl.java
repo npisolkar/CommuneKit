@@ -19,14 +19,15 @@ public class ImageServiceImpl implements ImageService {
 
     private final ImageRepository imageRepository;
 
-    public String uploadImage(MultipartFile imageFile) throws IOException {
+    public Long uploadImage(MultipartFile imageFile) throws IOException {
         var imageToSave = Image.builder()
                 .name(imageFile.getOriginalFilename())
                 .type(imageFile.getContentType())
                 .imageData(ImageUtils.compressImage(imageFile.getBytes()))
                 .build();
-        imageRepository.save(imageToSave);
-        return "file uploaded successfully : " + imageFile.getOriginalFilename();
+        Image savedImage = imageRepository.save(imageToSave);
+        //"file uploaded successfully : " + imageFile.getOriginalFilename();
+        return savedImage.getId();
     }
 
     public byte[] downloadImage(Long id) {

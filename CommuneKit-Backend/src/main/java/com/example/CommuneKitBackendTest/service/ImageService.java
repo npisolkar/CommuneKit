@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface ImageService {
     //ReportDto createReport(ReportDto reportDto);
-    public String uploadImage(MultipartFile imageFile) throws IOException;
+    public Long uploadImage(MultipartFile imageFile) throws IOException;
 
     public byte[] downloadImage(String imageName);
     public byte[] downloadImage(Long imageId);
