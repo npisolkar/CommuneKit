@@ -6,13 +6,15 @@ import { getUserById, updateUser } from './services/UserService.jsx';
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
-function EditButton({ isOwn, handleClick, bodyText }) {
+function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
         return (
             <button onClick={handleClick}>{bodyText}</button>
-        );
+        )
     }
-    return null;
+    else {
+        return null
+    }
 }
 
 function ItemsButton({ isOwn }) {
@@ -43,13 +45,18 @@ export default function Profile({ isOwn }) {
 
     useEffect(() => {
         const loggedInUserID = localStorage.getItem("userID");
+        console.log("comparing active user " + loggedInUserID + " and " + userID);
         if (userID === loggedInUserID) {
             isOwn = true;
         }
-        getUserById(loggedInUserID)
+        else {
+            isOwn = false;
+        }
+        getUserById(userID)
             .then(res => {
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
+                console.log("isown:" + isOwn)
             })
             .catch(error => console.log(error));
     }, [userID, isOwn]);
@@ -116,7 +123,7 @@ export default function Profile({ isOwn }) {
                                 <input type="text" name="phone" defaultValue={formData.phone} onChange={handleInputChange} />
                             </label>
                         </div>
-                        <EditButton isOwn={isOwn} handleClick={() => setClicked(!isClicked)} bodyText={"Cancel"} />
+                        <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={() => setClicked(!isClicked)} bodyText={"Cancel"} />
                         <button type="submit">Save Changes</button>
                     </form>
                 </div>
@@ -126,10 +133,10 @@ export default function Profile({ isOwn }) {
                     <label>Bio<div>{formData.bio}</div></label>
                     <label>Address<div>{formData.address}</div></label>
                     <label>Phone Number<div>{formData.phone}</div></label>
-                    <EditButton isOwn={isOwn} handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"} />
-                    <ItemsButton isOwn={isOwn} />
+                    <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"} />
+                    <ItemsButton isOwn={userID === localStorage.getItem('userID')} />
                     <div id="reset-password">
-                        {isOwn && (
+                        {userID === localStorage.getItem('userID') && (
                             <button onClick={navigateToResetPassword} className="reset-password-button">
                                 Reset Password
                             </button>
