@@ -157,24 +157,24 @@ input, label {
 /* search page */
 .search-bar {
     display:flex;
-    justify-content:right;
+    justify-content:left;
     align-items:center;
     top:150px;
     position:absolute;
-    padding-left:200px;
+    padding-left:300px;
 }
 
 #search-toggles {
-    top:230px;
-    padding-left:380px;
+    top:137px;
+    padding-left:0px;
     position:absolute;
 }
 
 .search-toggle {
     display:inline-block;
-    text-align:center;
+    text-align:left;
     position:static;
-    padding-left:100px;
+    padding-left:25px;
 }
 
 /* profile page */
