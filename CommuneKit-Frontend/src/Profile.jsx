@@ -28,7 +28,7 @@ function ItemsButton({ isOwn }) {
     return null;
 }
 
-export default function Profile({ isOwn }) {
+export default function Profile() {
     const navigate = useNavigate();
     const { userID } = useParams();
     const [isClicked, setClicked] = useState(false);
@@ -42,16 +42,12 @@ export default function Profile({ isOwn }) {
         bio: '',
         phone: ''
     });
+    const [isOwn, setIsOwn] = useState(false)
 
     useEffect(() => {
         const loggedInUserID = localStorage.getItem("userID");
         console.log("comparing active user " + loggedInUserID + " and " + userID);
-        if (userID === loggedInUserID) {
-            isOwn = true;
-        }
-        else {
-            isOwn = false;
-        }
+        setIsOwn(userID === loggedInUserID)
         getUserById(userID)
             .then(res => {
                 setFormData(res.data);

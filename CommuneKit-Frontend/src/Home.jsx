@@ -9,8 +9,7 @@ export default function Home() {
     const navigate = useNavigate();
 
     const [postedItems, setPostedItems] = useState([]);
-    const [borrowedItems, setBorrowedItems] = useState([]);
-    const [allItems, setAllItems] = useState([]);
+    const [suggestedItems, setSuggestedItems] = useState([]);
 
     useEffect(() => {
         const userID = localStorage.getItem("userID");
@@ -26,7 +25,7 @@ export default function Home() {
     const loadItems = (userID) => {
         getAllItems()
             .then(res => {
-                setAllItems(res.data);
+                setSuggestedItems(res.data);
                 console.log("All items:", res.data);
             })
             .catch(error => {
@@ -41,15 +40,6 @@ export default function Home() {
             .catch(error => {
                 console.log("Error fetching posted items:", error);
             });
-
-        getMyBorrows(userID)
-            .then(res => {
-                setBorrowedItems(res.data);
-                console.log("Borrowed items:", res.data);
-            })
-            .catch(error => {
-                console.log("Error fetching borrowed items:", error);
-            });
     };
 
     return (
@@ -57,11 +47,8 @@ export default function Home() {
             <div className="home-items" id="posted-header">
                 <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")} />
             </div>
-            <div className="home-items" id="borrowed-header">
-                <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />
-            </div>
             <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={allItems} userID={localStorage.getItem("userID")} />
+                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")} />
             </div>
         </>
     );
