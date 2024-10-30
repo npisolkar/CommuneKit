@@ -69,7 +69,7 @@ export default function ItemComponent({ data, userID }) {
             <td>{data.itemDescription}</td>
             <td>{data.itemCategory}</td>
             <td><Link to={`/item/${data.itemID}`}><button>To Item Page</button></Link></td>
-            <td><Link to="/profile"><button>To User Page</button></Link></td>
+            <td><Link to={"/profile/" + data.userID}><button>To User Page</button></Link></td>
             <td>
                 {loading ? (
                     <button disabled>Loading...</button>

@@ -69,6 +69,7 @@ export default function ItemPage() {
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
+                console.log("userid:" + JSON.stringify(res.data.userID))
                 setUserID(res.data.userID)
                 if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
                     setIsOwn(true);
@@ -96,6 +97,7 @@ export default function ItemPage() {
                 console.log("requests: " + JSON.stringify(currentRequests))
                 //check if item has been borrowed by user before
                 setRequestedIDs(currentRequests.map(extractID))
+                console.log("requested ids:" + JSON.stringify(requestedIDs))
                 setHasBorrowed(requestedIDs.some(compareID))
                 console.log("hasborrowed: " + hasBorrowed)
             })
@@ -253,6 +255,9 @@ export default function ItemPage() {
                         <ReviewComponent reviewDto={review}/>
                     ))
                 }
+            </div>
+            <div id="item-user">
+                <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
             </div>
         </>
     )
