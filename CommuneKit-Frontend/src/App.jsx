@@ -10,6 +10,8 @@ import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
 import LoginPage from "./components/LoginPage.jsx";
 import RegistrationPage from "./components/RegistrationPage.jsx";
+import FavoritePage from "./components/FavoritePage.jsx";
+import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
@@ -29,6 +31,7 @@ export default function App() {
                   </Link>
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
+                  <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
                   <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
@@ -44,6 +47,8 @@ export default function App() {
                   <Route path="/home" element={<Home />}/>
                   <Route path="/login" element={<LoginPage />}/>
                   <Route path="/registration" element={<RegistrationPage />}/>
+                  <Route path="/favorites" element={<FavoritePage />} />
+                  <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
                   <Route path="/" element={<LoginPage />}/>
                   <Route path="/admin" element={<AdminPage />}/>
               </Routes>
@@ -89,5 +94,5 @@ function MenuBar() {
                 </ul>
             </div>
         </>
-    )
+    );
 }
