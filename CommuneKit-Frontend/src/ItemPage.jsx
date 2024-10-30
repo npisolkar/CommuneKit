@@ -97,6 +97,7 @@ export default function ItemPage() {
                 console.log("requests: " + JSON.stringify(currentRequests))
                 //check if item has been borrowed by user before
                 setRequestedIDs(currentRequests.map(extractID))
+                console.log("requested ids:" + JSON.stringify(requestedIDs))
                 setHasBorrowed(requestedIDs.some(compareID))
                 console.log("hasborrowed: " + hasBorrowed)
             })
