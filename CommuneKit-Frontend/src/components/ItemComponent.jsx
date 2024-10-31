@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {deleteItem, favoriteItem, removeFavorite} from '../services/ItemService.jsx';
+import {favoriteItem, removeFavorite} from '../services/ItemService.jsx';
 import axios from 'axios';
 
 export default function ItemComponent({ data, userID }) {
@@ -65,10 +65,6 @@ export default function ItemComponent({ data, userID }) {
         }
     };
 
-    const handleDelete = async() => {
-        deleteItem(data.itemID)
-    }
-
     return (
         <tr key={`item-${data.itemID}`}> {/* Using itemID as a unique key */}
             <td>{data.itemID}</td>
@@ -86,7 +82,6 @@ export default function ItemComponent({ data, userID }) {
                     <button onClick={handleAddFavorite}>Favorite</button>
                 )}
             </td>
-            <td><button onClick={handleDelete}>Delete</button></td>
         </tr>
     );
 }

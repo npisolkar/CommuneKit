@@ -7,7 +7,6 @@ import { getAllItems, getItemsByUser, getMyBorrows } from './services/ItemServic
 
 export default function Home() {
     const navigate = useNavigate();
-
     const [postedItems, setPostedItems] = useState([]);
     const [suggestedItems, setSuggestedItems] = useState([]);
 

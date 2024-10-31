@@ -3,19 +3,24 @@
 *  isMine: determines whether the item is your own item or another's */
 
 import {useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
-import {updateItem, getItemById} from "./services/ItemService.jsx";
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
 import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 import RequestComponent from "./components/RequestComponent.jsx";
 
-function EditButton({isOwn, handleClick, bodyText}) {
+function EditButton({isOwn, handleClick, bodyText, itemID}) {
+    const navigate = useNavigate()
+    function handleDelete() {
+        deleteItem(itemID)
+        navigate("/profile/" + localStorage.getItem("userID") + "/my-items")
+    }
     if (isOwn === true) {
         return (
             <div>
             <button onClick={handleClick}>{bodyText}</button>
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
             </div>
         )
     }
@@ -154,7 +159,7 @@ export default function ItemPage() {
                 <h2>Item Page</h2>
             </div>
             <div id="edit-item-button">
-                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
+                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
             </div>
             {isClicked ?
                 <div id="item-info">
@@ -165,9 +170,6 @@ export default function ItemPage() {
                         <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
                         <button type="submit">Submit Changes</button>
                     </form>
-                    <div >
-                        <button className="delete-button">Delete Item</button>
-                    </div>
                 </div>
                 :
                 <div>
