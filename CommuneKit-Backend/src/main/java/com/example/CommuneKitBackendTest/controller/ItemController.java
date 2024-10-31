@@ -1,22 +1,18 @@
 package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
-import com.example.CommuneKitBackendTest.entity.User;
-import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
-import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
-import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 public class ItemController {
 
     private ItemService itemService;

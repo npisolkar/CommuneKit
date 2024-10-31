@@ -1,13 +1,14 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
 import com.example.CommuneKitBackendTest.dto.RequestDto;
+// import com.example.CommuneKitBackendTest.entity.Item;
 import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.RequestMapper;
 import com.example.CommuneKitBackendTest.repository.RequestRepository;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+// import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -161,5 +162,10 @@ public class RequestServiceImpl implements RequestService {
                         0, 0)))  // Use the start date for sorting
                 .map(RequestMapper::mapToRequestDto)  // Map to DTO
                 .collect(Collectors.toList());
+    }
+    @Override
+    public void deleteRequest(Long requestID) {
+        Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
+        requestRepository.deleteById(requestID);
     }
 }

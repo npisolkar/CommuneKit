@@ -2,6 +2,7 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
+import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
 import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -78,6 +79,24 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("id") long UserID) {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
+    }
+    @DeleteMapping("/ban/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> banUser(@PathVariable("id") long UserID) {
+        userService.banUser(UserID);
+        return ResponseEntity.ok("User successfully banned");
+    }
+
+    @PostMapping("/reset-password")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
+        boolean isReset = userService.resetPassword(passwordResetDto);
+
+        if (isReset) {
+            return ResponseEntity.ok("Password successfully reset.");
+        } else {
+            return new ResponseEntity<>("Password reset failed. Invalid credentials.", HttpStatus.UNAUTHORIZED);
+        }
     }
 }
 

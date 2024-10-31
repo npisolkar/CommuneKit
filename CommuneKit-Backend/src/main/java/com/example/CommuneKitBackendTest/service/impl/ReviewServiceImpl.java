@@ -1,11 +1,11 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
-import com.example.CommuneKitBackendTest.dto.ItemDto;
+// import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.dto.ReviewDto;
-import com.example.CommuneKitBackendTest.entity.Item;
-import com.example.CommuneKitBackendTest.entity.Request;
+// import com.example.CommuneKitBackendTest.entity.Item;
+// import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.entity.Review;
-import com.example.CommuneKitBackendTest.mapper.RequestMapper;
+// import com.example.CommuneKitBackendTest.mapper.RequestMapper;
 import com.example.CommuneKitBackendTest.mapper.ReviewMapper;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.service.ReviewService;

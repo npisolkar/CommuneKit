@@ -28,24 +28,14 @@ function RegistrationPage() {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleLogin = () => {
+        navigate('/login');  // Navigates to /registration when button is clicked
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             // Call the register method from UserService
-
-            //const token = localStorage.getItem('token');
-
-            // const fdata = new FormData();
-            // fdata.append('firstName', formData.firstName);
-            // fdata.append('lastName', formData.lastName);
-            // fdata.append('userName', formData.userName);
-            // fdata.append('password', formData.password);
-            // fdata.append('email', formData.email);
-            // fdata.append('password', formData.password);
-            // fdata.append('phone', formData.phone);
-            // fdata.append('address', formData.address);
-            // fdata.append('profilePicture', );
-
 
             console.log(JSON.stringify(formData));
             const userData = await createUser(JSON.stringify(formData));
@@ -126,6 +116,11 @@ function RegistrationPage() {
 
                 <button type="submit">Register</button>
             </form>
+            <div>
+            <button onClick={handleLogin}>
+                Go to Login Page
+            </button>
+            </div>
         </div>
 );
 }

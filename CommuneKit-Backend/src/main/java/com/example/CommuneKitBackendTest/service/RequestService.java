@@ -35,5 +35,7 @@ public interface RequestService {
 
     List<RequestDto> getCurrentRequestsByItemId(Long itemId);
 
+    void deleteRequest(Long requestId);
+
 
 }

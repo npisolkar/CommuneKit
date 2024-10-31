@@ -7,8 +7,8 @@ const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/users"
 const USER_API_BASE_URL = "http://localhost:8080/api/users"
 
 export function getUsers(){
-        return axios.get(EMPLOYEE_API_BASE_URL);
-    }
+    return axios.get(EMPLOYEE_API_BASE_URL);
+}
 
 export function updateUser(userId, userDto) {
     try {
@@ -38,8 +38,8 @@ export function createUser(userDto){
 }
 
 export function getUserById(userId){
-        return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
-    }
+    return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
+}
 
 export default function loginUser(userDto){
     try {
@@ -51,9 +51,8 @@ export default function loginUser(userDto){
     } catch (error) {
         throw error;
     }
-    //may be good to put this in here:
-    // headers: {
-    //     'Content-Type': 'application/json'
-    // }
 }
+export function banUser(userId) {
+    return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
 
+}

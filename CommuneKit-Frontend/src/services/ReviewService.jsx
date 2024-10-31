@@ -7,13 +7,11 @@ const REVIEW_API_BASE_URL = "http://localhost:8080/api/reviews"
 
 export function createReview(review) {
 
-    return axios.post(REVIEW_API_BASE_URL + "/1", review, {
+    return axios.post(REVIEW_API_BASE_URL, review, {
         headers: {'Content-Type': 'application/json'},
-        data:JSON.stringify(review),
     });
 }
 
 export function getReviewsById(itemID) {
-    //TODO: missing corresponding controller
     return axios.get(REVIEW_API_BASE_URL + "/" + itemID)
 }

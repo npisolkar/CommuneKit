@@ -12,11 +12,12 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/reviews")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 public class ReviewController {
     private ReviewService reviewService;
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto) {
         ReviewDto savedReview = reviewService.createReview(reviewDto);
         return new ResponseEntity<>(savedReview, HttpStatus.CREATED);

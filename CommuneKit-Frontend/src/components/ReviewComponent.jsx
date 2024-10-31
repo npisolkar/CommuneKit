@@ -3,12 +3,13 @@
 
 import {useState, useEffect} from 'react'
 import {getUserById} from "../services/UserService.jsx";
+import {Link} from "react-router-dom";
 
-export default function ReviewComponent(userID, itemID, reviewDto) {
+export default function ReviewComponent({reviewDto}) {
     const [name, setName] = useState('')
 
     useEffect(() => {
-        getUserById(userID)
+        getUserById(reviewDto.reviewerID)
             .then (res => {
                 setName(res.data.userName)
             })
@@ -16,7 +17,7 @@ export default function ReviewComponent(userID, itemID, reviewDto) {
     }, [])
     return (
         <div className="item-review">
-            <p>{name}</p>
+            <Link to={"/profile/" + reviewDto.reviewerID}><button>{name}</button></Link>
             <p>Rating: {reviewDto.rating}</p>
             <p>{reviewDto.reviewText}</p>
         </div>
