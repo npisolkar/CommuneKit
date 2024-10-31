@@ -16,6 +16,16 @@ function EditButton({isOwn, handleClick, bodyText}) {
         return null
     }
 }
+function ReportButton({isOwn, onClick, bodyText}) {
+    if (!isOwn) {
+        return (
+            <button onClick={onClick}>{bodyText}</button>
+        )
+    }
+    else {
+        return null
+    }
+}
 
 function ItemsButton({ isOwn }) {
     if (isOwn) {
@@ -89,6 +99,10 @@ export default function Profile({ isOwn }) {
     const navigateToResetPassword = () => {
         navigate('/reset-password');
     };
+    const handleReportNav = () => {
+        navigate('/report/'+userID)
+    }
+
 
     return (
         <>
@@ -130,11 +144,18 @@ export default function Profile({ isOwn }) {
             ) : (
                 <div className="about-box">
                     <div>{formData.userName}</div>
-                    <label>Bio<div>{formData.bio}</div></label>
-                    <label>Address<div>{formData.address}</div></label>
-                    <label>Phone Number<div>{formData.phone}</div></label>
-                    <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"} />
-                    <ItemsButton isOwn={userID === localStorage.getItem('userID')} />
+                    <label>Bio
+                        <div>{formData.bio}</div>
+                    </label>
+                    <label>Address
+                        <div>{formData.address}</div>
+                    </label>
+                    <label>Phone Number
+                        <div>{formData.phone}</div>
+                    </label>
+                    <EditButton isOwn={userID === localStorage.getItem('userID')}
+                                handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"}/>
+                    <ItemsButton isOwn={userID === localStorage.getItem('userID')}/>
                     <div id="reset-password">
                         {userID === localStorage.getItem('userID') && (
                             <button onClick={navigateToResetPassword} className="reset-password-button">
@@ -145,7 +166,10 @@ export default function Profile({ isOwn }) {
                     <div id="my-rating">
                         <h2>Rating</h2>
                     </div>
+                    <ReportButton isOwn={userID === localStorage.getItem('userID')}
+                                  onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
+
             )}
         </>
     );
