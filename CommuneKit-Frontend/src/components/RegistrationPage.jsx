@@ -28,6 +28,10 @@ function RegistrationPage() {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleLogin = () => {
+        navigate('/login');  // Navigates to /registration when button is clicked
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -112,6 +116,11 @@ function RegistrationPage() {
 
                 <button type="submit">Register</button>
             </form>
+            <div>
+            <button onClick={handleLogin}>
+                Go to Login Page
+            </button>
+            </div>
         </div>
 );
 }

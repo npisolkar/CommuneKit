@@ -300,6 +300,11 @@ input, label {
     height:200px;
 }
 
+#item-user {
+    top:10%;
+    position:absolute;
+}
+
 /* create reviews page */
 #rating-stars {
     display:flex;
