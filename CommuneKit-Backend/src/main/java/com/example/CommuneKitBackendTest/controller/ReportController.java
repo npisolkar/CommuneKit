@@ -1,11 +1,11 @@
 package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ReportDto;
-import com.example.CommuneKitBackendTest.entity.User;
-import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
-import com.example.CommuneKitBackendTest.repository.UserRepository;
+//import com.example.CommuneKitBackendTest.entity.User;
+//import com.example.CommuneKitBackendTest.exception; //.ResourceNotFoundException;
+//import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ReportService;
-import com.example.CommuneKitBackendTest.service.UserService;
+//import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
