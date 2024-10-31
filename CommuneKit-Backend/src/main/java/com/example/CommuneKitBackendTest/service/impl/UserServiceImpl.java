@@ -4,6 +4,7 @@ import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
+import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
 import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
@@ -116,5 +117,17 @@ public class UserServiceImpl implements UserService {
         user.setBanned(true);
         userRepository.save(user);
 
+    }
+
+    @Override
+    public boolean resetPassword(PasswordResetDto passwordResetDto) {
+        User user = userRepository.findByEmail(passwordResetDto.getEmail())
+                .orElse(null);
+        if (user != null && user.getPassword().equals(passwordResetDto.getCurrentPassword())) {
+            user.setPassword(passwordResetDto.getNewPassword());
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }
