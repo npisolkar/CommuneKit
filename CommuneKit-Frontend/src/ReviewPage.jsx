@@ -20,6 +20,7 @@ export default function ReviewPage() {
         getItemById(itemID)
             .then(res => {
                 setUserID(res.data.userID)
+                console.log("itemID:" + itemID)
             })
             .catch(err => console.log(err))
     }, [])
@@ -34,6 +35,7 @@ export default function ReviewPage() {
                 itemID:itemID
             };
             const thing = await createReview(submit, itemID);
+            console.log(thing)
             navigate("/item/" + String(itemID));
         } catch (error) {
             console.log(error);

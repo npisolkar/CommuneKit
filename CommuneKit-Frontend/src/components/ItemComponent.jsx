@@ -27,7 +27,8 @@ export default function ItemComponent({ data, userID }) {
                 console.error("Error fetching favorite status:", error);
             }
         };
-        fetchFavoriteStatus();
+        fetchFavoriteStatus()
+            .catch (err => console.log(err));
     }, [userID, data.itemID]);
 
     const handleAddFavorite = async () => {

@@ -4,7 +4,7 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {updateItem, getItemById, getItemsByUser} from "./services/ItemService.jsx";
+import {updateItem, getItemById} from "./services/ItemService.jsx";
 import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
@@ -49,12 +49,8 @@ export default function ItemPage() {
     });
     const [hasBorrowed, setHasBorrowed] = useState(false)
     const [currentRequests, setCurrentRequests] = useState([])
-    const [requestedIDs, setRequestedIDs] = useState([])
-    function extractID(request) {
-        return request.borrowingUserId
-    }
-    function compareID(currID) {
-        return currID === localStorage.getItem("userID")
+    function compareID(currRequest) {
+        return JSON.stringify(currRequest.borrowingUserId) === localStorage.getItem("userID")
     }
 
     function onClick() {
@@ -94,12 +90,11 @@ export default function ItemPage() {
         getApprovedRequestsById(itemID)
             .then(res => {
                 setCurrentRequests(res.data)
-                console.log("requests: " + JSON.stringify(currentRequests))
+                console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
-                setRequestedIDs(currentRequests.map(extractID))
-                console.log("requested ids:" + JSON.stringify(requestedIDs))
-                setHasBorrowed(requestedIDs.some(compareID))
-                console.log("hasborrowed: " + hasBorrowed)
+                //TODO: HASBORROWED IS NOT CORRECT
+                console.log("current user:" + localStorage.getItem("userID"))
+                setHasBorrowed(res.data.some(compareID))
             })
             .catch (err => console.log(err))
     }, [])
@@ -147,6 +142,11 @@ export default function ItemPage() {
     const handleItemChange = (e) => {
         const {name, value} = e.target;
         setItemData({...itemData, [name]: value})
+    }
+
+    const [isIllegalClicked, setIllegalClick] = useState(false)
+    function handleIllegalClick() {
+        setIllegalClick(!isIllegalClicked)
     }
     return (
         <>
@@ -241,9 +241,13 @@ export default function ItemPage() {
                 </div>
                     {hasBorrowed ?
                 <div id="reviews-button">
-                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
+                    <Link to={"/item/" + itemID + "/create-review"}><button>Leave a Review</button></Link>
                 </div>
-                        : null }
+                        :
+                        <div id="reviews-button">
+                            <button onClick={handleIllegalClick}>Leave a Review</button>
+                            <CantReviewNotif isClicked={isIllegalClicked}/>
+                        </div>}
                 </div>
             }
             <div id="reviews-header">
@@ -260,5 +264,17 @@ export default function ItemPage() {
                 <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
             </div>
         </>
+    )
+}
+
+function CantReviewNotif(isClicked) {
+    return (
+        <>
+            {isClicked ?
+        <div id="cant-review">
+            You need to borrow an item before you can review it.
+        </div> :
+                null}
+            </>
     )
 }
