@@ -35,14 +35,16 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public long getRatingByItemId(Long itemId) {
+    public double getRatingByItemId(Long itemId) {
         List<Review> reviews = reviewRepository.findAll();
         reviews.removeIf(review -> !(review.getItemID() == (itemId)));
+
         int num = reviews.size();
-        int total = 0;
-        for (Review review : reviews) {
-            total += review.getRating();
+        if (num == 0) {
+            return 0.0;
         }
-        return num / total;
+
+        int total = reviews.stream().mapToInt(Review::getRating).sum();
+        return (double) total / num;
     }
 }

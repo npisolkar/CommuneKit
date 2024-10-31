@@ -27,6 +27,10 @@ export function getDistance(itemID, userID) {
     return axios.get(ITEM_API_BASE_URL + `/distance/${itemID}/${userID}`)
 }
 
+export function getRating(itemID) {
+    return axios.get(ITEM_API_BASE_URL + `/rating/${itemID}`)
+}
+
 export function updateItem(userId, itemDto) {
     return axios.put(ITEM_API_BASE_URL + "/1", itemDto, {
         headers: {

@@ -93,4 +93,11 @@ public class ItemController {
         Double distance = itemService.getDistance(itemID, userID);
         return ResponseEntity.ok(distance);
     }
+
+    @GetMapping("/rating/{itemID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<Double> getRating(@PathVariable Long itemID) {
+        Double rating = itemService.getRating(itemID);
+        return ResponseEntity.ok(rating);
+    }
 }

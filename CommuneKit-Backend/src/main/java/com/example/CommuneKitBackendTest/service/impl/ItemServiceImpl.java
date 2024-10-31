@@ -3,12 +3,15 @@ package com.example.CommuneKitBackendTest.service.impl;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.entity.Item;
+import com.example.CommuneKitBackendTest.entity.Review;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.ItemMapper;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
+import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import com.example.CommuneKitBackendTest.service.ReviewService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
@@ -23,7 +26,8 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    private final UserRepository userRepository;
+    private ReviewRepository reviewRepository;
+    private UserRepository userRepository;
     private ItemRepository itemRepository;
 
     @Override
@@ -99,9 +103,25 @@ public class ItemServiceImpl implements ItemService {
                 return Double.compare(distance1, distance2);
             });
 
+        } else if (sort.equals("rating")) {
+            items.sort((item1, item2) -> {
+                double rating1 = calculateAverageRating(item1.getItemID());
+                double rating2 = calculateAverageRating(item2.getItemID());
+
+                return Double.compare(rating2, rating1);
+            });
         }
 
         return items.stream().map(this::convertToDto).collect(Collectors.toList());
+    }
+
+    private double calculateAverageRating(Long itemId) {
+        List<Review> reviews = reviewRepository.findByItemID(itemId);
+
+        if (reviews.isEmpty()) return 0.0;
+
+        double total = reviews.stream().mapToDouble(Review::getRating).sum();
+        return total / reviews.size();
     }
 
     @Override
@@ -116,6 +136,11 @@ public class ItemServiceImpl implements ItemService {
         User user2 = userRepository.getById(item.getUserID());
 
         return calculateDistance(lat, lon, user2.getLatitude(), user2.getLongitude());
+    }
+
+    @Override
+    public Double getRating(Long itemID) {
+        return calculateAverageRating(itemID);
     }
 
     private ItemDto convertToDto(Item item) {

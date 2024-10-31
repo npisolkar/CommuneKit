@@ -31,8 +31,8 @@ public class ReviewController {
 
     @GetMapping("/rating/{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<Long> getRating(@PathVariable("id") Long itemID) {
-        Long rating = reviewService.getRatingByItemId(itemID);
+    public ResponseEntity<Double> getRating(@PathVariable("id") Long itemID) {
+        Double rating = reviewService.getRatingByItemId(itemID);
         return ResponseEntity.ok(rating);
     }
 

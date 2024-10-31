@@ -1,14 +1,13 @@
-/* Search: The page handling all searching for items. The select drop-downs
-*  allow one to sort or filter by all the methods listed. */
 import './styles.css';
-import { search, getDistance } from "./services/ItemService.jsx"
-import {useEffect, useState} from 'react'
+import { search, getDistance, getRating } from "./services/ItemService.jsx";
+import { useEffect, useState } from 'react';
 
 export default function Search() {
     const [keyword, setKeyword] = useState('');
-    const [sort, setSort] = useState('a-z');
+    const [sort, setSort] = useState('time-asc');
     const [results, setResults] = useState([]);
     const [distances, setDistances] = useState({});
+    const [ratings, setRatings] = useState({});
 
     const userID = localStorage.getItem("userID");
 
@@ -18,6 +17,7 @@ export default function Search() {
                 const response = await search(userID, sort, keyword);
                 setResults(response.data);
                 fetchDistances(response.data);
+                fetchRatings(response.data);
             } catch (error) {
                 console.error("Search failed:", error);
             }
@@ -39,6 +39,19 @@ export default function Search() {
         setDistances(newDistances);
     };
 
+    const fetchRatings = async (items) => {
+        const newRatings = {};
+        for (let item of items) {
+            try {
+                const response = await getRating(item.itemID);
+                newRatings[item.itemID] = response.data;
+            } catch (error) {
+                console.error(`Failed to fetch rating for item ${item.itemID}:`, error);
+            }
+        }
+        setRatings(newRatings);
+    };
+
     const formatItemResult = (item) => {
         return (
             <div key={item.itemID} style={{
@@ -53,6 +66,7 @@ export default function Search() {
                 <div>Category: {item.itemCategory}</div>
                 <div><a href={`/profile/${item.userID ?? 'unknown'}`}>User ID: {item.userID ?? 'N/A'}</a></div>
                 <div>Distance: {distances[item.itemID] ? `${distances[item.itemID]} miles` : 'Loading...'}</div>
+                <div>Rating: {ratings[item.itemID] !== undefined ? ratings[item.itemID] : 'Loading...'}</div>
             </div>
         );
     };
@@ -84,7 +98,7 @@ export default function Search() {
                     >
                         <option value="time-asc">Oldest</option>
                         <option value="time-desc">Newest</option>
-                        <option value="rate-asc">Rating</option>
+                        <option value="rating">Rating</option>
                         <option value="a-z">A-Z</option>
                         <option value="z-a">Z-A</option>
                         <option value="distance">Distance</option>

@@ -22,4 +22,6 @@ public interface ItemService {
 
     Double getDistance(Long itemID, Long userID);
 
+    Double getRating(Long itemID);
+
 }
