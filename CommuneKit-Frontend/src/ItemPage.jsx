@@ -130,7 +130,7 @@ export default function ItemPage() {
     async function handleUploadItem() {
         try {
             console.log("trying to submit " + JSON.stringify(itemData))
-            const responseData = await updateItem(itemID, JSON.stringify(itemData));
+            const responseData = await updateItem(itemID, itemData);
             console.log("submit:" + responseData);
             setItemData(responseData.data)
             onClick()
