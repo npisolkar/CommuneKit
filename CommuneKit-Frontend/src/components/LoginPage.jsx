@@ -31,22 +31,32 @@ function LoginPage(){
             //await is necessary, otherwise result will pend forever
             //JSON.stringify turns the key-value pair object into a JSON string
             //backend needs it to be a string
+            console.log("about to log in ")
             const userData = await loginUser(JSON.stringify(loginJson))
             //all the data is in userData.data.<keyname>
             console.log(userData);
+            console.log("user data status" + userData.status)
+            console.log("user data data.status" + userData.data.status)
+
             if (userData.status === 200) {
                 localStorage.setItem('token', "LoggedIn")
                 localStorage.setItem('role', userData.data.role) //
                 localStorage.setItem('userID', userData.data.userId)
                 //localStorage.getItem('userID')
                 navigate('/home')
+
             } else {
                 setError(userData.message)
             }
-
         } catch (error) {
             console.log(error)
-            setError(error.message)
+            if (error.status === 403) {
+                setError("Username not in Database, please register or try with a valid username")
+            } else if (error.status === 401) {
+                setError("password is incorrect, please try again")
+            } else {
+                setError(error.message)
+            }
             setTimeout(()=>{
                 setError('');
             }, 5000);

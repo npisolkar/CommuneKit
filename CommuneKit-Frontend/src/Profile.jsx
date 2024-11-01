@@ -53,7 +53,7 @@ export default function Profile() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [])
+    }, [navigate])
 
     function onClick() {
         setClicked(!isClicked);
@@ -97,10 +97,10 @@ export default function Profile() {
                         <div>
                             <label>
                                 <b>First Name</b>
-                            </label>
-                            <input type="text" name="firstName" value={formData.firstName}
-                                   onChange={handleInputChange}/>
 
+                                <input id="firstName" type="text" name="firstName" value={formData.firstName}
+                                   onChange={handleInputChange}/>
+                            </label>
                             <label>
                                 <b>Last Name</b>
                             </label>
@@ -152,15 +152,15 @@ export default function Profile() {
                     </label>
                         <div>{formData.email}</div>
                     <label>
-                        Bio
+                        <b>Bio</b>
                         <div id="profile-bio">{formData.bio}</div>
                     </label>
                     <label>
-                        Address
+                        <b>Address</b>
                         <div id="profile-address">{formData.address}</div>
                     </label>
                     <label>
-                        Phone Number
+                        <b>Phone Number</b>
                         <div id="profile-phone">{formData.phone}</div>
                     </label>
                     {/*<div id="edit-profile">*/}

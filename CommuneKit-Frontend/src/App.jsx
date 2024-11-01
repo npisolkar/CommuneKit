@@ -1,5 +1,5 @@
 // @ts-ignore
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import './styles.css'
 import Home from "./Home.jsx"
 import Search from "./Search.jsx"
@@ -20,8 +20,14 @@ import AdminPage from "./components/AdminPage.jsx"
 //MESSAGE - coming from backup-main
 
 export default function App() {
-    let userID = localStorage.getItem('userID')
+    const [userID, setUserID] = useState( localStorage.getItem("userID") );
+    // const navigate = useNavigate();
+    useEffect(() => {
+        setUserID(localStorage.getItem('userID'))
+    }, [])
+    //const userID = localStorage.getItem('userID')
     console.log("userID found to be: " + userID);
+
   return (
       <>
       <Router>
@@ -33,7 +39,7 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${localStorage.getItem('userID')}`}
+                  <Link to={`/profile/${userID}`}
                         id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>

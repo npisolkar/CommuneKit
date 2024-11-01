@@ -18,11 +18,11 @@ export default function Search() {
             <div className="search-toggle">
                 <h4>Sort</h4>
                 <select name="sort-options" id="sort-options">
-                    <option value="a-z">A-Z</option>
-                    <option value="z-a">Z-A</option>
+                    {/*<option value="a-z">A-Z</option>*/}
+                    {/*<option value="z-a">Z-A</option>*/}
                     <option value="rate-asc">Rating</option>
                     <option value="time-asc">Oldest</option>
-                    <option value="time-desc">Newest</option>
+                    {/*<option value="time-desc">Newest</option>*/}
                     <option value="distance">Distance</option>
                 </select>
             </div>

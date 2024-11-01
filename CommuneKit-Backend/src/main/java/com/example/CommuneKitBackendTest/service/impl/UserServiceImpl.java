@@ -58,6 +58,9 @@ public class UserServiceImpl implements UserService {
                     && user.getPassword().equals(attemptingUser.getPassword())) {
                 return UserMapper.mapToUserDto(user);
             }
+            if (user.getUserName().equals(attemptingUser.getUserName())) {
+                return UserMapper.mapToUserDto(user);
+            }
         }
         return null;
     }
