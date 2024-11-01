@@ -64,5 +64,6 @@ export default function Home() {
                 <ItemTable headName="Suggested Items" items={allItems} userID={localStorage.getItem("userID")} />
             </div>
         </>
-    );
+    )
+   // }
 }
