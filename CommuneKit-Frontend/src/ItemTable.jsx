@@ -11,7 +11,8 @@ export default function ItemTable({ headName, items, userID }) {
         if (items.length > 0) {
             setDisplayItems(items);
         } else if (userID) {
-            loadItems(currentPage);
+            loadItems(currentPage)
+                .catch (err => console.log(err));
         }
     }, [currentPage, userID, items]);
 

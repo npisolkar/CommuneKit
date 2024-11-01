@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { favoriteItem, removeFavorite } from '../services/ItemService.jsx';
+import {favoriteItem, removeFavorite} from '../services/ItemService.jsx';
 import axios from 'axios';
 
 export default function ItemComponent({ data, userID }) {
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [isOwn, setIsOwn] = useState(false);
 
     useEffect(() => {
         if (!userID) {
             console.error("User ID is undefined or null");
             return;
         }
-
+        setIsOwn(localStorage.getItem("userID") === data.userID)
+        console.log("isOwn = " + isOwn)
         // Fetch favorite status when component loads
         const fetchFavoriteStatus = async () => {
             try {
@@ -25,7 +27,8 @@ export default function ItemComponent({ data, userID }) {
                 console.error("Error fetching favorite status:", error);
             }
         };
-        fetchFavoriteStatus();
+        fetchFavoriteStatus()
+            .catch (err => console.log(err));
     }, [userID, data.itemID]);
 
     const handleAddFavorite = async () => {

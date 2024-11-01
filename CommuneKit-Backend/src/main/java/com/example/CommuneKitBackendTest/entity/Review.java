@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.example.CommuneKitBackendTest.entity.User;
+//import com.example.CommuneKitBackendTest.entity.User;
 
 @Getter
 @Setter

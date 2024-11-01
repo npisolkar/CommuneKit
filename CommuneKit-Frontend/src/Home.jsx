@@ -10,7 +10,7 @@ export default function Home() {
 
     const [postedItems, setPostedItems] = useState([]);
    // const [borrowedItems, setBorrowedItems] = useState([]);
-    const [allItems, setAllItems] = useState([]);
+    const [suggestedItems, setSuggestedItems] = useState([]);
 
     useEffect(() => {
         const userID = localStorage.getItem("userID");
@@ -26,7 +26,7 @@ export default function Home() {
     const loadItems = (userID) => {
         getAllItems()
             .then(res => {
-                setAllItems(res.data);
+                setSuggestedItems(res.data);
                 console.log("All items:", res.data);
             })
             .catch(error => {
@@ -61,7 +61,7 @@ export default function Home() {
             {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
             {/*</div>*/}
             <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={allItems} userID={localStorage.getItem("userID")} />
+                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")} />
             </div>
         </>
     );

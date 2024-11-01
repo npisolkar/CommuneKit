@@ -16,16 +16,30 @@ function EditButton({isOwn, handleClick, bodyText}) {
         return null
     }
 }
+function ReportButton({isOwn, onClick, bodyText}) {
+    if (!isOwn) {
+        return (
+            <button onClick={onClick}>{bodyText}</button>
+        )
+    }
+    else {
+        return null
+    }
+}
 
 function ItemsButton({ isOwn }) {
     if (isOwn) {
         return (
             <div id="my-items-button">
-                <Link to="/profile/my-items">View My Items</Link>
+                <Link to={"/profile/" + localStorage.getItem("userID") + "/my-items"}>
+                    <button>View My Items</button>
+                </Link>
             </div>
-        );
+
+        )
+    } else {
+        return null
     }
-    return null;
 }
 
 export default function Profile() {
@@ -45,10 +59,10 @@ export default function Profile() {
 
     useEffect(() => {
         getUserById(userID)
-            .then (res => {
-                setFormData(res.data)
-                console.log("in get:" + JSON.stringify(res.data));
-                console.log("username in get: " + JSON.stringify(formData))
+            .then(res => {
+                setFormData(res.data);
+                console.log("User data fetched:", res.data);
+                //console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);
@@ -85,6 +99,10 @@ export default function Profile() {
     function navigateToResetPassword() {
         navigate('/reset-password');
     }
+    const handleReportNav = () => {
+        navigate('/report/'+userID)
+    }
+
 
     return (
         <>
@@ -188,7 +206,10 @@ export default function Profile() {
                             </button>
                         )}
                     </div>
+                    <ReportButton isOwn={userID === localStorage.getItem('userID')}
+                                  onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
+
             )}
         </>
     );

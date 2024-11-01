@@ -16,8 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
+import ReportPage from "./components/ReportPage.jsx";
 
-//MESSAGE - coming from backup-main
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
@@ -46,9 +46,8 @@ export default function App() {
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>} />
+                  <Route path="/profile/:userID" element={<Profile/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
-                  <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
                   <Route path="/newitem" element={<NewItem />}/>
@@ -59,6 +58,7 @@ export default function App() {
                   <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
                   <Route path="/admin" element={<AdminPage />}/>
                   {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
+                  <Route path="/report/:userID" element = {<ReportPage/>}/>
                   <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>

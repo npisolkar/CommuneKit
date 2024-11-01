@@ -2,12 +2,12 @@ package com.example.CommuneKitBackendTest.service.impl;
 
 
 import com.example.CommuneKitBackendTest.dto.ReportDto;
-import com.example.CommuneKitBackendTest.entity.Item;
+// import com.example.CommuneKitBackendTest.entity.Item;
 import com.example.CommuneKitBackendTest.entity.Report;
-import com.example.CommuneKitBackendTest.entity.Request;
+// import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.ReportMapper;
-import com.example.CommuneKitBackendTest.mapper.RequestMapper;
+// import com.example.CommuneKitBackendTest.mapper.RequestMapper;
 import com.example.CommuneKitBackendTest.repository.ReportRepository;
 import com.example.CommuneKitBackendTest.service.ReportService;
 import jakarta.persistence.EntityManager;
@@ -48,12 +48,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportDto> getAllPending() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = emf.createEntityManager();
-        String jpql = "SELECT r FROM  Report r WHERE r.status = 'Pending'";
-        TypedQuery<Report> query = entityManager.createQuery(jpql, Report.class);
-        List<Report> reports = query.getResultList();
+        List<Report> reports = reportRepository.findAll();
+        reports.removeIf(report -> !report.getStatus().equals("Pending"));
         return reports.stream().map((report) -> ReportMapper.mapToReportDto(report)).collect(Collectors.toList());
+
     }
 
     @Override
@@ -68,7 +66,7 @@ public class ReportServiceImpl implements ReportService {
 
 
 
-        @Override
+    @Override
     public void deleteReport(Long reportID) {
         Report report = reportRepository.findById(reportID).orElseThrow(() -> new ResourceNotFoundException("Report with given id not found: " + reportID));
         reportRepository.deleteById(reportID);

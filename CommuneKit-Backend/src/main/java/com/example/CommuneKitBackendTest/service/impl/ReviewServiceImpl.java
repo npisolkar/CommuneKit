@@ -1,11 +1,11 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
-import com.example.CommuneKitBackendTest.dto.ItemDto;
+// import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.dto.ReviewDto;
-import com.example.CommuneKitBackendTest.entity.Item;
-import com.example.CommuneKitBackendTest.entity.Request;
+// import com.example.CommuneKitBackendTest.entity.Item;
+// import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.entity.Review;
-import com.example.CommuneKitBackendTest.mapper.RequestMapper;
+// import com.example.CommuneKitBackendTest.mapper.RequestMapper;
 import com.example.CommuneKitBackendTest.mapper.ReviewMapper;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.service.ReviewService;
@@ -35,14 +35,16 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public long getRatingByItemId(Long itemId) {
+    public double getRatingByItemId(Long itemId) {
         List<Review> reviews = reviewRepository.findAll();
         reviews.removeIf(review -> !(review.getItemID() == (itemId)));
+
         int num = reviews.size();
-        int total = 0;
-        for (Review review : reviews) {
-            total += review.getRating();
+        if (num == 0) {
+            return 0.0;
         }
-        return num / total;
+
+        int total = reviews.stream().mapToInt(Review::getRating).sum();
+        return (double) total / num;
     }
 }
