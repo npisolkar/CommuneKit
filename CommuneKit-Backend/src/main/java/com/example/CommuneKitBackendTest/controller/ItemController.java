@@ -1,17 +1,12 @@
 package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
-import com.example.CommuneKitBackendTest.entity.User;
-import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
-import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
-import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -79,10 +74,26 @@ public class ItemController {
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> searchItems(
             @RequestParam(required = false) String keyword,
-            @RequestParam(required = false) Boolean sortByDistance,
+            @RequestParam(required = false) String sort,
             @RequestParam Long userID) {
 
-        List<ItemDto> items = itemService.searchItems(keyword, sortByDistance, userID);
+        List<ItemDto> items = itemService.searchItems(keyword, sort, userID);
         return ResponseEntity.ok(items);
+    }
+
+    @GetMapping("/distance/{itemID}/{userID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<Double> getDistance(
+            @PathVariable("itemID") Long itemID,
+            @PathVariable("userID") Long userID) {
+        Double distance = itemService.getDistance(itemID, userID);
+        return ResponseEntity.ok(distance);
+    }
+
+    @GetMapping("/rating/{itemID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<Double> getRating(@PathVariable Long itemID) {
+        Double rating = itemService.getRating(itemID);
+        return ResponseEntity.ok(rating);
     }
 }
