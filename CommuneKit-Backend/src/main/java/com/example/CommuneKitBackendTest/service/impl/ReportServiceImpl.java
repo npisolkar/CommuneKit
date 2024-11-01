@@ -48,12 +48,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public List<ReportDto> getAllPending() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myPersistenceUnit");
-        EntityManager entityManager = emf.createEntityManager();
-        String jpql = "SELECT r FROM  Report r WHERE r.status = 'Pending'";
-        TypedQuery<Report> query = entityManager.createQuery(jpql, Report.class);
-        List<Report> reports = query.getResultList();
+        List<Report> reports = reportRepository.findAll();
+        reports.removeIf(report -> !report.getStatus().equals("Pending"));
         return reports.stream().map((report) -> ReportMapper.mapToReportDto(report)).collect(Collectors.toList());
+
     }
 
     @Override
