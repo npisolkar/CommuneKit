@@ -46,19 +46,11 @@ export default function Profile() {
         bio: '',
         phone: ''
     });
-    const [isOwn, setIsOwn] = useState(false)
-
-    if (userID === localStorage.getItem('userID')) {
-        setIsOwn(true)
-    } else {
-        setIsOwn(false)
-    }
     useEffect(() => {
         getUserById(userID)
             .then(res => {
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
-                console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);

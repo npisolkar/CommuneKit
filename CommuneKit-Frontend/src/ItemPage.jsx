@@ -97,7 +97,6 @@ export default function ItemPage() {
                 setCurrentRequests(res.data)
                 console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
-                //TODO: HASBORROWED IS NOT CORRECT
                 console.log("current user:" + localStorage.getItem("userID"))
                 setHasBorrowed(res.data.some(compareID))
             })
