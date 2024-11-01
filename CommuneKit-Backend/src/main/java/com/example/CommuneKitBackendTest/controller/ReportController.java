@@ -22,6 +22,7 @@ public class ReportController {
     private ReportService reportService;
 
     @PostMapping
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ReportDto> createReport(@RequestBody ReportDto reportDto) {
         ReportDto savedReport = reportService.createReport(reportDto);
         return new ResponseEntity<>(savedReport, HttpStatus.CREATED);

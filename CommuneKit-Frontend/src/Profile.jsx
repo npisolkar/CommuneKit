@@ -4,12 +4,22 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {getUserById, updateUser} from "./services/UserService.jsx";
 
-axios.defaults.baseURL = "http://localhost:8080/api/users"
+axios.defaults.baseURL = "http://localhost:8080/api/users";
 
 function EditButton({isOwn, handleClick, bodyText}) {
     if (isOwn) {
         return (
             <button onClick={handleClick}>{bodyText}</button>
+        )
+    }
+    else {
+        return null
+    }
+}
+function ReportButton({isOwn, onClick, bodyText}) {
+    if (!isOwn) {
+        return (
+            <button onClick={onClick}>{bodyText}</button>
         )
     }
     else {
@@ -46,18 +56,20 @@ export default function Profile() {
         bio: '',
         phone: ''
     });
-
+/*
     if (userID === localStorage.getItem('userID')) {
         const isOwn = true;
     } else {
         const isOwn = false;
     }
+
+ */
     useEffect(() => {
         getUserById(userID)
             .then(res => {
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
-                console.log("isown:" + isOwn)
+                //console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);
@@ -106,7 +118,12 @@ export default function Profile() {
 
     function navigateToResetPassword() {
         navigate('/reset-password');
+
     }
+    const handleReportNav = () => {
+        navigate('/report/'+userID)
+    }
+
 
     return (
         <>
@@ -194,7 +211,10 @@ export default function Profile() {
                             </button>
                         )}
                     </div>
+                    <ReportButton isOwn={userID === localStorage.getItem('userID')}
+                                  onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
+
             )}
         </>
     )
