@@ -16,6 +16,16 @@ function EditButton({isOwn, handleClick, bodyText}) {
         return null
     }
 }
+function ReportButton({isOwn, onClick, bodyText}) {
+    if (!isOwn) {
+        return (
+            <button onClick={onClick}>{bodyText}</button>
+        )
+    }
+    else {
+        return null
+    }
+}
 
 function ItemsButton({isOwn}) {
     if (isOwn) {
@@ -46,11 +56,20 @@ export default function Profile() {
         bio: '',
         phone: ''
     });
+/*
+    if (userID === localStorage.getItem('userID')) {
+        const isOwn = true;
+    } else {
+        const isOwn = false;
+    }
+
+ */
     useEffect(() => {
         getUserById(userID)
             .then(res => {
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
+                //console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);
@@ -98,7 +117,12 @@ export default function Profile() {
 
     function navigateToResetPassword() {
         navigate('/reset-password');
+
     }
+    const handleReportNav = () => {
+        navigate('/report/'+userID)
+    }
+
 
     return (
         <>
@@ -186,7 +210,10 @@ export default function Profile() {
                             </button>
                         )}
                     </div>
+                    <ReportButton isOwn={userID === localStorage.getItem('userID')}
+                                  onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
+
             )}
         </>
     )

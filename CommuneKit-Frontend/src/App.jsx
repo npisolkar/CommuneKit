@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
+import ReportPage from "./components/ReportPage.jsx";
 
 
 export default function App() {
@@ -48,6 +49,7 @@ export default function App() {
                   <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
                   <Route path="/" element={<LoginPage />}/>
                   <Route path="/admin" element={<AdminPage />}/>
+                  <Route path="/report/:userID" element = {<ReportPage/>}/>
               </Routes>
           </div>
           </Router>

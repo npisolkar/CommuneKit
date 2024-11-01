@@ -1,13 +1,13 @@
 package com.example.CommuneKitBackendTest.dto;
 
-import com.example.CommuneKitBackendTest.entity.Item;
+//import com.example.CommuneKitBackendTest.entity.Item;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+//import java.util.List;
 
 @Getter
 @Setter
