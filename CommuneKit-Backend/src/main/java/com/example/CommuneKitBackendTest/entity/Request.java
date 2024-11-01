@@ -48,7 +48,6 @@ public class Request {
     @Column(nullable = false)
     private int endYear;
 
-    @Column(nullable = false)
     private Boolean isApproved;
 
     @Column(nullable = false)

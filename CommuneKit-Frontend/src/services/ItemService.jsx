@@ -1,7 +1,9 @@
 import axios from "axios";
+import {useState} from "react";
 
-const ITEM_API_BASE_URL = "http://localhost:8080/api/items";
+const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 const FAVORITE_API_BASE_URL = "http://localhost:8080/api/favorites";
+
 
 export function getItemById(id) {
     return axios.get(`${ITEM_API_BASE_URL}/${id}`);
@@ -18,6 +20,19 @@ export function getMyBorrows(userID) {
 export function getAllItems() {
     return axios.get(ITEM_API_BASE_URL);
 }
+
+export function search(userID, sort, keyword) {
+    return axios.get(ITEM_API_BASE_URL + `/search?userID=${userID}&sort=${sort}&keyword=${keyword}`)
+}
+
+export function getDistance(itemID, userID) {
+    return axios.get(ITEM_API_BASE_URL + `/distance/${itemID}/${userID}`)
+}
+
+export function getRating(itemID) {
+    return axios.get(ITEM_API_BASE_URL + `/rating/${itemID}`)
+}
+
 
 export function updateItem(userID, itemDto) {
     return axios.put(`${ITEM_API_BASE_URL}/${itemDto.itemID}`, itemDto, {

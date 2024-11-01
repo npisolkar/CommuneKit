@@ -32,7 +32,7 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${userID}`} id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${localStorage.getItem('userID')}`} id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -94,5 +94,5 @@ function MenuBar() {
                 </ul>
             </div>
         </>
-    );
+    )
 }
