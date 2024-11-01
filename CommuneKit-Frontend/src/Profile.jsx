@@ -43,11 +43,6 @@ export default function Profile() {
         phone: ''
     });
 
-    if (userID === localStorage.getItem('userID')) {
-        const isOwn = true;
-    } else {
-        const isOwn = false;
-    }
     useEffect(() => {
         getUserById(userID)
             .then (res => {
@@ -69,30 +64,17 @@ export default function Profile() {
         setFormData({ ...formData, [name]: value });
     };
 
-
-
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         //console.log("username at beginning of upload: " + formData.userName)
         console.log("upload: " + JSON.stringify(formData));
         try {
-            /*
-            const profileJson = {
-                userName: formData.userName,
-                password: formData.password,
-                email: formData.email,
-                phone: formData.phone,
-                address: formData.address,
-                isBanned: false
-            }*/
-            //console.log("profileJSON" + JSON.stringify(profileJson))
             console.log("trying to submit " + JSON.stringify(formData))
-            //console.log("username:" + formData.userName)
             const profileResponse = await updateUser(userID, JSON.stringify(formData));
             const profileData = profileResponse.data;
             console.log("Profile updated:", profileData);
             setFormData(profileData);
+            console.log("formData now set to: " + JSON.stringify(formData))
             onClick();
         }
         catch (error) {
@@ -107,24 +89,26 @@ export default function Profile() {
     return (
         <>
             <div id="profile-image" className="about-box"></div>
+            <div><p>Your username: {formData.userName}</p></div>
             {isClicked ? (
                 <div className="about-box">
-                    <div><p>Your username: {formData.userName}</p></div>
+
                     <form onSubmit={handleSubmit}>
                         <div>
                             <label>
-                                First Name
-                                <input type="text" name="firstName" defaultValue={formData.firstName}
-                                       onChange={handleInputChange}/>
+                                <b>First Name</b>
                             </label>
+                            <input type="text" name="firstName" value={formData.firstName}
+                                   onChange={handleInputChange}/>
+
                             <label>
-                                Last Name
-                                <input type="text" name="lastName" defaultValue={formData.lastName}
-                                       onChange={handleInputChange}/>
+                                <b>Last Name</b>
                             </label>
+                            <input type="text" name="lastName" value={formData.lastName}
+                                   onChange={handleInputChange}/>
                             <label>
                                 Email
-                                <input type="email" name="email" defaultValue={formData.email}
+                                <input type="email" name="email" value={formData.email}
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
@@ -135,6 +119,8 @@ export default function Profile() {
                             <label>
                                 Address
                                 <div id="profile-address">{formData.address}</div>
+                                <input id="address" value={formData.address} name="address" type="text"
+                                       onChange={handleInputChange}/>
                             </label>
                             <label>
                                 Phone Number
@@ -150,9 +136,21 @@ export default function Profile() {
             ) : (
 
                 <div className="about-box">
+                    <label>
+                        <b>First Name</b>
+                    </label>
                     <div>
-                        {formData.userName}
+                        {formData.firstName}
                     </div>
+                    <label>
+                        <b>Last Name</b>
+                    </label>
+                        <div>{formData.lastName} </div>
+
+                    <label>
+                        <b>Email</b>
+                    </label>
+                        <div>{formData.email}</div>
                     <label>
                         Bio
                         <div id="profile-bio">{formData.bio}</div>
@@ -165,21 +163,21 @@ export default function Profile() {
                         Phone Number
                         <div id="profile-phone">{formData.phone}</div>
                     </label>
-                    <div id="edit-profile">
-                        <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick}
-                                    bodyText={"Edit Profile"}/>
-                    </div>
+                    {/*<div id="edit-profile">*/}
+                    {/*    <EditButton isOwn={userID === localStorage.getItem('userID')} handleClick={onClick}*/}
+                    {/*                bodyText={"Edit Profile"}/>*/}
+                    {/*</div>*/}
                     {/*THIS IS THE NEW BROKEN STUFF BELOW*/}
-                    <div>{formData.userName}</div>
-                    <label>Bio
-                        <div>{formData.bio}</div>
-                    </label>
-                    <label>Address
-                        <div>{formData.address}</div>
-                    </label>
-                    <label>Phone Number
-                        <div>{formData.phone}</div>
-                    </label>
+
+                    {/*<label>Bio*/}
+                    {/*    <div>{formData.bio}</div>*/}
+                    {/*</label>*/}
+                    {/*<label>Address*/}
+                    {/*    <div>{formData.address}</div>*/}
+                    {/*</label>*/}
+                    {/*<label>Phone Number*/}
+                    {/*    <div>{formData.phone}</div>*/}
+                    {/*</label>*/}
                     <EditButton isOwn={userID === localStorage.getItem('userID')}
                                 handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"}/>
                     <ItemsButton isOwn={userID === localStorage.getItem('userID')}/>

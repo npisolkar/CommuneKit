@@ -33,7 +33,8 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${localStorage.getItem('userID')}`} id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${localStorage.getItem('userID')}`}
+                        id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -50,8 +51,9 @@ export default function App() {
                   <Route path="/registration" element={<RegistrationPage />}/>
                   <Route path="/favorites" element={<FavoritePage />} />
                   <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
-                  <Route path="/" element={<LoginPage />}/>
                   <Route path="/admin" element={<AdminPage />}/>
+                  {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
+                  <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>
           </Router>
