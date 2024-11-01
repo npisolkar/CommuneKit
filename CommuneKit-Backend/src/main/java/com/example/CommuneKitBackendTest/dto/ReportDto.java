@@ -1,6 +1,6 @@
 package com.example.CommuneKitBackendTest.dto;
 
-import com.example.CommuneKitBackendTest.entity.Report;
+//import com.example.CommuneKitBackendTest.entity.Report;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
