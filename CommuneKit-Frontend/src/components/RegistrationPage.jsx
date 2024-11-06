@@ -13,8 +13,7 @@ function RegistrationPage() {
         password: '',
         address: '',
         bio: '',
-        phone: '',
-        profilePicture: null,
+        phone: ''
 
     });
 
@@ -33,27 +32,16 @@ function RegistrationPage() {
         setFormData({ ...formData, [name]: value });
     };
 
+    const handleLogin = () => {
+        navigate('/login');  // Navigates to /registration when button is clicked
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             // Call the register method from UserService
 
-            //const token = localStorage.getItem('token');
-
-            /*const fdata = new FormData();
-            fdata.append('firstName', formData.firstName);
-            fdata.append('lastName', formData.lastName);
-            fdata.append('userName', formData.userName);
-            fdata.append('password', formData.password);
-            fdata.append('email', formData.email);
-            fdata.append('password', formData.password);
-            fdata.append('phone', formData.phone);
-            fdata.append('address', formData.address);
-            //fdata.append('profilePicture', profilePicture);*/
-
-
-            console.log("formData: " + JSON.stringify(formData));
-            //console.log("fData: " + JSON.stringify(fData));
+            console.log(JSON.stringify(formData));
             const userData = await createUser(JSON.stringify(formData));
             console.log(userData)
             localStorage.setItem('token', "LoggedIn")
@@ -85,11 +73,6 @@ function RegistrationPage() {
     return (
         <div className="auth-container">
             <h2>Registration</h2>
-            <div>
-                <button onClick={handleLoginReturn}>
-                    Go back to Login Page
-                </button>
-            </div>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Profile picture:</label>
@@ -137,8 +120,13 @@ function RegistrationPage() {
 
                 <button type="submit">Register</button>
             </form>
+            <div>
+            <button onClick={handleLogin}>
+                Go to Login Page
+            </button>
+            </div>
         </div>
-    );
+);
 }
 
 export default RegistrationPage;

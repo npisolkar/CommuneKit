@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 import {createReview} from './services/ReviewService.jsx'
+import {getItemById} from "./services/ItemService.jsx";
 
 export default function ReviewPage() {
     let {itemID} = useParams()
@@ -9,20 +10,33 @@ export default function ReviewPage() {
         reviewer:'',
         rating:'',
         reviewText:'',
-        isItem:'',
         targetID:''
     })
+    const navigate = useNavigate()
+    const [userID, setUserID] = useState('')
+    const [rating, setRating] = useState(review.rating)
 
-    async function onSubmit() {
+    useEffect(() => {
+        getItemById(itemID)
+            .then(res => {
+                setUserID(res.data.userID)
+                console.log("itemID:" + itemID)
+            })
+            .catch(err => console.log(err))
+    }, [])
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
         try {
             let submit = {
-                reviewer:'',
-                rating:review.rating,
+                reviewerID: userID,
+                rating: review.rating,
                 reviewText:review.reviewText,
-                isItem:true,
-                targetID:itemID
-            }
-            await createReview(submit)
+                itemID:itemID
+            };
+            const thing = await createReview(submit, itemID);
+            console.log(thing)
+            navigate("/item/" + String(itemID));
         } catch (error) {
             console.log(error);
         }
@@ -33,16 +47,45 @@ export default function ReviewPage() {
         setReview({ ...review, [name]: value });
     };
 
+    function cancel() {
+        navigate("/item/" + itemID)
+    }
+
     return (
         <>
             <div>
                 <h1>Leave A Review</h1>
                 <form onSubmit={onSubmit}>
-                    <input onChange={handleInputChange} name="rating" defaultValue={review.rating}></input>
-                    <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText}></input>
+                    <Stars/>
+                    <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
+                    <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></input>
                     <button type="submit">Submit</button>
                 </form>
             </div>
+            <div>
+                <button onClick={cancel}>Cancel</button>
+            </div>
         </>
+    )
+}
+
+function Star() {
+    return (
+        <>
+            <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+        </>
+    )
+}
+
+function Stars() {
+    let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
+    return (
+        <div id="rating-stars">
+            {
+                stars.map(star => (
+                    star
+                ))
+            }
+        </div>
     )
 }

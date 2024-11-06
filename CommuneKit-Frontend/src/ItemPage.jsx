@@ -3,18 +3,24 @@
 *  isMine: determines whether the item is your own item or another's */
 
 import {useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
-import {updateItem, getItemById} from "./services/ItemService.jsx";
-import {createRequest} from "./services/RequestService.jsx";
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
+import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
+import RequestComponent from "./components/RequestComponent.jsx";
 
-function EditButton({isOwn, handleClick, bodyText}) {
-    if (isOwn) {
+function EditButton({isOwn, handleClick, bodyText, itemID}) {
+    const navigate = useNavigate()
+    function handleDelete() {
+        deleteItem(itemID)
+        navigate("/profile/" + localStorage.getItem("userID") + "/my-items")
+    }
+    if (isOwn === true) {
         return (
             <div>
             <button onClick={handleClick}>{bodyText}</button>
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
             </div>
         )
     }
@@ -23,73 +29,9 @@ function EditButton({isOwn, handleClick, bodyText}) {
     }
 }
 
-function RequestForm(isOwn, itemData, handleSubmit, handleInputChange) {
-    if (isOwn) {
-        return (
-                <div id="request-form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Start Day</label>
-                            <input type="text" name="startDay" value={itemData.startDay}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Month</label>
-                            <input type="text" name="startMonth" value={itemData.startMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Year</label>
-                            <input type="text" name="startYear" value={itemData.startYear}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Day</label>
-                            <input type="text" name="endDay" value={itemData.endDay} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Month</label>
-                            <input type="text" name="endMonth" value={itemData.endMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Year</label>
-                            <input type="text" name="endYear" value={itemData.endYear} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Message</label>
-                            <input type="text" name="message" value={itemData.message} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <button type="submit">Request This Item</button>
-                    </form>
-                </div>
-        )}
-    else {
-        return null
-    }
-}
-
-function ReviewBox(itemID) {
-    return (
-        <>
-                <div id="reviews">
-                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
-                </div>
-
-        </>
-    )
-}
-
-export default function ItemPage(itemID) {
-    const [isClicked, setClicked] = useState(false);
-    let {id} = useParams();
+export default function ItemPage() {
+    const [isClicked, setClicked] = useState(false)
+    let {itemID} = useParams();
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
     const [userID, setUserID] = useState('')
@@ -107,29 +49,56 @@ export default function ItemPage(itemID) {
         endDay: '',
         endMonth: '',
         endYear: '',
-        message: ""
+        message: "",
+        itemID:''
     });
+    const [hasBorrowed, setHasBorrowed] = useState(false)
+    const [currentRequests, setCurrentRequests] = useState([])
+    function compareID(currRequest) {
+        return JSON.stringify(currRequest.borrowingUserId) === localStorage.getItem("userID")
+    }
 
     function onClick() {
         setClicked(!isClicked);
     }
 
     useEffect(() => {
-        if (isOwn === false) {
-            setIsOwn(true);
-        }
-        getItemById({itemID: id})
+        console.log("itemId:" + itemID)
+
+        //fetch single item
+        getItemById(itemID)
             .then((res) => {
                 setItemData(res.data);
                 console.log(JSON.stringify(res.data));
+                console.log("userid:" + JSON.stringify(res.data.userID))
                 setUserID(res.data.userID)
+                if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
+                    setIsOwn(true);
+                    console.log("isown:" + isOwn)
+                }
+                else {
+                    console.log("not is own")
+                }
             })
             .catch((error) => {
                 console.log(error);
             })
-        getReviewsById(itemData.itemID)
+
+        //fetch reviews
+        getReviewsById(itemID)
             .then(res => {
                 setReviews(res.data)
+            })
+            .catch (err => console.log(err))
+
+        //fetch requests
+        getApprovedRequestsById(itemID)
+            .then(res => {
+                setCurrentRequests(res.data)
+                console.log("requests: " + JSON.stringify(res.data))
+                //check if item has been borrowed by user before
+                console.log("current user:" + localStorage.getItem("userID"))
+                setHasBorrowed(res.data.some(compareID))
             })
             .catch (err => console.log(err))
     }, [])
@@ -139,16 +108,19 @@ export default function ItemPage(itemID) {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
                 lendingUserId: userID,
+                itemId:itemID,
                 startDay: requestData.startDay,
                 startMonth: requestData.startMonth,
                 startYear: requestData.startYear,
                 endDay: requestData.endDay,
                 endMonth: requestData.endMonth,
                 endYear: requestData.endYear,
-                message: requestData.message
+                message: requestData.message,
+                isApproved:null
             }
-            const requestData = await createRequest(JSON.stringify(requestJson));
-            console.log("submit:" + requestData);
+            console.log("trying to submit request: " + JSON.stringify(requestJson))
+            const responseData = await createRequest(JSON.stringify(requestJson));
+            console.log("submit:" + responseData);
         } catch (error) {
             console.log(error);
         }
@@ -156,13 +128,11 @@ export default function ItemPage(itemID) {
 
     async function handleUploadItem() {
         try {
-            let itemJson = {
-                itemName: itemData.itemName,
-                itemDescription: itemData.itemDescription,
-                itemCategory: itemData.itemCategory,
-            }
-            const responseData = await updateItem(userID, JSON.stringify(itemJson));
+            console.log("trying to submit " + JSON.stringify(itemData))
+            const responseData = await updateItem(itemID, itemData);
             console.log("submit:" + responseData);
+            setItemData(responseData.data)
+            onClick()
         } catch (error) {
             console.log(error);
         }
@@ -172,48 +142,140 @@ export default function ItemPage(itemID) {
         const {name, value} = e.target;
         setRequestData({...requestData, [name]: value});
     };
+
+    const handleItemChange = (e) => {
+        const {name, value} = e.target;
+        setItemData({...itemData, [name]: value})
+    }
+
+    const [isIllegalClicked, setIllegalClick] = useState(false)
+    function handleIllegalClick() {
+        setIllegalClick(!isIllegalClicked)
+    }
     return (
         <>
-        <div id="item-page-header">
+            <div id="item-page-header">
                 <h2>Item Page</h2>
             </div>
             <div id="edit-item-button">
-                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
-            </div>
-            <RequestForm isOwn={isOwn} itemData={itemData} handleSubmit={handleSubmit}
-                         handleInputChange={handleInputChange}/>
-            <div id="item-reviews">
-                <ReviewBox itemID={itemID}/>
-            </div>
-            <div id="reviews-section">
-                {
-                    reviews.map(review => (
-                        <ReviewComponent userID={id} itemID={itemData.itemID} reviewDto={review}/>
-                    ))
-                }
+                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
             </div>
             {isClicked ?
                 <div id="item-info">
                     <form onSubmit={handleUploadItem}>
                         <div id="item-image">Item Image</div>
-                        <input type="text" name="itemName" defaultValue={itemData.itemName} required/>
-                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required/>
-                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required/>
+                        <input type="text" name="itemName" defaultValue={itemData.itemName} required onChange={handleItemChange}/>
+                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required onChange={handleItemChange}/>
+                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
                         <button type="submit">Submit Changes</button>
                     </form>
-                    <div id="delete-button">
-                        <button>Delete Item</button>
-                    </div>
                 </div>
                 :
                 <div>
-                    <div className="item-column">
-                        <div id="item-image">{itemData.itemName}</div>
-                        <div id="item-name">{itemData.itemDescription}</div>
-                        <div id="item-desc">{itemData.itemCategory}</div>
+                    <div id="item-info">
+                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
                 </div>
             }
+            {isOwn ?
+                <table id="current-requests">
+                    <thead>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        currentRequests.map(request => (
+                            <RequestComponent data={request} isLending={false}/>
+                        ))
+                    }
+                    </tbody>
+                </table>
+                : <div>
+                    <div id="request-form">
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-group">
+                            <label>Start Day</label>
+                            <input type="text" name="startDay" value={requestData.startDay}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Month</label>
+                            <input type="text" name="startMonth" value={requestData.startMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Start Year</label>
+                            <input type="text" name="startYear" value={requestData.startYear}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Day</label>
+                            <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Month</label>
+                            <input type="text" name="endMonth" value={requestData.endMonth}
+                                   onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>End Year</label>
+                            <input type="text" name="endYear" value={requestData.endYear} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <div className="form-group">
+                            <label>Message</label>
+                            <input type="text" name="message" value={requestData.message} onChange={handleInputChange}
+                                   required/>
+                        </div>
+                        <button type="submit">Request This Item</button>
+                    </form>
+                </div>
+                    {hasBorrowed ?
+                <div id="reviews-button">
+                    <Link to={"/item/" + itemID + "/create-review"}><button>Leave a Review</button></Link>
+                </div>
+                        :
+                        <div id="reviews-button">
+                            <button onClick={handleIllegalClick}>Leave a Review</button>
+                            <CantReviewNotif isClicked={isIllegalClicked}/>
+                        </div>}
+                </div>
+            }
+            <div id="reviews-header">
+                <h2>Reviews</h2>
+            </div>
+            <div id="reviews-section">
+                {
+                    reviews.map(review => (
+                        <ReviewComponent reviewDto={review}/>
+                    ))
+                }
+            </div>
+            <div id="item-user">
+                <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
+            </div>
         </>
+    )
+}
+
+function CantReviewNotif(isClicked) {
+    return (
+        <>
+            {isClicked ?
+        <div id="cant-review">
+            You need to borrow an item before you can review it.
+        </div> :
+                null}
+            </>
     )
 }

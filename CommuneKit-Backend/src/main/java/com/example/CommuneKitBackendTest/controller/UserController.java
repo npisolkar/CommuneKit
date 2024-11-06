@@ -2,6 +2,7 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
+import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
 import com.example.CommuneKitBackendTest.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,10 @@ public class UserController {
     public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userDto) {
         UserDto user = userService.loginUser(userDto);
         if (user == null) {
+            //means username not in DB
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } else if (!user.getPassword().equals(userDto.getPassword())) {
+            //means correct username and incorrect password
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         return ResponseEntity.ok(user);
@@ -67,6 +72,7 @@ public class UserController {
         return ResponseEntity.ok(basicUserDto);
     }
 
+
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<UserDto> updateUser(@PathVariable("id") Long userID, @RequestBody UserDto updatedUser) {
@@ -80,19 +86,23 @@ public class UserController {
         userService.deleteUser(UserID);
         return ResponseEntity.ok("User successfully deleted");
     }
-/*
-    @PutMapping("/image/{id}")
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<MultipartFile> updateUserImage(@PathVariable("id") Long userID) {
-        //UserDto userDto = userService.updateUserImage(userID, image);
-        return ResponseEntity.ok(null);
+    @DeleteMapping("/ban/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> banUser(@PathVariable("id") long UserID) {
+        userService.banUser(UserID);
+        return ResponseEntity.ok("User successfully banned");
     }
 
-    @GetMapping("/image/{id}")
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<UserDto> getUserImage(@PathVariable("id") Long userID, @RequestParam MultipartFile image) {
-        UserDto userDto = userService.updateUserImage(userID, image);
-        return ResponseEntity.ok(userDto);
-    }*/
+    @PostMapping("/reset-password")
+    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
+        boolean isReset = userService.resetPassword(passwordResetDto);
+
+        if (isReset) {
+            return ResponseEntity.ok("Password successfully reset.");
+        } else {
+            return new ResponseEntity<>("Password reset failed. Invalid credentials.", HttpStatus.UNAUTHORIZED);
+        }
+    }
 }
 

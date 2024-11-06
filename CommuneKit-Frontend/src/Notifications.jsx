@@ -1,5 +1,6 @@
 import './styles.css'
 import { useState, useEffect } from 'react'
+import {updateRequest} from "./services/RequestService.jsx";
 
 export default function Notifications() {
     const [borrowerPendingRequests, setBorrowerPendingRequests] = useState([]);
@@ -52,37 +53,65 @@ export default function Notifications() {
     }, [userID]); // Add userID as a dependency so it re-fetches if the userID changes
 
     const handleApproval = async (requestId, isApproved) => {
+        const requestBody = {
+            isApproved: isApproved, // field you want to update
+        };
+
         try {
-            const response = await fetch(`http://localhost:8080/api/requests/${requestId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ isApproved }),
-            });
+            const response = await updateRequest(requestId, requestBody);
 
             if (response.ok) {
-                // Successfully updated, now remove or update the request in the pending list
-                setLenderPendingRequests(lenderPendingRequests.filter(request => request.requestId !== requestId));
-
-                // Optionally, you can add the request to the approved/denied list based on `isApproved`
-                if (isApproved) {
-                    const approvedRequest = lenderPendingRequests.find(req => req.requestId === requestId);
-                    setLenderApprovedRequests([...lenderApprovedRequests, approvedRequest]);
-                } else {
-                    const deniedRequest = lenderPendingRequests.find(req => req.requestId === requestId);
-                    setLenderDeniedRequests([...lenderDeniedRequests, deniedRequest]);
-                }
+                const data = await response.json();
+                console.log('Success:', data);
             } else {
-                console.error("Failed to update the request");
+                console.error('Error:', response.statusText);
             }
         } catch (error) {
-            console.error("Error while approving/denying request:", error);
+            console.error('Error:', error);
         }
     };
 
-    const formatRequest = (request) => {
-        return `Request ID: ${request.requestId}, Borrowing User ID: ${request.borrowingUserId}, Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
+    const formatRequestBorrower = (request) => {
+        return(
+            <div style = {{
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '10px',
+                border: '2px solid green',
+                margin: '4px'
+            }}>
+                <div>Request ID: {request.requestId}</div>
+                <div><a href={"/profile/"+request.lendingUserId}>Lender ID: {request.lendingUserId}</a></div>
+                <div><a href={"/item/"+request.itemId}>Item ID: {request.itemId}</a></div>
+                <div>Start Date: {request.startDay}/{request.startMonth}/{request.startYear}</div>
+                <div>End Date: {request.endDay}/{request.endMonth}/{request.endYear}</div>
+
+
+            </div>
+
+        )
+        // Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
+    };
+    const formatRequestLender = (request) => {
+        return(
+            <div style = {{
+                display: 'flex',
+                justifyContent: 'space-between',
+                gap: '10px',
+                border: '2px solid green',
+                margin: '4px'
+            }}>
+                <div>Request ID: {request.requestId}</div>
+                <div><a href={"/profile/"+request.borrowingUserId}>Borrower ID: {request.borrowingUserId}</a></div>
+                <div><a href={"/item/"+request.itemId}>Item ID: {request.itemId}</a></div>
+                <div>Start Date: {request.startDay}/{request.startMonth}/{request.startYear}</div>
+                <div>End Date: {request.endDay}/{request.endMonth}/{request.endYear}</div>
+
+
+            </div>
+
+        )
+        // Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
     };
 
     if (loading) {
@@ -103,7 +132,7 @@ export default function Notifications() {
                 {borrowerPendingRequests.length > 0 ? (
                     <ul>
                         {borrowerPendingRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>{formatRequestBorrower(request)}</li>
                         ))}
                     </ul>
                 ) : (
@@ -114,7 +143,7 @@ export default function Notifications() {
                 {borrowerApprovedRequests.length > 0 ? (
                     <ul>
                         {borrowerApprovedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>{formatRequestBorrower(request)}</li>
                         ))}
                     </ul>
                 ) : (
@@ -125,7 +154,7 @@ export default function Notifications() {
                 {borrowerDeniedRequests.length > 0 ? (
                     <ul>
                         {borrowerDeniedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>{formatRequestBorrower(request)}</li>
                         ))}
                     </ul>
                 ) : (
@@ -141,10 +170,14 @@ export default function Notifications() {
                 {lenderPendingRequests.length > 0 ? (
                     <ul>
                         {lenderPendingRequests.map(request => (
-                            <li key={request.requestId}>
-                                {formatRequest(request)}
+                            <li style={{
+                                paddingBottom: '10px'
+                            }}
+                                key={request.requestId}>
+                                {formatRequestLender(request)}
                                 <button onClick={() => handleApproval(request.requestId, true)}>Approve</button>
                                 <button onClick={() => handleApproval(request.requestId, false)}>Deny</button>
+
                             </li>
                         ))}
                     </ul>
@@ -156,7 +189,7 @@ export default function Notifications() {
                 {lenderApprovedRequests.length > 0 ? (
                     <ul>
                         {lenderApprovedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>{formatRequestLender(request)}</li>
                         ))}
                     </ul>
                 ) : (
@@ -167,7 +200,7 @@ export default function Notifications() {
                 {lenderDeniedRequests.length > 0 ? (
                     <ul>
                         {lenderDeniedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequest(request)}</li>
+                            <li key={request.requestId}>{formatRequestLender(request)}</li>
                         ))}
                     </ul>
                 ) : (

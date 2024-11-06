@@ -7,7 +7,6 @@ body {
     font-family: sans-serif;
     margin: 20px;
     padding: 0;
-    background-color:rgb(247,247,250);
 }
 
 h1 {
@@ -87,9 +86,9 @@ input, label {
 .menu-bar {
     position:fixed;
     top:0;
-    height:100px;
+    left:0;
     background-color:rgba(255,255,255,100%);
-    padding-left:500px;
+    padding-left:25%;
 }
 
 #logo {
@@ -170,37 +169,27 @@ input, label {
 /* search page */
 .search-bar {
     display:flex;
-    justify-content:right;
+    justify-content:left;
     align-items:center;
-    top:120px;
+    top:150px;
     position:absolute;
-    padding-left:400px;
+    padding-left:300px;
 }
 
 #search-toggles {
-    top:200px;
-    padding-left:500px;
+    top:137px;
+    padding-left:0px;
     position:absolute;
 }
 
 .search-toggle {
     display:inline-block;
-    text-align:center;
+    text-align:left;
     position:static;
-    padding-left:100px;
+    padding-left:25px;
 }
 
 /* profile page */
-#profile-posted {
-    position:absolute;
-    left:500px;
-}
-
-#profile-borrowed {
-    position:absolute;
-    left:1000px;
-}
-
 #edit-profile {
     position:absolute;
     z-index:0;
@@ -233,6 +222,11 @@ input, label {
 }
 
 /* my items page */
+#create-item {
+    left:50%;
+    padding-top:20px;
+    position:absolute;
+}
 
 /* notifications */
 #notif-title {
@@ -244,8 +238,8 @@ input, label {
     text-align:left;
 }
 
-/*
-/* individual item's page
+
+/* individual item's page */
 #item-page-header {
     position:absolute;
     top:150px;
@@ -258,9 +252,80 @@ input, label {
     left:900px;
 }
 
-.item-column {
+.form-group {
     display:inline-block;
-    text-align:center;
-    margin-left:300px;
-    width:200px;
-}*/
+}
+
+#reviews-button {
+    position:relative;
+    left: 50%;
+}
+
+#reviews-header {
+    position:absolute;
+    top:600px;
+    left:50%;
+}
+
+#reviews-section {
+    position:absolute;
+    top:700px;
+    margin-left:50px;
+}
+
+.item-review {
+    border: 1px black solid;
+    height:200px;
+    width:1000px;
+    padding:10px;
+    margin:10px;
+}
+
+.delete-button {
+    color:red;
+}
+
+#item-info {
+    left:50%;
+    padding-bottom:50px;
+    position:relative;
+}
+
+.item-member {
+    border: 1px solid black;
+    width:300px;
+}
+
+#item-desc {
+    height:200px;
+}
+
+#item-user {
+    top:10%;
+    position:absolute;
+}
+
+#cant-review {
+    height:200px;
+    width:500px;
+    background-color:white;
+    z-index:2;
+}
+
+/* create reviews page */
+#rating-stars {
+    display:flex;
+    align-content:center;
+    flex-direction:row;
+}
+
+.star-filled {
+    height:50px;
+    width:50px;
+}
+
+.star {
+    height:50px;
+    width:50px;
+    filter:grayscale(100%);
+}
