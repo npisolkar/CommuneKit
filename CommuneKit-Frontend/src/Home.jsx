@@ -18,6 +18,8 @@ export default function Home() {
 
         if (!userID) {
             navigate('/login');
+        } else if (localStorage.getItem("role") === "ADMIN") {
+            navigate('/admin');
         } else {
             loadItems(userID);
         }

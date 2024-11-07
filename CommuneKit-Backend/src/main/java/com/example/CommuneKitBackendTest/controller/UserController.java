@@ -24,7 +24,13 @@ public class UserController {
     public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userDto) {
         UserDto user = userService.loginUser(userDto);
         if (user == null) {
+            //means username not in DB
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        } else if (!user.getPassword().equals(userDto.getPassword())) {
+            //means correct username and incorrect password
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } else if (user.isBanned()){
+            return new ResponseEntity<>(HttpStatus.GONE);
         }
         return ResponseEntity.ok(user);
     }
