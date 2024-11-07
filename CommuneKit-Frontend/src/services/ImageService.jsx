@@ -20,7 +20,14 @@ export function uploadImage(formData) {
     try {
         console.log('Image uploading...');
         //formData contains one attribute "image"
-        return axios.post(IMAGE_API_BASE_URL, formData);
+        return axios.post(IMAGE_API_BASE_URL, formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                    // "x-rapidapi-host": "file-upload8.p.rapidapi.com",
+                    // "x-rapidapi-key": "your-rapidapi-key-here",
+                },
+            });
     } catch (error) {
         console.error('Error uploading image:', error);
     }
