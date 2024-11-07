@@ -15,7 +15,7 @@ export function getApprovedRequests(userId) {
 export function updateRequest(requestId, requestDto) {
     try {
         console.log("in updateRequest:" + requestDto)
-        return axios.put(API_BASE_URL + "/" + requestId, requestDto, {
+        return axios.put(REQUEST_BASE_URL + "/" + requestId, requestDto, {
             headers: {
                 'Content-Type': 'application/json'
             },

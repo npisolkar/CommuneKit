@@ -196,54 +196,73 @@ export default function ItemPage() {
                     </tbody>
                 </table>
                 : <div>
+                    <table id="current-requests">
+                        <thead>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            currentRequests.map(request => (
+                                <RequestComponent data={request} isLending={false}/>
+                            ))
+                        }
+                        </tbody>
+                    </table>
                     <div id="request-form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Start Day</label>
-                            <input type="text" name="startDay" value={requestData.startDay}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Month</label>
-                            <input type="text" name="startMonth" value={requestData.startMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Year</label>
-                            <input type="text" name="startYear" value={requestData.startYear}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Day</label>
-                            <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Month</label>
-                            <input type="text" name="endMonth" value={requestData.endMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Year</label>
-                            <input type="text" name="endYear" value={requestData.endYear} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Message</label>
-                            <input type="text" name="message" value={requestData.message} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <button type="submit">Request This Item</button>
-                    </form>
-                </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Start Day</label>
+                                <input type="text" name="startDay" value={requestData.startDay}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Month</label>
+                                <input type="text" name="startMonth" value={requestData.startMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Year</label>
+                                <input type="text" name="startYear" value={requestData.startYear}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Day</label>
+                                <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Month</label>
+                                <input type="text" name="endMonth" value={requestData.endMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Year</label>
+                                <input type="text" name="endYear" value={requestData.endYear}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Message</label>
+                                <input type="text" name="message" value={requestData.message}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <button type="submit">Request This Item</button>
+                        </form>
+                    </div>
                     {hasBorrowed ?
-                <div id="reviews-button">
-                    <Link to={"/item/" + itemID + "/create-review"}><button>Leave a Review</button></Link>
-                </div>
+                        <div id="reviews-button">
+                            <Link to={"/item/" + itemID + "/create-review"}>
+                                <button>Leave a Review</button>
+                            </Link>
+                        </div>
                         :
                         <div id="reviews-button">
                             <button onClick={handleIllegalClick}>Leave a Review</button>
@@ -262,7 +281,9 @@ export default function ItemPage() {
                 }
             </div>
             <div id="item-user">
-                <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
+                <Link to={"/profile/" + itemData.userID}>
+                    <button>To User Profile</button>
+                </Link>
             </div>
         </>
     )
