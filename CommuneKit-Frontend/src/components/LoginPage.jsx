@@ -54,6 +54,8 @@ function LoginPage(){
                 setError("Username not in Database, please register or try with a valid username")
             } else if (error.status === 401) {
                 setError("password is incorrect, please try again")
+            } else if (error.status === 410) {
+                setError("you have been banned. Be better")
             } else {
                 setError(error.message)
             }
