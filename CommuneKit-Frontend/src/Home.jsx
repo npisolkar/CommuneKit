@@ -2,7 +2,7 @@
 import './styles.css'
 import ItemTable from './ItemTable.jsx'
 import {useEffect, useState} from 'react'
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {getAllItems, getItemsByUser, getMyBorrows} from "./services/ItemService.jsx";
 
 export default function Home() {
@@ -55,13 +55,18 @@ export default function Home() {
     return (
         <>
             <div className="home-items" id="posted-header">
-                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")} />
+                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
             </div>
             {/*<div className="home-items" id="borrowed-header">*/}
             {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
             {/*</div>*/}
             <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")} />
+                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")}/>
+            </div>
+            <div id="create-item-home">
+                <Link to="/newitem">
+                    <button>Create New Item</button>
+                </Link>
             </div>
         </>
     );
