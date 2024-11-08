@@ -45,7 +45,7 @@ public class User {
 
     private String role;
 
-    private byte[] profilePicture;
+    private Long profilePicture;
 
     private Double latitude;
 

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.lang.Exception;
 import java.util.List;
 
@@ -72,6 +74,18 @@ public class UserController {
         return ResponseEntity.ok(basicUserDto);
     }
 
+    @PutMapping("updatePfp/{userID}/{imageID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> updateUserImage(@PathVariable("userID") Long userID,
+                                                  @PathVariable("imageID") Long imageID) {
+        try {
+            userService.updateUserImage(userID, imageID);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})

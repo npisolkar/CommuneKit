@@ -56,6 +56,7 @@ export default function Home() {
 
     return (
         <>
+
             <div className="home-items" id="posted-header">
                 <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")} />
             </div>
@@ -63,8 +64,9 @@ export default function Home() {
             {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
             {/*</div>*/}
             <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")} />
+                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")}/>
             </div>
         </>
-    );
+    )
+   // }
 }

@@ -4,21 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="Added search by rating">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/MessageController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/MessageDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/MessageMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/repository/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/MessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/MessageServiceImpl.java" afterDir="false" />
+    <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Search.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/LoginPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/LoginPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ReportPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ReportPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/RequestService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/RequestService.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ImageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ImageServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/UserService.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/UserService.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,17 +24,12 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$/.." value="0ebf91273b516202e3258bd59cdb787aad36fa29" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -50,7 +41,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/npisolkar/CommuneKit.git&quot;,
-    &quot;accountId&quot;: &quot;55b68fec-6c8e-4088-83eb-9951d6db1ea4&quot;
+    &quot;accountId&quot;: &quot;e2e9d355-65b8-4d7a-a71c-e9342048e061&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -66,29 +57,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Maven.CommuneKitBackendTest [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.CommuneKitBackendTestApplication.executor": "Run",
-    "git-widget-placeholder": "messages",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Maven.CommuneKitBackendTest [org.apache.maven.plugins:maven-clean-plugin:3.3.2:clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.CommuneKitBackendTestApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;ProfileFixingAndPics&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rohangaddam/Desktop/HW/CS/CS 307/CommuneKit/CommuneKit/CommuneKit-Backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="CommuneKitBackendTestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="CommuneKitBackendTest" />
@@ -121,8 +113,9 @@
       <workItem from="1729540610973" duration="1075000" />
       <workItem from="1729787284574" duration="3430000" />
       <workItem from="1730038867614" duration="4977000" />
-      <workItem from="1730423015305" duration="14552000" />
-      <workItem from="1730925395774" duration="14011000" />
+      <workItem from="1730127308383" duration="10558000" />
+      <workItem from="1730160567549" duration="11876000" />
+      <workItem from="1731090884715" duration="2487000" />
     </task>
     <servers />
   </component>
@@ -153,7 +146,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added search by rating" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added search by rating" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>

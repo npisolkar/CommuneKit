@@ -4,7 +4,7 @@ import { createUser } from "../services/UserService.jsx";
 
 function RegistrationPage() {
     const navigate = useNavigate();
-    const [profilePicture, setProfilePicture] = useState(' ');
+    //const [profilePicture, setProfilePicture] = useState(' ');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -18,10 +18,14 @@ function RegistrationPage() {
     });
 
     //followed this for explanation: https://www.youtube.com/watch?v=YOGgaYUW1OA
-    const handleFileChange = (e) => {
-        console.log(e.target.file)
-        setProfilePicture(e.target.files[0]);
-    }
+    // const handleFileChange = (e) => {
+    //     console.log(e.target.file)
+    //     setProfilePicture(e.target.files[0]);
+    // }
+
+    const handleLoginReturn = () => {
+        navigate('/login');  // Navigates to /registration when button is clicked
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

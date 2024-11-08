@@ -15,6 +15,11 @@ public interface UserService {
 
     BasicUserDto getBasicUserInfoById(long userId);
 
+    void updateUserImage(Long userID, Long imageId);
+/*
+    MultipartFile getUserImageById(long userID);
+*/
+
     UserDto updateUser(Long userID, UserDto updatedUser);
 
     void deleteUser(Long userID);
