@@ -79,6 +79,7 @@ function Star() {
 
 function Stars() {
     let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
+    //click dependency, re-render on click
     return (
         <div id="rating-stars">
             {

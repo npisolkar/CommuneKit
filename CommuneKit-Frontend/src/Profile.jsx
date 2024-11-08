@@ -60,6 +60,7 @@ export default function Profile() {
     useEffect(() => {
         getUserById(userID)
             .then(res => {
+                console.log("formdata before fetch: " + JSON.stringify(formData))
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
                 //console.log("isown:" + isOwn)
@@ -67,7 +68,7 @@ export default function Profile() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [navigate])
+    }, [navigate, isClicked])
 
     function onClick() {
         setClicked(!isClicked);

@@ -8,7 +8,7 @@ export default function NewItem() {
         itemName: '',
         itemDescription: '',
         itemCategory: '',
-        userID: '',
+        userID: localStorage.getItem("userID"),
     })
     const navigate = useNavigate()
 
@@ -34,14 +34,15 @@ export default function NewItem() {
     return (
         <div id="new-item-info">
             <form onSubmit={handleUploadItem}>
-                <div id="item-image">Item Image</div>
+                <div id="create-image">Item Image</div>
+                <label htmlFor="itemName" className="item-head">Item Name</label>
                 <input type="text" name="itemName" defaultValue={itemData.itemName} required
                        onChange={handleItemChange}/>
+                <label htmlFor="itemDescription" className="item-head">Description</label>
                 <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required
                        onChange={handleItemChange}/>
+                <label htmlFor="itemCategory" className="item-head">Category</label>
                 <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required
-                       onChange={handleItemChange}/>
-                <input type="text" name="userID" defaultValue={itemData.userID} required
                        onChange={handleItemChange}/>
                 <button type="submit">Submit Changes</button>
             </form>
