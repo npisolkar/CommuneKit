@@ -4,11 +4,16 @@ import {getReports, updateReports} from "../services/ReportService.jsx";
 import {updateRequest} from "../services/RequestService.jsx";
 import {banUser} from "../services/UserService.jsx";
 export default function AdminPage(){
+    const role = localStorage.getItem('role');
     const navigate = useNavigate();
     const [pendingReports, setPendingReports] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (! (role === 'ADMIN')) {
+            navigate('/home');
+        }
+
         const fetchReports = async () => {
             try{
                 const pendingReportResponse = await fetch(`http://localhost:8080/api/reports/pending`);

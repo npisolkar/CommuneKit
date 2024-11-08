@@ -53,6 +53,7 @@ export default function Search() {
     };
 
     const formatItemResult = (item) => {
+        const distance = distances[item.itemID];
         return (
             <div key={item.itemID} style={{
                 display: 'flex',
@@ -65,7 +66,7 @@ export default function Search() {
                 <div>Description: {item.itemDescription}</div>
                 <div>Category: {item.itemCategory}</div>
                 <div><a href={`/profile/${item.userID ?? 'unknown'}`}>User ID: {item.userID ?? 'N/A'}</a></div>
-                <div>Distance: {distances[item.itemID] ? `${distances[item.itemID]} miles` : 'Loading...'}</div>
+                <div>Distance: {distance !== undefined ? `${distance} miles` : 'Loading...'}</div>
                 <div>Rating: {ratings[item.itemID] !== undefined ? ratings[item.itemID] : 'Loading...'}</div>
             </div>
         );
@@ -97,28 +98,28 @@ export default function Search() {
                         onChange={(e) => setSort(e.target.value)}
                     >
                         <option value="time-asc">Oldest</option>
-                        <option value="time-desc">Newest</option>
+                        {/*<option value="time-desc">Newest</option>*/}
                         <option value="rating">Rating</option>
-                        <option value="a-z">A-Z</option>
-                        <option value="z-a">Z-A</option>
+                        {/*<option value="a-z">A-Z</option>*/}
+                        {/*<option value="z-a">Z-A</option>*/}
                         <option value="distance">Distance</option>
                     </select>
                 </div>
-                <div className="search-toggle">
-                    <h4>Filter</h4>
-                    <select name="filter-options" id="filter-options">
-                        <option value="10mi">10 miles</option>
-                        <option value="5mi">5 miles</option>
-                        <option value="2mi">2 miles</option>
-                        <option value="1mi">1 mile</option>
-                    </select>
-                </div>
-                <div className="search-toggle">
-                    <h4>Toggles</h4>
-                    <select name="toggle-options" id="toggle-options">
-                        <option value="idk">IDK</option>
-                    </select>
-                </div>
+                {/*<div className="search-toggle">*/}
+                {/*    <h4>Filter</h4>*/}
+                {/*    <select name="filter-options" id="filter-options">*/}
+                {/*        <option value="10mi">10 miles</option>*/}
+                {/*        <option value="5mi">5 miles</option>*/}
+                {/*        <option value="2mi">2 miles</option>*/}
+                {/*        <option value="1mi">1 mile</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
+                {/*<div className="search-toggle">*/}
+                {/*    <h4>Toggles</h4>*/}
+                {/*    <select name="toggle-options" id="toggle-options">*/}
+                {/*        <option value="idk">IDK</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
             </div>
 
             <div className="search-results">

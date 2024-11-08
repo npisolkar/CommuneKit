@@ -86,9 +86,9 @@ input, label {
 .menu-bar {
     position:fixed;
     top:0;
-    height:100px;
+    left:0;
     background-color:rgba(255,255,255,100%);
-    padding-left:500px;
+    padding-left:25%;
 }
 
 #logo {
@@ -303,6 +303,13 @@ input, label {
 #item-user {
     top:10%;
     position:absolute;
+}
+
+#cant-review {
+    height:200px;
+    width:500px;
+    background-color:white;
+    z-index:2;
 }
 
 /* create reviews page */

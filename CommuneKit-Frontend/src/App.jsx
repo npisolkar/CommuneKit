@@ -1,5 +1,5 @@
 // @ts-ignore
-import { useState } from 'react'
+import {useEffect, useState} from 'react'
 import './styles.css'
 import Home from "./Home.jsx"
 import Search from "./Search.jsx"
@@ -20,8 +20,14 @@ import ReportPage from "./components/ReportPage.jsx";
 
 
 export default function App() {
-    let userID = localStorage.getItem('userID')
+    const [userID, setUserID] = useState( localStorage.getItem("userID") );
+    // const navigate = useNavigate();
+    useEffect(() => {
+        setUserID(localStorage.getItem('userID'))
+    }, [])
+    //const userID = localStorage.getItem('userID')
     console.log("userID found to be: " + userID);
+
   return (
       <>
       <Router>
@@ -33,15 +39,15 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${localStorage.getItem('userID')}`} id="profile-button"><button>Profile</button></Link>
+                  <Link to={`/profile/${userID}`}
+                        id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
-                  <Route path="/profile/:userID" element={<Profile isOwn={true}/>} />
+                  <Route path="/profile/:userID" element={<Profile/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
-                  <Route path="/profile/my-items/dummypage" element={<ItemPage isOwn={true}/>}/>
                   <Route path="/item/:itemID" element={<ItemPage />}/>
                   <Route path="/item/:itemID/create-review" element ={<ReviewPage />}/>
                   <Route path="/newitem" element={<NewItem />}/>
@@ -50,9 +56,10 @@ export default function App() {
                   <Route path="/registration" element={<RegistrationPage />}/>
                   <Route path="/favorites" element={<FavoritePage />} />
                   <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
-                  <Route path="/" element={<LoginPage />}/>
                   <Route path="/admin" element={<AdminPage />}/>
+                  {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
                   <Route path="/report/:userID" element = {<ReportPage/>}/>
+                  <Route path="/" element={<LoginPage />}/>
               </Routes>
           </div>
           </Router>
@@ -96,5 +103,5 @@ function MenuBar() {
                 </ul>
             </div>
         </>
-    )
+    );
 }

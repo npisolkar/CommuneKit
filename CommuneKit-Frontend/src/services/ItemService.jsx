@@ -35,7 +35,7 @@ export function getRating(itemID) {
 
 
 export function updateItem(userID, itemDto) {
-    return axios.put(`${ITEM_API_BASE_URL}/${itemDto.itemID}`, itemDto, {
+    return axios.put(ITEM_API_BASE_URL + "/" + JSON.stringify(itemDto.itemID), itemDto, {
         headers: {
             'Content-Type': 'application/json'
         }

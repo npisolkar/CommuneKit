@@ -3,19 +3,24 @@
 *  isMine: determines whether the item is your own item or another's */
 
 import {useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
-import {updateItem, getItemById, getItemsByUser} from "./services/ItemService.jsx";
+import {Link, useParams, useNavigate} from 'react-router-dom';
+import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
 import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 import RequestComponent from "./components/RequestComponent.jsx";
 
-function EditButton({isOwn, handleClick, bodyText}) {
+function EditButton({isOwn, handleClick, bodyText, itemID}) {
+    const navigate = useNavigate()
+    function handleDelete() {
+        deleteItem(itemID)
+        navigate("/profile/" + localStorage.getItem("userID") + "/my-items")
+    }
     if (isOwn === true) {
         return (
             <div>
             <button onClick={handleClick}>{bodyText}</button>
-            <button>Delete</button>
+            <button onClick={handleDelete}>Delete</button>
             </div>
         )
     }
@@ -49,12 +54,8 @@ export default function ItemPage() {
     });
     const [hasBorrowed, setHasBorrowed] = useState(false)
     const [currentRequests, setCurrentRequests] = useState([])
-    const [requestedIDs, setRequestedIDs] = useState([])
-    function extractID(request) {
-        return request.borrowingUserId
-    }
-    function compareID(currID) {
-        return currID === localStorage.getItem("userID")
+    function compareID(currRequest) {
+        return JSON.stringify(currRequest.borrowingUserId) === localStorage.getItem("userID")
     }
 
     function onClick() {
@@ -94,12 +95,10 @@ export default function ItemPage() {
         getApprovedRequestsById(itemID)
             .then(res => {
                 setCurrentRequests(res.data)
-                console.log("requests: " + JSON.stringify(currentRequests))
+                console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
-                setRequestedIDs(currentRequests.map(extractID))
-                console.log("requested ids:" + JSON.stringify(requestedIDs))
-                setHasBorrowed(requestedIDs.some(compareID))
-                console.log("hasborrowed: " + hasBorrowed)
+                console.log("current user:" + localStorage.getItem("userID"))
+                setHasBorrowed(res.data.some(compareID))
             })
             .catch (err => console.log(err))
     }, [])
@@ -130,7 +129,7 @@ export default function ItemPage() {
     async function handleUploadItem() {
         try {
             console.log("trying to submit " + JSON.stringify(itemData))
-            const responseData = await updateItem(itemID, JSON.stringify(itemData));
+            const responseData = await updateItem(itemID, itemData);
             console.log("submit:" + responseData);
             setItemData(responseData.data)
             onClick()
@@ -148,13 +147,18 @@ export default function ItemPage() {
         const {name, value} = e.target;
         setItemData({...itemData, [name]: value})
     }
+
+    const [isIllegalClicked, setIllegalClick] = useState(false)
+    function handleIllegalClick() {
+        setIllegalClick(!isIllegalClicked)
+    }
     return (
         <>
             <div id="item-page-header">
                 <h2>Item Page</h2>
             </div>
             <div id="edit-item-button">
-                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}/>
+                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
             </div>
             {isClicked ?
                 <div id="item-info">
@@ -165,9 +169,6 @@ export default function ItemPage() {
                         <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
                         <button type="submit">Submit Changes</button>
                     </form>
-                    <div >
-                        <button className="delete-button">Delete Item</button>
-                    </div>
                 </div>
                 :
                 <div>
@@ -195,55 +196,78 @@ export default function ItemPage() {
                     </tbody>
                 </table>
                 : <div>
+                    <table id="current-requests">
+                        <thead>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>End Date</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            currentRequests.map(request => (
+                                <RequestComponent data={request} isLending={false}/>
+                            ))
+                        }
+                        </tbody>
+                    </table>
                     <div id="request-form">
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label>Start Day</label>
-                            <input type="text" name="startDay" value={requestData.startDay}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Month</label>
-                            <input type="text" name="startMonth" value={requestData.startMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Start Year</label>
-                            <input type="text" name="startYear" value={requestData.startYear}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Day</label>
-                            <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Month</label>
-                            <input type="text" name="endMonth" value={requestData.endMonth}
-                                   onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>End Year</label>
-                            <input type="text" name="endYear" value={requestData.endYear} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <div className="form-group">
-                            <label>Message</label>
-                            <input type="text" name="message" value={requestData.message} onChange={handleInputChange}
-                                   required/>
-                        </div>
-                        <button type="submit">Request This Item</button>
-                    </form>
-                </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="form-group">
+                                <label>Start Day</label>
+                                <input type="text" name="startDay" value={requestData.startDay}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Month</label>
+                                <input type="text" name="startMonth" value={requestData.startMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Start Year</label>
+                                <input type="text" name="startYear" value={requestData.startYear}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Day</label>
+                                <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Month</label>
+                                <input type="text" name="endMonth" value={requestData.endMonth}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>End Year</label>
+                                <input type="text" name="endYear" value={requestData.endYear}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <div className="form-group">
+                                <label>Message</label>
+                                <input type="text" name="message" value={requestData.message}
+                                       onChange={handleInputChange}
+                                       required/>
+                            </div>
+                            <button type="submit">Request This Item</button>
+                        </form>
+                    </div>
                     {hasBorrowed ?
-                <div id="reviews-button">
-                    <Link to="/item/1/create-review"><button>Leave a Review</button></Link>
-                </div>
-                        : null }
+                        <div id="reviews-button">
+                            <Link to={"/item/" + itemID + "/create-review"}>
+                                <button>Leave a Review</button>
+                            </Link>
+                        </div>
+                        :
+                        <div id="reviews-button">
+                            <button onClick={handleIllegalClick}>Leave a Review</button>
+                            <CantReviewNotif isClicked={isIllegalClicked}/>
+                        </div>}
                 </div>
             }
             <div id="reviews-header">
@@ -257,8 +281,22 @@ export default function ItemPage() {
                 }
             </div>
             <div id="item-user">
-                <Link to={"/profile/" + itemData.userID}><button>To User Profile</button></Link>
+                <Link to={"/profile/" + itemData.userID}>
+                    <button>To User Profile</button>
+                </Link>
             </div>
         </>
+    )
+}
+
+function CantReviewNotif(isClicked) {
+    return (
+        <>
+            {isClicked ?
+        <div id="cant-review">
+            You need to borrow an item before you can review it.
+        </div> :
+                null}
+            </>
     )
 }

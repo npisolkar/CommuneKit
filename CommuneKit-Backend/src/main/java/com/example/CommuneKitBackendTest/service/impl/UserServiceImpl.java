@@ -22,7 +22,9 @@ import com.example.CommuneKitBackendTest.service.ItemService;
 //import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +60,9 @@ public class UserServiceImpl implements UserService {
                     && user.getPassword().equals(attemptingUser.getPassword())) {
                 return UserMapper.mapToUserDto(user);
             }
+            if (user.getUserName().equals(attemptingUser.getUserName())) {
+                return UserMapper.mapToUserDto(user);
+            }
         }
         return null;
     }
@@ -80,17 +85,28 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToBasicUserDto(user);
     }
 
+    //TODO: deletes whatever image they previously had. GENIUS.
+    public void updateUserImage(Long userID, Long imageId) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+        user.setProfilePicture( imageId );
+        userRepository.save(user);
+        return;
+    }
+
+
     @Override
     public UserDto updateUser(Long userID, UserDto updatedUser) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
 
         user.setUserName(updatedUser.getUserName());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
         user.setPassword(updatedUser.getPassword());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
         user.setAddress(updatedUser.getAddress());
         user.setBio(updatedUser.getBio());
-        user.setProfilePicture(updatedUser.getProfilePicture());
+        //user.setProfilePicture( updatedUser.getProfilePicture() != null ? updatedUser.getProfilePicture() : user.getProfilePicture());
 
         User updatedUserObj = userRepository.save(user);
 
@@ -114,9 +130,8 @@ public class UserServiceImpl implements UserService {
             requestService.deleteRequest(r.getRequestId());
         }
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
-        user.setBanned(true);
+        user.setBanned(false);
         userRepository.save(user);
-
     }
 
     @Override
@@ -130,4 +145,28 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+/*
+    @Override
+    public MultipartFile getUserImageById(long userID) { //no idea if this is correct
+
+        return null;
+    }
+    @Override
+    public UserDto updateUserImage(Long userID, MultipartFile image) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                user.setProfilePicture(image.getBytes());
+            } catch (IOException e) {
+                System.out.println("IO Exception while updating user profile pic" + e.getMessage());
+            }
+        }
+
+        userRepository.save(user);
+
+        return UserMapper.mapToUserDto(user);
+    }*/
+
+
 }
