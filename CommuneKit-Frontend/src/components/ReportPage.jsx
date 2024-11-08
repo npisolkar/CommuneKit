@@ -23,6 +23,8 @@ export default function ReportPage() {
                 status: "Pending"
             });
 
+            alert("report successfully submitted")
+
             navigateToProfile();
         } catch (error) {
             if (error.response && error.response.status === 401) {

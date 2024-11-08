@@ -31,6 +31,8 @@ public class UserController {
         } else if (!user.getPassword().equals(userDto.getPassword())) {
             //means correct username and incorrect password
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } else if (user.isBanned()){
+            return new ResponseEntity<>(HttpStatus.GONE);
         }
         return ResponseEntity.ok(user);
     }

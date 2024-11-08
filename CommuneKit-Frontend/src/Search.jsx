@@ -53,6 +53,7 @@ export default function Search() {
     };
 
     const formatItemResult = (item) => {
+        const distance = distances[item.itemID];
         return (
             <div key={item.itemID} style={{
                 display: 'flex',
@@ -65,7 +66,7 @@ export default function Search() {
                 <div>Description: {item.itemDescription}</div>
                 <div>Category: {item.itemCategory}</div>
                 <div><a href={`/profile/${item.userID ?? 'unknown'}`}>User ID: {item.userID ?? 'N/A'}</a></div>
-                <div>Distance: {distances[item.itemID] ? `${distances[item.itemID]} miles` : 'Loading...'}</div>
+                <div>Distance: {distance !== undefined ? `${distance} miles` : 'Loading...'}</div>
                 <div>Rating: {ratings[item.itemID] !== undefined ? ratings[item.itemID] : 'Loading...'}</div>
             </div>
         );

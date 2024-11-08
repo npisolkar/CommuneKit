@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
             requestService.deleteRequest(r.getRequestId());
         }
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
-        user.setBanned(true);
+        user.setBanned(false);
         userRepository.save(user);
     }
 
