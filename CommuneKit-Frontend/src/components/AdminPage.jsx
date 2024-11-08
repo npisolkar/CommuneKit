@@ -2,12 +2,14 @@ import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
 import {getReports, updateReports} from "../services/ReportService.jsx";
 import {updateRequest} from "../services/RequestService.jsx";
-import {banUser} from "../services/UserService.jsx";
+import {banUser, unbanUser} from "../services/UserService.jsx";
 export default function AdminPage(){
     const role = localStorage.getItem('role');
     const navigate = useNavigate();
     const [pendingReports, setPendingReports] = useState([]);
+    const [pendingBanned, setPendingBanned] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [bannedLoading, setBannedLoading] = useState(true);
 
     useEffect(() => {
         if (! (role === 'ADMIN')) {
@@ -28,6 +30,20 @@ export default function AdminPage(){
 
         }
         fetchReports();
+        const fetchBanned = async () => {
+            try{
+                const pendingBannedResponse = await fetch(`http://localhost:8080/api/users/banned`);
+                const pendingBannedData = await pendingBannedResponse.json();
+                setPendingBanned(pendingBannedData);
+            } catch (error) {
+                console.error("Failed to fetch banned users:", error);
+            } finally {
+                setBannedLoading(false);
+            }
+
+
+        }
+        fetchBanned();
     },[])
     const handleBan = async (reportID, reportedUserID) => {
         const requestBody = {
@@ -74,6 +90,20 @@ export default function AdminPage(){
             console.error('Error:', error);
         }
     };
+    const handleUnban = async (userID) => {
+
+        try {
+            const response = await unbanUser(userID);
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Success:', data);
+            } else {
+                console.error('Error:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
 
     const formatReports = (report) => {
         return(
@@ -104,6 +134,30 @@ export default function AdminPage(){
         )
         // Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
     };
+    const formatBanned = (user) => {
+        return(
+            <div>
+                <div style={{
+                    border: '2px solid green',
+                    margin: '4px'
+                }}>
+                    <div style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        gap: '10px'
+                    }}>
+                        <div>User ID: {user.userId}</div>
+
+                    </div>
+                </div>
+                <button onClick={() => handleUnban(user.userId)}>Unban</button>
+            </div>
+
+
+
+        )
+        // Lending User ID: ${request.lendingUserId}, Item ID: ${request.itemId}, Start Date: ${request.startDay}/${request.startMonth}/${request.startYear}, End Date: ${request.endDay}/${request.endMonth}/${request.endYear}, Message: ${request.message}`;
+    };
 
 
     return (
@@ -117,6 +171,16 @@ export default function AdminPage(){
                 </ul>
             ) : (
                 <p>No pending reports.</p>
+            )}
+            <h3>BannedUsers:</h3>
+            {pendingBanned.length > 0 ? (
+                <ul>
+                    {pendingBanned.map(user => (
+                        <li key={user.userId}>{formatBanned(user)}</li>
+                    ))}
+                </ul>
+            ) : (
+                <p>No banned users.</p>
             )}
         </div>
 

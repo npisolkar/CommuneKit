@@ -35,6 +35,7 @@ export default function ItemPage() {
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
     const [userID, setUserID] = useState('')
+
     const [itemData, setItemData] = useState({
         itemID: '',
         itemName: '',

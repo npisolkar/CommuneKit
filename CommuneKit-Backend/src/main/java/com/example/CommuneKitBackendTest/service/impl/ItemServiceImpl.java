@@ -46,6 +46,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDto> getAllItems() {
         List<Item> items = itemRepository.findAll();
+        items.removeIf(item -> (item.getVisible().equals(false)));
         return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
 
@@ -73,6 +74,7 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDto> getItemsByUserId(Long userId) {
         List<Item> items = itemRepository.findAll();
         items.removeIf(item -> !(item.getUserID().equals(userId)));
+        items.removeIf(item -> (item.getVisible().equals(false)));
         return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
 
@@ -82,9 +84,11 @@ public class ItemServiceImpl implements ItemService {
 
         if (keyword != null) {
             items = itemRepository.searchByKeyword(keyword);
+            items.removeIf(item -> (item.getVisible().equals(false)));
         }
         else {
             items = itemRepository.findAll();
+            items.removeIf(item -> (item.getVisible().equals(false)));
         }
 
         if (sort.equals("distance")) {
@@ -163,6 +167,24 @@ public class ItemServiceImpl implements ItemService {
 
         return Math.acos(Math.sin(lat1)*Math.sin(lat2)+Math.cos(lat1)*Math.cos(lat2)*Math.cos(lon2-lon1))*3958.8;
     }
+
+    public void hideItem(Long itemID) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+        item.setVisible(false);
+        itemRepository.save(item);
+    }
+    public void unhideItem(Long itemID) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+        item.setVisible(true);
+        itemRepository.save(item);
+    }
+    @Override
+    public List<ItemDto> getItemsByBannedUser(Long userId) {
+        List<Item> items = itemRepository.findAll();
+        items.removeIf(item -> !(item.getUserID().equals(userId)));
+        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
+    }
+
 
 
 

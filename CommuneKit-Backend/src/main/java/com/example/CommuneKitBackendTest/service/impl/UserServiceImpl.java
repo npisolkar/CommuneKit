@@ -110,13 +110,24 @@ public class UserServiceImpl implements UserService {
     public void banUser(Long userID) {
         List<ItemDto> items = itemService.getItemsByUserId(userID);
         for(ItemDto i: items ) {
-            itemService.deleteItem(i.getItemID());
+            itemService.hideItem(i.getItemID());
         }
         List<RequestDto> requests = requestService.getRequestsByUserId(userID);
         for(RequestDto r: requests ) {
             requestService.deleteRequest(r.getRequestId());
         }
-        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        user.setBanned(true);
+        userRepository.save(user);
+
+    }
+    @Override
+    public void unbanUser(Long userID) {
+        List<ItemDto> items = itemService.getItemsByBannedUser(userID);
+        for(ItemDto i: items ) {
+            itemService.unhideItem(i.getItemID());
+        }
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
         user.setBanned(false);
         userRepository.save(user);
 
@@ -132,5 +143,11 @@ public class UserServiceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    public List<UserDto> getBannedUsers() {
+        List<User> users = userRepository.findAll();
+        users.removeIf(user -> !(user.isBanned()));
+        return users.stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
     }
 }

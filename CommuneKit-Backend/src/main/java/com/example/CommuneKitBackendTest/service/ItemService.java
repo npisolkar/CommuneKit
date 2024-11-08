@@ -24,4 +24,10 @@ public interface ItemService {
 
     Double getRating(Long itemID);
 
+    void hideItem(Long itemID);
+
+    void unhideItem(Long itemID);
+
+    List<ItemDto> getItemsByBannedUser(Long userID);
+
 }
