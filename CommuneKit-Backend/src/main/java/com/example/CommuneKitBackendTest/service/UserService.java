@@ -2,7 +2,6 @@ package com.example.CommuneKitBackendTest.service;
 
 import com.example.CommuneKitBackendTest.dto.BasicUserDto;
 import com.example.CommuneKitBackendTest.dto.UserDto;
-import org.springframework.web.multipart.MultipartFile;
 import com.example.CommuneKitBackendTest.dto.PasswordResetDto;
 
 import java.util.List;

@@ -58,16 +58,15 @@ export default function Home() {
         <>
 
             <div className="home-items" id="posted-header">
-                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
+                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")} />
             </div>
             {/*<div className="home-items" id="borrowed-header">*/}
             {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
             {/*</div>*/}
-            <div><img src="http://localhost:8080/api/image/fileId/1"/></div>
-
             <div className="home-items" id="suggested-items">
                 <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")}/>
             </div>
         </>
-    );
+    )
+   // }
 }

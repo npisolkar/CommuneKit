@@ -99,10 +99,8 @@ export default function Profile() {
         console.log("starting change submission routine...");
         try {
             if (uploadedImage) {
-                //TODO: if profile pic has been changed, when submitting changes
-                //  need to start by uploading new image, then set profile picture in
-                //  formdata to be the id of the new picture,
-                //  AND need to change with setProfilePicture
+                //if profile pic has been changed, when submitting changes
+                //  need to start by uploading new image
                 const imageData = new FormData();
                 imageData.append("image", uploadedImage);
                 let newImageId = await uploadImage(imageData);
@@ -256,5 +254,4 @@ export default function Profile() {
             )}
         </>
     )
-};
-
+}
