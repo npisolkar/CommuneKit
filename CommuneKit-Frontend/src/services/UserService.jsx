@@ -80,3 +80,6 @@ export function banUser(userId) {
     return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
 
 }
+export  function unbanUser(userId){
+    return axios.delete(EMPLOYEE_API_BASE_URL + '/unban/' + userId);
+}
