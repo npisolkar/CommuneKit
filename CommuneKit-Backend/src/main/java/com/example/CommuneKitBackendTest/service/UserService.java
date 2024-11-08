@@ -23,5 +23,9 @@ public interface UserService {
 
     void banUser(Long userId);
 
+    void unbanUser(Long userId);
+
     boolean resetPassword(PasswordResetDto passwordResetDto);
+
+    List<UserDto> getBannedUsers();
 }

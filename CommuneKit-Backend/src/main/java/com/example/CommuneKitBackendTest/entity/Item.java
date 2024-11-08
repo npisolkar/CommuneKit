@@ -29,4 +29,11 @@ public class Item {
     @Column(name = "fk_user_id", nullable = false)
     private Long userID;
 
+    @Column(name = "visible", nullable = false)
+    private Boolean visible;
+
+    protected void onCreate() {
+        this.visible = true;
+    }
+
 }
