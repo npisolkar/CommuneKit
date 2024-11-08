@@ -2,7 +2,7 @@ import './styles.css';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {getUserById, updateUser} from "./services/UserService.jsx";
+import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
 import {getImageById, uploadImage} from "./services/ImageService.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
@@ -107,18 +107,20 @@ export default function Profile() {
                 imageData.append("image", uploadedImage);
                 let newImageId = await uploadImage(imageData);
 
-                console.log("newImageId: ");
-                console.log(newImageId.data);
-                console.log("formData before imageId amend: " + JSON.stringify(formData));
-                //setFormData({ ...formData, profilePicture: newImageId.data });
-                setFormData((prevFormData) => {
-                    const updatedFormData = { ...prevFormData, profilePicture: newImageId.data };
-                    console.log("Updated formData:", updatedFormData);
+                await updateUserImage(localStorage.getItem("userID"), newImageId.data);
 
-                    //setFormData(updatedFormData)
-                    return updatedFormData;
-                });
-                console.log("formData after imageId amend: " + JSON.stringify(formData))
+                // console.log("newImageId: ");
+                // console.log(newImageId.data);
+                // console.log("formData before imageId amend: " + JSON.stringify(formData));
+                //setFormData({ ...formData, profilePicture: newImageId.data });
+                // setFormData((prevFormData) => {
+                //     const updatedFormData = { ...prevFormData, profilePicture: newImageId.data };
+                //     console.log("Updated formData:", updatedFormData);
+                //
+                //     //setFormData(updatedFormData)
+                //     return updatedFormData;
+                // });
+                // console.log("formData after imageId amend: " + JSON.stringify(formData))
                 setUploadedImage(null);
 
             }
@@ -128,11 +130,9 @@ export default function Profile() {
             const profileResponse = await updateUser(userID, JSON.stringify(formData));
             const profileData = profileResponse.data;
             console.log("Profile updated:", profileData);
-            setFormData(prev => (profileData));
+            //setFormData(prev => (profileData));
             console.log("formData now set to: " + JSON.stringify(formData))
             onClick();
-            //reload();
-
         }
         catch (error) {
             console.log(error);
@@ -146,7 +146,6 @@ export default function Profile() {
     const handleReportNav = () => {
         navigate('/report/' + userID)
     }
-
 
     return (
         <>
@@ -177,7 +176,7 @@ export default function Profile() {
                             </label>
                             <label>
                                 <b>Last Name</b>
-                                <input id="profile-bio" value={formData.lastName} name="lastName" type="text"
+                                <input value={formData.lastName} name="lastName" type="text"
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
@@ -208,31 +207,34 @@ export default function Profile() {
                     </form>
                 </div>
             ) : (
-
                 <div className="about-box">
                     <label>
                         <b>First Name</b>
                     </label>
-
                     <div>
                         {formData.firstName}
                     </div>
+
                     <label>
                         <b>Last Name</b>
-                        <div id="profile-bio"> {formData.lastName} </div>
+                        <div> {formData.lastName} </div>
                     </label>
+
                     <label>
                         <b>Email</b>
                     </label>
                     <div>{formData.email}</div>
+
                     <label>
                         <b>Bio</b>
                         <div id="profile-bio">{formData.bio}</div>
                     </label>
+
                     <label>
                         <b>Address</b>
                         <div id="profile-address">{formData.address}</div>
                     </label>
+
                     <label>
                         <b>Phone Number</b>
                         <div id="profile-phone">{formData.phone}</div>
@@ -251,7 +253,6 @@ export default function Profile() {
                     <ReportButton isOwn={userID === localStorage.getItem('userID')}
                                   onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
-
             )}
         </>
     )

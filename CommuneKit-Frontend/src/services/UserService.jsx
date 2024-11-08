@@ -10,10 +10,19 @@ export function getUsers(){
     return axios.get(EMPLOYEE_API_BASE_URL);
 }
 
+export function updateUserImage(userID, imageID) {
+    try {
+        console.log("in updateUserImage... userID: " + userID + " imageID: " + imageID);
+        return axios.put(USER_API_BASE_URL + "/updatePfp" + "/" + userID + "/" + imageID, {})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export function updateUser(userId, userDto) {
     try {
         console.log("in updateUser:" + userDto)
-        return axios.put(USER_API_BASE_URL + "/"+ String(userId), userDto, {
+        return axios.put(USER_API_BASE_URL +  "/"+ String(userId), userDto, {
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -24,7 +33,7 @@ export function updateUser(userId, userDto) {
         console.log(error);
     }
 }
-
+/*
 export function updateUserImage(userId, image) {
     try {
         console.log("trying to update this user's pfp:" + userId)
@@ -38,7 +47,7 @@ export function updateUserImage(userId, image) {
     catch (error) {
         console.log(error);
     }
-}
+}*/
 
 export function createUser(userDto){
     try {

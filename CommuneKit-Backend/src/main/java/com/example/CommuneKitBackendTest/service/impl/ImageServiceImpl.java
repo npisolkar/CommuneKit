@@ -33,6 +33,10 @@ public class ImageServiceImpl implements ImageService {
     public byte[] downloadImage(Long id) {
         Optional<Image> dbImage = imageRepository.findById(id);
 
+        if (dbImage.isEmpty()) {
+            dbImage = imageRepository.findById(1L);
+        }
+
         return dbImage.map(image -> {
             try {
                 return ImageUtils.decompressImage(image.getImageData());

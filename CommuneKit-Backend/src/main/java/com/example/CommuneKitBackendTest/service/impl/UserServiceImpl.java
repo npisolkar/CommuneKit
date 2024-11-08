@@ -85,17 +85,28 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToBasicUserDto(user);
     }
 
+    //TODO: deletes whatever image they previously had. GENIUS.
+    public void updateUserImage(Long userID, Long imageId) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+        user.setProfilePicture( imageId );
+        userRepository.save(user);
+        return;
+    }
+
+
     @Override
     public UserDto updateUser(Long userID, UserDto updatedUser) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
 
         user.setUserName(updatedUser.getUserName());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
         user.setPassword(updatedUser.getPassword());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
         user.setAddress(updatedUser.getAddress());
         user.setBio(updatedUser.getBio());
-        user.setProfilePicture(updatedUser.getProfilePicture());
+        //user.setProfilePicture( updatedUser.getProfilePicture() != null ? updatedUser.getProfilePicture() : user.getProfilePicture());
 
         User updatedUserObj = userRepository.save(user);
 
@@ -121,7 +132,6 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
         user.setBanned(true);
         userRepository.save(user);
-
     }
 
     @Override

@@ -15,10 +15,9 @@ public interface UserService {
     List<UserDto> getAllUsers();
 
     BasicUserDto getBasicUserInfoById(long userId);
+
+    void updateUserImage(Long userID, Long imageId);
 /*
-
-    UserDto updateUserImage(Long userID, MultipartFile file);
-
     MultipartFile getUserImageById(long userID);
 */
 
