@@ -320,3 +320,28 @@ textarea {
     font: bold 14px sans-serif;
     padding:10px;
 }
+
+/* message component */
+#message-container {
+    position:absolute;
+    right:0;
+    top:50%;
+}
+
+#message-bar {
+    display:flex;
+    align-content:center;
+    flex-direction:row;
+}
+
+.message-timestamp {
+    opacity:50%;
+    font-size: 10px;
+}
+
+.actual-message {
+    display:flex;
+    align-content:flex-start;
+    flex-direction:row;
+    justify-content:space-around;
+}

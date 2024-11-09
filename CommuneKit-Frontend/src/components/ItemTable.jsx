@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ItemComponent from './components/ItemComponent.jsx';
-import { getItemsByPage } from './services/ItemService.jsx';
+import ItemComponent from './ItemComponent.jsx';
+import { getItemsByPage } from '../services/ItemService.jsx';
 
 export default function ItemTable({ headName, items, userID }) {
     const [displayItems, setDisplayItems] = useState(items || []);

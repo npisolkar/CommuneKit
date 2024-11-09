@@ -4,6 +4,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
 import {getImageById, uploadImage} from "./services/ImageService.jsx";
+import ConversationComponent from "./components/ConversationComponent.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
@@ -124,12 +125,10 @@ export default function Profile() {
 
             }
 
-
             console.log("trying to submit " + JSON.stringify(formData))
             const profileResponse = await updateUser(userID, JSON.stringify(formData));
             const profileData = profileResponse.data;
             console.log("Profile updated:", profileData);
-            //setFormData(prev => (profileData));
             console.log("formData now set to: " + JSON.stringify(formData))
             onClick();
         }
@@ -248,6 +247,9 @@ export default function Profile() {
                                   onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
             )}
+            {userID===localStorage.getItem('userID') ? null :
+                <ConversationComponent user2={userID}/>
+            }
         </>
     )
 }

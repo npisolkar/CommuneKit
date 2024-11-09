@@ -8,15 +8,15 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
-import LoginPage from "./components/LoginPage.jsx";
-import RegistrationPage from "./components/RegistrationPage.jsx";
-import FavoritePage from "./components/FavoritePage.jsx";
-import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
+import LoginPage from "./LoginPage.jsx";
+import RegistrationPage from "./RegistrationPage.jsx";
+import FavoritePage from "./FavoritePage.jsx";
+import ResetPasswordPage from "./ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
-import AdminPage from "./components/AdminPage.jsx"
-import ReportPage from "./components/ReportPage.jsx";
+import AdminPage from "./AdminPage.jsx"
+import ReportPage from "./ReportPage.jsx";
 
 
 export default function App() {

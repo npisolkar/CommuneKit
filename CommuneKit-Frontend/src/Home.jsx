@@ -1,6 +1,6 @@
 /* Home: The home page, containing lists of items. */
 import './styles.css'
-import ItemTable from './ItemTable.jsx'
+import ItemTable from './components/ItemTable.jsx'
 import {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
 import {getAllItems, getItemsByUser, getMyBorrows} from "./services/ItemService.jsx";

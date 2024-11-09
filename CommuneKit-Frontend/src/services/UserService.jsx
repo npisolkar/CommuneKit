@@ -3,11 +3,10 @@
 
 import axios from "axios";
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/users"
 const USER_API_BASE_URL = "http://localhost:8080/api/users"
 
 export function getUsers(){
-    return axios.get(EMPLOYEE_API_BASE_URL);
+    return axios.get(USER_API_BASE_URL);
 }
 
 export function updateUserImage(userID, imageID) {
@@ -51,7 +50,7 @@ export function updateUserImage(userId, image) {
 
 export function createUser(userDto){
     try {
-        return axios.post(EMPLOYEE_API_BASE_URL, userDto, {
+        return axios.post(USER_API_BASE_URL, userDto, {
             headers: {
                 'Content-Type': 'application/json'
             }}
@@ -62,12 +61,12 @@ export function createUser(userDto){
 }
 
 export function getUserById(userId){
-    return axios.get(EMPLOYEE_API_BASE_URL + '/' + userId);
+    return axios.get(USER_API_BASE_URL + '/' + userId);
 }
 
 export default function loginUser(userDto){
     try {
-        return axios.post(EMPLOYEE_API_BASE_URL + '/login', userDto, {
+        return axios.post(USER_API_BASE_URL + '/login', userDto, {
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -77,9 +76,9 @@ export default function loginUser(userDto){
     }
 }
 export function banUser(userId) {
-    return axios.delete(EMPLOYEE_API_BASE_URL + '/ban/' + userId);
+    return axios.delete(USER_API_BASE_URL + '/ban/' + userId);
 
 }
 export  function unbanUser(userId){
-    return axios.delete(EMPLOYEE_API_BASE_URL + '/unban/' + userId);
+    return axios.delete(USER_API_BASE_URL + '/unban/' + userId);
 }
