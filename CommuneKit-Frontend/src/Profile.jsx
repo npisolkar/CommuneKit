@@ -68,6 +68,7 @@ export default function Profile() {
     useEffect(() => {
         getUserById(userID)
             .then(res => {
+                console.log("formdata before fetch: " + JSON.stringify(formData))
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
                 //console.log("isown:" + isOwn)
@@ -184,7 +185,7 @@ export default function Profile() {
                             </label>
                             <label>
                                 <b>Bio</b>
-                                <input id="profile-bio" value={formData.bio} name="bio" type="text"
+                                <textarea id="profile-bio" value={formData.bio} name="bio"
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
@@ -212,27 +213,22 @@ export default function Profile() {
                     <div>
                         {formData.firstName}
                     </div>
-
                     <label>
                         <b>Last Name</b>
                         <div> {formData.lastName} </div>
                     </label>
-
                     <label>
                         <b>Email</b>
                     </label>
-                    <div>{formData.email}</div>
-
+                        <div>{formData.email}</div>
                     <label>
                         <b>Bio</b>
                         <div id="profile-bio">{formData.bio}</div>
                     </label>
-
                     <label>
                         <b>Address</b>
                         <div id="profile-address">{formData.address}</div>
                     </label>
-
                     <label>
                         <b>Phone Number</b>
                         <div id="profile-phone">{formData.phone}</div>
