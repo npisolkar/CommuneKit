@@ -322,13 +322,17 @@ textarea {
 }
 
 /* message component */
+.conversation {
+    right:50px;
+}
+
 #message-container {
     position:absolute;
-    right:0;
     top:50%;
     overflow:scroll;
     height:350px;
     width:300px;
+    border: 1px black solid;
 }
 
 #messages-header {
@@ -336,15 +340,18 @@ textarea {
     height:50px;
     width:300px;
     background:#22B14C;
+    position:absolute;
+    top:43.8%;
+    text-align:center;
+    font-size:20px;
 }
 
 #message-bar {
     display:flex;
     align-content:center;
     flex-direction:row;
-    right:0;
     position:absolute;
-    top:92%;
+    top:94.2%;
     width:300px;
 }
 

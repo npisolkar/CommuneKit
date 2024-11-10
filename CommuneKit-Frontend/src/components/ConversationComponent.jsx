@@ -2,7 +2,7 @@ import {useState, useEffect, useRef} from 'react'
 import {getConversation, createMessage} from "../services/MessageService.jsx"
 import MessageComponent from './MessageComponent.jsx'
 
-export default function ConversationComponent(user2) {
+export const ConversationComponent = (user2) => {
     const [conversation, setConversation] = useState([])
     const endRef = useRef(null)
     const sendMessage = async (e) => {
@@ -20,11 +20,11 @@ export default function ConversationComponent(user2) {
     const scrollToElement = () => {
         const {current} = endRef
         if (current !== null){
-            current.scrollIntoView({behavior: "smooth"})
+            endRef.current.scrollTo(0, 350)
         }
     }
 
-    useEffect(scrollToElement, [])
+    useEffect(scrollToElement, [sendMessage])
 
     useEffect(() => {
         getConversation(user2)
@@ -47,14 +47,9 @@ export default function ConversationComponent(user2) {
 
     return (
         <div>
-            <div>Messages</div>
-        <div id="message-container">
+            <div id="messages-header" className="conversation">Messages</div>
+        <div id="message-container" className="conversation" ref={endRef}>
             <table>
-                <thead>
-                <tr>
-                    <th id="messages-header">Messages</th>
-                </tr>
-                </thead>
                 <tbody>
                 {conversation.map(message => (
                     <MessageComponent message={message}/>
@@ -63,7 +58,7 @@ export default function ConversationComponent(user2) {
             </table>
         </div>
         <form onSubmit={sendMessage}>
-            <div id="message-bar">
+            <div id="message-bar" className="conversation">
                 <input type="text" name="message" onChange={handleInputChange}/>
                 <button type="submit">Send</button>
             </div>
