@@ -13,7 +13,7 @@ import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.GeocodingService;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import com.example.CommuneKitBackendTest.service.UserService;
-import com.example.CommuneKitBackendTest.repository.ItemRepository;
+//import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
 //import com.example.CommuneKitBackendTest.service.impl.ItemServiceImpl;
 //import jakarta.persistence.EntityManager;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private GeocodingService geocodingService;
-    private ItemRepository itemRepository;
+    //private ItemRepository itemRepository;
     private ItemService itemService;
     private RequestService requestService;
 

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useNavigate } from "react-router-dom";
-import {getReports, updateReports} from "../services/ReportService.jsx";
-import {updateRequest} from "../services/RequestService.jsx";
-import {banUser, unbanUser} from "../services/UserService.jsx";
+import {getReports, updateReports} from "./services/ReportService.jsx";
+import {updateRequest} from "./services/RequestService.jsx";
+import {banUser, unbanUser} from "./services/UserService.jsx";
 export default function AdminPage(){
     const role = localStorage.getItem('role');
     const navigate = useNavigate();

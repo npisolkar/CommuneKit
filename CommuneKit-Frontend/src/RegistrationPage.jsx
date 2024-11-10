@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createUser } from "../services/UserService.jsx";
+import { createUser } from "./services/UserService.jsx";
 
 function RegistrationPage() {
     const navigate = useNavigate();

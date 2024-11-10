@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getFavoriteItems, removeFavorite } from '../services/ItemService.jsx';
+import { getFavoriteItems, removeFavorite } from './services/ItemService.jsx';
 
 export default function FavoritePage() {
     const [favorites, setFavorites] = useState([]);
