@@ -326,12 +326,26 @@ textarea {
     position:absolute;
     right:0;
     top:50%;
+    overflow:scroll;
+    height:350px;
+    width:300px;
+}
+
+#messages-header {
+    border:1px solid black;
+    height:50px;
+    width:300px;
+    background:#22B14C;
 }
 
 #message-bar {
     display:flex;
     align-content:center;
     flex-direction:row;
+    right:0;
+    position:absolute;
+    top:92%;
+    width:300px;
 }
 
 .message-timestamp {
