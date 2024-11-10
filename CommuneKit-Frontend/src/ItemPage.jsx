@@ -36,6 +36,7 @@ export default function ItemPage() {
     const [reviews, setReviews] = useState([])
     const [userID, setUserID] = useState('')
 
+
     const [itemData, setItemData] = useState({
         itemID: '',
         itemName: '',
@@ -103,6 +104,21 @@ export default function ItemPage() {
             })
             .catch (err => console.log(err))
     }, [])
+
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
+
+    const handleStartDateChange = (e) => {
+        setStartDate(e.target.value);
+        if (new Date(e.target.value) > new Date(endDate)) {
+            setEndDate(e.target.value); // Reset end date if it's before the new start date
+        }
+    };
+
+    const handleEndDateChange = (e) => {
+        setEndDate(e.target.value);
+    };
+
 
     async function handleSubmit() {
         try {
@@ -214,41 +230,62 @@ export default function ItemPage() {
                     </table>
                     <div id="request-form">
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label>Start Day</label>
-                                <input type="text" name="startDay" value={requestData.startDay}
-                                       onChange={handleInputChange}
-                                       required/>
+                            <div>
+                                <label>
+                                    Start Date:
+                                    <input
+                                        type="date"
+                                        value={startDate}
+                                        onChange={handleStartDateChange}
+                                    />
+                                </label>
+                                <br/>
+                                <label>
+                                    End Date:
+                                    <input
+                                        type="date"
+                                        value={endDate}
+                                        min={startDate} // Set minimum end date to start date
+                                        onChange={handleEndDateChange}
+                                    />
+                                </label>
                             </div>
-                            <div className="form-group">
-                                <label>Start Month</label>
-                                <input type="text" name="startMonth" value={requestData.startMonth}
-                                       onChange={handleInputChange}
-                                       required/>
-                            </div>
-                            <div className="form-group">
-                                <label>Start Year</label>
-                                <input type="text" name="startYear" value={requestData.startYear}
-                                       onChange={handleInputChange}
-                                       required/>
-                            </div>
-                            <div className="form-group">
-                                <label>End Day</label>
-                                <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}
-                                       required/>
-                            </div>
-                            <div className="form-group">
-                                <label>End Month</label>
-                                <input type="text" name="endMonth" value={requestData.endMonth}
-                                       onChange={handleInputChange}
-                                       required/>
-                            </div>
-                            <div className="form-group">
-                                <label>End Year</label>
-                                <input type="text" name="endYear" value={requestData.endYear}
-                                       onChange={handleInputChange}
-                                       required/>
-                            </div>
+
+                            {/*<div className="form-group">*/}
+                            {/*    <label>Start Day</label>*/}
+                            {/*    <input type="text" name="startDay" value={requestData.startDay}*/}
+                            {/*           onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group">*/}
+                            {/*    <label>Start Month</label>*/}
+                            {/*    <input type="text" name="startMonth" value={requestData.startMonth}*/}
+                            {/*           onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group">*/}
+                            {/*    <label>Start Year</label>*/}
+                            {/*    <input type="text" name="startYear" value={requestData.startYear}*/}
+                            {/*           onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group">*/}
+                            {/*    <label>End Day</label>*/}
+                            {/*    <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group">*/}
+                            {/*    <label>End Month</label>*/}
+                            {/*    <input type="text" name="endMonth" value={requestData.endMonth}*/}
+                            {/*           onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
+                            {/*<div className="form-group">*/}
+                            {/*    <label>End Year</label>*/}
+                            {/*    <input type="text" name="endYear" value={requestData.endYear}*/}
+                            {/*           onChange={handleInputChange}*/}
+                            {/*           required/>*/}
+                            {/*</div>*/}
                             <div className="form-group">
                                 <label>Message</label>
                                 <input type="text" name="message" value={requestData.message}
@@ -266,7 +303,7 @@ export default function ItemPage() {
                         </div>
                         :
                         <div id="reviews-button">
-                            <button onClick={handleIllegalClick}>Leave a Review</button>
+                        <button onClick={handleIllegalClick}>Leave a Review</button>
                             <CantReviewNotif isClicked={isIllegalClicked}/>
                         </div>}
                 </div>
