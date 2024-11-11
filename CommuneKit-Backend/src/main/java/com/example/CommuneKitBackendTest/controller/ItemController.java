@@ -92,8 +92,20 @@ public class ItemController {
 
     @GetMapping("/rating/{itemID}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<Double> getRating(@PathVariable Long itemID) {
+    public ResponseEntity<Double> getRating(@PathVariable("itemID") Long itemID) {
         Double rating = itemService.getRating(itemID);
         return ResponseEntity.ok(rating);
+    }
+
+    @GetMapping("/suggested/{id}")
+    public ResponseEntity<List<ItemDto>> getSuggestedItems(@PathVariable("id") Long userID) {
+        List<ItemDto> suggestedItems = itemService.getSuggestedItems(userID);
+        return ResponseEntity.ok(suggestedItems);
+    }
+
+    @GetMapping("/suggestedf/{id}")
+    public ResponseEntity<List<ItemDto>> getSuggestedItemsFavorites(@PathVariable("id") Long userID) {
+        List<ItemDto> suggestedItems = itemService.getSuggestedItemsByFavorites(userID);
+        return ResponseEntity.ok(suggestedItems);
     }
 }

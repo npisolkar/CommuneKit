@@ -4,6 +4,7 @@ import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.entity.Favorite;
 import com.example.CommuneKitBackendTest.entity.Item;
 import com.example.CommuneKitBackendTest.entity.User;
+import com.example.CommuneKitBackendTest.mapper.ItemMapper;
 import com.example.CommuneKitBackendTest.repository.FavoriteRepository;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
@@ -48,7 +49,7 @@ public class FavoriteService {
         List<Favorite> favorites = favoriteRepository.findByUser_UserID(userID);
         return favorites.stream().map(favorite -> {
             Item item = favorite.getItem();
-            return new ItemDto(item.getItemID(), item.getItemName(), item.getItemDescription(), item.getItemCategory(), item.getUserID());
+            return ItemMapper.mapToItemDto(item);
         }).collect(Collectors.toList());
     }
 

@@ -7,6 +7,7 @@ import com.example.CommuneKitBackendTest.entity.Review;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.ItemMapper;
+import com.example.CommuneKitBackendTest.repository.FavoriteRepository;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
@@ -29,6 +30,7 @@ public class ItemServiceImpl implements ItemService {
     private ReviewRepository reviewRepository;
     private UserRepository userRepository;
     private ItemRepository itemRepository;
+    private FavoriteRepository favoriteRepository;
 
     @Override
     public ItemDto createItem(ItemDto itemDto) {
@@ -142,6 +144,56 @@ public class ItemServiceImpl implements ItemService {
     public Double getRating(Long itemID) {
         return calculateAverageRating(itemID);
     }
+
+    @Override
+    public List<ItemDto> getSuggestedItems(Long userID) {
+        User currentUser = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        double userLat = currentUser.getLatitude();
+        double userLon = currentUser.getLongitude();
+
+        List<Item> items = itemRepository.findAll();
+
+        return calculateAndSortSuggestedItems(items, userLat, userLon);
+    }
+
+    @Override
+    public List<ItemDto> getSuggestedItemsByFavorites(Long userID) {
+        User currentUser = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        double userLat = currentUser.getLatitude();
+        double userLon = currentUser.getLongitude();
+
+        List<String> favoriteCategories = favoriteRepository.findByUser_UserID(userID).stream()
+                .map(favorite -> favorite.getItem().getItemCategory())
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<Item> filteredItems = itemRepository.findAll().stream()
+                .filter(item -> favoriteCategories.contains(item.getItemCategory()))
+                .collect(Collectors.toList());
+
+        return calculateAndSortSuggestedItems(filteredItems, userLat, userLon);
+    }
+
+    private List<ItemDto> calculateAndSortSuggestedItems(List<Item> items, double userLat, double userLon) {
+        return items.stream()
+                .map(item -> {
+                    double rating = calculateAverageRating(item.getItemID());
+                    if (rating == 0.0) {
+                        rating = 0.1;
+                    }
+                    User user = userRepository.getById(item.getUserID());
+                    double lat = user.getLatitude();
+                    double lon = user.getLongitude();
+                    double distance = calculateDistance(userLat, userLon, lat, lon);
+                    double score = distance > 0 ? rating / distance : 0.0;
+
+                    return ItemMapper.mapToItemDto(item, score);
+                })
+                .filter(itemDto -> itemDto.getScore() > 0)
+                .sorted((dto1, dto2) -> Double.compare(dto2.getScore(), dto1.getScore()))
+                .collect(Collectors.toList());
+    }
+
 
     private ItemDto convertToDto(Item item) {
         ItemDto dto = new ItemDto();

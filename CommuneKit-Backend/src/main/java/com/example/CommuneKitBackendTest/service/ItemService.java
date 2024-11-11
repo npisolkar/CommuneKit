@@ -24,4 +24,8 @@ public interface ItemService {
 
     Double getRating(Long itemID);
 
+    List<ItemDto> getSuggestedItems(Long userID);
+
+    List<ItemDto> getSuggestedItemsByFavorites(Long userID);
+
 }
