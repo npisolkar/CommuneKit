@@ -16,5 +16,6 @@ public class ItemDto {
     private String itemDescription;
     private String itemCategory;
     private Long userID;
+    private Long picture;
     private Boolean visible;
 }

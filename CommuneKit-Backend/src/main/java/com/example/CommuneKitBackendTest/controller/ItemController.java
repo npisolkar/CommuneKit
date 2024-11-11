@@ -96,4 +96,17 @@ public class ItemController {
         Double rating = itemService.getRating(itemID);
         return ResponseEntity.ok(rating);
     }
+
+    @PutMapping("updateItemPic/{itemID}/{imageID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> updateUserImage(@PathVariable("itemID") Long userID,
+                                                  @PathVariable("imageID") Long imageID) {
+        try {
+            itemService.updateItemImage(imageID, imageID);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

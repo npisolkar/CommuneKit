@@ -48,7 +48,7 @@ public class FavoriteService {
         List<Favorite> favorites = favoriteRepository.findByUser_UserID(userID);
         return favorites.stream().map(favorite -> {
             Item item = favorite.getItem();
-            return new ItemDto(item.getItemID(), item.getItemName(), item.getItemDescription(), item.getItemCategory(), item.getUserID(), item.getVisible());
+            return new ItemDto(item.getItemID(), item.getItemName(), item.getItemDescription(), item.getItemCategory(), item.getUserID(), item.getPicture(), item.getVisible());
         }).collect(Collectors.toList());
     }
 
