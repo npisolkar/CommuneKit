@@ -212,8 +212,9 @@ textarea {
 }
 
 #reviews-button {
-    position:relative;
-    left: 50%;
+    position:absolute;
+    left: 40%;
+    top:90%;
 }
 
 #reviews-box {
@@ -248,15 +249,13 @@ textarea {
 #item-info {
     left:25%;
     position:absolute;
-    border: 10px solid #22B14C;
-    top:50%;
+    top:20%;
 }
 
 .item-member {
-    border: 1px solid black;
-    width:700px;
     padding-left:10px;
     text-align:left;
+    width:500px;
 }
 
 .item-member-label {
@@ -265,11 +264,24 @@ textarea {
 
 #item-desc {
     height:200px;
+    border: 1px solid black;
 }
 
 #item-user {
     top:20%;
     position:absolute;
+    margin-left:50px
+}
+
+#item-cat {
+    border: 1px solid black;
+}
+
+#avg-rating-container {
+    position:absolute;
+    margin-left:100px;
+    top:30%;
+    left:60%;
 }
 
 #cant-review {
@@ -287,6 +299,16 @@ textarea {
     top:30%;
     margin-left:50px;
     position:absolute;
+}
+
+#request-form {
+    position:absolute;
+    top:80%;
+    margin-left:50px;
+}
+
+#request-text {
+    width:200px;
 }
 /* create reviews page */
 #rating-stars {
