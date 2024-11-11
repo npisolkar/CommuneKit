@@ -93,6 +93,7 @@ function MenuBar() {
     function handleSignout() {
         localStorage.clear();
         navigate("/login");
+
     }
     return (
         <>

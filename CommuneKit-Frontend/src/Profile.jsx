@@ -155,7 +155,7 @@ export default function Profile() {
             {isClicked ? (<>
                 <div className="form-group">
                     <label>Profile picture:</label>
-                    <input type="file" onChange={handleFileChange}/>
+                    <input type="file" accept="image/*" onChange={handleFileChange}/>
                 </div>
             </>) : (
                 <></>
