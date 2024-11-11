@@ -5,7 +5,7 @@
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
-import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
+import {createDateRequest, createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 import RequestComponent from "./components/RequestComponent.jsx";
@@ -45,12 +45,8 @@ export default function ItemPage() {
         userID: '',
     })
     const [requestData, setRequestData] = useState({
-        startDay: '',
-        startMonth: '',
-        startYear: '',
-        endDay: '',
-        endMonth: '',
-        endYear: '',
+        startDate: "",
+        endDate: "",
         message: "",
         itemID:''
     });
@@ -105,18 +101,17 @@ export default function ItemPage() {
             .catch (err => console.log(err))
     }, [])
 
-    const [startDate, setStartDate] = useState('');
-    const [endDate, setEndDate] = useState('');
 
     const handleStartDateChange = (e) => {
-        setStartDate(e.target.value);
-        if (new Date(e.target.value) > new Date(endDate)) {
-            setEndDate(e.target.value); // Reset end date if it's before the new start date
+        setRequestData({...requestData, ["startDate"]: e.target.value});
+        if (new Date(e.target.value) > new Date(requestData.endDate)) {
+            setRequestData({...requestData, ["endDate"]: e.target.value});
+            //setEndDate(e.target.value); // Reset end date if it's before the new start date
         }
     };
 
     const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
+        setRequestData({...requestData, ["endDate"]: e.target.value});
     };
 
 
@@ -126,17 +121,13 @@ export default function ItemPage() {
                 borrowingUserId: localStorage.getItem('userID'),
                 lendingUserId: userID,
                 itemId:itemID,
-                startDay: requestData.startDay,
-                startMonth: requestData.startMonth,
-                startYear: requestData.startYear,
-                endDay: requestData.endDay,
-                endMonth: requestData.endMonth,
-                endYear: requestData.endYear,
+                startDate: requestData.startDate,
+                endDate: requestData.endDate,
                 message: requestData.message,
                 isApproved:null
             }
             console.log("trying to submit request: " + JSON.stringify(requestJson))
-            const responseData = await createRequest(JSON.stringify(requestJson));
+            const responseData = await createDateRequest(JSON.stringify(requestJson));
             console.log("submit:" + responseData);
         } catch (error) {
             console.log(error);
@@ -246,8 +237,10 @@ export default function ItemPage() {
                                     Start Date:
                                     <input
                                         type="date"
-                                        value={startDate}
+                                        name="startDate"
+                                        value={requestData.startDate}
                                         onChange={handleStartDateChange}
+                                        required
                                     />
                                 </label>
                                 <br/>
@@ -255,9 +248,11 @@ export default function ItemPage() {
                                     End Date:
                                     <input
                                         type="date"
-                                        value={endDate}
-                                        min={startDate} // Set minimum end date to start date
+                                        name="endDate"
+                                        value={requestData.endDate}
+                                        min={requestData.startDate} // Set minimum end date to start date
                                         onChange={handleEndDateChange}
+                                        required
                                     />
                                 </label>
                             </div>

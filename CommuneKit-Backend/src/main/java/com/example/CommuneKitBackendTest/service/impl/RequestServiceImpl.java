@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
+import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 // import com.example.CommuneKitBackendTest.entity.Item;
 import com.example.CommuneKitBackendTest.entity.Request;
@@ -29,6 +30,14 @@ public class RequestServiceImpl implements RequestService {
         Request savedRequest = requestRepository.save(request);
         return RequestMapper.mapToRequestDto(savedRequest);
     }
+    @Override
+    public RequestDto createDateRequest(RequestDateDto requestDateDto) {
+
+        Request request = RequestMapper.mapDateToRequest(requestDateDto);
+        Request savedRequest = requestRepository.save(request);
+        return RequestMapper.mapToRequestDto(savedRequest);
+    }
+
     public RequestDto approveRequest(Long requestId) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
         request.setIsApproved(true);

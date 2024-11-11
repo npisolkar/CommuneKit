@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.controller;
 
+import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,12 @@ public class RequestController {
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> createRequest(@RequestBody RequestDto requestDto) {
         RequestDto savedRequest = requestService.createRequest(requestDto);
+        return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
+    }
+    @PostMapping("/date")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<RequestDto> createDateRequest(@RequestBody RequestDateDto requestDateDto) {
+        RequestDto savedRequest = requestService.createDateRequest(requestDateDto);
         return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
     }
     @PutMapping("/approve/{id}")
