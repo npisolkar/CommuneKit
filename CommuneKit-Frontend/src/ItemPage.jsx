@@ -4,11 +4,12 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
-import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
+import {updateItem, getItemById, deleteItem, updateItemImage} from "./services/ItemService.jsx";
 import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 import RequestComponent from "./components/RequestComponent.jsx";
+import {uploadImage} from "./services/ImageService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -36,6 +37,7 @@ export default function ItemPage() {
     const [reviews, setReviews] = useState([])
     const [avgRating, setAvgRating] = useState(0)
     const [userID, setUserID] = useState('')
+    const [uploadedImage, setUploadedImage] = useState(null);
 
     const [itemData, setItemData] = useState({
         itemID: '',
@@ -43,6 +45,7 @@ export default function ItemPage() {
         itemDescription: '',
         itemCategory: '',
         userID: '',
+        picture: ''
     })
     const [requestData, setRequestData] = useState({
         startDay: '',
@@ -63,6 +66,16 @@ export default function ItemPage() {
     function onClick() {
         setClicked(!isClicked);
     }
+    const ItemPicture = ({ imageId }) => {
+        return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
+                     alt="Item Picture"
+                     style={{width: "150px", height: "150px", objectFit: "cover"}}/>);
+    }
+    const handleFileChange = (e) => {
+        //console.log(e.target.file);
+        setUploadedImage(e.target.files[0]);
+        console.log(e.target.files[0]);
+    }
 
     useEffect(() => {
         console.log("itemId:" + itemID)
@@ -71,15 +84,16 @@ export default function ItemPage() {
         getItemById(itemID)
             .then((res) => {
                 setItemData(res.data);
-                console.log(JSON.stringify(res.data));
-                console.log("userid:" + JSON.stringify(res.data.userID))
-                setUserID(res.data.userID)
+                console.log("GET item data: " + JSON.stringify(res.data));
+                //console.log("userid:" + JSON.stringify(res.data.userID))
+                setUserID(res.data.userID);
+                console.log();
                 if (localStorage.getItem("userID") === JSON.stringify(res.data.userID)) {
-                    setIsOwn(true);
-                    console.log("isown:" + isOwn)
+                    setIsOwn((prev) => true);
+                    console.log("isown:" + isOwn);
                 }
                 else {
-                    console.log("not is own")
+                    console.log("not is own");
                 }
             })
             .catch((error) => {
@@ -100,7 +114,7 @@ export default function ItemPage() {
             .then(res => {
                 setCurrentRequests(res.data)
                 //check if item has been borrowed by user before
-                console.log("current user:" + localStorage.getItem("userID"))
+                //console.log("current user:" + localStorage.getItem("userID"))
                 setHasBorrowed(res.data.some(compareID))
             })
             .catch (err => console.log(err))
@@ -133,12 +147,24 @@ export default function ItemPage() {
     const handleUploadItem = async (e) => {
         e.preventDefault()
         try {
-            console.log("trying to submit " + JSON.stringify(itemData))
+            console.log("STARTING ITEM UPLOAD")
+            if (uploadedImage) {
+                //if item pic has been changed, when submitting changes
+                //  need to start by uploading new image
+                const imageData = new FormData();
+                imageData.append("image", uploadedImage);
+                let newImageId = await uploadImage(imageData);
+                console.log("uploaded image with imageID: " + newImageId.data)
+                await updateItemImage( itemID, newImageId.data);
+                setUploadedImage(null);
+            }
+            console.log("NOW UPLOADING: " + JSON.stringify(itemData))
             const responseData = await updateItem(itemID, itemData);
-            console.log("submit:" + responseData);
+            //console.log("submit:" + responseData);
             setItemData(responseData.data)
             onClick()
         } catch (error) {
+            console.log("ERROR when uploading/editing item")
             console.log(error);
         }
     }
@@ -159,13 +185,28 @@ export default function ItemPage() {
     }
     return (
         <>
-            <div id="edit-item-button">
-                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
-            </div>
+
+
             {isClicked ?
+                <>
+                <div id="edit-item-button">
+                    <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Cancel Edit"} itemID={itemData.itemID}/>
+                </div>
                 <div id="item-info">
+
+
+                    <div id="item-image">
+                        <h3>Item Image</h3>
+                        <>
+                            <ItemPicture imageId={itemData.picture}/>
+                            <div>
+                                <label>Item picture upload:</label>
+                                <input type="file" onChange={handleFileChange}/>
+                            </div>
+                        </>
+                    </div>
                     <form onSubmit={handleUploadItem}>
-                        <div id="item-image">Item Image</div>
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
                         <input type="text" id="item-name" className="item-member" name="itemName"
                                defaultValue={itemData.itemName}
                                required onChange={handleItemChange}/>
@@ -173,6 +214,7 @@ export default function ItemPage() {
                         <textarea id="item-desc" className="item-member" name="itemDescription"
                                   defaultValue={itemData.itemDescription} maxLength="2000" required
                                   onChange={handleItemChange}/>
+
                         <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
                         <select id="item-cat" name="itemCategory" className="item-member" onChange={handleItemChange}
                                 defaultValue={itemData.itemCategory} required>
@@ -186,20 +228,33 @@ export default function ItemPage() {
                 </div>
                 :
                 <div id="item-box">
-                    <div id="item-info">
-                        <div id="item-image">Item Image</div>
-                        <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
-                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
-                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                        <label htmlFor="itemCategory"
+                        <div id="edit-item-button">
+                            <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
+                                    itemID={itemData.itemID}/>
+                        </div>
+                        <div id="item-info">
+                            <div id="item-image">Item Image</div>
+                            <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
+
+                            <div id="item-image">
+                                <h3> Item Image</h3>
+                                <ItemPicture imageId={itemData.picture}/>
+                            </div>
+
+                            {/*<div id="item-image">Item Image</div>*/}
+                            <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                            <div id="item-name" className="item-member">{itemData.itemName}</div>
+                            <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                            <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                            <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
-                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                            <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                        </div>
+                        <div id="avg-rating-container">
+                            <label><b>Average Rating</b></label>
+                            <div id="item-avg">{avgRating}</div>
+                        </div>
                     </div>
-                    <div id="avg-rating-container">
-                        <label><b>Average Rating</b></label>
-                        <div id="item-avg">{avgRating}</div>
-                    </div>
-                </div>
             }
             {isOwn ?
                 <table id="current-requests">
@@ -239,7 +294,7 @@ export default function ItemPage() {
                         </tbody>
                     </table>
                     <div id="request-form">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleSubmitRequest}>
                             <div className="form-group">
                                 <label>Start Day</label>
                                 <input type="text" name="startDay" value={requestData.startDay}

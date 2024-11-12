@@ -89,3 +89,12 @@ export function getFavoriteItems(userID) {
 export function getCategories() {
     return axios.get(`${ITEM_API_BASE_URL}/categories`);
 }
+
+export function updateItemImage(itemID, imageID) {
+    try {
+        console.log("in updateItemImage... itemID: " + itemID + " imageID: " + imageID);
+        return axios.put(ITEM_API_BASE_URL + "/updateItemPic" + "/" + itemID + "/" + imageID, {})
+    } catch (error) {
+        console.log(error);
+    }
+}
