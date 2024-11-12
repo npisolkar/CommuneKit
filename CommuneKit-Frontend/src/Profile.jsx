@@ -45,7 +45,8 @@ function ItemsButton({ isOwn }) {
 }
 
 const ProfilePicture = ({ imageId }) => {
-   return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
+   return(
+       <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
          alt="User Profile"
          style={{width: "150px", height: "150px", objectFit: "cover", borderRadius: "50%"}}/>);
 }
@@ -147,11 +148,10 @@ export default function Profile() {
 
     return (
         <>
-            <div id="profile-image" className="about-box"></div>
-            <div><p>Your username: {formData.userName}</p></div>
-
-            <ProfilePicture imageId={formData.profilePicture}/>
-
+            <div id="profile-image">
+                <div><p>Your username: {formData.userName}</p></div>
+                <ProfilePicture imageId={formData.profilePicture}/>
+            </div>
             {isClicked ? (<>
                 <div className="form-group">
                     <label>Profile picture:</label>

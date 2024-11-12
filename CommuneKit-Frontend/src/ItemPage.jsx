@@ -106,7 +106,8 @@ export default function ItemPage() {
             .catch (err => console.log(err))
     }, [])
 
-    async function handleSubmit() {
+    const handleSubmit = async(e) => {
+        e.preventDefault()
         try {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
@@ -190,7 +191,7 @@ export default function ItemPage() {
                         <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                        <label htmlFor="itemCategory" id="item-cat"
+                        <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
                         <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
@@ -297,6 +298,7 @@ export default function ItemPage() {
                 </div>
             }
             <div id="reviews-header"><h2>Reviews</h2></div>
+            <div id="reviews-underline" className="underline"></div>
             <div id="reviews-box">
                 <div id="reviews-section">
                     {
