@@ -19,8 +19,8 @@ function EditButton({isOwn, handleClick, bodyText, itemID}) {
     if (isOwn === true) {
         return (
             <div>
-            <button onClick={handleClick}>{bodyText}</button>
-            <button onClick={handleDelete}>Delete</button>
+            <button id="edit-item" onClick={handleClick}>{bodyText}</button>
+            <button id="delete-item" onClick={handleDelete}>Delete</button>
             </div>
         )
     }
@@ -35,6 +35,7 @@ export default function ItemPage() {
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
     const [userID, setUserID] = useState('')
+
     const [itemData, setItemData] = useState({
         itemID: '',
         itemName: '',
@@ -154,9 +155,6 @@ export default function ItemPage() {
     }
     return (
         <>
-            <div id="item-page-header">
-                <h2>Item Page</h2>
-            </div>
             <div id="edit-item-button">
                 <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
             </div>
@@ -164,17 +162,26 @@ export default function ItemPage() {
                 <div id="item-info">
                     <form onSubmit={handleUploadItem}>
                         <div id="item-image">Item Image</div>
-                        <input type="text" name="itemName" defaultValue={itemData.itemName} required onChange={handleItemChange}/>
-                        <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required onChange={handleItemChange}/>
-                        <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
+                        <input type="text" id="item-name" className="item-member" name="itemName" defaultValue={itemData.itemName}
+                               required onChange={handleItemChange}/>
+                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                        <textarea id="item-desc" className="item-member" name="itemDescription"
+                               defaultValue={itemData.itemDescription} maxLength="2000" required onChange={handleItemChange}/>
+                        <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
+                        <input type="text" id="item-cat" className="item-member" name="itemCategory"
+                               defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
                         <button type="submit">Submit Changes</button>
                     </form>
                 </div>
                 :
                 <div>
                     <div id="item-info">
+                        <div id="item-image">Item Image</div>
                         <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <label htmlFor="itemCategory" id="item-cat"
+                               className="item-member-label"><b>Category</b></label>
                         <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
                 </div>
@@ -196,11 +203,16 @@ export default function ItemPage() {
                     </tbody>
                 </table>
                 : <div>
+                    <div id="item-user">
+                        <Link to={"/profile/" + itemData.userID}>
+                            <button>To User Profile</button>
+                        </Link>
+                    </div>
                     <table id="current-requests">
                         <thead>
                         <tr>
-                            <td>Start Date</td>
-                            <td>End Date</td>
+                            <th>Start Date</th>
+                            <th>End Date</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -270,9 +282,8 @@ export default function ItemPage() {
                         </div>}
                 </div>
             }
-            <div id="reviews-header">
-                <h2>Reviews</h2>
-            </div>
+            <div id="reviews-box">
+                <div id="reviews-header"><h2>Reviews</h2></div>
             <div id="reviews-section">
                 {
                     reviews.map(review => (
@@ -280,10 +291,6 @@ export default function ItemPage() {
                     ))
                 }
             </div>
-            <div id="item-user">
-                <Link to={"/profile/" + itemData.userID}>
-                    <button>To User Profile</button>
-                </Link>
             </div>
         </>
     )

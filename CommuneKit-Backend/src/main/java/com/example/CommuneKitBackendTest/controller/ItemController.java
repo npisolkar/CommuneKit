@@ -71,6 +71,7 @@ public class ItemController {
     }
 
     @GetMapping("/search")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> searchItems(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String sort,

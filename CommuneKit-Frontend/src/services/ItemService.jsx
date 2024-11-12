@@ -1,5 +1,5 @@
-// src/services/ItemService.jsx
 import axios from "axios";
+import {useState} from "react";
 
 const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 const FAVORITE_API_BASE_URL = "http://localhost:8080/api/favorites";
@@ -31,7 +31,7 @@ export function search(userID, sort, keyword, category, minRating, maxDistance) 
 }
 
 export function getDistance(itemID, userID) {
-    return axios.get(`${ITEM_API_BASE_URL}/distance/${itemID}/${userID}`);
+    return axios.get(ITEM_API_BASE_URL + `/distance/${itemID}/${userID}`)
 }
 
 export function getRating(itemID) {

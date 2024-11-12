@@ -13,7 +13,7 @@ import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.GeocodingService;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import com.example.CommuneKitBackendTest.service.UserService;
-import com.example.CommuneKitBackendTest.repository.ItemRepository;
+//import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
 //import com.example.CommuneKitBackendTest.service.impl.ItemServiceImpl;
 //import jakarta.persistence.EntityManager;
@@ -22,7 +22,9 @@ import com.example.CommuneKitBackendTest.service.ItemService;
 //import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     private GeocodingService geocodingService;
-    private ItemRepository itemRepository;
+    //private ItemRepository itemRepository;
     private ItemService itemService;
     private RequestService requestService;
 
@@ -83,17 +85,28 @@ public class UserServiceImpl implements UserService {
         return UserMapper.mapToBasicUserDto(user);
     }
 
+    //TODO: deletes whatever image they previously had. GENIUS.
+    public void updateUserImage(Long userID, Long imageId) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+        user.setProfilePicture( imageId );
+        userRepository.save(user);
+        return;
+    }
+
+
     @Override
     public UserDto updateUser(Long userID, UserDto updatedUser) {
         User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
 
         user.setUserName(updatedUser.getUserName());
+        user.setFirstName(updatedUser.getFirstName());
+        user.setLastName(updatedUser.getLastName());
         user.setPassword(updatedUser.getPassword());
         user.setEmail(updatedUser.getEmail());
         user.setPhone(updatedUser.getPhone());
         user.setAddress(updatedUser.getAddress());
         user.setBio(updatedUser.getBio());
-        user.setProfilePicture(updatedUser.getProfilePicture());
+        //user.setProfilePicture( updatedUser.getProfilePicture() != null ? updatedUser.getProfilePicture() : user.getProfilePicture());
 
         User updatedUserObj = userRepository.save(user);
 
@@ -110,16 +123,26 @@ public class UserServiceImpl implements UserService {
     public void banUser(Long userID) {
         List<ItemDto> items = itemService.getItemsByUserId(userID);
         for(ItemDto i: items ) {
-            itemService.deleteItem(i.getItemID());
+            itemService.hideItem(i.getItemID());
         }
         List<RequestDto> requests = requestService.getRequestsByUserId(userID);
         for(RequestDto r: requests ) {
             requestService.deleteRequest(r.getRequestId());
         }
-        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + userID));
-        user.setBanned(false);
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        user.setBanned(true);
         userRepository.save(user);
 
+    }
+    @Override
+    public void unbanUser(Long userID) {
+        List<ItemDto> items = itemService.getItemsByBannedUser(userID);
+        for(ItemDto i: items ) {
+            itemService.unhideItem(i.getItemID());
+        }
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        user.setBanned(false);
+        userRepository.save(user);
     }
 
     @Override
@@ -133,4 +156,34 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    public List<UserDto> getBannedUsers() {
+        List<User> users = userRepository.findAll();
+        users.removeIf(user -> !(user.isBanned()));
+        return users.stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+    }
+/*
+    @Override
+    public MultipartFile getUserImageById(long userID) { //no idea if this is correct
+
+        return null;
+    }
+    @Override
+    public UserDto updateUserImage(Long userID, MultipartFile image) {
+        User user = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given ID not found: " + userID));
+
+        if (image != null && !image.isEmpty()) {
+            try {
+                user.setProfilePicture(image.getBytes());
+            } catch (IOException e) {
+                System.out.println("IO Exception while updating user profile pic" + e.getMessage());
+            }
+        }
+
+        userRepository.save(user);
+
+        return UserMapper.mapToUserDto(user);
+    }*/
+
+
 }

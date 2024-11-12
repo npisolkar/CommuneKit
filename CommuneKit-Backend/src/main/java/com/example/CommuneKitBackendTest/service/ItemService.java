@@ -30,7 +30,10 @@ public interface ItemService {
 
 
 
+    void hideItem(Long itemID);
 
+    void unhideItem(Long itemID);
 
+    List<ItemDto> getItemsByBannedUser(Long userID);
 
 }

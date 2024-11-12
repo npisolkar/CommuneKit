@@ -10,6 +10,11 @@ import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+//import com.example.CommuneKitBackendTest.service.ReviewService;
+//import jakarta.persistence.EntityManager;
+//import jakarta.persistence.EntityManagerFactory;
+//import jakarta.persistence.Persistence;
+//import jakarta.persistence.TypedQuery;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +46,8 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemDto> getAllItems() {
         List<Item> items = itemRepository.findAll();
-        return items.stream()
-                .map(ItemMapper::mapToItemDto)
-                .collect(Collectors.toList());
+        items.removeIf(item -> (item.getVisible().equals(false)));
+        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
 
     @Override
@@ -69,10 +73,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemDto> getItemsByUserId(Long userId) {
-        List<Item> items = itemRepository.findByUserID(userId);
-        return items.stream()
-                .map(ItemMapper::mapToItemDto)
-                .collect(Collectors.toList());
+        List<Item> items = itemRepository.findAll();
+        items.removeIf(item -> !(item.getUserID().equals(userId)));
+        items.removeIf(item -> (item.getVisible().equals(false)));
+        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
     }
 
     @Override
@@ -182,12 +186,14 @@ public class ItemServiceImpl implements ItemService {
     }
 
     private ItemDto convertToDto(Item item) {
+        // Use ItemMapper to map basic fields
         ItemDto dto = ItemMapper.mapToItemDto(item);
-        // 在这里设置 averageRating 和 distance，如果需要
+
+        // Calculate and set the average rating
         Double avgRating = calculateAverageRating(item.getItemID());
         dto.setAverageRating(avgRating != null ? avgRating : Double.valueOf(0.0));
 
-        // 假设你需要设置 distance，可以根据需要添加
+        // If needed, you can add distance calculation here
         // User itemOwner = userRepository.findById(item.getUserID())
         //         .orElseThrow(() -> new ResourceNotFoundException("Owner of the item not found: " + item.getUserID()));
         // Double distance = calculateDistance(userLat, userLon, itemOwner.getLatitude(), itemOwner.getLongitude());
@@ -216,9 +222,26 @@ public class ItemServiceImpl implements ItemService {
         return Double.valueOf(distance);
     }
 
+    public void hideItem(Long itemID) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+        item.setVisible(false);
+        itemRepository.save(item);
+    }
+    public void unhideItem(Long itemID) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
+        item.setVisible(true);
+        itemRepository.save(item);
+    }
     @Override
     public List<String> getAllCategories() {
         return itemRepository.findAllDistinctCategories();
     }
+
+    @Override
+        public List<ItemDto> getItemsByBannedUser(Long userId) {
+            List<Item> items = itemRepository.findAll();
+            items.removeIf(item -> !(item.getUserID().equals(userId)));
+            return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
+        }
 
 }

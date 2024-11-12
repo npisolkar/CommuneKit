@@ -10,7 +10,8 @@ public class ItemMapper {
                 item.getItemName(),
                 item.getItemDescription(),
                 item.getItemCategory(),
-                item.getUserID()
+                item.getUserID(),
+                item.getVisible()
         );
     }
 
@@ -20,7 +21,8 @@ public class ItemMapper {
                 itemDto.getItemName(),
                 itemDto.getItemDescription(),
                 itemDto.getItemCategory(),
-                itemDto.getUserID()
+                itemDto.getUserID(),
+                itemDto.getVisible()
         );
     }
 }
