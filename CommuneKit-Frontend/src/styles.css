@@ -255,9 +255,11 @@ button:hover {
 
 #reviews-header {
     position:absolute;
-    left:50%;
+    text-align:center;
     margin-left:55px;
-    top:400px;
+    top:90%;
+    width:100%;
+    height:300px;
 }
 
 #reviews-section {

@@ -206,7 +206,7 @@ export default function ItemPage() {
                     <tr>
                         <td>Start Date</td>
                         <td>End Date</td>
-                        </tr>
+                    </tr>
                     </thead>
                     <tbody>
                     {
@@ -277,8 +277,8 @@ export default function ItemPage() {
                             <div>
                                 <label>Message</label>
                                 <textarea name="message" id="request-text" value={requestData.message}
-                                       onChange={handleInputChange}
-                                       required/>
+                                          onChange={handleInputChange}
+                                          required/>
                             </div>
                             <button type="submit">Request This Item</button>
                         </form>
@@ -296,15 +296,15 @@ export default function ItemPage() {
                         </div>}
                 </div>
             }
+            <div id="reviews-header"><h2>Reviews</h2></div>
             <div id="reviews-box">
-                <div id="reviews-header"><h2>Reviews</h2></div>
-            <div id="reviews-section">
-                {
-                    reviews.map(review => (
-                        <ReviewComponent reviewDto={review}/>
-                    ))
-                }
-            </div>
+                <div id="reviews-section">
+                    {
+                        reviews.map(review => (
+                            <ReviewComponent reviewDto={review}/>
+                        ))
+                    }
+                </div>
             </div>
         </>
     )
