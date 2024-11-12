@@ -68,7 +68,7 @@ export default function ItemPage() {
     const ItemPicture = ({ imageId }) => {
         return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
                      alt="Item Picture"
-                     style={{width: "150px", height: "150px", objectFit: "cover", borderRadius: "50%"}}/>);
+                     style={{width: "150px", height: "150px", objectFit: "cover"}}/>);
     }
     const handleFileChange = (e) => {
         //console.log(e.target.file);
@@ -186,29 +186,30 @@ export default function ItemPage() {
             <div id="edit-item-button">
                 <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
             </div>
-            <h3>ITEM PICTURE</h3>
-            <ItemPicture imageId={itemData.picture}/>
-            <div id="item-image">Item Image</div>
 
-            {isClicked ? (<>
-                <div className="form-group">
-                    <label>Item picture upload:</label>
-                    <input type="file" onChange={handleFileChange}/>
-                </div>
-            </>) : (
-                <></>
-            )}
-            <h3>END OF ITEM PICTURE</h3>
             {isClicked ?
                 <div id="item-info">
 
-                    <form onSubmit={handleUploadItem}>
 
-                        <input type="text" id="item-name" className="item-member" name="itemName" defaultValue={itemData.itemName}
+                    <div id="item-image">
+                        <h3>Item Image</h3>
+                        <>
+                            <ItemPicture imageId={itemData.picture}/>
+                            <div>
+                                <label>Item picture upload:</label>
+                                <input type="file" onChange={handleFileChange}/>
+                            </div>
+                        </>
+                    </div>
+                    <form onSubmit={handleUploadItem}>
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                        <input type="text" id="item-name" className="item-member" name="itemName"
+                               defaultValue={itemData.itemName}
                                required onChange={handleItemChange}/>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <textarea id="item-desc" className="item-member" name="itemDescription"
-                               defaultValue={itemData.itemDescription} maxLength="2000" required onChange={handleItemChange}/>
+                                  defaultValue={itemData.itemDescription} maxLength="2000" required
+                                  onChange={handleItemChange}/>
 
                         <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
                         <input type="text" id="item-cat" className="item-member" name="itemCategory"
@@ -219,7 +220,13 @@ export default function ItemPage() {
                 :
                 <div>
                     <div id="item-info">
-                        <div id="item-image">Item Image</div>
+
+                    <div id="item-image">
+                            <h3>    Item Image</h3>
+                            <ItemPicture imageId={itemData.picture}/>
+                        </div>
+
+                        {/*<div id="item-image">Item Image</div>*/}
                         <div id="item-name" className="item-member">{itemData.itemName}</div>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
