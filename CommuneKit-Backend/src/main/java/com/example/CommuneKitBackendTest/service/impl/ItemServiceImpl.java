@@ -244,4 +244,12 @@ public class ItemServiceImpl implements ItemService {
             return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
         }
 
+    //TODO: deletes whatever image they previously had. GENIUS.
+    public void updateItemImage(Long itemID, Long imageId) {
+        Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given ID not found: " + itemID));
+        item.setPicture( imageId );
+        itemRepository.save(item);
+    }
+
+
 }

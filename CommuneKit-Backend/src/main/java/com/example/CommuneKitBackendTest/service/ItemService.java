@@ -36,4 +36,6 @@ public interface ItemService {
 
     List<ItemDto> getItemsByBannedUser(Long userID);
 
+    void updateItemImage(Long itemID, Long imageId);
+
 }

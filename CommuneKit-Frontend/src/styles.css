@@ -353,6 +353,15 @@ button {
 #item-info {
     left:25%;
     position:absolute;
+    border: 10px solid #22B14C;
+    top:25%;
+}
+
+#item-image {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-15%)
     top:20%;
 }
 

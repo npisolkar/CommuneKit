@@ -16,6 +16,7 @@ public class ItemDto {
     private String itemDescription;
     private String itemCategory;
     private Long userID;
+    private Long picture;
     private Boolean visible;
     private Double averageRating;
     private Double distance;
@@ -36,6 +37,16 @@ public class ItemDto {
         this.itemDescription = itemDescription;
         this.itemCategory = itemCategory;
         this.userID = userID;
+        this.visible = visible;
+    }
+
+    public ItemDto(Long itemID, String itemName, String itemDescription, String itemCategory, Long userID, Long picture, Boolean visible) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemCategory = itemCategory;
+        this.userID = userID;
+        this.picture = picture;
         this.visible = visible;
     }
 }
