@@ -39,4 +39,14 @@ public class ItemDto {
         this.userID = userID;
         this.visible = visible;
     }
+
+    public ItemDto(Long itemID, String itemName, String itemDescription, String itemCategory, Long userID, Long picture, Boolean visible) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemCategory = itemCategory;
+        this.userID = userID;
+        this.picture = picture;
+        this.visible = visible;
+    }
 }
