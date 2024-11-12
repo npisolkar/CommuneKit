@@ -90,7 +90,8 @@ export default function ItemPage() {
         getReviewsById(itemID)
             .then(res => {
                 setReviews(res.data)
-                setAvgRating(res.data.map(review => parseInt(review.rating)).reduce((a, b) => a + b) / res.data.length);
+                setAvgRating(res.data.map(review => parseInt(review.rating)).reduce((a, b) => a + b)
+                    / res.data.length);
             })
             .catch (err => console.log(err))
 
@@ -98,7 +99,6 @@ export default function ItemPage() {
         getApprovedRequestsById(itemID)
             .then(res => {
                 setCurrentRequests(res.data)
-                console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
                 console.log("current user:" + localStorage.getItem("userID"))
                 setHasBorrowed(res.data.some(compareID))
@@ -129,7 +129,8 @@ export default function ItemPage() {
         }
     }
 
-    async function handleUploadItem() {
+    const handleUploadItem = async (e) => {
+        e.preventDefault()
         try {
             console.log("trying to submit " + JSON.stringify(itemData))
             const responseData = await updateItem(itemID, itemData);

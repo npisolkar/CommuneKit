@@ -63,6 +63,9 @@ textarea {
     font: 14px sans-serif;
 }
 
+button:hover {
+    background:#22B14C !important;
+}
 /* Login, registration */
 .auth-container {
     max-width: 400px;
@@ -100,6 +103,38 @@ textarea {
     z-index:2;
 }
 
+#close-menu {
+    position: absolute;
+    z-index:3;
+    right: 10px;
+    top:120px;
+}
+
+#menu-popup {
+    position:absolute;
+    z-index:3;
+    height:200px;
+    width:200px;
+    background-color:white;
+    right:0;
+}
+
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left:0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+#sign-out {
+    top:100px;
+    position:absolute;
+    z-index:3;
+}
+
 #logo {
     top:0;
     width:10px;
@@ -115,9 +150,6 @@ textarea {
     opacity:0.5;
 }
 
-.bar-button {
-    background:#22B14C !important;
-}
 /* home page css */
 .home-items {
     text-align:center;
@@ -131,7 +163,7 @@ textarea {
 #create-item-home {
     position:absolute;
     top:20%;
-    right:0;
+    right:50px;
 }
 /* search page */
 .search-bar {
