@@ -34,6 +34,7 @@ export default function ItemPage() {
     let {itemID} = useParams();
     const [isOwn, setIsOwn] = useState(false);
     const [reviews, setReviews] = useState([])
+    const [avgRating, setAvgRating] = useState(0)
     const [userID, setUserID] = useState('')
 
     const [itemData, setItemData] = useState({
@@ -89,6 +90,8 @@ export default function ItemPage() {
         getReviewsById(itemID)
             .then(res => {
                 setReviews(res.data)
+                setAvgRating(res.data.map(review => parseInt(review.rating)).reduce((a, b) => a + b)
+                    / res.data.length);
             })
             .catch (err => console.log(err))
 
@@ -96,7 +99,6 @@ export default function ItemPage() {
         getApprovedRequestsById(itemID)
             .then(res => {
                 setCurrentRequests(res.data)
-                console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
                 console.log("current user:" + localStorage.getItem("userID"))
                 setHasBorrowed(res.data.some(compareID))
@@ -127,7 +129,8 @@ export default function ItemPage() {
         }
     }
 
-    async function handleUploadItem() {
+    const handleUploadItem = async (e) => {
+        e.preventDefault()
         try {
             console.log("trying to submit " + JSON.stringify(itemData))
             const responseData = await updateItem(itemID, itemData);
@@ -162,37 +165,48 @@ export default function ItemPage() {
                 <div id="item-info">
                     <form onSubmit={handleUploadItem}>
                         <div id="item-image">Item Image</div>
-                        <input type="text" id="item-name" className="item-member" name="itemName" defaultValue={itemData.itemName}
+                        <input type="text" id="item-name" className="item-member" name="itemName"
+                               defaultValue={itemData.itemName}
                                required onChange={handleItemChange}/>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <textarea id="item-desc" className="item-member" name="itemDescription"
-                               defaultValue={itemData.itemDescription} maxLength="2000" required onChange={handleItemChange}/>
+                                  defaultValue={itemData.itemDescription} maxLength="2000" required
+                                  onChange={handleItemChange}/>
                         <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
-                        <input type="text" id="item-cat" className="item-member" name="itemCategory"
-                               defaultValue={itemData.itemCategory} required onChange={handleItemChange}/>
+                        <select id="item-cat" name="itemCategory" className="item-member" onChange={handleItemChange}
+                                defaultValue={itemData.itemCategory} required>
+                            <option value="Indoor">Indoor</option>
+                            <option value="Outdoor">Outdoor</option>
+                            <option value="Party">Party</option>
+                            <option value="Consumable">Consumable</option>
+                        </select>
                         <button type="submit">Submit Changes</button>
                     </form>
                 </div>
                 :
-                <div>
+                <div id="item-box">
                     <div id="item-info">
                         <div id="item-image">Item Image</div>
-                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
                         <label htmlFor="itemCategory" id="item-cat"
                                className="item-member-label"><b>Category</b></label>
                         <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
+                    <div id="avg-rating-container">
+                        <label><b>Average Rating</b></label>
+                        <div id="item-avg">{avgRating}</div>
+                    </div>
                 </div>
             }
             {isOwn ?
                 <table id="current-requests">
                     <thead>
-                        <tr>
-                            <td>Start Date</td>
-                            <td>End Date</td>
-                        </tr>
+                    <tr>
+                        <td>Start Date</td>
+                        <td>End Date</td>
+                    </tr>
                     </thead>
                     <tbody>
                     {
@@ -260,11 +274,11 @@ export default function ItemPage() {
                                        onChange={handleInputChange}
                                        required/>
                             </div>
-                            <div className="form-group">
+                            <div>
                                 <label>Message</label>
-                                <input type="text" name="message" value={requestData.message}
-                                       onChange={handleInputChange}
-                                       required/>
+                                <textarea name="message" id="request-text" value={requestData.message}
+                                          onChange={handleInputChange}
+                                          required/>
                             </div>
                             <button type="submit">Request This Item</button>
                         </form>
@@ -282,15 +296,15 @@ export default function ItemPage() {
                         </div>}
                 </div>
             }
+            <div id="reviews-header"><h2>Reviews</h2></div>
             <div id="reviews-box">
-                <div id="reviews-header"><h2>Reviews</h2></div>
-            <div id="reviews-section">
-                {
-                    reviews.map(review => (
-                        <ReviewComponent reviewDto={review}/>
-                    ))
-                }
-            </div>
+                <div id="reviews-section">
+                    {
+                        reviews.map(review => (
+                            <ReviewComponent reviewDto={review}/>
+                        ))
+                    }
+                </div>
             </div>
         </>
     )

@@ -4,7 +4,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
 import {getImageById, uploadImage} from "./services/ImageService.jsx";
-import ConversationComponent from "./components/ConversationComponent.jsx";
+import {ConversationComponent} from "./components/ConversationComponent.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
