@@ -15,6 +15,5 @@ export function getMessageById(id) {
 }
 
 export function getConversation(user2) {
-    console.log("user1: " + localStorage.getItem("userID") + " user2: " + user2.user2)
     return axios.get(MESSAGE_BASE_URL + "/conversation/" + localStorage.getItem("userID") + "/" + user2.user2)
 }

@@ -1,25 +1,48 @@
+// src/components/Search.jsx
 import './styles.css';
-import { search, getDistance, getRating } from "./services/ItemService.jsx";
+import { search, getDistance, getRating, getCategories } from "./services/ItemService.jsx";
 import { useEffect, useState } from 'react';
 
 export default function Search() {
     const [keyword, setKeyword] = useState('');
     const [sort, setSort] = useState('time-asc');
+    const [category, setCategory] = useState('');
+    const [distanceRange, setDistanceRange] = useState('');
+    const [ratingRange, setRatingRange] = useState('');
     const [results, setResults] = useState([]);
     const [distances, setDistances] = useState({});
     const [ratings, setRatings] = useState({});
+    const [categories, setCategories] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const userID = localStorage.getItem("userID");
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await getCategories();
+                setCategories(response.data);
+            } catch (error) {
+                console.error("Failed to fetch categories:", error);
+                setError("Could not load categories.");
+            }
+        };
+        fetchCategories();
+    }, []);
+
     const handleSearch = async () => {
         if (userID) {
+            setIsLoading(true);
             try {
-                const response = await search(userID, sort, keyword);
+                const response = await search(userID, sort, keyword, category, ratingRange, distanceRange);
                 setResults(response.data);
                 fetchDistances(response.data);
                 fetchRatings(response.data);
             } catch (error) {
                 console.error("Search failed:", error);
+            } finally {
+                setIsLoading(false);
             }
         } else {
             console.error("User ID is not available in localStorage.");
@@ -54,20 +77,15 @@ export default function Search() {
 
     const formatItemResult = (item) => {
         const distance = distances[item.itemID];
+        const rating = ratings[item.itemID];
         return (
-            <div key={item.itemID} style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                gap: '10px',
-                border: '2px solid green',
-                margin: '4px'
-            }}>
+            <div key={item.itemID} className="search-result-item">
                 <div>Item Name: <a href={`/item/${item.itemID}`}>{item.itemName}</a></div>
                 <div>Description: {item.itemDescription}</div>
                 <div>Category: {item.itemCategory}</div>
                 <div><a href={`/profile/${item.userID ?? 'unknown'}`}>User ID: {item.userID ?? 'N/A'}</a></div>
                 <div>Distance: {distance !== undefined ? `${distance} miles` : 'Loading...'}</div>
-                <div>Rating: {ratings[item.itemID] !== undefined ? ratings[item.itemID] : 'Loading...'}</div>
+                <div>Rating: {rating !== undefined ? rating : 'Loading...'}</div>
             </div>
         );
     };
@@ -75,55 +93,65 @@ export default function Search() {
     return (
         <>
             <div className="search-bar">
-                <div>
-                    <input
-                        type="text"
-                        style={{height:"50px", width:"1000px"}}
-                        className="search-input"
-                        value={keyword}
-                        onChange={(e) => setKeyword(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <button onClick={handleSearch}>Search</button>
-                </div>
+                <input
+                    type="text"
+                    className="search-input"
+                    value={keyword}
+                    onChange={(e) => setKeyword(e.target.value)}
+                    placeholder="Search for items..."
+                />
+                <button onClick={handleSearch}>Search</button>
             </div>
+
             <div id="search-toggles">
                 <div className="search-toggle">
                     <h4>Sort</h4>
-                    <select
-                        name="sort-options"
-                        id="sort-options"
-                        value={sort}
-                        onChange={(e) => setSort(e.target.value)}
-                    >
+                    <select value={sort} onChange={(e) => setSort(e.target.value)}>
                         <option value="time-asc">Oldest</option>
-                        {/*<option value="time-desc">Newest</option>*/}
                         <option value="rating">Rating</option>
-                        {/*<option value="a-z">A-Z</option>*/}
-                        {/*<option value="z-a">Z-A</option>*/}
                         <option value="distance">Distance</option>
                     </select>
                 </div>
-                {/*<div className="search-toggle">*/}
-                {/*    <h4>Filter</h4>*/}
-                {/*    <select name="filter-options" id="filter-options">*/}
-                {/*        <option value="10mi">10 miles</option>*/}
-                {/*        <option value="5mi">5 miles</option>*/}
-                {/*        <option value="2mi">2 miles</option>*/}
-                {/*        <option value="1mi">1 mile</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-                {/*<div className="search-toggle">*/}
-                {/*    <h4>Toggles</h4>*/}
-                {/*    <select name="toggle-options" id="toggle-options">*/}
-                {/*        <option value="idk">IDK</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
+
+                <div className="search-toggle">
+                    <h4>Category</h4>
+                    <select value={category} onChange={(e) => setCategory(e.target.value)}>
+                        <option value="">All</option>
+                        {categories.map((cat) => (
+                            <option key={cat} value={cat}>{cat}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="search-toggle">
+                    <h4>Distance Range</h4>
+                    <select value={distanceRange} onChange={(e) => setDistanceRange(e.target.value)}>
+                        <option value="">All</option>
+                        <option value="1">Less than 1 mile</option>
+                        <option value="2">Less than 2 miles</option>
+                        <option value="5">Less than 5 miles</option>
+                        <option value="10">Less than 10 miles</option>
+                    </select>
+                </div>
+
+                <div className="search-toggle">
+                    <h4>Rating Range</h4>
+                    <select value={ratingRange} onChange={(e) => setRatingRange(e.target.value)}>
+                        <option value="">All</option>
+                        <option value="1">≥ 1 Star</option>
+                        <option value="2">≥ 2 Stars</option>
+                        <option value="3">≥ 3 Stars</option>
+                        <option value="4">≥ 4 Stars</option>
+                    </select>
+                </div>
             </div>
 
+            {error && <p className="error-message">{error}</p>}
+
             <div className="search-results">
-                {results.length > 0 ? (
+                {isLoading ? (
+                    <p>Loading...</p>
+                ) : results.length > 0 ? (
                     results.map(item => formatItemResult(item))
                 ) : (
                     <p>No items found. Please try another search.</p>

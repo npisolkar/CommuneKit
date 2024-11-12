@@ -43,9 +43,13 @@ export default function NewItem() {
                 <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required
                        onChange={handleItemChange}/>
                 <label htmlFor="itemCategory" className="item-head">Category</label>
-                <input type="text" name="itemCategory" defaultValue={itemData.itemCategory} required
-                       onChange={handleItemChange}/>
-                <button type="submit">Submit Changes</button>
+                <select name="itemCategory" onChange={handleItemChange} required>
+                    <option value="Indoor">Indoor</option>
+                    <option value="Outdoor">Outdoor</option>
+                    <option value="Party">Party</option>
+                    <option value="Consumable">Consumable</option>
+                </select>
+                <button type="submit">Create New Item</button>
             </form>
         </div>
     )
