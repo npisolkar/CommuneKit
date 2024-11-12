@@ -120,7 +120,7 @@ export default function ItemPage() {
             .catch (err => console.log(err))
     }, [])
 
-    const handleSubmit = async(e) => {
+    const handleSubmitRequest = async(e) => {
         e.preventDefault()
         try {
             let requestJson = {
@@ -226,6 +226,7 @@ export default function ItemPage() {
                         <button type="submit">Submit Changes</button>
                     </form>
                 </div>
+                </>
                 :
                 <div id="item-box">
                         <div id="edit-item-button">
@@ -254,7 +255,7 @@ export default function ItemPage() {
                             <label><b>Average Rating</b></label>
                             <div id="item-avg">{avgRating}</div>
                         </div>
-                    </div>
+                </div>
             }
             {isOwn ?
                 <table id="current-requests">
@@ -352,10 +353,13 @@ export default function ItemPage() {
                         </div>}
                 </div>
             }
-            <div id="reviews-header"><h2>Reviews</h2></div>
-            <div id="reviews-underline" className="underline"></div>
+            <div id="reviews-header">
+                <h2>Reviews</h2>
+                <div id="reviews-underline" className="underline"></div>
+            </div>
+
             <div id="reviews-box">
-                <div id="reviews-section">
+            <div id="reviews-section">
                     {
                         reviews.map(review => (
                             <ReviewComponent reviewDto={review}/>
