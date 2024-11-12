@@ -8,15 +8,15 @@ import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./ItemPage.jsx"
-import LoginPage from "./LoginPage.jsx";
-import RegistrationPage from "./RegistrationPage.jsx";
-import FavoritePage from "./FavoritePage.jsx";
-import ResetPasswordPage from "./ResetPasswordPage.jsx";
+import LoginPage from "./components/LoginPage.jsx";
+import RegistrationPage from "./components/RegistrationPage.jsx";
+import FavoritePage from "./components/FavoritePage.jsx";
+import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
-import AdminPage from "./AdminPage.jsx"
-import ReportPage from "./ReportPage.jsx";
+import AdminPage from "./components/AdminPage.jsx"
+import ReportPage from "./components/ReportPage.jsx";
 
 
 export default function App() {
@@ -36,11 +36,11 @@ export default function App() {
                   <Link id="logo" to="/home">
                       <img src="/CommuneKit Logo.png" alt="logo"></img>
                   </Link>
-                  <Link to="/search" id="search-button"><button className="bar-button">Search</button></Link>
-                  <Link to="/notifications" id="notif-button"><button className="bar-button">Notifications</button></Link>
-                  <Link to="/favorites" id="notif-button"><button className="bar-button">Favorites</button></Link>
+                  <Link to="/search" id="search-button"><button>Search</button></Link>
+                  <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
+                  <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
                   <Link to={`/profile/${userID}`}
-                        id="profile-button"><button className="bar-button">Profile</button></Link>
+                        id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -83,7 +83,7 @@ function OptionsMenu() {
     }
     return (
         <>
-            {isClicked ? <button id="menu-button" className="bar-button" onClick={handleClick}>Menu</button>
+            {isClicked ? <button id="menu-button" onClick={handleClick}>Menu</button>
                  :
                 <div>
                     <div id="menu-popup">

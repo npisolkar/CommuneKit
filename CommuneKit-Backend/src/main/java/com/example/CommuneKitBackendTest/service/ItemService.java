@@ -24,6 +24,12 @@ public interface ItemService {
 
     Double getRating(Long itemID);
 
+    List<ItemDto> filterItems(String category, Double minRating, Double maxDistance, String sort, Long userID);
+
+    List<String> getAllCategories();
+
+
+
     void hideItem(Long itemID);
 
     void unhideItem(Long itemID);
