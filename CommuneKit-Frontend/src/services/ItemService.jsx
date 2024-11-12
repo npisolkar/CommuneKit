@@ -82,3 +82,12 @@ export function removeFavorite(userID, itemID) {
 export function getFavoriteItems(userID) {
     return axios.get(`${FAVORITE_API_BASE_URL}/${userID}`);
 }
+
+export function updateItemImage(itemID, imageID) {
+    try {
+        console.log("in updateItemImage... itemID: " + itemID + " imageID: " + imageID);
+        return axios.put(ITEM_API_BASE_URL + "/updateItemPic" + "/" + itemID + "/" + imageID, {})
+    } catch (error) {
+        console.log(error);
+    }
+}

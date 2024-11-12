@@ -7,13 +7,10 @@
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="merging stuff">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/dto/ItemDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/entity/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ItemMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/ItemMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ItemService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/ItemService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemPage.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

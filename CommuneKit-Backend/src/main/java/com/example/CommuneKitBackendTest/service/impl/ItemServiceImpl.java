@@ -154,6 +154,7 @@ public class ItemServiceImpl implements ItemService {
         dto.setItemDescription(item.getItemDescription());
         dto.setItemCategory(item.getItemCategory());
         dto.setUserID(item.getUserID());
+        dto.setPicture(item.getPicture());
         return dto;
     }
 
