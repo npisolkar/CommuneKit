@@ -183,11 +183,13 @@ export default function ItemPage() {
     }
     return (
         <>
-            <div id="edit-item-button">
-                <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"} itemID={itemData.itemID}/>
-            </div>
+
 
             {isClicked ?
+                <>
+                <div id="edit-item-button">
+                    <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Cancel Edit"} itemID={itemData.itemID}/>
+                </div>
                 <div id="item-info">
 
 
@@ -217,16 +219,22 @@ export default function ItemPage() {
                         <button type="submit">Submit Changes</button>
                     </form>
                 </div>
+                </>
                 :
                 <div>
+                    <div id="edit-item-button">
+                        <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
+                                    itemID={itemData.itemID}/>
+                    </div>
                     <div id="item-info">
 
-                    <div id="item-image">
-                            <h3>    Item Image</h3>
+                        <div id="item-image">
+                            <h3> Item Image</h3>
                             <ItemPicture imageId={itemData.picture}/>
                         </div>
 
                         {/*<div id="item-image">Item Image</div>*/}
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
                         <div id="item-name" className="item-member">{itemData.itemName}</div>
                         <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
                         <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
@@ -239,8 +247,8 @@ export default function ItemPage() {
             {isOwn ?
                 <table id="current-requests">
                     <thead>
-                        <tr>
-                            <td>Start Date</td>
+                    <tr>
+                        <td>Start Date</td>
                             <td>End Date</td>
                         </tr>
                     </thead>
