@@ -66,6 +66,14 @@ textarea {
 button:hover {
     background:#22B14C !important;
 }
+
+td {
+    text-overflow:ellipsis;
+}
+
+table tr {
+    border-bottom:1px solid black;
+}
 /* Login, registration */
 .auth-container {
     max-width: 400px;
@@ -158,6 +166,7 @@ button:hover {
     height:250px;
     margin-left:100px;
     font-size:12px;
+    width:550px;
 }
 
 #create-item-home {
@@ -309,6 +318,38 @@ button {
     text-align:left;
 }
 
+.table-head {
+    border: 1px solid black;
+    text-align:center;
+    font-size:30px;
+}
+
+.item-comp {
+    height:10px;
+    border: 1px solid black;
+}
+
+.comp-desc {
+    text-overflow:ellipsis;
+    max-width:40px;
+    max-height:40px;
+    white-space:nowrap;
+    overflow:hidden
+}
+
+.more-info {
+    z-index:2;
+    display:none;
+}
+
+.item-comp:hover ~ .more-info {
+    display:block;
+    position:absolute;
+}
+
+.item-comp:hover {
+    background-color:#22B14C
+}
 /* individual item's page */
 #edit-item-button {
     position:absolute;
@@ -317,13 +358,14 @@ button {
 }
 
 .form-group {
-    display:inline-block;
+    display:flex;
+    flex-direction:column;
 }
 
 #reviews-button {
     position:absolute;
-    left: 40%;
-    top:90%;
+    left: 45%;
+    top:125%;
 }
 
 #reviews-box {
@@ -342,12 +384,6 @@ button {
     position:absolute;
     top:700px;
     margin-left:50px;
-}
-
-.underline {
-    width:100%;
-    height:1px;
-    background-color:black
 }
 
 .item-review {
@@ -430,7 +466,7 @@ button {
 #request-form {
     position:absolute;
     top:80%;
-    margin-left:50px;
+    right:10%;
 }
 
 #request-text {

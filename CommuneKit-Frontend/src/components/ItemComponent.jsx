@@ -7,6 +7,8 @@ export default function ItemComponent({ data, userID }) {
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isOwn, setIsOwn] = useState(false);
+    const [isHovering, setHovering] = useState(false);
+
 
     useEffect(() => {
         if (!userID) {
@@ -65,11 +67,22 @@ export default function ItemComponent({ data, userID }) {
         }
     };
 
+    const handleHover = () => {
+        setHovering(true);
+        console.log("hovering over " + JSON.stringify(data.itemID))
+    }
+
+    const handleLeave = () => {
+        setHovering(false);
+        console.log("left " + JSON.stringify(data.itemID))
+    }
+
     return (
-        <tr key={`item-${data.itemID}`}> {/* Using itemID as a unique key */}
+        <tr key={`item-${data.itemID}`} className='item-comp'
+            onMouseOver={handleHover} onMouseLeave={handleLeave}> {/* Using itemID as a unique key */}
             <td>{data.itemID}</td>
             <td>{data.itemName}</td>
-            <td>{data.itemDescription}</td>
+            <td className="comp-desc" >{data.itemDescription}</td>
             <td>{data.itemCategory}</td>
             <td><Link to={`/item/${data.itemID}`}><button>To Item Page</button></Link></td>
             <td><Link to={"/profile/" + data.userID}><button>To User Page</button></Link></td>
@@ -82,6 +95,10 @@ export default function ItemComponent({ data, userID }) {
                     <button onClick={handleAddFavorite}>Favorite</button>
                 )}
             </td>
+            <td><div className="more-info">{data.itemDescription}</div></td>
+            <td>{ isHovering ?
+                <div id="more-info">{data.itemDescription}</div>
+                : null }</td>
         </tr>
     );
 }

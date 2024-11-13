@@ -34,8 +34,8 @@ export default function ItemTable({ headName, items, userID }) {
 
     return (
         <>
-            <h1>{headName}</h1>
-            <table>
+            <div className="table-head"><b>{headName}</b></div>
+            <table >
                 <thead>
                 <tr>
                     <th>ID</th>

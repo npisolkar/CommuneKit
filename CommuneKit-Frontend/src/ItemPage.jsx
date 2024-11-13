@@ -340,25 +340,25 @@ export default function ItemPage() {
                             <button type="submit">Request This Item</button>
                         </form>
                     </div>
-                    {hasBorrowed ?
-                        <div id="reviews-button">
-                            <Link to={"/item/" + itemID + "/create-review"}>
-                                <button>Leave a Review</button>
-                            </Link>
-                        </div>
-                        :
-                        <div id="reviews-button">
-                            <button onClick={handleIllegalClick}>Leave a Review</button>
-                            <CantReviewNotif isClicked={isIllegalClicked}/>
-                        </div>}
                 </div>
             }
             <div id="reviews-header">
                 <h2>Reviews</h2>
-                <div id="reviews-underline" className="underline"></div>
+                <hr id="reviews-underline" ></hr>
             </div>
-
+            {hasBorrowed ?
+                <div id="reviews-button">
+                    <Link to={"/item/" + itemID + "/create-review"}>
+                        <button>Leave a Review</button>
+                    </Link>
+                </div>
+                :
+                <div id="reviews-button">
+                    <button onClick={handleIllegalClick}>Leave a Review</button>
+                    <CantReviewNotif isClicked={isIllegalClicked}/>
+                </div>}
             <div id="reviews-box">
+
             <div id="reviews-section">
                     {
                         reviews.map(review => (
