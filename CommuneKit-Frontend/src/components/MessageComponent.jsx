@@ -4,7 +4,6 @@ import {getUserById} from "../services/UserService.jsx";
 export default function MessageComponent(message) {
     const [name, setName] = useState('')
     useEffect(() => {
-        console.log("message: " + JSON.stringify(message))
         getUserById(JSON.stringify(message.message.senderID))
             .then (res =>
                 setName(res.data.userName)

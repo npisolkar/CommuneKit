@@ -75,9 +75,19 @@ public class ItemController {
     public ResponseEntity<List<ItemDto>> searchItems(
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String sort,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) Double minRating,
+            @RequestParam(required = false) Double maxDistance,
             @RequestParam Long userID) {
 
-        List<ItemDto> items = itemService.searchItems(keyword, sort, userID);
+        List<ItemDto> items;
+
+        if (category != null || minRating != null || maxDistance != null) {
+            items = itemService.filterItems(category, minRating, maxDistance, sort, userID);
+        } else {
+            items = itemService.searchItems(keyword, sort, userID);
+        }
+
         return ResponseEntity.ok(items);
     }
 
@@ -95,5 +105,25 @@ public class ItemController {
     public ResponseEntity<Double> getRating(@PathVariable Long itemID) {
         Double rating = itemService.getRating(itemID);
         return ResponseEntity.ok(rating);
+    }
+
+    @GetMapping("/categories")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<String>> getAllCategories() {
+        List<String> categories = itemService.getAllCategories();
+        return ResponseEntity.ok(categories);
+    }
+
+    @PutMapping("/updateItemPic/{itemID}/{imageID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> updateItemImage(@PathVariable("itemID") Long itemID,
+                                                  @PathVariable("imageID") Long imageID) {
+        try {
+            itemService.updateItemImage(itemID, imageID);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
