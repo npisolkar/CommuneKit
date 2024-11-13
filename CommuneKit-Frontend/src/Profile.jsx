@@ -73,7 +73,6 @@ export default function Profile() {
                 console.log("formdata before fetch: " + JSON.stringify(formData))
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
-                //console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);
