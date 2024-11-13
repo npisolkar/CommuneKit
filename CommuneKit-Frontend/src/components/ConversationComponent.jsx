@@ -6,7 +6,6 @@ export const ConversationComponent = (user2) => {
     const [conversation, setConversation] = useState([])
     const endRef = useRef(null)
     const sendMessage = async (e) => {
-        e.preventDefault()
         try {
             console.log("going to send " + JSON.stringify(messageData))
             const response = await createMessage(JSON.stringify(messageData))
@@ -20,11 +19,19 @@ export const ConversationComponent = (user2) => {
     const scrollToElement = () => {
         const {current} = endRef
         if (current !== null){
-            endRef.current.scrollTo(0, 350)
+            endRef.current.scrollTo(endRef.current.scrollWidth, endRef.current.scrollHeight)
         }
     }
 
-    useEffect(scrollToElement, [sendMessage])
+    const [messageData, setMessageData] = useState({
+        senderID:localStorage.getItem("userID"),
+        receiverID:user2.user2,
+        message:'',
+    });
+
+    useEffect(
+        scrollToElement
+    , [conversation])
 
     useEffect(() => {
         getConversation(user2)
@@ -32,13 +39,7 @@ export const ConversationComponent = (user2) => {
                 setConversation(res.data)
             })
             .catch (err => console.log(err))
-    }, [sendMessage])
-
-    const [messageData, setMessageData] = useState({
-        senderID:localStorage.getItem("userID"),
-        receiverID:user2.user2,
-        message:'',
-    });
+    }, [])
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;

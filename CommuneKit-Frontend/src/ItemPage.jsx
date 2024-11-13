@@ -113,7 +113,6 @@ export default function ItemPage() {
         getApprovedRequestsById(itemID)
             .then(res => {
                 setCurrentRequests(res.data)
-                console.log("requests: " + JSON.stringify(res.data))
                 //check if item has been borrowed by user before
                 //console.log("current user:" + localStorage.getItem("userID"))
                 setHasBorrowed(res.data.some(compareID))
@@ -121,7 +120,8 @@ export default function ItemPage() {
             .catch (err => console.log(err))
     }, [])
 
-    async function handleSubmitRequest() {
+    const handleSubmitRequest = async(e) => {
+        e.preventDefault()
         try {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
@@ -228,33 +228,33 @@ export default function ItemPage() {
                 </div>
                 </>
                 :
-                <div>
-                    <div id="edit-item-button">
-                        <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
-                                    itemID={itemData.itemID}/>
-                    </div>
                 <div id="item-box">
-                    <div id="item-info">
-
-                        <div id="item-image">
-                            <h3> Item Image</h3>
-                            <ItemPicture imageId={itemData.picture}/>
+                        <div id="edit-item-button">
+                            <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
+                                    itemID={itemData.itemID}/>
                         </div>
+                        <div id="item-info">
+                            <div id="item-image">Item Image</div>
+                            <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
-                        {/*<div id="item-image">Item Image</div>*/}
-                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
-                        <div id="item-name" className="item-member">{itemData.itemName}</div>
-                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
-                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                        <label htmlFor="itemCategory" id="item-cat"
+                            <div id="item-image">
+                                <h3> Item Image</h3>
+                                <ItemPicture imageId={itemData.picture}/>
+                            </div>
+
+                            {/*<div id="item-image">Item Image</div>*/}
+                            <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                            <div id="item-name" className="item-member">{itemData.itemName}</div>
+                            <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                            <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                            <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
-                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
-                    </div>
-                    <div id="avg-rating-container">
-                        <label><b>Average Rating</b></label>
-                        <div id="item-avg">{avgRating}</div>
-                    </div>
-                </div>
+                            <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                        </div>
+                        <div id="avg-rating-container">
+                            <label><b>Average Rating</b></label>
+                            <div id="item-avg">{avgRating}</div>
+                        </div>
                 </div>
             }
             {isOwn ?
@@ -353,9 +353,13 @@ export default function ItemPage() {
                         </div>}
                 </div>
             }
-            <div id="reviews-header"><h2>Reviews</h2></div>
+            <div id="reviews-header">
+                <h2>Reviews</h2>
+                <div id="reviews-underline" className="underline"></div>
+            </div>
+
             <div id="reviews-box">
-                <div id="reviews-section">
+            <div id="reviews-section">
                     {
                         reviews.map(review => (
                             <ReviewComponent reviewDto={review}/>

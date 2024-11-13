@@ -1,7 +1,7 @@
 /* general stuff */
 * {
     box-sizing: border-box;
-    font-family: cursive;
+    font-family: sans-serif
 }
 
 html {
@@ -83,7 +83,7 @@ button:hover {
 .about-box {
     max-width: 400px;
     margin: 20px;
-    padding: 70px;
+    padding: 69px;
     border: 10px solid #22B14C;
     border-radius: 10px;
     background-color: #ffffff;
@@ -285,6 +285,13 @@ button {
     width:200px;
 }
 
+#profile-image {
+    position:absolute;
+    top:40%;
+    margin-left:100px;
+    left:0;
+}
+
 /* my items page */
 #create-item {
     left:50%;
@@ -326,16 +333,21 @@ button {
 #reviews-header {
     position:absolute;
     text-align:center;
-    margin-left:55px;
-    top:90%;
+    top:130%;
     width:100%;
     height:300px;
 }
 
 #reviews-section {
     position:absolute;
-    top:450px;
+    top:700px;
     margin-left:50px;
+}
+
+.underline {
+    width:100%;
+    height:1px;
+    background-color:black
 }
 
 .item-review {
@@ -359,19 +371,21 @@ button {
 
 #item-image {
     position: relative;
-    top: 50%;
     left: 50%;
     transform: translate(-15%);
+    top:20%;
 }
 
 .item-member {
-    padding-left:10px;
+    padding:10px;
     text-align:left;
     width:500px;
+    margin:10px;
 }
 
 .item-member-label {
     text-align:center;
+    border: 1px solid black;
 }
 
 #item-desc {
