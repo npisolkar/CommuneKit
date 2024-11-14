@@ -50,6 +50,18 @@ export function getItemsByPage(page, pageSize) {
     return axios.get(`${ITEM_API_BASE_URL}?page=${page}&size=${pageSize}`);
 }
 
+export function getSuggestedItems(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/suggested/${userID}`);
+}
+
+export function getSuggestedItemsByFavorites(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/suggestedf/${userID}`);
+}
+
+export function getFavorites(userID) {
+    return axios.get(`${FAVORITE_API_BASE_URL}/${userID}`);
+}
+
 export function createItem(itemDto) {
     return axios.post(ITEM_API_BASE_URL, itemDto, {
         headers: {

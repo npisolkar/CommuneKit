@@ -151,7 +151,9 @@ public class ItemServiceImpl implements ItemService {
         double userLat = currentUser.getLatitude();
         double userLon = currentUser.getLongitude();
 
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemRepository.findAll().stream()
+                .filter(item -> !item.getUserID().equals(userID))
+                .collect(Collectors.toList());
 
         return calculateAndSortSuggestedItems(items, userLat, userLon);
     }
@@ -169,6 +171,7 @@ public class ItemServiceImpl implements ItemService {
 
         List<Item> filteredItems = itemRepository.findAll().stream()
                 .filter(item -> favoriteCategories.contains(item.getItemCategory()))
+                .filter(item -> !item.getUserID().equals(userID))
                 .collect(Collectors.toList());
 
         return calculateAndSortSuggestedItems(filteredItems, userLat, userLon);

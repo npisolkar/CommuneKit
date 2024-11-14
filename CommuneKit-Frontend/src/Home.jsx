@@ -3,7 +3,7 @@ import './styles.css'
 import ItemTable from './ItemTable.jsx'
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
-import {getAllItems, getItemsByUser, getMyBorrows} from "./services/ItemService.jsx";
+import {getAllItems, getItemsByUser, getSuggestedItemsByFavorites, getSuggestedItems, getFavorites} from "./services/ItemService.jsx";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -26,13 +26,30 @@ export default function Home() {
     }, [navigate]);
 
     const loadItems = (userID) => {
-        getAllItems()
+        getFavorites(userID)
             .then(res => {
-                setSuggestedItems(res.data);
-                console.log("All items:", res.data);
+                if (res.data && res.data.length > 0) {
+                    getSuggestedItemsByFavorites(userID)
+                        .then(res => {
+                            setSuggestedItems(res.data);
+                            console.log("Suggested items based on favorites:", res.data);
+                        })
+                        .catch(error => {
+                            console.log("Error fetching suggested items by favorites:", error);
+                        });
+                } else {
+                    getSuggestedItems(userID)
+                        .then(res => {
+                            setSuggestedItems(res.data);
+                            console.log("General suggested items:", res.data);
+                        })
+                        .catch(error => {
+                            console.log("Error fetching general suggested items:", error);
+                        });
+                }
             })
             .catch(error => {
-                console.log("Error fetching all items:", error);
+                console.log("Error checking user favorites:", error);
             });
 
         getItemsByUser(userID)
