@@ -11,6 +11,9 @@ public class ItemMapper {
                 item.getItemDescription(),
                 item.getItemCategory(),
                 item.getUserID(),
+                item.getPicture(),
+                item.getVisible(),
+                item.getUserID(),
                 score
         );
     }
@@ -25,7 +28,9 @@ public class ItemMapper {
                 itemDto.getItemName(),
                 itemDto.getItemDescription(),
                 itemDto.getItemCategory(),
-                itemDto.getUserID()
+                itemDto.getUserID(),
+                itemDto.getPicture(),
+                itemDto.getVisible()
         );
     }
 }

@@ -29,4 +29,16 @@ public class Item {
     @Column(name = "fk_user_id", nullable = false)
     private Long userID;
 
+    @Column(name="picture", nullable = true)
+    private Long picture;
+
+    @Column(name = "visible", nullable = false)
+    private Boolean visible;
+
+    protected void onCreate() {
+        this.visible = true;
+        //TODO: make this the imageID for the minecraft item block
+        this.picture = 0l;
+    }
+
 }

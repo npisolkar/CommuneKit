@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.lang.Exception;
 import java.util.List;
 
@@ -24,10 +26,8 @@ public class UserController {
     public ResponseEntity<UserDto> loginUser(@RequestBody UserDto userDto) {
         UserDto user = userService.loginUser(userDto);
         if (user == null) {
-            //means username not in DB
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        } else if (!user.getPassword().equals(userDto.getPassword())) {
-            //means correct username and incorrect password
+        } else if (!(user.getPassword()).equals(userDto.getPassword())) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         } else if (user.isBanned()){
             return new ResponseEntity<>(HttpStatus.GONE);
@@ -72,6 +72,18 @@ public class UserController {
         return ResponseEntity.ok(basicUserDto);
     }
 
+    @PutMapping("updatePfp/{userID}/{imageID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> updateUserImage(@PathVariable("userID") Long userID,
+                                                  @PathVariable("imageID") Long imageID) {
+        try {
+            userService.updateUserImage(userID, imageID);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
@@ -87,14 +99,20 @@ public class UserController {
         return ResponseEntity.ok("User successfully deleted");
     }
     @DeleteMapping("/ban/{id}")
-    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> banUser(@PathVariable("id") long UserID) {
         userService.banUser(UserID);
         return ResponseEntity.ok("User successfully banned");
     }
+    @DeleteMapping("/unban/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> unbanUser(@PathVariable("id") long UserID) {
+        userService.unbanUser(UserID);
+        return ResponseEntity.ok("User successfully banned");
+    }
 
     @PostMapping("/reset-password")
-    @CrossOrigin(origins = {"http://localhost:5173\", \"http://localhost:5174"})
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> resetPassword(@RequestBody PasswordResetDto passwordResetDto) {
         boolean isReset = userService.resetPassword(passwordResetDto);
 
@@ -103,6 +121,12 @@ public class UserController {
         } else {
             return new ResponseEntity<>("Password reset failed. Invalid credentials.", HttpStatus.UNAUTHORIZED);
         }
+    }
+    @GetMapping("/banned")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<UserDto>> getBannedUsers() {
+        List<UserDto> users = userService.getBannedUsers();
+        return ResponseEntity.ok(users);
     }
 }
 

@@ -58,7 +58,7 @@ export default function ReviewPage() {
                 <form onSubmit={onSubmit}>
                     <Stars/>
                     <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
-                    <input onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></input>
+                    <textarea onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></textarea>
                     <button type="submit">Submit</button>
                 </form>
             </div>
@@ -79,6 +79,7 @@ function Star() {
 
 function Stars() {
     let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
+    //click dependency, re-render on click
     return (
         <div id="rating-stars">
             {

@@ -15,6 +15,11 @@ public interface UserService {
 
     BasicUserDto getBasicUserInfoById(long userId);
 
+    void updateUserImage(Long userID, Long imageId);
+/*
+    MultipartFile getUserImageById(long userID);
+*/
+
     UserDto updateUser(Long userID, UserDto updatedUser);
 
     void deleteUser(Long userID);
@@ -23,5 +28,9 @@ public interface UserService {
 
     void banUser(Long userId);
 
+    void unbanUser(Long userId);
+
     boolean resetPassword(PasswordResetDto passwordResetDto);
+
+    List<UserDto> getBannedUsers();
 }

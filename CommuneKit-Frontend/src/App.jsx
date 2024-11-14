@@ -74,12 +74,26 @@ function OptionsMenu() {
     function handleClick() {
         setIsClicked(!isClicked);
     }
+    const navigate = useNavigate();
+
+    function handleSignout() {
+        localStorage.clear();
+        setIsClicked(true)
+        navigate("/login");
+    }
     return (
         <>
             {isClicked ? <button id="menu-button" onClick={handleClick}>Menu</button>
                  :
                 <div>
-                    <MenuBar />
+                    <div id="menu-popup">
+                        <ul>
+                            <li>
+                                <button id="sign-out" onClick={handleSignout}>Sign Out</button>
+                            </li>
+                            {/*<li><button>Delete Account</button></li>*/}
+                        </ul>
+                    </div>
                     <button id="close-menu" onClick={handleClick}>X</button>
                     <div id="overlay"></div>
                 </div>
@@ -90,10 +104,12 @@ function OptionsMenu() {
 
 function MenuBar() {
     const navigate = useNavigate();
+
     function handleSignout() {
         localStorage.clear();
         navigate("/login");
     }
+
     return (
         <>
             <div id="menu-popup">

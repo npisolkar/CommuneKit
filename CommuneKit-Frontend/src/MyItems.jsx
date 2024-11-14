@@ -1,6 +1,6 @@
 /* My Items: The page which contains all items associated
 *  with your account, both posted and borrowed items. */
-import ItemTable from "./ItemTable.jsx";
+import ItemTable from "./components/ItemTable.jsx";
 import {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {getItemsByUser, getMyBorrows, createItem} from './services/ItemService.jsx'
