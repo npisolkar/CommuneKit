@@ -35,7 +35,7 @@ export default function ItemTable({ headName, items, userID }) {
     return (
         <>
             <div className="table-head"><b>{headName}</b></div>
-            <table >
+            <table className="item-table">
                 <thead>
                 <tr>
                     <th>ID</th>

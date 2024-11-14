@@ -17,7 +17,7 @@ import ReviewPage from "./ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./components/ReportPage.jsx";
-
+import 'react-tooltip/dist/react-tooltip.css'
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );

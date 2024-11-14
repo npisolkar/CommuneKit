@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {Tooltip} from 'react-tooltip';
 import {favoriteItem, removeFavorite} from '../services/ItemService.jsx';
 import axios from 'axios';
 
@@ -31,7 +32,7 @@ export default function ItemComponent({ data, userID }) {
         };
         fetchFavoriteStatus()
             .catch (err => console.log(err));
-    }, [userID, data.itemID]);
+    }, [userID, data.itemID, isHovering]);
 
     const handleAddFavorite = async () => {
         if (!userID) {
@@ -68,37 +69,41 @@ export default function ItemComponent({ data, userID }) {
     };
 
     const handleHover = () => {
-        setHovering(true);
+        setHovering(!isHovering);
         console.log("hovering over " + JSON.stringify(data.itemID))
     }
 
     const handleLeave = () => {
-        setHovering(false);
+        setHovering(!isHovering);
         console.log("left " + JSON.stringify(data.itemID))
     }
 
     return (
-        <tr key={`item-${data.itemID}`} className='item-comp'
-            onMouseOver={handleHover} onMouseLeave={handleLeave}> {/* Using itemID as a unique key */}
-            <td>{data.itemID}</td>
-            <td>{data.itemName}</td>
-            <td className="comp-desc" >{data.itemDescription}</td>
-            <td>{data.itemCategory}</td>
-            <td><Link to={`/item/${data.itemID}`}><button>To Item Page</button></Link></td>
-            <td><Link to={"/profile/" + data.userID}><button>To User Page</button></Link></td>
-            <td>
-                {loading ? (
-                    <button disabled>Loading...</button>
-                ) : isFavorite ? (
-                    <button onClick={handleRemoveFavorite}>Remove Favorite</button>
-                ) : (
-                    <button onClick={handleAddFavorite}>Favorite</button>
-                )}
-            </td>
-            <td><div className="more-info">{data.itemDescription}</div></td>
-            <td>{ isHovering ?
-                <div id="more-info">{data.itemDescription}</div>
-                : null }</td>
-        </tr>
+        <>
+    <tr key={`item-${data.itemID}`} className='item-comp'> {/* Using itemID as a unique key */}
+        <td>{data.itemID}</td>
+        <td>{data.itemName}</td>
+        <td className="comp-desc">
+            <a className="desc-anchor" data-tooltip-id="desc-tooltip" data-tooltip-content={data.itemDescription}>{data.itemDescription}</a>
+            <Tooltip id="desc-tooltip" anchorSelect=".desc-anchor"/>
+        </td>
+        <td>{data.itemCategory}</td>
+        <td><Link to={`/item/${data.itemID}`}>
+            <button>To Item Page</button>
+        </Link></td>
+        <td><Link to={"/profile/" + data.userID}>
+            <button>To User Page</button>
+        </Link></td>
+        <td>
+            {loading ? (
+                <button disabled>Loading...</button>
+            ) : isFavorite ? (
+                <button onClick={handleRemoveFavorite}>Remove Favorite</button>
+            ) : (
+                <button onClick={handleAddFavorite}>Favorite</button>
+            )}
+        </td>
+    </tr>
+    </>
     );
 }
