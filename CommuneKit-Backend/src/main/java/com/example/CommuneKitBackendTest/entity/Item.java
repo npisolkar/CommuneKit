@@ -38,7 +38,7 @@ public class Item {
     protected void onCreate() {
         this.visible = true;
         //TODO: make this the imageID for the minecraft item block
-        this.picture = 0l;
+        //this.picture = 0l;
     }
 
 }
