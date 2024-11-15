@@ -18,13 +18,14 @@ import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./components/ReportPage.jsx";
 import 'react-tooltip/dist/react-tooltip.css'
+import LoadProfile from "./LoadProfile.jsx";
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
     // const navigate = useNavigate();
     useEffect(() => {
         setUserID(localStorage.getItem('userID'))
-    }, [])
+    }, [localStorage.getItem('userID')])
     //const userID = localStorage.getItem('userID')
     console.log("userID found to be: " + userID);
 
@@ -39,13 +40,14 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${userID}`}
+                  <Link to={"/profile/"}
                         id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/profile/" element={<LoadProfile/>}/>
                   <Route path="/profile/:userID" element={<Profile/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
                   <Route path="/item/:itemID" element={<ItemPage />}/>
