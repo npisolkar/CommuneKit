@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {Tooltip} from 'react-tooltip';
 import {favoriteItem, removeFavorite} from '../services/ItemService.jsx';
+import {getImageById} from "../services/ImageService.jsx";
 import axios from 'axios';
 
 export default function ItemComponent({ data, userID }) {
@@ -9,7 +10,6 @@ export default function ItemComponent({ data, userID }) {
     const [loading, setLoading] = useState(false);
     const [isOwn, setIsOwn] = useState(false);
     const [isHovering, setHovering] = useState(false);
-
 
     useEffect(() => {
         if (!userID) {
@@ -81,11 +81,19 @@ export default function ItemComponent({ data, userID }) {
     return (
         <>
     <tr key={`item-${data.itemID}`} className='item-comp'> {/* Using itemID as a unique key */}
+        <td><img src={`http://localhost:8080/api/image/fileId/${data.picture}`}
+                 alt="Item Picture"
+                 style={{width: "50px", height: "50px", objectFit: "cover"}}/></td>
         <td>{data.itemID}</td>
         <td>{data.itemName}</td>
         <td className="comp-desc">
-            <a className="desc-anchor" data-tooltip-id="desc-tooltip" data-tooltip-content={data.itemDescription}>{data.itemDescription}</a>
-            <Tooltip id="desc-tooltip" anchorSelect=".desc-anchor"/>
+            <a className="desc-anchor" data-tooltip-id="desc-tooltip"
+               data-tooltip-html={data.itemName + " Rating: "
+                   + data.averageRating + "<br/>" + data.itemDescription}>
+                {data.itemDescription}
+            </a>
+            <Tooltip id="desc-tooltip" anchorSelect=".desc-anchor" place="right-end" border="1px solid black">
+            </Tooltip>
         </td>
         <td>{data.itemCategory}</td>
         <td><Link to={`/item/${data.itemID}`}>

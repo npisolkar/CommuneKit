@@ -38,6 +38,7 @@ export default function ItemTable({ headName, items, userID }) {
             <table className="item-table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>

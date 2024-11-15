@@ -10,6 +10,7 @@ import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
 import RequestComponent from "./components/RequestComponent.jsx";
 import {uploadImage} from "./services/ImageService.jsx";
+import {Tooltip} from "react-tooltip";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -234,7 +235,6 @@ export default function ItemPage() {
                                     itemID={itemData.itemID}/>
                         </div>
                         <div id="item-info">
-                            <div id="item-image">Item Image</div>
                             <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
                             <div id="item-image">
@@ -354,8 +354,10 @@ export default function ItemPage() {
                 </div>
                 :
                 <div id="reviews-button">
-                    <button onClick={handleIllegalClick}>Leave a Review</button>
-                    <CantReviewNotif isClicked={isIllegalClicked}/>
+                    <a className="review-anchor" data-tooltip-content={"You need to borrow an item before you can review it!"}>
+                        <button onClick={handleIllegalClick}>Leave a Review</button>
+                    </a>
+                    <Tooltip anchorSelect=".review-anchor" id="review-tooltip"/>
                 </div>}
             <div id="reviews-box">
 

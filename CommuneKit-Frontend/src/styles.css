@@ -341,6 +341,11 @@ button {
     overflow:hidden
 }
 
+#desc-tooltip {
+    background-color:white;
+    color:black;
+    font-size:14px;
+}
 /*.comp-desc:hover {
     white-space:normal;
     overflow:visible;
