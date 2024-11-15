@@ -4,12 +4,12 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
-import {updateItem, getItemById, deleteItem, updateItemImage} from "./services/ItemService.jsx";
-import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
-import ReviewComponent from "./components/ReviewComponent.jsx";
-import {getReviewsById} from "./services/ReviewService.jsx";
-import RequestComponent from "./components/RequestComponent.jsx";
-import {uploadImage} from "./services/ImageService.jsx";
+import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
+import {createRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
+import ReviewComponent from "../components/ReviewComponent.jsx";
+import {getReviewsById} from "../services/ReviewService.jsx";
+import RequestComponent from "../components/RequestComponent.jsx";
+import {uploadImage} from "../services/ImageService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()

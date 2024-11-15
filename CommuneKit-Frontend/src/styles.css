@@ -321,6 +321,8 @@ button {
 
 #reviews-box {
     position:relative;
+    overflow:scroll;
+    height:100px;
 }
 
 #reviews-header {
@@ -361,7 +363,7 @@ button {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-15%)
+    transform: translate(-15%);
     top:20%;
 }
 

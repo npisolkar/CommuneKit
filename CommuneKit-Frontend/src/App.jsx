@@ -7,16 +7,16 @@ import Notifications from "./Notifications.jsx"
 import Profile from "./Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
-import ItemPage from "./ItemPage.jsx"
+import ItemPage from "./Pages/ItemPage.jsx"
 import LoginPage from "./components/LoginPage.jsx";
-import RegistrationPage from "./components/RegistrationPage.jsx";
-import FavoritePage from "./components/FavoritePage.jsx";
+import RegistrationPage from "./Pages/RegistrationPage.jsx";
+import FavoritePage from "./Pages/FavoritePage.jsx";
 import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
-import ReviewPage from "./ReviewPage.jsx"
+import ReviewPage from "./Pages/ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
-import ReportPage from "./components/ReportPage.jsx";
+import ReportPage from "./Pages/ReportPage.jsx";
 
 
 export default function App() {

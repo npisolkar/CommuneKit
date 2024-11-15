@@ -5,6 +5,7 @@ import axios from 'axios';
 import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
 import {getImageById, uploadImage} from "./services/ImageService.jsx";
 import {ConversationComponent} from "./components/ConversationComponent.jsx";
+import UserReview from "./components/UserReview.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
@@ -67,6 +68,9 @@ export default function Profile() {
     });
 
     useEffect(() => {
+        if (!localStorage.getItem("userID")) {
+            navigate('/')
+        }
         getUserById(userID)
             .then(res => {
                 console.log("formdata before fetch: " + JSON.stringify(formData))
@@ -151,6 +155,8 @@ export default function Profile() {
             <div><p>Your username: {formData.userName}</p></div>
 
             <ProfilePicture imageId={formData.profilePicture}/>
+
+            <UserReview> </UserReview>
 
             {isClicked ? (<>
                 <div className="form-group">
