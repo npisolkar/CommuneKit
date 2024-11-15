@@ -2,11 +2,9 @@
    This is also the page that appears when creating and editing items
 *  isMine: determines whether the item is your own item or another's */
 
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {updateItem, getItemById, deleteItem, updateItemImage} from "./services/ItemService.jsx";
-import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
-import {updateItem, getItemById, deleteItem} from "./services/ItemService.jsx";
 import {createDateRequest, createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
 import ReviewComponent from "./components/ReviewComponent.jsx";
 import {getReviewsById} from "./services/ReviewService.jsx";
@@ -40,7 +38,7 @@ export default function ItemPage() {
     const [avgRating, setAvgRating] = useState(0)
     const [userID, setUserID] = useState('')
     const [uploadedImage, setUploadedImage] = useState(null);
-
+    const today = new Date().toISOString().split("T")[0];
 
     const [itemData, setItemData] = useState({
         itemID: '',
@@ -123,10 +121,10 @@ export default function ItemPage() {
 
     const handleStartDateChange = (e) => {
         setRequestData({...requestData, ["startDate"]: e.target.value});
-        if (new Date(e.target.value) > new Date(requestData.endDate)) {
-            setRequestData({...requestData, ["endDate"]: e.target.value});
-            //setEndDate(e.target.value); // Reset end date if it's before the new start date
-        }
+        // if (new Date(e.target.value) > new Date(requestData.endDate)) {
+        //     setRequestData({...requestData, ["endDate"]: e.target.value});
+        //     //setEndDate(e.target.value); // Reset end date if it's before the new start date
+        // }
     };
 
     const handleEndDateChange = (e) => {
@@ -135,7 +133,8 @@ export default function ItemPage() {
 
 
 
-    async function handleSubmitRequest() {
+    const handleSubmitRequest = async(e) => {
+        e.preventDefault();
         try {
             let requestJson = {
                 borrowingUserId: localStorage.getItem('userID'),
@@ -150,8 +149,13 @@ export default function ItemPage() {
             const responseData = await createDateRequest(JSON.stringify(requestJson));
             console.log("submit:" + responseData);
         } catch (error) {
+                if(error.status === 401||error.status === 500) {
+                    console.log(error);
+                    alert("Request with overlapping time already exists, please request a different time.");
+                }
             console.log(error);
         }
+        window.location.reload();
     }
 
     const handleUploadItem = async (e) => {
@@ -193,6 +197,7 @@ export default function ItemPage() {
     function handleIllegalClick() {
         setIllegalClick(!isIllegalClicked)
     }
+
     return (
         <>
 
@@ -268,6 +273,7 @@ export default function ItemPage() {
                 </div>
             }
             {isOwn ?
+
                 <table id="current-requests">
                     <thead>
                     <tr>
@@ -299,7 +305,7 @@ export default function ItemPage() {
                         <tbody>
                         {
                             currentRequests.map(request => (
-                                <RequestComponent data={request} isLending={false}/>
+                                <RequestComponent key={request.requestId} data={request} isLending={false}/>
                             ))
                         }
                         </tbody>
@@ -313,6 +319,7 @@ export default function ItemPage() {
                                         type="date"
                                         name="startDate"
                                         value={requestData.startDate}
+                                        min = {today.toString()}
                                         onChange={handleStartDateChange}
                                         required
                                     />
@@ -331,41 +338,6 @@ export default function ItemPage() {
                                 </label>
                             </div>
 
-                            {/*<div className="form-group">*/}
-                            {/*    <label>Start Day</label>*/}
-                            {/*    <input type="text" name="startDay" value={requestData.startDay}*/}
-                            {/*           onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                            {/*    <label>Start Month</label>*/}
-                            {/*    <input type="text" name="startMonth" value={requestData.startMonth}*/}
-                            {/*           onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                            {/*    <label>Start Year</label>*/}
-                            {/*    <input type="text" name="startYear" value={requestData.startYear}*/}
-                            {/*           onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                            {/*    <label>End Day</label>*/}
-                            {/*    <input type="text" name="endDay" value={requestData.endDay} onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                            {/*    <label>End Month</label>*/}
-                            {/*    <input type="text" name="endMonth" value={requestData.endMonth}*/}
-                            {/*           onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
-                            {/*<div className="form-group">*/}
-                            {/*    <label>End Year</label>*/}
-                            {/*    <input type="text" name="endYear" value={requestData.endYear}*/}
-                            {/*           onChange={handleInputChange}*/}
-                            {/*           required/>*/}
-                            {/*</div>*/}
                             <div className="form-group">
                                 <label>Message</label>
                                 <textarea name="message" id="request-text" value={requestData.message}

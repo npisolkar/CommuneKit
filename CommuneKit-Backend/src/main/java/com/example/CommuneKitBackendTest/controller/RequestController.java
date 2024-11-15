@@ -2,6 +2,7 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
+import com.example.CommuneKitBackendTest.dto.UserDto;
 import com.example.CommuneKitBackendTest.service.RequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,14 +28,35 @@ public class RequestController {
     @PostMapping("/date")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> createDateRequest(@RequestBody RequestDateDto requestDateDto) {
-        RequestDto savedRequest = requestService.createDateRequest(requestDateDto);
-        return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
+        RequestDto savedRequest;
+        try {
+            savedRequest = requestService.createDateRequest(requestDateDto);
+            if (savedRequest == null) {
+                System.out.println("saved request is null when attempting creation");
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println("\n\nfound normalinternal server error\n\n " + e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
     @PutMapping("/approve/{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> approveRequest(@RequestBody Long requestID) {
-        RequestDto savedRequest = requestService.approveRequest(requestID);
-        return ResponseEntity.ok(savedRequest);
+        RequestDto savedRequest;
+        try {
+            savedRequest = requestService.approveRequest(requestID);
+            if (savedRequest == null) {
+                System.out.println("Unable to approve request");
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(savedRequest, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     @PutMapping("/deny/{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
@@ -60,8 +82,18 @@ public class RequestController {
     @PutMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<RequestDto> updateRequest(@PathVariable("id") Long requestId, @RequestBody RequestDto updatedRequest) {
-        RequestDto requestDto = requestService.updateRequest(requestId, updatedRequest);
-        return ResponseEntity.ok(requestDto);
+        RequestDto savedRequest;
+        try {
+            savedRequest = requestService.updateRequest(requestId,updatedRequest);
+            if (savedRequest == null) {
+                System.out.println("unable to update request");
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+            return new ResponseEntity<>(savedRequest, HttpStatus.CREATED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @GetMapping("/sent-to/{id}")
@@ -126,6 +158,13 @@ public class RequestController {
     public ResponseEntity<List<RequestDto>> getCurrentRequests(@PathVariable Long itemId) {
         List<RequestDto> requests = requestService.getCurrentRequestsByItemId(itemId);
         return ResponseEntity.ok(requests);
+    }
+
+    @DeleteMapping("/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> deleteRequest(@PathVariable("id") Long requestID) {
+        requestService.deleteRequest(requestID);
+        return ResponseEntity.ok("Request deleted successfully");
     }
 
 }

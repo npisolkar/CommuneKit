@@ -324,7 +324,7 @@ button {
 }
 
 #reviews-header {
-    position:absolute;
+    position:relative;
     text-align:center;
     margin-left:55px;
     top:90%;
@@ -361,7 +361,7 @@ button {
     position: relative;
     top: 50%;
     left: 50%;
-    transform: translate(-15%)
+    transform: translate(-15%);
     top:20%;
 }
 
