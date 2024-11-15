@@ -81,10 +81,16 @@ export default function ItemComponent({ data, userID }) {
     return (
         <>
     <tr key={`item-${data.itemID}`} className='item-comp'> {/* Using itemID as a unique key */}
-        <td><img src={`http://localhost:8080/api/image/fileId/${data.picture}`}
+        <td> {!data.picture ?
+            <img src={'../public/no_image.jpg'}
                  alt="Item Picture"
-                 style={{width: "50px", height: "50px", objectFit: "cover"}}/></td>
-        <td>{data.itemID}</td>
+                 style={{width: "50px", height: "50px", objectFit: "cover"}}/>
+            :
+            <img src={`http://localhost:8080/api/image/fileId/${data.picture}`}
+                 alt="Item Picture"
+                 style={{width: "50px", height: "50px", objectFit: "cover"}}/>
+        }</td>
+            <td>{data.itemID}</td>
         <td>{data.itemName}</td>
         <td className="comp-desc">
             <a className="desc-anchor" data-tooltip-id="desc-tooltip"

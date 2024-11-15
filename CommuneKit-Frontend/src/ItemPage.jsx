@@ -69,7 +69,7 @@ export default function ItemPage() {
     }
     const ItemPicture = ({ imageId }) => {
         if (!imageId) {
-            return( <img src={'../public/default_image.jpg'}
+            return( <img src={'../public/no_image.jpg'}
                          alt="Item Picture"
                          style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
         }
@@ -200,9 +200,7 @@ export default function ItemPage() {
                 </div>
                 <div id="item-info">
 
-
                     <div id="item-image">
-                        <h3>Item Image</h3>
                         <>
                             <ItemPicture imageId={itemData.picture}/>
                             <div>
@@ -243,7 +241,6 @@ export default function ItemPage() {
                             <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
                             <div id="item-image">
-                                <h3> Item Image</h3>
                                 <ItemPicture imageId={itemData.picture}/>
                             </div>
 

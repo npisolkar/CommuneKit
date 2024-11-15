@@ -336,7 +336,7 @@ td {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width:600px;
+    width:33%;
 }
 
 .table-head {
@@ -434,6 +434,11 @@ td {
     left: 50%;
     transform: translate(-15%);
     top:20%;
+}
+
+#item-image-header {
+    position:absolute;
+    margin-left:50px;
 }
 
 .item-member {
