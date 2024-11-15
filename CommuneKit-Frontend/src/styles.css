@@ -319,6 +319,23 @@ button {
 /* item table */
 .item-table {
     text-align:left;
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    width: 33%;
+}
+
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     width:600px;
 }
 

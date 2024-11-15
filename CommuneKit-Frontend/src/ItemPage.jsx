@@ -68,6 +68,11 @@ export default function ItemPage() {
         setClicked(!isClicked);
     }
     const ItemPicture = ({ imageId }) => {
+        if (!imageId) {
+            return( <img src={'../public/default_image.jpg'}
+                         alt="Item Picture"
+                         style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
+        }
         return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
                      alt="Item Picture"
                      style={{width: "150px", height: "150px", objectFit: "cover"}}/>);
@@ -242,19 +247,19 @@ export default function ItemPage() {
                                 <ItemPicture imageId={itemData.picture}/>
                             </div>
 
-                            {/*<div id="item-image">Item Image</div>*/}
-                            <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
-                            <div id="item-name" className="item-member">{itemData.itemName}</div>
-                            <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
-                            <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                            <label htmlFor="itemCategory"
+                        {/*<div id="item-image">Item Image</div>*/}
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
-                            <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
-                        </div>
-                        <div id="avg-rating-container">
-                            <label><b>Average Rating</b></label>
-                            <div id="item-avg">{avgRating}</div>
-                        </div>
+                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                    </div>
+                    <div id="avg-rating-container">
+                        <label><b>Average Rating</b></label>
+                        <div id="item-avg">{avgRating}</div>
+                    </div>
                 </div>
             }
             {isOwn ?
