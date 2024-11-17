@@ -390,13 +390,9 @@ td {
 
 #reviews-button {
     position:absolute;
-    left: 45%;
-    top:125%;
+    right:10%;
+    top:140%;
 }
-
-
-
-
 
 .review-text {
     margin-top: 10px;
@@ -408,23 +404,37 @@ td {
     position:absolute;
     text-align:center;
     margin-left:55px;
-    top:90%;
+    top:130%;
     width:100%;
     height:300px;
 }
 
 #reviews-section {
     position:absolute;
-    top:450px;
+    top:140%;
     margin-left:50px;
 }
 
 .item-review {
-    border: 1px black solid;
+    border: 5px #22B14C solid;
     height:200px;
     width:1000px;
     padding:10px;
     margin:10px;
+}
+
+.comp-row-2 {
+    display:flex;
+    flex-direction:row;
+}
+
+.pic-name {
+    display:flex;
+    flex-direction:column;
+}
+
+.review-picture {
+    background-color:white;
 }
 
 .delete-button {
