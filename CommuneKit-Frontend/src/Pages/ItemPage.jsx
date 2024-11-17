@@ -4,12 +4,12 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
-import {updateItem, getItemById, deleteItem, updateItemImage} from "./services/ItemService.jsx";
-import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
-import ReviewComponent from "./components/ReviewComponent.jsx";
-import {getReviewsById} from "./services/ReviewService.jsx";
-import RequestComponent from "./components/RequestComponent.jsx";
-import {uploadImage} from "./services/ImageService.jsx";
+import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
+import {createRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
+import ReviewComponent from "../components/ReviewComponent.jsx";
+import {getReviewsById} from "../services/ReviewService.jsx";
+import RequestComponent from "../components/RequestComponent.jsx";
+import {uploadImage} from "../services/ImageService.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -67,6 +67,11 @@ export default function ItemPage() {
         setClicked(!isClicked);
     }
     const ItemPicture = ({ imageId }) => {
+        if (!imageId) {
+            return( <img src={'../public/default_image.jpg'}
+                         alt="Item Picture"
+                         style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
+        }
         return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
                      alt="Item Picture"
                      style={{width: "150px", height: "150px", objectFit: "cover"}}/>);
@@ -229,32 +234,34 @@ export default function ItemPage() {
                 </>
                 :
                 <div id="item-box">
-                        <div id="edit-item-button">
-                            <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
+
+                    <div id="edit-item-button">
+                        <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
                                     itemID={itemData.itemID}/>
+                    </div>
+                    <div id="item-info">
+                        <div id="item-image">Item Image</div>
+                        <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
+
+                        <div id="item-image">
+                            <h3> Item Image</h3>
+                            <ItemPicture imageId={itemData.picture}/>
+
                         </div>
-                        <div id="item-info">
-                            <div id="item-image">Item Image</div>
-                            <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
-                            <div id="item-image">
-                                <h3> Item Image</h3>
-                                <ItemPicture imageId={itemData.picture}/>
-                            </div>
-
-                            {/*<div id="item-image">Item Image</div>*/}
-                            <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
-                            <div id="item-name" className="item-member">{itemData.itemName}</div>
-                            <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
-                            <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                            <label htmlFor="itemCategory"
+                        {/*<div id="item-image">Item Image</div>*/}
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
-                            <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
-                        </div>
-                        <div id="avg-rating-container">
-                            <label><b>Average Rating</b></label>
-                            <div id="item-avg">{avgRating}</div>
-                        </div>
+                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                    </div>
+                    <div id="avg-rating-container">
+                        <label><b>Average Rating</b></label>
+                        <div id="item-avg">{avgRating}</div>
+                    </div>
                 </div>
             }
             {isOwn ?
