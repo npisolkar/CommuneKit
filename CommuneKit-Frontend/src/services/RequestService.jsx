@@ -35,6 +35,14 @@ export function createRequest(requestDto) {
     })
 }
 
+export function createDateRequest(requestDateDto) {
+    return axios.post(REQUEST_BASE_URL+"/date", requestDateDto, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
 export function getApprovedRequestsById(itemID) {
     return axios.get(REQUEST_BASE_URL + "/current/" + itemID)
 }

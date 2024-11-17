@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.service.impl;
 
+import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 // import com.example.CommuneKitBackendTest.entity.Item;
 import com.example.CommuneKitBackendTest.entity.Request;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,10 +31,28 @@ public class RequestServiceImpl implements RequestService {
         Request savedRequest = requestRepository.save(request);
         return RequestMapper.mapToRequestDto(savedRequest);
     }
+    @Override
+    public RequestDto createDateRequest(RequestDateDto requestDateDto) {
+
+        Request request = RequestMapper.mapDateToRequest(requestDateDto);
+        Request savedRequest = requestRepository.save(request);
+        if(checkOverlap(request)) {
+            return null;
+        }
+
+
+        return RequestMapper.mapToRequestDto(savedRequest);
+
+    }
+
     public RequestDto approveRequest(Long requestId) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
-        request.setIsApproved(true);
         Request updated = requestRepository.save(request);
+        if(checkOverlap(request)) {
+            return null;
+        }
+        request.setIsApproved(true);
+
         return RequestMapper.mapToRequestDto(updated);
 
     }
@@ -58,8 +78,11 @@ public class RequestServiceImpl implements RequestService {
     @Override
     public RequestDto updateRequest(Long requestId, RequestDto updatedRequest) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
-        request.setIsApproved(updatedRequest.getIsApproved());
 
+        if(checkOverlap(request)) {
+            return null;
+        }
+        request.setIsApproved(updatedRequest.getIsApproved());
         Request updatedRequestObj = requestRepository.save(request);
 
         return RequestMapper.mapToRequestDto(updatedRequestObj);
@@ -130,7 +153,7 @@ public class RequestServiceImpl implements RequestService {
         List<Request> requests = requestRepository.findAll();
         requests.removeIf(request -> !(request.getItemId().equals(itemId)));
         requests.removeIf(request -> request.getIsApproved() == null);
-        requests.removeIf(request -> request.getIsApproved() != true);
+        requests.removeIf(request -> !request.getIsApproved());
         return requests.stream().map((request) -> RequestMapper.mapToRequestDto(request)).collect(Collectors.toList());
     }
 
@@ -167,5 +190,25 @@ public class RequestServiceImpl implements RequestService {
     public void deleteRequest(Long requestID) {
         Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
         requestRepository.deleteById(requestID);
+    }
+
+    private boolean checkOverlap(Request request){
+        List<Request> requests = requestRepository.findAll();
+        for (Request r:requests){
+            if(r.getRequestId()!=request.getRequestId()
+                    && r.getIsApproved()!=null
+                    && r.getIsApproved().equals(true)
+                    && request.getItemId().equals(r.getItemId())) {
+                int rStartDate = r.getStartYear() * 10000 + r.getStartMonth() * 100 + r.getStartDay();
+                int rEndDate = r.getEndYear() * 10000 + r.getEndMonth() * 100 + r.getEndDay();
+                int reqStartDate = request.getStartYear() * 10000 + request.getStartMonth() * 100 + request.getStartDay();
+                int reqEndDate = request.getEndYear() * 10000 + request.getEndMonth() * 100 + request.getEndDay();
+                if (rStartDate <= reqEndDate && rEndDate >= reqStartDate) {
+                    deleteRequest(request.getRequestId());
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
