@@ -167,4 +167,17 @@ public class RequestController {
         return ResponseEntity.ok("Request deleted successfully");
     }
 
+    @GetMapping("/History/borrow/{userId}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<RequestDto>> getBorrowerBorrowingHistory(@PathVariable Long userId) {
+        List<RequestDto> requests = requestService.getBorrowerBorrowingHistory(userId);
+        return ResponseEntity.ok(requests);
+    }
+
+    @GetMapping("/History/lend/{userId}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<RequestDto>> getLenderBorrowingHistory(@PathVariable Long userId) {
+        List<RequestDto> requests = requestService.getLenderRequestHistory(userId);
+        return ResponseEntity.ok(requests);
+    }
 }

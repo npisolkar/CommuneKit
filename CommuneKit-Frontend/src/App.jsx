@@ -18,6 +18,7 @@ import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./Pages/ReportPage.jsx";
 import LoadProfile from "./LoadProfile.jsx";
+import BorrowHistoryPage from "./Pages/BorrowHistoryPage.jsx";
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
@@ -41,6 +42,7 @@ export default function App() {
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
                   <Link to={"/profile/"}
                         id="profile-button"><button>Profile</button></Link>
+                  <Link to="/BorrowingHistory" id="borrow-button"><button>BorrowingHistory</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -61,6 +63,7 @@ export default function App() {
                   {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
                   <Route path="/report/:userID" element = {<ReportPage/>}/>
                   <Route path="/" element={<LoginPage />}/>
+                  <Route path="/BorrowingHistory" element={<BorrowHistoryPage />} />
               </Routes>
           </div>
           </Router>

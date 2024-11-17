@@ -38,6 +38,10 @@ public interface RequestService {
 
     List<RequestDto> getCurrentRequestsByItemId(Long itemId);
 
+    List<RequestDto> getBorrowerBorrowingHistory(Long userId);
+
+    List<RequestDto> getLenderRequestHistory(Long userId);
+
     void deleteRequest(Long requestId);
 
 
