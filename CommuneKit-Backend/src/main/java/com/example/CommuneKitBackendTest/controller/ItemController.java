@@ -129,13 +129,7 @@ public class ItemController {
 
     @GetMapping("/suggested/{id}")
     public ResponseEntity<List<ItemDto>> getSuggestedItems(@PathVariable("id") Long userID) {
-        List<ItemDto> suggestedItems = itemService.getSuggestedItems(userID);
-        return ResponseEntity.ok(suggestedItems);
-    }
-
-    @GetMapping("/suggestedf/{id}")
-    public ResponseEntity<List<ItemDto>> getSuggestedItemsFavorites(@PathVariable("id") Long userID) {
-        List<ItemDto> suggestedItems = itemService.getSuggestedItemsByFavorites(userID);
+        List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
     }
 }

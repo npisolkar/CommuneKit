@@ -219,23 +219,51 @@ public class ItemServiceImpl implements ItemService {
         return calculateAndSortSuggestedItems(filteredItems, userLat, userLon);
     }
 
+    @Override
+    public List<ItemDto> getCombinedSuggestedItems(Long userID) {
+        // Check if the user exists
+        User currentUser = userRepository.findById(userID)
+                .orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+
+        // Check if the user has any favorite items
+        boolean hasFavorites = favoriteRepository.findByUser_UserID(userID).stream()
+                .anyMatch(favorite -> favorite.getItem() != null);
+
+        // Call the appropriate method based on whether the user has favorite items
+        if (hasFavorites) {
+            return getSuggestedItemsByFavorites(userID);
+        } else {
+            return getSuggestedItems(userID);
+        }
+    }
+
     private List<ItemDto> calculateAndSortSuggestedItems(List<Item> items, double userLat, double userLon) {
         return items.stream()
                 .map(item -> {
-                    double rating = calculateAverageRating(item.getItemID());
-                    if (rating == 0.0) {
-                        rating = 0.1;
+                    Double averageRating = calculateAverageRating(item.getItemID());
+                    if (averageRating == null || averageRating == 0.0) {
+                        averageRating = 0.1; // default to 0.1 if rating is null or zero
                     }
-                    User user = userRepository.getById(item.getUserID());
+
+                    User user = userRepository.findById(item.getUserID())
+                            .orElseThrow(() -> new ResourceNotFoundException("User not found for item owner ID: " + item.getUserID()));
+
                     double lat = user.getLatitude();
                     double lon = user.getLongitude();
-                    double distance = calculateDistance(userLat, userLon, lat, lon);
-                    double score = distance > 0 ? rating / distance : 0.0;
+                    Double distance = calculateDistance(userLat, userLon, lat, lon);
+                    if (distance == null) {
+                        distance = Double.valueOf(0.0); // default to 0 if distance cannot be calculated
+                    }
 
-                    return ItemMapper.mapToItemDto(item, score);
+                    return ItemMapper.mapToItemDto(item, averageRating, distance);
                 })
-                .filter(itemDto -> itemDto.getScore() > 0)
-                .sorted((dto1, dto2) -> Double.compare(dto2.getScore(), dto1.getScore()))
+                .filter(itemDto -> itemDto.getAverageRating() > 0) // filter out items with zero average rating
+                .sorted((dto1, dto2) -> {
+                    // Calculate scores using averageRating and distance to sort
+                    double score1 = dto1.getAverageRating() / (dto1.getDistance() > 0 ? dto1.getDistance() : 1);
+                    double score2 = dto2.getAverageRating() / (dto2.getDistance() > 0 ? dto2.getDistance() : 1);
+                    return Double.compare(score2, score1); // sort descending by score
+                })
                 .collect(Collectors.toList());
     }
 
@@ -293,11 +321,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-        public List<ItemDto> getItemsByBannedUser(Long userId) {
-            List<Item> items = itemRepository.findAll();
-            items.removeIf(item -> !(item.getUserID().equals(userId)));
-            return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
-        }
+    public List<ItemDto> getItemsByBannedUser(Long userId) {
+        List<Item> items = itemRepository.findAll();
+        items.removeIf(item -> !(item.getUserID().equals(userId)));
+        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
+    }
 
     //TODO: deletes whatever image they previously had. GENIUS.
     public void updateItemImage(Long itemID, Long imageId) {
