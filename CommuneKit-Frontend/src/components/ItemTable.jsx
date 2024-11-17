@@ -34,10 +34,11 @@ export default function ItemTable({ headName, items, userID }) {
 
     return (
         <>
-            <h1>{headName}</h1>
-            <table>
+            <div className="table-head"><b>{headName}</b></div>
+            <table className="item-table">
                 <thead>
                 <tr>
+                    <th></th>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>

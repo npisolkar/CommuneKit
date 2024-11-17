@@ -17,7 +17,7 @@ import ReviewPage from "./Pages/ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./Pages/ReportPage.jsx";
-
+import LoadProfile from "./LoadProfile.jsx";
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
@@ -39,13 +39,14 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${userID}`}
+                  <Link to={"/profile/"}
                         id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/profile/" element={<LoadProfile/>}/>
                   <Route path="/profile/:userID" element={<Profile/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
                   <Route path="/item/:itemID" element={<ItemPage />}/>
