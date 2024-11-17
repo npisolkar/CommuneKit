@@ -5,29 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="merging stuff">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/UserReviewController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/mapper/UserReviewMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/repository/UserReviewRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/UserReviewService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/UserReviewServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReview.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReviewBox.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/services/UserReviewService.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/public/dark_star.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/public/simplepfp.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReviewMaterial/StarRating.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReviewMaterial/UserReview.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReviewMaterial/UserReviewBox.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/impl/ReviewServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/AdminPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/AdminPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/public/istockphoto-1135769825-612x612.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/public/gold_star.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ItemPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ItemTable.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/LoginPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/LoginPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ResetPasswordPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ResetPasswordPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/ReviewPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ReviewPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/FavoritePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/FavoritePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/RegistrationPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/RegistrationPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ReportPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ReportPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ReviewPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ReviewPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Profile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/Profile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReview.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/UserReviewBox.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -143,6 +132,7 @@
       <workItem from="1731433498610" duration="733000" />
       <workItem from="1731523036405" duration="3434000" />
       <workItem from="1731605787542" duration="6681000" />
+      <workItem from="1731787315265" duration="6546000" />
     </task>
     <task id="LOCAL-00001" summary="Added get items by user id api">
       <option name="closed" value="true" />

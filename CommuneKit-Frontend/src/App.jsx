@@ -4,7 +4,7 @@ import './styles.css'
 import Home from "./Home.jsx"
 import Search from "./Search.jsx"
 import Notifications from "./Notifications.jsx"
-import Profile from "./Profile.jsx"
+import Profile from "./Pages/Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
 import ItemPage from "./Pages/ItemPage.jsx"

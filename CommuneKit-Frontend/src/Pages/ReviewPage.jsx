@@ -72,7 +72,7 @@ export default function ReviewPage() {
 function Star() {
     return (
         <>
-            <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+            <img src="/gold_star.jpg" alt="star" className="star"/>
         </>
     )
 }

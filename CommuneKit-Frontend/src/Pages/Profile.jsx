@@ -1,11 +1,13 @@
-import './styles.css';
+import '../styles.css';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
-import {getImageById, uploadImage} from "./services/ImageService.jsx";
-import {ConversationComponent} from "./components/ConversationComponent.jsx";
-import UserReview from "./components/UserReview.jsx";
+import {getUserById, updateUser, updateUserImage} from "../services/UserService.jsx";
+import {getImageById, uploadImage} from "../services/ImageService.jsx";
+import {ConversationComponent} from "../components/ConversationComponent.jsx";
+import UserReview from "../components/UserReviewMaterial/UserReview.jsx";
+import UserReviewBox from "../components/UserReviewMaterial/UserReviewBox.jsx";
+import StarRating from "../components/UserReviewMaterial/StarRating.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
@@ -46,7 +48,8 @@ function ItemsButton({ isOwn }) {
 }
 
 const ProfilePicture = ({ imageId }) => {
-   return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
+   return( <img src={imageId ? `http://localhost:8080/api/image/fileId/${imageId}`
+                        : '../public/simplepfp.png'}
          alt="User Profile"
          style={{width: "150px", height: "150px", objectFit: "cover", borderRadius: "50%"}}/>);
 }
@@ -68,6 +71,7 @@ export default function Profile() {
     });
 
     useEffect(() => {
+        // if not logged in, navigate to login page
         if (!localStorage.getItem("userID")) {
             navigate('/')
         }
@@ -76,12 +80,11 @@ export default function Profile() {
                 console.log("formdata before fetch: " + JSON.stringify(formData))
                 setFormData(res.data);
                 console.log("User data fetched:", res.data);
-                //console.log("isown:" + isOwn)
             })
             .catch(function (error) {
                 console.log(error);
             });
-    }, [isClicked])
+    }, [isClicked, userID])
 
     function onClick() {
         setClicked(!isClicked);
@@ -151,22 +154,22 @@ export default function Profile() {
 
     return (
         <>
-            <div id="profile-image" className="about-box"></div>
-            <div><p>Your username: {formData.userName}</p></div>
+            <div className="profile-left-panel">
+                <ProfilePicture imageId={formData.profilePicture}/>
 
-            <ProfilePicture imageId={formData.profilePicture}/>
+                {isClicked ? (<>
+                    <div className="form-group">
+                        <label>Profile picture:</label>
+                        <input type="file" onChange={handleFileChange}/>
+                    </div>
+                </>) : (
+                    <></>
+                )}
 
-            <UserReview> </UserReview>
-
-            {isClicked ? (<>
-                <div className="form-group">
-                    <label>Profile picture:</label>
-                    <input type="file" onChange={handleFileChange}/>
-                </div>
-            </>) : (
-                <></>
-            )}
-
+                <>
+                    <UserReviewBox username={formData.userName} userID={userID} isOwn={localStorage.getItem("userID")===userID}/>
+                </>
+            </div>
             {isClicked ? (
                 <div className="about-box">
                     <div><p>Your username: {formData.userName}</p></div>
@@ -253,9 +256,9 @@ export default function Profile() {
                                   onClick={handleReportNav} bodyText={"Report User"}/>
                 </div>
             )}
-            {userID===localStorage.getItem('userID') ? null :
-                <ConversationComponent user2={userID}/>
-            }
-        </>
+            {/*{userID===localStorage.getItem('userID') ? null :*/}
+            {/*    <ConversationComponent user2={userID}/>*/}
+            {/*}*/}
+            </>
     )
 }
