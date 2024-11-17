@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import {Tooltip} from 'react-tooltip';
 import {favoriteItem, removeFavorite} from '../services/ItemService.jsx';
+import {getImageById} from "../services/ImageService.jsx";
 import axios from 'axios';
 
 export default function ItemComponent({ data, userID }) {
     const [isFavorite, setIsFavorite] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isOwn, setIsOwn] = useState(false);
+    const [isHovering, setHovering] = useState(false);
 
     useEffect(() => {
         if (!userID) {
@@ -29,7 +32,7 @@ export default function ItemComponent({ data, userID }) {
         };
         fetchFavoriteStatus()
             .catch (err => console.log(err));
-    }, [userID, data.itemID]);
+    }, [userID, data.itemID, isHovering]);
 
     const handleAddFavorite = async () => {
         if (!userID) {
@@ -65,23 +68,56 @@ export default function ItemComponent({ data, userID }) {
         }
     };
 
+    const handleHover = () => {
+        setHovering(!isHovering);
+        console.log("hovering over " + JSON.stringify(data.itemID))
+    }
+
+    const handleLeave = () => {
+        setHovering(!isHovering);
+        console.log("left " + JSON.stringify(data.itemID))
+    }
+
     return (
-        <tr key={`item-${data.itemID}`}> {/* Using itemID as a unique key */}
+        <>
+    <tr key={`item-${data.itemID}`} className='item-comp'> {/* Using itemID as a unique key */}
+        <td> {!data.picture ?
+            <img src={'../public/no_image.jpg'}
+                 alt="Item Picture"
+                 style={{width: "50px", height: "50px", objectFit: "cover"}}/>
+            :
+            <img src={`http://localhost:8080/api/image/fileId/${data.picture}`}
+                 alt="Item Picture"
+                 style={{width: "50px", height: "50px", objectFit: "cover"}}/>
+        }</td>
             <td>{data.itemID}</td>
-            <td>{data.itemName}</td>
-            <td>{data.itemDescription}</td>
-            <td>{data.itemCategory}</td>
-            <td><Link to={`/item/${data.itemID}`}><button>To Item Page</button></Link></td>
-            <td><Link to={"/profile/" + data.userID}><button>To User Page</button></Link></td>
-            <td>
-                {loading ? (
-                    <button disabled>Loading...</button>
-                ) : isFavorite ? (
-                    <button onClick={handleRemoveFavorite}>Remove Favorite</button>
-                ) : (
-                    <button onClick={handleAddFavorite}>Favorite</button>
-                )}
-            </td>
-        </tr>
+        <td>{data.itemName}</td>
+        <td className="comp-desc">
+            <a className="desc-anchor" data-tooltip-id="desc-tooltip"
+               data-tooltip-html={data.itemName + " Rating: "
+                   + data.averageRating + "<br/>" + data.itemDescription}>
+                {data.itemDescription}
+            </a>
+            <Tooltip id="desc-tooltip" anchorSelect=".desc-anchor" place="right-end" border="1px solid black">
+            </Tooltip>
+        </td>
+        <td>{data.itemCategory}</td>
+        <td><Link to={`/item/${data.itemID}`}>
+            <button>To Item Page</button>
+        </Link></td>
+        <td><Link to={"/profile/" + data.userID}>
+            <button>To User Page</button>
+        </Link></td>
+        <td>
+            {loading ? (
+                <button disabled>Loading...</button>
+            ) : isFavorite ? (
+                <button onClick={handleRemoveFavorite}>Remove Favorite</button>
+            ) : (
+                <button onClick={handleAddFavorite}>Favorite</button>
+            )}
+        </td>
+    </tr>
+    </>
     );
 }

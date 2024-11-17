@@ -4,12 +4,13 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
-import {updateItem, getItemById, deleteItem, updateItemImage} from "./services/ItemService.jsx";
-import {createRequest, getApprovedRequestsById} from "./services/RequestService.jsx";
-import ReviewComponent from "./components/ReviewComponent.jsx";
-import {getReviewsById} from "./services/ReviewService.jsx";
-import RequestComponent from "./components/RequestComponent.jsx";
-import {uploadImage} from "./services/ImageService.jsx";
+import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
+import {createRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
+import ReviewComponent from "../components/ReviewComponent.jsx";
+import {getReviewsById} from "../services/ReviewService.jsx";
+import RequestComponent from "../components/RequestComponent.jsx";
+import {uploadImage} from "../services/ImageService.jsx";
+import {Tooltip} from "react-tooltip";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -67,6 +68,11 @@ export default function ItemPage() {
         setClicked(!isClicked);
     }
     const ItemPicture = ({ imageId }) => {
+        if (!imageId) {
+            return( <img src={'../public/no_image.jpg'}
+                         alt="Item Picture"
+                         style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
+        }
         return( <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
                      alt="Item Picture"
                      style={{width: "150px", height: "150px", objectFit: "cover"}}/>);
@@ -194,9 +200,7 @@ export default function ItemPage() {
                 </div>
                 <div id="item-info">
 
-
                     <div id="item-image">
-                        <h3>Item Image</h3>
                         <>
                             <ItemPicture imageId={itemData.picture}/>
                             <div>
@@ -234,27 +238,25 @@ export default function ItemPage() {
                                     itemID={itemData.itemID}/>
                         </div>
                         <div id="item-info">
-                            <div id="item-image">Item Image</div>
                             <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
                             <div id="item-image">
-                                <h3> Item Image</h3>
                                 <ItemPicture imageId={itemData.picture}/>
                             </div>
 
-                            {/*<div id="item-image">Item Image</div>*/}
-                            <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
-                            <div id="item-name" className="item-member">{itemData.itemName}</div>
-                            <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
-                            <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
-                            <label htmlFor="itemCategory"
+                        {/*<div id="item-image">Item Image</div>*/}
+                        <label htmlFor="itemName" className="item-member-label"><b>Item Name</b></label>
+                        <div id="item-name" className="item-member">{itemData.itemName}</div>
+                        <label htmlFor="itemDescription" className="item-member-label"><b>Description</b></label>
+                        <div id="item-desc" className="item-member">{itemData.itemDescription}</div>
+                        <label htmlFor="itemCategory"
                                className="item-member-label"><b>Category</b></label>
-                            <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
-                        </div>
-                        <div id="avg-rating-container">
-                            <label><b>Average Rating</b></label>
-                            <div id="item-avg">{avgRating}</div>
-                        </div>
+                        <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
+                    </div>
+                    <div id="avg-rating-container">
+                        <label><b>Average Rating</b></label>
+                        <div id="item-avg">{avgRating}</div>
+                    </div>
                 </div>
             }
             {isOwn ?
@@ -340,25 +342,27 @@ export default function ItemPage() {
                             <button type="submit">Request This Item</button>
                         </form>
                     </div>
-                    {hasBorrowed ?
-                        <div id="reviews-button">
-                            <Link to={"/item/" + itemID + "/create-review"}>
-                                <button>Leave a Review</button>
-                            </Link>
-                        </div>
-                        :
-                        <div id="reviews-button">
-                            <button onClick={handleIllegalClick}>Leave a Review</button>
-                            <CantReviewNotif isClicked={isIllegalClicked}/>
-                        </div>}
                 </div>
             }
             <div id="reviews-header">
                 <h2>Reviews</h2>
-                <div id="reviews-underline" className="underline"></div>
+                <hr id="reviews-underline" ></hr>
             </div>
-
+            {hasBorrowed ?
+                <div id="reviews-button">
+                    <Link to={"/item/" + itemID + "/create-review"}>
+                        <button>Leave a Review</button>
+                    </Link>
+                </div>
+                :
+                <div id="reviews-button">
+                    <a className="review-anchor" data-tooltip-content={"You need to borrow an item before you can review it!"}>
+                        <button onClick={handleIllegalClick}>Leave a Review</button>
+                    </a>
+                    <Tooltip anchorSelect=".review-anchor" id="review-tooltip"/>
+                </div>}
             <div id="reviews-box">
+
             <div id="reviews-section">
                     {
                         reviews.map(review => (

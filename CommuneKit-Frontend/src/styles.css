@@ -66,6 +66,18 @@ textarea {
 button:hover {
     background:#22B14C !important;
 }
+
+td {
+    text-overflow:ellipsis;
+}
+
+table tr {
+    border-bottom:1px solid black;
+}
+
+a {
+    color:inherit !important;
+}
 /* Login, registration */
 .auth-container {
     max-width: 400px;
@@ -77,7 +89,7 @@ button:hover {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -45%);
 }
 
 .about-box {
@@ -99,8 +111,10 @@ button:hover {
     top:0;
     left:0;
     background-color:rgba(255,255,255,100%);
+    border: 3px solid #22B14C;
     padding-left:25%;
     z-index:2;
+    width: max-content;
 }
 
 #close-menu {
@@ -307,8 +321,61 @@ button {
 /* item table */
 .item-table {
     text-align:left;
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
+th {
+    width: 33%;
+}
+
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width:33%;
+}
+
+.table-head {
+    border: 1px solid black;
+    text-align:center;
+    font-size:30px;
+}
+
+.item-comp {
+    height:10px;
+    border: 1px solid black;
+}
+
+.comp-desc {
+    text-overflow:ellipsis;
+    max-width:40px;
+    max-height:40px;
+    white-space:nowrap;
+    overflow:hidden
+}
+
+#desc-tooltip {
+    background-color:white;
+    color:black;
+    font-size:14px;
+}
+/*.comp-desc:hover {
+    white-space:normal;
+    overflow:visible;
+    max-width:60px;
+}*/
+
+
+
+.item-comp:hover {
+    background-color: #b7ecc7
+}
 /* individual item's page */
 #edit-item-button {
     position:absolute;
@@ -317,22 +384,26 @@ button {
 }
 
 .form-group {
-    display:inline-block;
+    display:flex;
+    flex-direction:column;
 }
 
 #reviews-button {
     position:absolute;
-    left: 40%;
-    top:90%;
+    right:10%;
+    top:140%;
 }
 
-#reviews-box {
-    position:relative;
+.review-text {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
 }
 
 #reviews-header {
     position:absolute;
     text-align:center;
+    margin-left:55px;
     top:130%;
     width:100%;
     height:300px;
@@ -340,22 +411,30 @@ button {
 
 #reviews-section {
     position:absolute;
-    top:700px;
+    top:140%;
     margin-left:50px;
 }
 
-.underline {
-    width:100%;
-    height:1px;
-    background-color:black
-}
-
 .item-review {
-    border: 1px black solid;
+    border: 5px #22B14C solid;
     height:200px;
     width:1000px;
     padding:10px;
     margin:10px;
+}
+
+.comp-row-2 {
+    display:flex;
+    flex-direction:row;
+}
+
+.pic-name {
+    display:flex;
+    flex-direction:column;
+}
+
+.review-picture {
+    background-color:white;
 }
 
 .delete-button {
@@ -374,6 +453,11 @@ button {
     left: 50%;
     transform: translate(-15%);
     top:20%;
+}
+
+#item-image-header {
+    position:absolute;
+    margin-left:50px;
 }
 
 .item-member {
@@ -403,12 +487,159 @@ button {
     border: 1px solid black;
 }
 
+
+/********************************/
+/* START OF USER REVIEW SECTION */
+/********************************/
+#rating_stars {
+    display:flex;
+    align-content:center;
+    flex-direction:row;
+}
+
+.star_filled {
+    height:50px;
+    width:50px;
+}
+
+.star {
+    height:50px;
+    width:50px;
+}
+
+#leave_review_section {
+    margin-bottom: 50px;
+    padding: 10px;
+    border: 2px solid #22B14C;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    height: 200px;
+    width: 500px;
+}
+
+.reviews_box {
+    /*position:absolute;*/
+    /*top:75%;*/
+    overflow:scroll;
+    height:500px;
+    border: 3px solid #22B14C;
+    /*width:600px;*/
+}
+/* Form inputs styling */
+
+
+.reviews-header {
+    position:absolute;
+    text-align:center;
+    margin-left:55px;
+    top:90%;
+    width:100%;
+    height:300px;
+}
+/*.user-review {*/
+/*    border-radius: 10px;*/
+/*    border: 10px #22B14C solid;*/
+/*    height:150px;*/
+/*    width:550px;*/
+/*    padding:10px;*/
+/*    margin:10px;*/
+/*}*/
+.user-review {
+    border-radius: 10px;
+    border: 10px #22B14C solid;
+    height: 150px;
+    width: 550px;
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.user-review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rating {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.profile-left-panel {
+    position:absolute;
+    top: 120px;
+    left: 20px;
+}
+
+.profile-button {
+    background-color: #22B14C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.profile-button:hover {
+    background-color: #1c8c3b;
+}
+#user_review_form {
+    position: relative;
+    top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.review_inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* Input fields */
+#user_review_form input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#user_review_form textarea {
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+#user_review_form button {
+    position: relative;
+    left: 30%;
+    padding: 5px 10px;
+    background-color: #22B14C;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#user_review_form button:hover {
+    background-color: #1c8c3b;
+}
 #avg-rating-container {
     position:absolute;
     margin-left:100px;
     top:30%;
     left:60%;
 }
+
+/** END OF USER REVIEW SECTION **/
+
+
+
+
 
 #cant-review {
     height:200px;
@@ -430,29 +661,14 @@ button {
 #request-form {
     position:absolute;
     top:80%;
-    margin-left:50px;
+    right:10%;
 }
 
 #request-text {
     width:200px;
 }
-/* create reviews page */
-#rating-stars {
-    display:flex;
-    align-content:center;
-    flex-direction:row;
-}
 
-.star-filled {
-    height:50px;
-    width:50px;
-}
 
-.star {
-    height:50px;
-    width:50px;
-    filter:grayscale(100%);
-}
 
 /* create items page */
 #new-item-info {

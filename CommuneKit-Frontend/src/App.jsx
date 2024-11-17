@@ -4,20 +4,20 @@ import './styles.css'
 import Home from "./Home.jsx"
 import Search from "./Search.jsx"
 import Notifications from "./Notifications.jsx"
-import Profile from "./Profile.jsx"
+import Profile from "./Pages/Profile.jsx"
 import { BrowserRouter as Router, Route, Link, Routes,} from "react-router-dom";
 import MyItems from "./MyItems.jsx";
-import ItemPage from "./ItemPage.jsx"
+import ItemPage from "./Pages/ItemPage.jsx"
 import LoginPage from "./components/LoginPage.jsx";
-import RegistrationPage from "./components/RegistrationPage.jsx";
-import FavoritePage from "./components/FavoritePage.jsx";
+import RegistrationPage from "./Pages/RegistrationPage.jsx";
+import FavoritePage from "./Pages/FavoritePage.jsx";
 import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
-import ReviewPage from "./ReviewPage.jsx"
+import ReviewPage from "./Pages/ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
-import ReportPage from "./components/ReportPage.jsx";
-
+import ReportPage from "./Pages/ReportPage.jsx";
+import LoadProfile from "./LoadProfile.jsx";
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
@@ -39,13 +39,14 @@ export default function App() {
                   <Link to="/search" id="search-button"><button>Search</button></Link>
                   <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={`/profile/${userID}`}
+                  <Link to={"/profile/"}
                         id="profile-button"><button>Profile</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
                   <Route path="/notifications" element={<Notifications />} />
+                  <Route path="/profile/" element={<LoadProfile/>}/>
                   <Route path="/profile/:userID" element={<Profile/>} />
                   <Route path="/profile/:userID/my-items" element={<MyItems />} />
                   <Route path="/item/:itemID" element={<ItemPage />}/>
