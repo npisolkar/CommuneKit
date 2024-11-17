@@ -1,10 +1,13 @@
-import './styles.css';
+import '../styles.css';
 import { useState, useEffect } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import {getUserById, updateUser, updateUserImage} from "./services/UserService.jsx";
-import {getImageById, uploadImage} from "./services/ImageService.jsx";
-import {ConversationComponent} from "./components/ConversationComponent.jsx";
+import {getUserById, updateUser, updateUserImage} from "../services/UserService.jsx";
+import {getImageById, uploadImage} from "../services/ImageService.jsx";
+import {ConversationComponent} from "../components/ConversationComponent.jsx";
+import UserReview from "../components/UserReviewMaterial/UserReview.jsx";
+import UserReviewBox from "../components/UserReviewMaterial/UserReviewBox.jsx";
+import StarRating from "../components/UserReviewMaterial/StarRating.jsx";
 
 axios.defaults.baseURL = "http://localhost:8080/api/users";
 
@@ -45,8 +48,8 @@ function ItemsButton({ isOwn }) {
 }
 
 const ProfilePicture = ({ imageId }) => {
-   return(
-       <img src={`http://localhost:8080/api/image/fileId/${imageId}`}
+   return( <img src={imageId ? `http://localhost:8080/api/image/fileId/${imageId}`
+                        : '../public/simplepfp.png'}
          alt="User Profile"
          style={{width: "150px", height: "150px", objectFit: "cover", borderRadius: "50%"}}/>);
 }
@@ -68,6 +71,10 @@ export default function Profile() {
     });
 
     useEffect(() => {
+        // if not logged in, navigate to login page
+        if (!localStorage.getItem("userID")) {
+            navigate('/')
+        }
         getUserById(userID)
             .then(res => {
                 console.log("formdata before fetch: " + JSON.stringify(formData))
@@ -77,7 +84,7 @@ export default function Profile() {
             .catch(function (error) {
                 console.log(error);
             });
-    }, [isClicked])
+    }, [isClicked, userID])
 
     function onClick() {
         setClicked(!isClicked);
@@ -147,19 +154,22 @@ export default function Profile() {
 
     return (
         <>
-            <div id="profile-image">
-                <div><p>Your username: {formData.userName}</p></div>
+            <div className="profile-left-panel">
                 <ProfilePicture imageId={formData.profilePicture}/>
-            </div>
-            {isClicked ? (<>
-                <div className="form-group">
-                    <label>Profile picture:</label>
-                    <input type="file" onChange={handleFileChange}/>
-                </div>
-            </>) : (
-                <></>
-            )}
 
+                {isClicked ? (<>
+                    <div className="form-group">
+                        <label>Profile picture:</label>
+                        <input type="file" onChange={handleFileChange}/>
+                    </div>
+                </>) : (
+                    <></>
+                )}
+
+                <>
+                    <UserReviewBox username={formData.userName} userID={userID} isOwn={localStorage.getItem("userID")===userID}/>
+                </>
+            </div>
             {isClicked ? (
                 <div className="about-box">
                     <div><p>Your username: {formData.userName}</p></div>
