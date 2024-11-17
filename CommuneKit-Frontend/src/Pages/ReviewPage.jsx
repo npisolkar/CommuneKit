@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
-import {createReview} from './services/ReviewService.jsx'
-import {getItemById} from "./services/ItemService.jsx";
+import {createReview} from '../services/ReviewService.jsx'
+import {getItemById} from "../services/ItemService.jsx";
 
 export default function ReviewPage() {
     let {itemID} = useParams()
@@ -72,7 +72,7 @@ export default function ReviewPage() {
 function Star() {
     return (
         <>
-            <img src="/istockphoto-1135769825-612x612.jpg" alt="star" className="star"/>
+            <img src="/gold_star.jpg" alt="star" className="star"/>
         </>
     )
 }
