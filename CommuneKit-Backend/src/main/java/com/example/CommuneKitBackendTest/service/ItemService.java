@@ -24,6 +24,12 @@ public interface ItemService {
 
     Double getRating(Long itemID);
 
+    List<ItemDto> getSuggestedItems(Long userID);
+
+    List<ItemDto> getSuggestedItemsByFavorites(Long userID);
+
+    List<ItemDto> getCombinedSuggestedItems(Long userID);
+
     List<ItemDto> filterItems(String category, Double minRating, Double maxDistance, String sort, Long userID);
 
     List<String> getAllCategories();

@@ -1,5 +1,6 @@
 package com.example.CommuneKitBackendTest.mapper;
 
+import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 import com.example.CommuneKitBackendTest.entity.Request;
 
@@ -41,4 +42,27 @@ public class RequestMapper {
                 requestDto.getUpdatedAt()
         );
     }
+
+    public static Request mapDateToRequest(RequestDateDto requestDateDto) {
+        String[] start = requestDateDto.getStartDate().split("-");
+        String[] end = requestDateDto.getEndDate().split("-");
+        return new Request(
+                requestDateDto.getRequestId(),
+                requestDateDto.getBorrowingUserId(),
+                requestDateDto.getLendingUserId(),
+                requestDateDto.getItemId(),
+                Integer.parseInt(start[2]),
+                Integer.parseInt(start[1]),
+                Integer.parseInt(start[0]),
+                Integer.parseInt(end[2]),
+                Integer.parseInt(end[1]),
+                Integer.parseInt(end[0]),
+                requestDateDto.getIsApproved(),
+                requestDateDto.getMessage(),
+                requestDateDto.getCreatedAt(),
+                requestDateDto.getUpdatedAt()
+        );
+    }
+
+
 }

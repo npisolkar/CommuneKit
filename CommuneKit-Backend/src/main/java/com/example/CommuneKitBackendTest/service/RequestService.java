@@ -1,11 +1,14 @@
 package com.example.CommuneKitBackendTest.service;
 
+import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
 
 import java.util.List;
 
 public interface RequestService {
     RequestDto createRequest(RequestDto requestDto);
+
+    RequestDto createDateRequest(RequestDateDto requestDateDto);
 
     RequestDto approveRequest(Long requestId);
 

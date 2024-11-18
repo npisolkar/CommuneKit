@@ -6,6 +6,7 @@ import com.example.CommuneKitBackendTest.entity.Review;
 import com.example.CommuneKitBackendTest.entity.User;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.ItemMapper;
+import com.example.CommuneKitBackendTest.repository.FavoriteRepository;
 import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
@@ -25,9 +26,10 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class ItemServiceImpl implements ItemService {
 
-    private final ReviewRepository reviewRepository;
-    private final UserRepository userRepository;
-    private final ItemRepository itemRepository;
+    private ReviewRepository reviewRepository;
+    private UserRepository userRepository;
+    private ItemRepository itemRepository;
+    private FavoriteRepository favoriteRepository;
 
     @Override
     public ItemDto createItem(ItemDto itemDto) {
@@ -185,6 +187,87 @@ public class ItemServiceImpl implements ItemService {
         return rating != null ? rating : Double.valueOf(0.0); // 显式装箱
     }
 
+    @Override
+    public List<ItemDto> getSuggestedItems(Long userID) {
+        User currentUser = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        double userLat = currentUser.getLatitude();
+        double userLon = currentUser.getLongitude();
+
+        List<Item> items = itemRepository.findAll().stream()
+                .filter(item -> !item.getUserID().equals(userID))
+                .collect(Collectors.toList());
+
+        return calculateAndSortSuggestedItems(items, userLat, userLon);
+    }
+
+    @Override
+    public List<ItemDto> getSuggestedItemsByFavorites(Long userID) {
+        User currentUser = userRepository.findById(userID).orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+        double userLat = currentUser.getLatitude();
+        double userLon = currentUser.getLongitude();
+
+        List<String> favoriteCategories = favoriteRepository.findByUser_UserID(userID).stream()
+                .map(favorite -> favorite.getItem().getItemCategory())
+                .distinct()
+                .collect(Collectors.toList());
+
+        List<Item> filteredItems = itemRepository.findAll().stream()
+                .filter(item -> favoriteCategories.contains(item.getItemCategory()))
+                .filter(item -> !item.getUserID().equals(userID))
+                .collect(Collectors.toList());
+
+        return calculateAndSortSuggestedItems(filteredItems, userLat, userLon);
+    }
+
+    @Override
+    public List<ItemDto> getCombinedSuggestedItems(Long userID) {
+        // Check if the user exists
+        User currentUser = userRepository.findById(userID)
+                .orElseThrow(() -> new ResourceNotFoundException("User with given id not found: " + userID));
+
+        // Check if the user has any favorite items
+        boolean hasFavorites = favoriteRepository.findByUser_UserID(userID).stream()
+                .anyMatch(favorite -> favorite.getItem() != null);
+
+        // Call the appropriate method based on whether the user has favorite items
+        if (hasFavorites) {
+            return getSuggestedItemsByFavorites(userID);
+        } else {
+            return getSuggestedItems(userID);
+        }
+    }
+
+    private List<ItemDto> calculateAndSortSuggestedItems(List<Item> items, double userLat, double userLon) {
+        return items.stream()
+                .map(item -> {
+                    Double averageRating = calculateAverageRating(item.getItemID());
+                    if (averageRating == null || averageRating == 0.0) {
+                        averageRating = 0.1; // default to 0.1 if rating is null or zero
+                    }
+
+                    User user = userRepository.findById(item.getUserID())
+                            .orElseThrow(() -> new ResourceNotFoundException("User not found for item owner ID: " + item.getUserID()));
+
+                    double lat = user.getLatitude();
+                    double lon = user.getLongitude();
+                    Double distance = calculateDistance(userLat, userLon, lat, lon);
+                    if (distance == null) {
+                        distance = Double.valueOf(0.0); // default to 0 if distance cannot be calculated
+                    }
+
+                    return ItemMapper.mapToItemDto(item, averageRating, distance);
+                })
+                .filter(itemDto -> itemDto.getAverageRating() > 0) // filter out items with zero average rating
+                .sorted((dto1, dto2) -> {
+                    // Calculate scores using averageRating and distance to sort
+                    double score1 = dto1.getAverageRating() / (dto1.getDistance() > 0 ? dto1.getDistance() : 1);
+                    double score2 = dto2.getAverageRating() / (dto2.getDistance() > 0 ? dto2.getDistance() : 1);
+                    return Double.compare(score2, score1); // sort descending by score
+                })
+                .collect(Collectors.toList());
+    }
+
+
     private ItemDto convertToDto(Item item) {
         // Use ItemMapper to map basic fields
         ItemDto dto = ItemMapper.mapToItemDto(item);
@@ -219,7 +302,7 @@ public class ItemServiceImpl implements ItemService {
 
         double distance = Math.acos(Math.sin(lat1) * Math.sin(lat2) +
                 Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)) * 3958.8;
-        return Double.valueOf(distance);
+        return (double) Math.round(distance * 100) / 100;
     }
 
     public void hideItem(Long itemID) {
@@ -238,11 +321,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-        public List<ItemDto> getItemsByBannedUser(Long userId) {
-            List<Item> items = itemRepository.findAll();
-            items.removeIf(item -> !(item.getUserID().equals(userId)));
-            return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
-        }
+    public List<ItemDto> getItemsByBannedUser(Long userId) {
+        List<Item> items = itemRepository.findAll();
+        items.removeIf(item -> !(item.getUserID().equals(userId)));
+        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
+    }
 
     //TODO: deletes whatever image they previously had. GENIUS.
     public void updateItemImage(Long itemID, Long imageId) {
