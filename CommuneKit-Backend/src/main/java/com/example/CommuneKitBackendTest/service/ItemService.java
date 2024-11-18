@@ -34,8 +34,6 @@ public interface ItemService {
 
     List<String> getAllCategories();
 
-
-
     void hideItem(Long itemID);
 
     void unhideItem(Long itemID);
@@ -44,4 +42,5 @@ public interface ItemService {
 
     void updateItemImage(Long itemID, Long imageId);
 
+    List<ItemDto> getMyBorrows(Long userID);
 }

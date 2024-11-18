@@ -24,17 +24,6 @@ public class ItemController {
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
 
-    /*@GetMapping("/my/{id}")
-    public ResponseEntity<List<ItemDto>> getMyItems(@PathVariable("id") Long userId) {
-        List<ItemDto> items = itemService.getAllItems();
-        List<ItemDto> userItems = new ArrayList<>();
-        for (ItemDto itemDto : items) {
-            if itemDto.getUserId = userId
-                    add to userItems
-        }
-        return ResponseEntity.ok(itemDto);
-    }*/
-
     @GetMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<ItemDto> getItemById(@PathVariable("id") Long itemID) {
@@ -131,5 +120,12 @@ public class ItemController {
     public ResponseEntity<List<ItemDto>> getSuggestedItems(@PathVariable("id") Long userID) {
         List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
+    }
+
+    @GetMapping("/my-borrows/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<ItemDto>> getMyBorrows(@PathVariable("id") Long userID) {
+        List<ItemDto> myBorrows = itemService.getMyBorrows(userID);
+        return ResponseEntity.ok(myBorrows);
     }
 }

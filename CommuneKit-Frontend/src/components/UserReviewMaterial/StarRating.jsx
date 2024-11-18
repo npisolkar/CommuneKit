@@ -10,7 +10,7 @@ const StarRating = ({ rating }) => {
     return (
         <div className="star-rating">
             {goldStars.map((star, index) => (
-                <img key={`gold-${index}`} src={star} alt="Gold Star" className="star" />
+                <img key={`gold-${index}`} src={star} alt="Gold Star" className="star"/>
             ))}
             {darkStars.map((star, index) => (
                 <img key={`dark-${index}`} src={star} alt="Dark Star" className="star" />
