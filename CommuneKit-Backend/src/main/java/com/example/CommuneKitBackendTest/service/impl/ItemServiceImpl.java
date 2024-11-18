@@ -302,7 +302,7 @@ public class ItemServiceImpl implements ItemService {
 
         double distance = Math.acos(Math.sin(lat1) * Math.sin(lat2) +
                 Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)) * 3958.8;
-        return Double.valueOf(distance);
+        return (double) Math.round(distance * 100) / 100;
     }
 
     public void hideItem(Long itemID) {
