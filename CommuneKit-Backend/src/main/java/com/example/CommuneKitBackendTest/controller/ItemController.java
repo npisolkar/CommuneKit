@@ -102,7 +102,7 @@ public class ItemController {
 
     @GetMapping("/rating/{itemID}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<Double> getRating(@PathVariable Long itemID) {
+    public ResponseEntity<Double> getRating(@PathVariable("itemID") Long itemID) {
         Double rating = itemService.getRating(itemID);
         return ResponseEntity.ok(rating);
     }
@@ -125,5 +125,11 @@ public class ItemController {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/suggested/{id}")
+    public ResponseEntity<List<ItemDto>> getSuggestedItems(@PathVariable("id") Long userID) {
+        List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
+        return ResponseEntity.ok(suggestedItems);
     }
 }
