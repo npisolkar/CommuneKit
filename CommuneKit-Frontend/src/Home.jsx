@@ -3,7 +3,7 @@ import './styles.css'
 import ItemTable from './components/ItemTable.jsx'
 import {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
-import {getAllItems, getItemsByUser, getMyBorrows, getSuggestedItems} from "./services/ItemService.jsx";
+import {getAllItems, getItemsByUser, getMyBorrows, getMyLent, getSuggestedItems} from "./services/ItemService.jsx";
 
 export default function Home() {
     const navigate = useNavigate();
@@ -51,7 +51,7 @@ export default function Home() {
             })
             .catch(err=>{console.log(err)})
 
-        getAllItems(userID)
+        getMyLent(userID)
             .then(res => {
                 setLentItems(res.data)
             })
@@ -61,26 +61,36 @@ export default function Home() {
 
     return (
         <>
-            <div className="home-items" id="posted-header">
-                <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
+        <div id="home-home">
+            <div className="home-row">
+                <div className="home-items" id="posted-header">
+                    <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
+                </div>
+                {/*<div className="home-items" id="borrowed-header">*/}
+                {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
+                {/*</div>*/}
+                <div className="home-items">
+                    <ItemTable headName="My Lent Items" items={lentItems} userID={localStorage.getItem("userID")}/>
+                </div>
             </div>
-            {/*<div className="home-items" id="borrowed-header">*/}
-            {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
-            {/*</div>*/}
-            <div className="home-items">
-                <ItemTable headName="My Lent Items" items={lentItems} userID={localStorage.getItem("userID")}/>
+            <div className="home-row">
+                <div className="home-items">
+                    <ItemTable headName="My Borrowed Items" items={borrowedItems}
+                               userID={localStorage.getItem("userID")}/>
+                </div>
+                <div className="home-items" id="suggested-items">
+                    <ItemTable headName="Suggested Items" items={suggestedItems}
+                               userID={localStorage.getItem("userID")}/>
+                </div>
             </div>
-            <div className="home-items">
-                <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")}/>
-            </div>
-            <div className="home-items" id="suggested-items">
-                <ItemTable headName="Suggested Items" items={suggestedItems} userID={localStorage.getItem("userID")}/>
-            </div>
-            <div id="create-item-home">
-                <Link to="/newitem">
-                    <button>Create New Item</button>
-                </Link>
-            </div>
-        </>
-    );
+
+        </div>
+    <div id="create-item-home">
+        <Link to="/newitem">
+            <button>Create New Item</button>
+        </Link>
+    </div>
+    </>
+)
+    ;
 }

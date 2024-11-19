@@ -15,6 +15,7 @@ export default function ReviewPage() {
     const navigate = useNavigate()
     const [userID, setUserID] = useState('')
     const [rating, setRating] = useState(review.rating)
+    const [hoverValue, setHoverValue] = useState(undefined)
 
     useEffect(() => {
         getItemById(itemID)
@@ -51,6 +52,46 @@ export default function ReviewPage() {
         navigate("/item/" + itemID)
     }
 
+    const handleMouseOverStar = value => {
+        setHoverValue(value)
+    };
+
+    const handleMouseLeaveStar = () => {
+        setHoverValue(undefined)
+    }
+
+    const handleClickStar = value => {
+        setRating(value)
+    };
+
+    function Stars() {
+        let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
+        const colors = {
+            orange: "#F2C265",
+            grey: "a9a9a9"
+        }
+
+        //click dependency, re-render on click
+        return (
+            <div id="rating-stars">
+                {
+                    stars.map((_, index) => {
+                        return (
+                            <Star
+                                key={index}
+                                color={(rating) > index ? colors.orange : colors.grey}
+                                onChange={(e) => setRating(e.target.value)}
+                                onClick={() => handleClickStar(index + 1)}
+                                onMouseOver={() => handleMouseOverStar(index + 1)}
+                                onMouseLeave={() => handleMouseLeaveStar}
+                            />
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+
     return (
         <>
             <div>
@@ -70,23 +111,10 @@ export default function ReviewPage() {
 }
 
 function Star() {
+
     return (
         <>
             <img src="/gold_star.jpg" alt="star" className="star"/>
         </>
-    )
-}
-
-function Stars() {
-    let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
-    //click dependency, re-render on click
-    return (
-        <div id="rating-stars">
-            {
-                stars.map(star => (
-                    star
-                ))
-            }
-        </div>
     )
 }

@@ -337,29 +337,4 @@ public class ItemServiceImpl implements ItemService {
         item.setPicture( imageId );
         itemRepository.save(item);
     }
-
-    @Override
-    public List<ItemDto> getMyBorrows(Long userId) {
-        List<Item> items = itemRepository.findAll();
-        items.removeIf(item -> (item.getVisible().equals(false)));
-        List<Request> requests = requestRepository.findAll();
-        requests.removeIf(request -> !(request.getBorrowingUserId().equals(userId)));
-
-        for (int i = 0; i < items.size(); i++) {
-            boolean hasRequested = false;
-            for (Request request : requests) {
-                if ((request.getItemId().equals(items.get(i).getItemID()))) {
-                    hasRequested = true;
-                    break;
-                }
-
-                //TODO: make sure it's only current requests
-            }
-            if (!hasRequested) {
-                items.remove(items.get(i));
-                i--;
-            }
-        }
-        return items.stream().map((item) -> ItemMapper.mapToItemDto(item)).collect(Collectors.toList());
-    }
 }

@@ -121,11 +121,4 @@ public class ItemController {
         List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
     }
-
-    @GetMapping("/my-borrows/{id}")
-    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
-    public ResponseEntity<List<ItemDto>> getMyBorrows(@PathVariable("id") Long userID) {
-        List<ItemDto> myBorrows = itemService.getMyBorrows(userID);
-        return ResponseEntity.ok(myBorrows);
-    }
 }

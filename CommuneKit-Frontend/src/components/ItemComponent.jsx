@@ -82,7 +82,7 @@ export default function ItemComponent({ data, userID }) {
         <>
     <tr key={`item-${data.itemID}`} className='item-comp'> {/* Using itemID as a unique key */}
         <td> {!data.picture ?
-            <img src={'../public/no_image.jpg'}
+            <img src={'/no_image.jpg'}
                  alt="Item Picture"
                  style={{width: "50px", height: "50px", objectFit: "cover"}}/>
             :
@@ -94,7 +94,7 @@ export default function ItemComponent({ data, userID }) {
         <td>{data.itemName}</td>
         <td className="comp-desc">
             <a className="desc-anchor" data-tooltip-id="desc-tooltip"
-               data-tooltip-html={data.itemName + " Rating: "
+               data-tooltip-html={"<b>" + data.itemName + "</b>" + " Rating: "
                    + data.averageRating + "<br/>" + data.itemDescription}>
                 {data.itemDescription}
             </a>
@@ -112,9 +112,11 @@ export default function ItemComponent({ data, userID }) {
             {loading ? (
                 <button disabled>Loading...</button>
             ) : isFavorite ? (
-                <button onClick={handleRemoveFavorite}>Remove Favorite</button>
+                <button onClick={handleRemoveFavorite} className="fav-button"><img src="/gold_star.jpg" alt="star"
+                                                            style={{width: "30px", height: "30px", objectFit: "cover"}}/></button>
             ) : (
-                <button onClick={handleAddFavorite}>Favorite</button>
+                <button onClick={handleAddFavorite} className="fav-button"><img src="/dark_star.jpg" alt="star"
+                                                         style={{width: "30px", height: "30px", objectFit: "cover"}}/></button>
             )}
         </td>
     </tr>

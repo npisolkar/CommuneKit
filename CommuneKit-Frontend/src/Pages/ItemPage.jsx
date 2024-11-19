@@ -66,7 +66,7 @@ export default function ItemPage() {
     }
     const ItemPicture = ({ imageId }) => {
         if (!imageId) {
-            return( <img src={'../public/no_image.jpg'}
+            return( <img src={'/no_image.jpg'}
                          alt="Item Picture"
                          style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
         }

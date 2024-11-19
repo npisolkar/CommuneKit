@@ -21,7 +21,8 @@ export default function NewItem() {
                 await createItem(JSON.stringify(itemData));
             console.log("submit: " + responseData);
             setItemData(responseData.data)
-            navigate("/profile/" + String(localStorage.getItem("userID")) + "/my-items")
+            navigate("/item/" + JSON.stringify(responseData.data.itemID))
+            //navigate("/profile/" + String(localStorage.getItem("userID")) + "/my-items")
         } catch (error) {
             console.log(error);
         }

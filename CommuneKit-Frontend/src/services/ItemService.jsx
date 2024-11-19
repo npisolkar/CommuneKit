@@ -12,7 +12,11 @@ export function getItemsByUser(userID) {
 }
 
 export function getMyBorrows(userID) {
-    return axios.get(`${ITEM_API_BASE_URL}/my-borrows/${userID}`);
+    return axios.get(`${ITEM_API_BASE_URL}/borrowed/${userID}`);
+}
+
+export function getMyLent(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/lent/${userID}`);
 }
 
 export function getAllItems() {
