@@ -60,7 +60,7 @@ public class FavoriteService {
         return favorites.stream().map(favorite -> {
             Item item = favorite.getItem();
 
-            double distance = calculateDistance(userLat, userLon, user.getLatitude(), user.getLongitude());
+            double distance = (double) Math.round(100 * calculateDistance(userLat, userLon, user.getLatitude(), user.getLongitude())) /100;
             Double averageRating = calculateAverageRating(item.getItemID());
 
             return new ItemDto(

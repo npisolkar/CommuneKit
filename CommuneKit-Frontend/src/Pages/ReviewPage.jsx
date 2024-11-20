@@ -14,8 +14,13 @@ export default function ReviewPage() {
     })
     const navigate = useNavigate()
     const [userID, setUserID] = useState('')
-    const [rating, setRating] = useState(review.rating)
-
+    const [stars, setStars] = useState([
+        {id: 0, "src":"/dark_star.jpg"},
+        {id: 1, "src":"/dark_star.jpg"},
+        {id: 2, "src":"/dark_star.jpg"},
+        {id: 3, "src":"/dark_star.jpg"},
+        {id: 4, "src":"/dark_star.jpg"}
+    ])
     useEffect(() => {
         getItemById(itemID)
             .then(res => {
@@ -51,13 +56,42 @@ export default function ReviewPage() {
         navigate("/item/" + itemID)
     }
 
+    function Stars() {
+
+        function onClick(ind) {
+            console.log("clicked at " + ind)
+            setStars(stars.map((star, index) => {
+                if (ind >= star.id) {
+                    return {
+                        ...star,
+                        src:"/gold_star.jpg"
+                    }
+                }
+                else {
+                    return {
+                        ...star,
+                        src:"/dark_star.jpg"
+                    }
+                }
+            }))
+            setReview({...review, rating:ind+1})
+        }
+
+        return (
+            <div id="rating-stars">
+                {stars.map((star, index) => (
+                    <img src={star.src} alt="star" className="star" onMouseDown={() => onClick(index)}/>
+                ))}
+            </div>
+        )
+    }
+
     return (
         <>
             <div>
                 <h1>Leave A Review</h1>
                 <form onSubmit={onSubmit}>
                     <Stars/>
-                    <input onChange={handleInputChange} name="rating" defaultValue={review.rating} required></input>
                     <textarea onChange={handleInputChange} name="reviewText" defaultValue={review.reviewText} required></textarea>
                     <button type="submit">Submit</button>
                 </form>
@@ -66,27 +100,5 @@ export default function ReviewPage() {
                 <button onClick={cancel}>Cancel</button>
             </div>
         </>
-    )
-}
-
-function Star() {
-    return (
-        <>
-            <img src="/gold_star.jpg" alt="star" className="star"/>
-        </>
-    )
-}
-
-function Stars() {
-    let stars = ([<Star/>, <Star/>, <Star/>, <Star/>, <Star/>])
-    //click dependency, re-render on click
-    return (
-        <div id="rating-stars">
-            {
-                stars.map(star => (
-                    star
-                ))
-            }
-        </div>
     )
 }

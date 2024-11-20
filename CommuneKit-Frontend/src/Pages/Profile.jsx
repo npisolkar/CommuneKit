@@ -153,7 +153,7 @@ export default function Profile() {
     }
 
     return (
-        <>
+        <div id="profile-box">
             <div className="profile-left-panel">
                 <ProfilePicture imageId={formData.profilePicture}/>
 
@@ -165,10 +165,11 @@ export default function Profile() {
                 </>) : (
                     <></>
                 )}
-
-                <>
-                    <UserReviewBox username={formData.userName} userID={userID} isOwn={localStorage.getItem("userID")===userID}/>
-                </>
+                {localStorage.getItem("userID")===userID ?
+                 null
+                    :
+                    <UserReviewBox username={formData.userName} userID={userID}/>
+                }
             </div>
             {isClicked ? (
                 <div className="about-box">
@@ -259,6 +260,6 @@ export default function Profile() {
             {userID===localStorage.getItem('userID') ? null :
                 <ConversationComponent user2={userID}/>
             }
-        </>
+        </div>
     )
 }
