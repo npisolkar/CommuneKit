@@ -43,4 +43,6 @@ public class ReviewServiceImpl implements ReviewService {
         int total = reviews.stream().mapToInt(Review::getRating).sum();
         return (double) total / num;
     }
+
+    
 }

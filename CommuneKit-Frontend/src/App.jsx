@@ -42,7 +42,6 @@ export default function App() {
                   <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
                   <Link to={"/profile/"}
                         id="profile-button"><button>Profile</button></Link>
-                  <Link to="/BorrowingHistory" id="borrow-button"><button>BorrowingHistory</button></Link>
                   <OptionsMenu />
               </div>
               <Routes>
@@ -85,6 +84,11 @@ function OptionsMenu() {
         setIsClicked(true)
         navigate("/login");
     }
+
+    function navigateToBorrowHistory() {
+        setIsClicked(true);
+        navigate("/BorrowingHistory");
+    }
     return (
         <>
             {isClicked ? <button id="menu-button" onClick={handleClick}>Menu</button>
@@ -94,6 +98,9 @@ function OptionsMenu() {
                         <ul>
                             <li>
                                 <button id="sign-out" onClick={handleSignout}>Sign Out</button>
+                            </li>
+                            <li>
+                                <button id="borrowing-history" onClick={navigateToBorrowHistory}>Borrowing History</button>
                             </li>
                             {/*<li><button>Delete Account</button></li>*/}
                         </ul>
@@ -118,8 +125,13 @@ function MenuBar() {
         <>
             <div id="menu-popup">
                 <ul>
-                    <li><button id="sign-out" onClick={handleSignout}>Sign Out</button></li>
+                    <li>
+                        <button id="sign-out" onClick={handleSignout}>Sign Out</button>
+                    </li>
                     {/*<li><button>Delete Account</button></li>*/}
+                    <li>
+                        <button id="borrowing-history" onClick={navigateToBorrowHistory}></button>
+                    </li>
                 </ul>
             </div>
         </>

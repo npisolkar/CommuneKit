@@ -214,7 +214,6 @@ public class RequestServiceImpl implements RequestService {
 
         return getApprovedRequestsByLender(userId).stream()
                 .filter(request -> {
-                    // Parse the end date from the request
                     LocalDateTime endDate = LocalDateTime.of(
                             request.getEndYear(),
                             request.getEndMonth(),
