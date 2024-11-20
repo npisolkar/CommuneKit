@@ -11,6 +11,8 @@ import {getReviewsById} from "../services/ReviewService.jsx";
 import RequestComponent from "../components/RequestComponent.jsx";
 import {uploadImage} from "../services/ImageService.jsx";
 import {Tooltip} from "react-tooltip";
+import StarRating from "../components/UserReviewMaterial/StarRating.jsx";
+import ItemUserDistance from "../components/ItemUserDistance.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -267,10 +269,7 @@ export default function ItemPage() {
                                className="item-member-label"><b>Category</b></label>
                         <div id="item-cat" className="item-member">{itemData.itemCategory}</div>
                     </div>
-                    <div id="avg-rating-container">
-                        <label><b>Average Rating</b></label>
-                        <div id="item-avg">{avgRating}</div>
-                    </div>
+
                 </div>
             }
             {isOwn ?
@@ -311,6 +310,7 @@ export default function ItemPage() {
                         }
                         </tbody>
                     </table>
+                    <ItemUserDistance userID={userID} itemID={itemID}/>
                     <div id="request-form">
                         <form onSubmit={handleSubmitRequest}>
                             <div>
@@ -352,7 +352,13 @@ export default function ItemPage() {
             }
             <div id="reviews-header">
                 <h2>Reviews</h2>
-                <hr id="reviews-underline" ></hr>
+                <div id="avg-rating-container">
+                    <label><b>Average Rating</b></label>
+                    <div id="item-avg">
+                        <StarRating rating={avgRating}></StarRating>
+                    </div>
+                </div>
+                <hr id="reviews-underline"></hr>
             </div>
             {hasBorrowed ?
                 <div id="reviews-button">

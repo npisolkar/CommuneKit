@@ -114,7 +114,7 @@ a {
     border: 3px solid #22B14C;
     padding-left:25%;
     z-index:2;
-    width: max-content;
+    width: 100%;
 }
 
 #close-menu {
@@ -180,6 +180,12 @@ a {
     right:50px;
 }
 /* search page */
+
+#search-component {
+    position: absolute;
+    top:20%;
+}
+
 .search-bar {
     display: flex;
     justify-content: left;
@@ -238,7 +244,7 @@ button {
     align-items: center;
     gap: 10px;
     margin-top: 20px;
-    max-height: 500px;
+    max-height: 400px;
     overflow-y: auto;
     width: 100%;
 }
@@ -269,6 +275,7 @@ button {
     display: flex;
     gap: 15px;
     font-size: 14px;
+    padding: 10px;
 }
 
 /* profile page */
@@ -342,6 +349,8 @@ td {
 }
 
 .table-head {
+    position: fixed;
+    width: 850px;
     border: 1px solid black;
     text-align:center;
     font-size:30px;
@@ -465,26 +474,34 @@ td {
     text-align:left;
     width:500px;
     margin:10px;
+    border: 3px solid rgba(26, 142, 54, 0.6);
+    border-radius:5px;
 }
 
 .item-member-label {
+    border: 3px solid rgba(26, 142, 54, 0.6);
+    border-radius:5px;
+    margin: 5px;
     text-align:center;
-    border: 1px solid black;
 }
 
 #item-desc {
     height:200px;
-    border: 1px solid black;
+    border: 2px solid #1a8e36;
+    border-radius: 3px;
 }
 
 #item-user {
     top:20%;
     position:absolute;
-    margin-left:50px
+    margin-left:50px;
+    border: 2px solid #1a8e36;
+    border-radius: 3px;
 }
 
 #item-cat {
-    border: 1px solid black;
+    border: 2px solid #1a8e36;
+    border-radius: 3px;
 }
 
 
@@ -628,11 +645,11 @@ td {
 #user_review_form button:hover {
     background-color: #1c8c3b;
 }
+
 #avg-rating-container {
     position:absolute;
-    margin-left:100px;
-    top:30%;
-    left:60%;
+    top:-10%;
+    right:15%;
 }
 
 /** END OF USER REVIEW SECTION **/
@@ -659,6 +676,10 @@ td {
 }
 
 #request-form {
+    border: 5px rgba(34, 177, 76, 0.9) solid;
+    border-radius: 10px;
+    margin:10px;
+    padding:10px;
     position:absolute;
     top:80%;
     right:10%;
@@ -668,7 +689,15 @@ td {
     width:200px;
 }
 
-
+#item-page-distance {
+    border: 5px rgba(34, 177, 76, 0.9) solid;
+    border-radius: 10px;
+    margin:10px;
+    padding:10px;
+    position:absolute;
+    top:50%;
+    right:10%;
+}
 
 /* create items page */
 #new-item-info {
