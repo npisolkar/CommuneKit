@@ -5,7 +5,7 @@ const StarRating = ({ rating }) => {
     const maxStars = 5; // Total stars to display
     const goldStars = Array(roundedRating).fill("../gold_star.jpg"); // Array of gold stars
     const darkStars = Array(maxStars - roundedRating).fill("../dark_star.jpg"); // Array of dark stars
-    console.log(roundedRating, goldStars, darkStars);
+    //console.log(roundedRating, goldStars, darkStars);
 
     return (
         <div className="star-rating">

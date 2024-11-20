@@ -516,17 +516,10 @@ td {
 /********************************/
 /* START OF USER REVIEW SECTION */
 /********************************/
-#rating_stars {
+#star-rating {
     display:flex;
-    align-content:center;
     flex-direction:row;
 }
-
-.star_filled {
-    height:50px;
-    width:50px;
-}
-
 .star {
     height:50px;
     width:50px;
