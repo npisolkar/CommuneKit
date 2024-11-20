@@ -112,11 +112,11 @@ export default function ItemComponent({ data, userID }) {
             {loading ? (
                 <button disabled>Loading...</button>
             ) : isFavorite ? (
-                <button onClick={handleRemoveFavorite} className="fav-button"><img src="/gold_star.jpg" alt="star"
-                                                            style={{width: "30px", height: "30px", objectFit: "cover"}}/></button>
+                <button onClick={handleRemoveFavorite} className="fav-button"><img src="/full-bookmark.jpg" alt="star"
+                                                            style={{width: "30px", height: "40px", objectFit: "cover"}}/></button>
             ) : (
-                <button onClick={handleAddFavorite} className="fav-button"><img src="/dark_star.jpg" alt="star"
-                                                         style={{width: "30px", height: "30px", objectFit: "cover"}}/></button>
+                <button onClick={handleAddFavorite} className="fav-button"><img src="/empty-bookmark.jpg" alt="star"
+                                                         style={{width: "30px", height: "40px", objectFit: "cover"}}/></button>
             )}
         </td>
     </tr>

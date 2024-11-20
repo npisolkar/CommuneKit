@@ -122,9 +122,18 @@ button:hover {
     left:0;
     background-color:rgba(255,255,255,100%);
     border: 3px solid #22B14C;
-    padding-left:25%;
     z-index:2;
     width:100%;
+}
+
+#menu-buttons {
+    position:absolute;
+    top: 30px;
+    right:10px;
+}
+
+#home-logo {
+    margin-left:30px;
 }
 
 #close-menu {
@@ -190,8 +199,8 @@ button:hover {
     right:50px;
 }
 
-button .fav_button {
-    background-color:white !important;
+button .fav-button {
+    background-color:transparent !important;
 }
 
 #home-home {
