@@ -20,7 +20,9 @@ export default function Home() {
             navigate('/login');
         } else if (localStorage.getItem("role") === "ADMIN") {
             navigate('/admin');
-        } else {
+        } else if (localStorage.getItem("role") === "OWNER"){
+            navigate('/owner');
+        }else{
             loadItems(userID);
         }
     }, [navigate]);
