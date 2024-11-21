@@ -823,3 +823,14 @@ td {
     flex-direction:row;
     justify-content:space-around;
 }
+/*owner page stuff*/
+.admin-container{
+    display:flex;
+    padding:10px;
+    gap:10px;
+
+}
+.admin-box{
+    padding: 10px;
+    border: 5px solid green;
+}

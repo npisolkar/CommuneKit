@@ -82,3 +82,6 @@ export function banUser(userId) {
 export  function unbanUser(userId){
     return axios.delete(USER_API_BASE_URL + '/unban/' + userId);
 }
+export  function deleteUser(userId){
+    return axios.delete(USER_API_BASE_URL + '/' + userId);
+}
