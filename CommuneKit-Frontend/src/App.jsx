@@ -131,7 +131,6 @@ function MenuBar() {
                     <li>
                         <button id="sign-out" onClick={handleSignout}>Sign Out</button>
                     </li>
-                    {/*<li><button>Delete Account</button></li>*/}
                     <li>
                         <button id="borrowing-history" onClick={navigateToBorrowHistory}></button>
                     </li>

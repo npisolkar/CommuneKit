@@ -5,7 +5,7 @@
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
-import {createDateRequest, createRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
+import {createDateRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
 import ReviewComponent from "../components/ReviewComponent.jsx";
 import {getReviewsById} from "../services/ReviewService.jsx";
 import RequestComponent from "../components/RequestComponent.jsx";
@@ -232,10 +232,16 @@ export default function ItemPage() {
                         <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
                         <select id="item-cat" name="itemCategory" className="item-member" onChange={handleItemChange}
                                 defaultValue={itemData.itemCategory} required>
-                            <option value="Indoor">Indoor</option>
-                            <option value="Outdoor">Outdoor</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Games">Games</option>
                             <option value="Party">Party</option>
-                            <option value="Consumable">Consumable</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Moving">Moving</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Landscaping">Landscaping</option>
+                            <option value="Baby">Baby</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
                         </select>
                         <button type="submit">Submit Changes</button>
                     </form>
@@ -359,11 +365,11 @@ export default function ItemPage() {
                 <hr id="reviews-underline"></hr>
             </div>
             {hasBorrowed ?
-                <div id="reviews-button">
-                    <Link to={"/item/" + itemID + "/create-review"}>
-                        <button>Leave a Review</button>
-                    </Link>
-                </div>
+                        <div id="reviews-button">
+                            <Link to={"/item/" + itemID + "/create-review"}>
+                                <button>Leave a Review</button>
+                            </Link>
+                        </div>
                 :
                 <div id="reviews-button">
                     <a className="review-anchor" data-tooltip-content={"You need to borrow an item before you can review it!"}>
