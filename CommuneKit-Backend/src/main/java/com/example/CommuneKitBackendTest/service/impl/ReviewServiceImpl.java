@@ -44,5 +44,16 @@ public class ReviewServiceImpl implements ReviewService {
         return (double) total / num;
     }
 
-    
+    @Override
+    public double getRatingByUser(Long itemId, Long userId) {
+        List<Review> reviews = getReviewsByItemId(itemId).stream().map((review) ->
+                ReviewMapper.mapToReview(review)).collect(Collectors.toList());
+
+        reviews.removeIf(review -> review.getReviewerID() != (userId));
+        double sum = 0;
+        for (Review review : reviews) {
+            sum += review.getRating();
+        }
+        return sum / reviews.size();
+    }
 }

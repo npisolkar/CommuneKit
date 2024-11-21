@@ -4,6 +4,8 @@ export default function BorrowingHistory() {
     const userID = localStorage.getItem("userID"); // Get userID from localStorage
     const [borrowedItems, setBorrowedItems] = useState([]);
     const [lentItems, setLentItems] = useState([]);
+    const [borrowedRatings, setBorrowedRatings] = useState({});
+    const [lentRatings, setLentRatings] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -12,13 +14,36 @@ export default function BorrowingHistory() {
             try {
                 setLoading(true);
 
+                // Fetch borrowing history
                 const borrowResponse = await fetch(`http://localhost:8080/api/requests/History/borrow/${userID}`);
                 const borrowData = await borrowResponse.json();
                 setBorrowedItems(borrowData);
 
+                // Fetch lending history
                 const lendResponse = await fetch(`http://localhost:8080/api/requests/History/lend/${userID}`);
                 const lendData = await lendResponse.json();
                 setLentItems(lendData);
+
+                // Fetch ratings for borrowed items
+                const borrowedRatings = {};
+                for (const item of borrowData) {
+                    const ratingResponse = await fetch(`http://localhost:8080/api/reviews/rating/${item.itemId}/${userID}`);
+                    const ratingData = await ratingResponse.text(); // Use .text() for plain number response
+                    console.log(`Borrowed - ItemID: ${item.itemId}, UserID: ${userID}, Rating:`, ratingData);
+                    borrowedRatings[item.requestId] = parseFloat(ratingData) || "N/A"; // Parse the number and handle invalid cases
+                }
+                setBorrowedRatings(borrowedRatings);
+
+                // Fetch ratings for lent items
+                const lentRatings = {};
+                for (const item of lendData) {
+                    const ratingResponse = await fetch(`http://localhost:8080/api/reviews/rating/${item.itemId}/${item.borrowingUserId}`);
+                    const ratingData = await ratingResponse.text(); // Use .text() for plain number response
+                    console.log(`Lent - ItemID: ${item.itemId}, BorrowingUserID: ${item.borrowingUserId}, Rating:`, ratingData);
+                    lentRatings[item.requestId] = parseFloat(ratingData) || "N/A"; // Parse the number and handle invalid cases
+                }
+                setLentRatings(lentRatings);
+
             } catch (err) {
                 setError("Failed to fetch borrowing or lending history.");
                 console.error(err);
@@ -30,6 +55,7 @@ export default function BorrowingHistory() {
         fetchData();
     }, [userID]);
 
+
     if (loading) return <p>Loading borrowing history...</p>;
     if (error) return <p>{error}</p>;
 
@@ -37,6 +63,7 @@ export default function BorrowingHistory() {
         <div className="borrowing-history-page">
             <h1>Borrowing History</h1>
 
+            {/* Borrowed Items Section */}
             <div className="history-section">
                 <h2>Items Borrowed by You</h2>
                 {borrowedItems.length > 0 ? (
@@ -48,6 +75,7 @@ export default function BorrowingHistory() {
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Message</th>
+                            <th>Rating</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,6 +86,7 @@ export default function BorrowingHistory() {
                                 <td>{`${item.startDay}/${item.startMonth}/${item.startYear}`}</td>
                                 <td>{`${item.endDay}/${item.endMonth}/${item.endYear}`}</td>
                                 <td>{item.message}</td>
+                                <td>{borrowedRatings[item.requestId]}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -67,7 +96,7 @@ export default function BorrowingHistory() {
                 )}
             </div>
 
-            {/* Lending Section */}
+            {/* Lent Items Section */}
             <div className="history-section">
                 <h2>Items Lent by You</h2>
                 {lentItems.length > 0 ? (
@@ -79,6 +108,7 @@ export default function BorrowingHistory() {
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Message</th>
+                            <th>Rating</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -89,6 +119,7 @@ export default function BorrowingHistory() {
                                 <td>{`${item.startDay}/${item.startMonth}/${item.startYear}`}</td>
                                 <td>{`${item.endDay}/${item.endMonth}/${item.endYear}`}</td>
                                 <td>{item.message}</td>
+                                <td>{lentRatings[item.requestId]}</td>
                             </tr>
                         ))}
                         </tbody>
