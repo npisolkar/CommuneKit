@@ -66,9 +66,6 @@ export default function Home() {
                 <div className="home-items" id="posted-header">
                     <ItemTable key="posted-item" headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
                 </div>
-                {/*<div className="home-items" id="borrowed-header">*/}
-                {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
-                {/*</div>*/}
                 <div className="home-items">
                     <ItemTable key="lent-item" headName="My Lent Items" items={lentItems} userID={localStorage.getItem("userID")}/>
                 </div>

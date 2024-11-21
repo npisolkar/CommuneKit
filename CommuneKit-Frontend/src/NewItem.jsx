@@ -38,17 +38,23 @@ export default function NewItem() {
             <form onSubmit={handleUploadItem}>
                 <div id="create-image">Item Image</div>
                 <label htmlFor="itemName" className="item-head">Item Name</label>
-                <input type="text" name="itemName" defaultValue={itemData.itemName} required
+                <input type="text" name="itemName" className="new-item-input" defaultValue={itemData.itemName} required
                        onChange={handleItemChange}/>
                 <label htmlFor="itemDescription" className="item-head">Description</label>
-                <input type="text" name="itemDescription" defaultValue={itemData.itemDescription} required
+                <input type="text" name="itemDescription" className="new-item-input" defaultValue={itemData.itemDescription} required
                        onChange={handleItemChange}/>
                 <label htmlFor="itemCategory" className="item-head">Category</label>
                 <select name="itemCategory" onChange={handleItemChange} required>
-                    <option value="Indoor">Indoor</option>
-                    <option value="Outdoor">Outdoor</option>
+                    <option value="Tools">Tools</option>
+                    <option value="Games">Games</option>
                     <option value="Party">Party</option>
-                    <option value="Consumable">Consumable</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Kitchen">Kitchen</option>
+                    <option value="Moving">Moving</option>
+                    <option value="Cleaning">Cleaning</option>
+                    <option value="Landscaping">Landscaping</option>
+                    <option value="Baby">Baby</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
                 </select>
                 <button type="submit">Create New Item</button>
             </form>

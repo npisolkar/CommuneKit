@@ -124,11 +124,11 @@ button:hover {
     border: 3px solid #22B14C;
     z-index:2;
     width:100%;
+    box-shadow: 10px 10px #22B14C;
 }
 
 #menu-buttons {
     position:absolute;
-    /*padding: 10px;*/
     top: 30px;
     right:10px;
 }
@@ -307,8 +307,8 @@ button .fav-button {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-top: 20px;
-    max-height: 400px;
+    margin: 20px;
+    max-height: 500px;
     overflow-y: auto;
     width: 100%;
 }
@@ -384,6 +384,9 @@ button .fav-button {
     position:absolute;
 }
 
+.new-item-input {
+    width:100%;
+}
 /* notifications */
 #notif-title {
     top:auto;
@@ -426,7 +429,7 @@ td {
     text-align:center;
     font-size:30px;
     background-color:#22B14C;
-    width:800px;
+    width:700px;
 }
 
 .item-comp {
@@ -581,11 +584,6 @@ td {
 /********************************/
 /* START OF USER REVIEW SECTION */
 /********************************/
-#rating_stars {
-    display:flex;
-    /*align-content:center;*/
-    flex-direction:row;
-}
 #star-rating {
     display:flex;
     flex-direction:row;
