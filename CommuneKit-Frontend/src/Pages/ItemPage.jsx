@@ -13,6 +13,7 @@ import {uploadImage} from "../services/ImageService.jsx";
 import {Tooltip} from "react-tooltip";
 import StarRating from "../components/UserReviewMaterial/StarRating.jsx";
 import ItemUserDistance from "../components/ItemUserDistance.jsx";
+import FavoriteButton from "../components/FavoriteButton.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -246,6 +247,9 @@ export default function ItemPage() {
                             <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
                                     itemID={itemData.itemID}/>
                         </div>
+                        <div>
+                            <FavoriteButton itemID={itemData.itemID} userID={localStorage.getItem("userID")}/>
+                        </div>
                         <div id="item-info">
                             <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
 
@@ -303,6 +307,7 @@ export default function ItemPage() {
                         }
                         </tbody>
                     </table>
+
                     <ItemUserDistance userID={userID} itemID={itemID}/>
                     <div id="request-form">
                         <form onSubmit={handleSubmitRequest}>
