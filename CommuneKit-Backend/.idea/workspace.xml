@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51dbf551-eb19-428d-a168-1116a0ce9dd3" name="Changes" comment="added unbanning">
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/public/notsaved.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/public/saved.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ItemUserDistance.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/FavoriteService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/service/FavoriteService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/CommuneKitBackendTest/controller/ItemController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/controller/ItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/ItemService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/ItemService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/example/CommuneKitBackendTest/service/impl/ItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Home.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Home.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ItemPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Pages/ItemPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Search.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/Search.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ItemTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/components/ItemTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/../CommuneKit-Frontend/src/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,8 +48,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/npisolkar/CommuneKit&quot;,
-    &quot;accountId&quot;: &quot;ddeeed67-28ad-4b6a-95c2-ad5f6350a223&quot;
+    &quot;url&quot;: &quot;https://github.com/npisolkar/CommuneKit.git&quot;,
+    &quot;accountId&quot;: &quot;e2e9d355-65b8-4d7a-a71c-e9342048e061&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -100,8 +106,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
@@ -121,6 +127,8 @@
       <workItem from="1730344047879" duration="6593000" />
       <workItem from="1730467551304" duration="471000" />
       <workItem from="1730510205484" duration="7767000" />
+      <workItem from="1732035675368" duration="1824000" />
+      <workItem from="1732128661481" duration="1327000" />
     </task>
     <task id="LOCAL-00001" summary="Added get items by user id api">
       <option name="closed" value="true" />
