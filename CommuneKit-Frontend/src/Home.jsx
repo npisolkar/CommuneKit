@@ -13,8 +13,6 @@ export default function Home() {
     const [borrowedItems, setBorrowedItems] = useState([]);
     const [suggestedItems, setSuggestedItems] = useState([]);
 
-
-
     useEffect(() => {
         const userID = localStorage.getItem("userID");
         console.log("userID found to be: " + userID);
@@ -66,9 +64,6 @@ export default function Home() {
                 <div className="home-items" id="posted-header">
                     <ItemTable headName="My Posted Items" items={postedItems} userID={localStorage.getItem("userID")}/>
                 </div>
-                {/*<div className="home-items" id="borrowed-header">*/}
-                {/*    <ItemTable headName="My Borrowed Items" items={borrowedItems} userID={localStorage.getItem("userID")} />*/}
-                {/*</div>*/}
                 <div className="home-items">
                     <ItemTable headName="My Lent Items" items={lentItems} userID={localStorage.getItem("userID")}/>
                 </div>
