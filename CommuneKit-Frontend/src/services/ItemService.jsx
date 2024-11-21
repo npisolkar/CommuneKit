@@ -1,5 +1,4 @@
 import axios from "axios";
-import {useState} from "react";
 
 const ITEM_API_BASE_URL = "http://localhost:8080/api/items"
 const FAVORITE_API_BASE_URL = "http://localhost:8080/api/favorites";
@@ -13,7 +12,11 @@ export function getItemsByUser(userID) {
 }
 
 export function getMyBorrows(userID) {
-    return axios.get(`${ITEM_API_BASE_URL}/my-borrows/${userID}`);
+    return axios.get(`${ITEM_API_BASE_URL}/borrowed/${userID}`);
+}
+
+export function getMyLent(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/lent/${userID}`);
 }
 
 export function getAllItems() {
@@ -52,6 +55,18 @@ export function deleteItem(itemID) {
 
 export function getItemsByPage(page, pageSize) {
     return axios.get(`${ITEM_API_BASE_URL}?page=${page}&size=${pageSize}`);
+}
+
+export function getSuggestedItems(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/suggested/${userID}`);
+}
+
+export function getSuggestedItemsByFavorites(userID) {
+    return axios.get(`${ITEM_API_BASE_URL}/suggestedf/${userID}`);
+}
+
+export function getFavorites(userID) {
+    return axios.get(`${FAVORITE_API_BASE_URL}/${userID}`);
 }
 
 export function createItem(itemDto) {

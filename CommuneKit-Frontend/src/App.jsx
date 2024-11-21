@@ -35,14 +35,15 @@ export default function App() {
           <div>
               <div className="menu-bar" id="navbar">
                   <Link id="logo" to="/home">
-                      <img src="/CommuneKit Logo.png" alt="logo"></img>
+                      <img src="/CommuneKit Logo.png" alt="logo" id="home-logo"></img>
                   </Link>
-                  <Link to="/search" id="search-button"><button>Search</button></Link>
-                  <Link to="/notifications" id="notif-button"><button>Notifications</button></Link>
-                  <Link to="/favorites" id="notif-button"><button>Favorites</button></Link>
-                  <Link to={"/profile/"}
-                        id="profile-button"><button>Profile</button></Link>
+                  <div id="menu-buttons">
+                    <Link to="/search"><button className="menu-button">Search</button></Link>
+                    <Link to="/notifications"><button className="menu-button">Notifications</button></Link>
+                    <Link to="/favorites"><button className="menu-button">Favorites</button></Link>
+                    <Link to={"/profile/"}><button className="menu-button">Profile</button></Link>
                   <OptionsMenu />
+                  </div>
               </div>
               <Routes>
                   <Route path="/search" element={<Search />}/>
@@ -87,7 +88,7 @@ function OptionsMenu() {
     }
     return (
         <>
-            {isClicked ? <button id="menu-button" onClick={handleClick}>Menu</button>
+            {isClicked ? <button id="menu-button" onClick={handleClick} className="menu-button">Menu</button>
                  :
                 <div>
                     <div id="menu-popup">
@@ -95,7 +96,6 @@ function OptionsMenu() {
                             <li>
                                 <button id="sign-out" onClick={handleSignout}>Sign Out</button>
                             </li>
-                            {/*<li><button>Delete Account</button></li>*/}
                         </ul>
                     </div>
                     <button id="close-menu" onClick={handleClick}>X</button>

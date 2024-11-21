@@ -6,7 +6,7 @@ import StarRating from "./StarRating.jsx";
 import {useNavigate} from "react-router-dom";
 
 
-export default function UserReviewBox({username, userID, isOwn}) {
+export default function UserReviewBox({username, userID}) {
     const [reviews, setReviews] = useState([]);
     const [avgRating, setAvgRating] = useState(0);
     const navigate = useNavigate();
