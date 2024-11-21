@@ -9,12 +9,12 @@ export default function ItemTable({ headName, items, userID }) {
 
 
     useEffect(() => {
-        if (items.length > 0) {
+        //if (items.length > 0) {
             setDisplayItems(items);
-        } else if (userID) {
-            loadItems(currentPage)
-                .catch (err => console.log(err));
-        }
+        //} else if (userID) {
+            //loadItems(currentPage)
+                //.catch (err => console.log(err));
+        //}
     }, [currentPage, userID, items]);
 
     const loadItems = async (page) => {
@@ -48,15 +48,10 @@ export default function ItemTable({ headName, items, userID }) {
                 </thead>
                 <tbody>
                 {displayItems.map(item => (
-                    <ItemComponent key={`item-${item.itemID}-${userID}`} data={item} userID={userID} />
+                    <ItemComponent key={`item-${item.itemID}-${userID}-${headName}`} data={item} userID={userID} />
                 ))}
                 </tbody>
             </table>
-            {hasMoreItems && (
-                <div style={{ textAlign: 'center', margin: '20px' }}>
-                    <button onClick={loadMoreItems}>Load More</button>
-                </div>
-            )}
         </div>
     );
 }

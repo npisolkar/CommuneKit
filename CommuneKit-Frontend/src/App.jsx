@@ -18,6 +18,7 @@ import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./Pages/ReportPage.jsx";
 import LoadProfile from "./LoadProfile.jsx";
+import OwnerPage from "./Pages/OwnerPage.jsx";
 
 export default function App() {
     const [userID, setUserID] = useState( localStorage.getItem("userID") );
@@ -59,9 +60,11 @@ export default function App() {
                   <Route path="/favorites" element={<FavoritePage />} />
                   <Route path="/reset-password" element={<ResetPasswordPage />} /> {/* Added reset password route */}
                   <Route path="/admin" element={<AdminPage />}/>
+                  <Route path="/owner" element={<OwnerPage />}/>
                   {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
                   <Route path="/report/:userID" element = {<ReportPage/>}/>
                   <Route path="/" element={<LoginPage />}/>
+
               </Routes>
           </div>
           </Router>

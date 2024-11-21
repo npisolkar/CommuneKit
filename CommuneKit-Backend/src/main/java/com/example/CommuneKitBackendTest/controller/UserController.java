@@ -128,5 +128,13 @@ public class UserController {
         List<UserDto> users = userService.getBannedUsers();
         return ResponseEntity.ok(users);
     }
+
+    @GetMapping("/admins")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<List<UserDto>> getAdmins() {
+        List<UserDto> users = userService.getAdmins();
+        return ResponseEntity.ok(users);
+    }
+
 }
 

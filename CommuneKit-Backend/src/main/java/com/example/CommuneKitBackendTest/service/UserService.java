@@ -33,4 +33,6 @@ public interface UserService {
     boolean resetPassword(PasswordResetDto passwordResetDto);
 
     List<UserDto> getBannedUsers();
+
+    List<UserDto> getAdmins();
 }
