@@ -68,7 +68,7 @@ export default function ItemPage() {
     }
     const ItemPicture = ({ imageId }) => {
         if (!imageId) {
-            return( <img src={'../public/no_image.jpg'}
+            return( <img src={'/no_image.jpg'}
                          alt="Item Picture"
                          style={{width: "150px", height: "150px", objectFit: "cover"}}/>)
         }
@@ -200,15 +200,8 @@ export default function ItemPage() {
         setItemData({...itemData, [name]: value})
     }
 
-    const [isIllegalClicked, setIllegalClick] = useState(false)
-    function handleIllegalClick() {
-        setIllegalClick(!isIllegalClicked)
-    }
-
     return (
         <>
-
-
             {isClicked ?
                 <>
                 <div id="edit-item-button">
@@ -369,7 +362,7 @@ export default function ItemPage() {
                 :
                 <div id="reviews-button">
                     <a className="review-anchor" data-tooltip-content={"You need to borrow an item before you can review it!"}>
-                        <button onClick={handleIllegalClick}>Leave a Review</button>
+                        <button>Leave a Review</button>
                     </a>
                     <Tooltip anchorSelect=".review-anchor" id="review-tooltip"/>
                 </div>}
@@ -384,17 +377,5 @@ export default function ItemPage() {
                 </div>
             </div>
         </>
-    )
-}
-
-function CantReviewNotif(isClicked) {
-    return (
-        <>
-            {isClicked ?
-        <div id="cant-review">
-            You need to borrow an item before you can review it.
-        </div> :
-                null}
-            </>
     )
 }
