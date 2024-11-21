@@ -162,6 +162,12 @@ public class UserServiceImpl implements UserService {
         users.removeIf(user -> !(user.isBanned()));
         return users.stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
     }
+
+    public List<UserDto> getAdmins() {
+        List<User> users = userRepository.findAll();
+        users.removeIf(user -> !(user.getRole().equals("ADMIN")));
+        return users.stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+    }
 /*
     @Override
     public MultipartFile getUserImageById(long userID) { //no idea if this is correct

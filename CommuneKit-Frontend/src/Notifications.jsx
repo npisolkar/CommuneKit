@@ -69,6 +69,7 @@ export default function Notifications() {
         } catch (error) {
             console.error('Error:', error);
         }
+        window.location.reload();
     };
 
     const formatRequestBorrower = (request) => {
@@ -106,8 +107,6 @@ export default function Notifications() {
                 <div><a href={"/item/"+request.itemId}>Item ID: {request.itemId}</a></div>
                 <div>Start Date: {request.startDay}/{request.startMonth}/{request.startYear}</div>
                 <div>End Date: {request.endDay}/{request.endMonth}/{request.endYear}</div>
-
-
             </div>
 
         )
@@ -119,7 +118,7 @@ export default function Notifications() {
     }
 
     return (
-        <>
+        <div id="notifs-box">
             <div id="notif-title">
                 <h1>Notifications</h1>
             </div>
@@ -207,6 +206,6 @@ export default function Notifications() {
                     <p>No denied requests.</p>
                 )}
             </div>
-        </>
+        </div>
     )
 }

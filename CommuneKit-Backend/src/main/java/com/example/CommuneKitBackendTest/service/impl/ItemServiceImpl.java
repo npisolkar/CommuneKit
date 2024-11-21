@@ -11,6 +11,9 @@ import com.example.CommuneKitBackendTest.repository.ItemRepository;
 import com.example.CommuneKitBackendTest.repository.ReviewRepository;
 import com.example.CommuneKitBackendTest.repository.UserRepository;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import com.example.CommuneKitBackendTest.entity.Request;
+import com.example.CommuneKitBackendTest.service.RequestService;
+import com.example.CommuneKitBackendTest.repository.RequestRepository;
 //import com.example.CommuneKitBackendTest.service.ReviewService;
 //import jakarta.persistence.EntityManager;
 //import jakarta.persistence.EntityManagerFactory;
@@ -19,10 +22,8 @@ import com.example.CommuneKitBackendTest.service.ItemService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
-
 
 @Service
 @AllArgsConstructor
@@ -32,6 +33,7 @@ public class ItemServiceImpl implements ItemService {
     private UserRepository userRepository;
     private ItemRepository itemRepository;
     private FavoriteRepository favoriteRepository;
+    private RequestRepository requestRepository;
 
     @Override
     public ItemDto createItem(ItemDto itemDto) {
@@ -70,7 +72,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public void deleteItem(Long itemID) {
-        Item item = itemRepository.findById(itemID)
+        itemRepository.findById(itemID)
                 .orElseThrow(() -> new ResourceNotFoundException("Item with given id not found: " + itemID));
         itemRepository.deleteById(itemID);
     }

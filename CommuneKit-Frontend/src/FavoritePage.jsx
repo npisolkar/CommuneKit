@@ -31,7 +31,7 @@ export default function FavoritePage() {
     };
 
     return (
-        <>
+        <div id="fav-page">
             <h2>Your Favorites</h2>
             {favorites.length === 0 ? (
                 <p>You have no favorite items.</p>
@@ -57,6 +57,6 @@ export default function FavoritePage() {
                     </tbody>
                 </table>
             )}
-        </>
+        </div>
     );
 }

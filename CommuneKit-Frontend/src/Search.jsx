@@ -91,7 +91,7 @@ export default function Search() {
     };
 
     return (
-        <>
+        <div id="search-component">
             <div className="search-bar">
                 <input
                     type="text"
@@ -157,6 +157,6 @@ export default function Search() {
                     <p>No items found. Please try another search.</p>
                 )}
             </div>
-        </>
+        </div>
     );
 }

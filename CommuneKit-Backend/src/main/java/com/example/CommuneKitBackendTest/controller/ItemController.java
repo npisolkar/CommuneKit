@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.lang.Exception;
 
 @AllArgsConstructor
 @RestController
@@ -23,17 +24,6 @@ public class ItemController {
         ItemDto savedItem = itemService.createItem(itemDto);
         return new ResponseEntity<>(savedItem, HttpStatus.CREATED);
     }
-
-    /*@GetMapping("/my/{id}")
-    public ResponseEntity<List<ItemDto>> getMyItems(@PathVariable("id") Long userId) {
-        List<ItemDto> items = itemService.getAllItems();
-        List<ItemDto> userItems = new ArrayList<>();
-        for (ItemDto itemDto : items) {
-            if itemDto.getUserId = userId
-                    add to userItems
-        }
-        return ResponseEntity.ok(itemDto);
-    }*/
 
     @GetMapping("{id}")
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
