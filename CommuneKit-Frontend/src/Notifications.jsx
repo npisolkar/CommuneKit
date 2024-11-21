@@ -1,6 +1,7 @@
 import './styles.css'
 import { useState, useEffect } from 'react'
 import {updateRequest} from "./services/RequestService.jsx";
+import ContactInfo from "./components/ContactInfo.jsx";
 
 export default function Notifications() {
     const [borrowerPendingRequests, setBorrowerPendingRequests] = useState([]);
@@ -142,7 +143,10 @@ export default function Notifications() {
                 {borrowerApprovedRequests.length > 0 ? (
                     <ul>
                         {borrowerApprovedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequestBorrower(request)}</li>
+                            <li key={request.requestId}>
+                                {formatRequestBorrower(request)}
+                                <ContactInfo userID={request.lendingUserId} />
+                            </li>
                         ))}
                     </ul>
                 ) : (
@@ -188,7 +192,10 @@ export default function Notifications() {
                 {lenderApprovedRequests.length > 0 ? (
                     <ul>
                         {lenderApprovedRequests.map(request => (
-                            <li key={request.requestId}>{formatRequestLender(request)}</li>
+                            <li key={request.requestId}>
+                                {formatRequestLender(request)}
+                                <ContactInfo userID={request.borrowingUserId} />
+                            </li>
                         ))}
                     </ul>
                 ) : (
