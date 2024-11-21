@@ -132,4 +132,18 @@ public class ItemController {
         List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
     }
+
+    @GetMapping("/lent/{userId}")
+    public ResponseEntity<List<ItemDto>> getLentItems(@PathVariable Long userId) {
+        List<ItemDto> lentItems = itemService.getLentItems(userId);
+        return ResponseEntity.ok(lentItems);
+    }
+
+    @GetMapping("/borrowed/{userId}")
+    public ResponseEntity<List<ItemDto>> getBorrowedItems(@PathVariable Long userId) {
+        List<ItemDto> borrowedItems = itemService.getBorrowedItems(userId);
+        return ResponseEntity.ok(borrowedItems);
+    }
+
+
 }

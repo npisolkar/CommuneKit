@@ -22,4 +22,11 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("SELECT DISTINCT i.itemCategory FROM Item i")
     List<String> findAllDistinctCategories();
+
+    @Query("SELECT i FROM Item i WHERE i.borrowerID = :userId AND i.isBorrowed = TRUE")
+    List<Item> findBorrowedItemsByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT i FROM Item i WHERE i.userID = :userId AND i.isBorrowed = TRUE")
+    List<Item> findLentItemsByUserId(@Param("userId") Long userId);
+
 }
