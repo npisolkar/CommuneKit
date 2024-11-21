@@ -78,6 +78,7 @@ a {
 button {
     background-color: #22B14C !important;
     color: white;
+    margin: 2px;
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
@@ -124,11 +125,11 @@ button:hover {
     border: 3px solid #22B14C;
     z-index:2;
     width:100%;
+    box-shadow: 2px 2px rgba(0, 0, 0, 0.3);
 }
 
 #menu-buttons {
     position:absolute;
-    /*padding: 10px;*/
     top: 30px;
     right:10px;
 }
@@ -141,7 +142,7 @@ button:hover {
     position: absolute;
     z-index:3;
     right: 10px;
-    top:120px;
+    top:50px;
 }
 
 #menu-popup {
@@ -164,9 +165,49 @@ button:hover {
 }
 
 #sign-out {
-    top:100px;
+    top:120px;
     position:absolute;
     z-index:3;
+}
+
+#borrowing-history {
+    top:70px;
+    position:absolute;
+    z-index:3;
+}
+
+.borrowing-history-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.borrowing-history-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.history-section {
+    margin-bottom: 40px;
+}
+
+.history-section h2 {
+    margin-bottom: 10px;
+}
+
+.history-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.history-section th, .history-section td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.history-section tr:hover {
+    background-color: #f1f1f1;
 }
 
 #logo {
@@ -217,7 +258,9 @@ button .fav-button {
 
 #search-component {
     position: absolute;
-    top:20%;
+    top:25%;
+    width:80%;
+    height:25%;
 }
 
 .search-bar {
@@ -237,6 +280,7 @@ button .fav-button {
     font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    transform:translate(0, -15%)
 }
 
 #search-toggles {
@@ -245,7 +289,6 @@ button .fav-button {
     gap: 20px;
     margin-left:50px;
     position:absolute;
-    top:30%;
 }
 
 .search-toggle {
@@ -262,15 +305,14 @@ button .fav-button {
 }
 
 /* Styling for Search Results */
-.search-results {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+#search-results {
     gap: 10px;
-    margin-top: 20px;
-    max-height: 400px;
+    margin: 20px;
+    max-height: 500px;
     overflow-y: auto;
     width: 100%;
+    position:absolute;
+    top:50%;
 }
 
 .search-result-item {
@@ -344,6 +386,9 @@ button .fav-button {
     position:absolute;
 }
 
+.new-item-input {
+    width:100%;
+}
 /* notifications */
 #notif-title {
     top:auto;
@@ -386,7 +431,7 @@ td {
     text-align:center;
     font-size:30px;
     background-color:#22B14C;
-    width:800px;
+    width:700px;
 }
 
 .item-comp {
@@ -541,11 +586,6 @@ td {
 /********************************/
 /* START OF USER REVIEW SECTION */
 /********************************/
-#rating_stars {
-    display:flex;
-    /*align-content:center;*/
-    flex-direction:row;
-}
 #star-rating {
     display:flex;
     flex-direction:row;
@@ -793,4 +833,6 @@ td {
 .admin-box{
     padding: 10px;
     border: 5px solid green;
+    overflow: scroll;
+    height:350px;
 }

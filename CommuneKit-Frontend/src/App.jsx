@@ -18,6 +18,7 @@ import NewItem from "./NewItem.jsx"
 import AdminPage from "./components/AdminPage.jsx"
 import ReportPage from "./Pages/ReportPage.jsx";
 import LoadProfile from "./LoadProfile.jsx";
+import BorrowHistoryPage from "./Pages/BorrowHistoryPage.jsx";
 import OwnerPage from "./Pages/OwnerPage.jsx";
 
 export default function App() {
@@ -64,6 +65,7 @@ export default function App() {
                   {/*// THIS IS THE CORRECT ORDERING of the admin directory*/}
                   <Route path="/report/:userID" element = {<ReportPage/>}/>
                   <Route path="/" element={<LoginPage />}/>
+                  <Route path="/BorrowingHistory" element={<BorrowHistoryPage />} />
 
               </Routes>
           </div>
@@ -86,6 +88,11 @@ function OptionsMenu() {
         setIsClicked(true)
         navigate("/login");
     }
+
+    function navigateToBorrowHistory() {
+        setIsClicked(true);
+        navigate("/BorrowingHistory");
+    }
     return (
         <>
             {isClicked ? <button id="menu-button" onClick={handleClick} className="menu-button">Menu</button>
@@ -95,6 +102,9 @@ function OptionsMenu() {
                         <ul>
                             <li>
                                 <button id="sign-out" onClick={handleSignout}>Sign Out</button>
+                            </li>
+                            <li>
+                                <button id="borrowing-history" onClick={navigateToBorrowHistory}>Borrowing History</button>
                             </li>
                         </ul>
                     </div>
@@ -118,8 +128,12 @@ function MenuBar() {
         <>
             <div id="menu-popup">
                 <ul>
-                    <li><button id="sign-out" onClick={handleSignout}>Sign Out</button></li>
-                    {/*<li><button>Delete Account</button></li>*/}
+                    <li>
+                        <button id="sign-out" onClick={handleSignout}>Sign Out</button>
+                    </li>
+                    <li>
+                        <button id="borrowing-history" onClick={navigateToBorrowHistory}></button>
+                    </li>
                 </ul>
             </div>
         </>

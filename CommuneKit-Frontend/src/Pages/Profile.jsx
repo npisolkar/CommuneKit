@@ -165,11 +165,9 @@ export default function Profile() {
                 </>) : (
                     <></>
                 )}
-                {localStorage.getItem("userID")===userID ?
-                 null
-                    :
+
                     <UserReviewBox username={formData.userName} userID={userID}/>
-                }
+
             </div>
             {isClicked ? (
                 <div className="about-box">

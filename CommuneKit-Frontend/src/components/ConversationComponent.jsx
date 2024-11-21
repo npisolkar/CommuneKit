@@ -19,7 +19,7 @@ export const ConversationComponent = (user2) => {
     const scrollToElement = () => {
         const {current} = endRef
         if (current !== null){
-            endRef.current.scrollTo(endRef.current.scrollWidth, endRef.current.scrollHeight)
+            endRef.current.scrollTo(0, endRef.current.scrollHeight)
         }
     }
 

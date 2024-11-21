@@ -193,6 +193,49 @@ public class RequestServiceImpl implements RequestService {
                 .map(RequestMapper::mapToRequestDto)  // Map to DTO
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<RequestDto> getBorrowerBorrowingHistory(Long userId) {
+        LocalDateTime today = LocalDateTime.now();
+
+        return getApprovedRequestsByBorrower(userId).stream()
+                .filter(request -> {
+                    LocalDateTime endDate = LocalDateTime.of(
+                            request.getEndYear(),
+                            request.getEndMonth(),
+                            request.getEndDay(),
+                            23, 59, 59);
+                    return endDate.isBefore(today);
+                })
+                .sorted(Comparator.comparing(request -> LocalDateTime.of(
+                        request.getEndYear(),
+                        request.getEndMonth(),
+                        request.getEndDay(),
+                        0, 0)))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RequestDto> getLenderRequestHistory(Long userId) {
+        LocalDateTime today = LocalDateTime.now();
+
+        return getApprovedRequestsByLender(userId).stream()
+                .filter(request -> {
+                    LocalDateTime endDate = LocalDateTime.of(
+                            request.getEndYear(),
+                            request.getEndMonth(),
+                            request.getEndDay(),
+                            23, 59, 59);
+                    return endDate.isBefore(today); // Only include requests where the end date is in the past
+                })
+                .sorted(Comparator.comparing(request -> LocalDateTime.of(
+                        request.getEndYear(),
+                        request.getEndMonth(),
+                        request.getEndDay(),
+                        0, 0)))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public void deleteRequest(Long requestID) {
         Request request = requestRepository.findById(requestID).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestID));
