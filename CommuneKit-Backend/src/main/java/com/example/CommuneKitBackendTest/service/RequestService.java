@@ -2,6 +2,8 @@ package com.example.CommuneKitBackendTest.service;
 
 import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
+import com.example.CommuneKitBackendTest.dto.ItemDto;
+
 
 import java.util.List;
 
@@ -39,6 +41,12 @@ public interface RequestService {
     List<RequestDto> getCurrentRequestsByItemId(Long itemId);
 
     void deleteRequest(Long requestId);
+
+    List<ItemDto> getBorrowedItemsByUser(Long userId);
+
+    List<ItemDto> getLentItemsByUser(Long userId);
+
+
 
 
 }

@@ -337,28 +337,5 @@ public class ItemServiceImpl implements ItemService {
         item.setPicture( imageId );
         itemRepository.save(item);
     }
-    @Override
-    public List<ItemDto> getLentItems(Long userId) {
-        List<Item> lentItems = itemRepository.findLentItemsByUserId(userId);
-        return lentItems.stream().map(this::mapItemToDto).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ItemDto> getBorrowedItems(Long userId) {
-        List<Item> borrowedItems = itemRepository.findBorrowedItemsByUserId(userId);
-        return borrowedItems.stream().map(this::mapItemToDto).collect(Collectors.toList());
-    }
-
-    private ItemDto mapItemToDto(Item item) {
-        return new ItemDto(
-                item.getItemID(),
-                item.getItemName(),
-                item.getItemDescription(),
-                item.getItemCategory(),
-                item.getUserID(),
-                item.getPicture(),
-                item.getVisible()
-        );
-    }
 
 }

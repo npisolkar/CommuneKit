@@ -46,18 +46,5 @@ public class ItemMapper {
         return item;
     }
 
-    // Mapping from ItemDto to Item, with all fields (borrowerID and isBorrowed)
-    public static Item mapToItemWithBorrowDetails(ItemDto itemDto, Long borrowerID, Boolean isBorrowed) {
-        Item item = new Item();
-        item.setItemID(itemDto.getItemID());
-        item.setItemName(itemDto.getItemName());
-        item.setItemDescription(itemDto.getItemDescription());
-        item.setItemCategory(itemDto.getItemCategory());
-        item.setUserID(itemDto.getUserID());
-        item.setPicture(itemDto.getPicture());
-        item.setVisible(itemDto.getVisible());
-        item.setBorrowerID(borrowerID);
-        item.setIsBorrowed(isBorrowed);
-        return item;
-    }
+
 }

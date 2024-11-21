@@ -40,11 +40,7 @@ public class Item {
         //TODO: make this the imageID for the minecraft item block
         //this.picture = 0l;
     }
-    @Column(name = "borrower_id", nullable = true)
-    private Long borrowerID;
 
-    @Column(name = "borrowed", nullable = false)
-    private Boolean isBorrowed = false;
 
 
 }

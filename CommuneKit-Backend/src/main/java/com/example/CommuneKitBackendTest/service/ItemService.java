@@ -44,7 +44,4 @@ public interface ItemService {
 
     void updateItemImage(Long itemID, Long imageId);
 
-    List<ItemDto> getLentItems(Long userId);
-
-    List<ItemDto> getBorrowedItems(Long userId);
 }
