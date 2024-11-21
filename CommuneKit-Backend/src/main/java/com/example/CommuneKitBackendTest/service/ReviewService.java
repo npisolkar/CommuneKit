@@ -10,4 +10,6 @@ public interface ReviewService {
     List<ReviewDto> getReviewsByItemId(Long itemId);
 
     double getRatingByItemId(Long itemId);
+
+    double getRatingByUser(Long itemId, Long userId);
 }

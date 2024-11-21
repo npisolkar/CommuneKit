@@ -37,6 +37,11 @@ public class ReviewController {
         return ResponseEntity.ok(rating);
     }
 
-
+    @GetMapping("/rating/{itemId}/{userId}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<Double> getRatingBbyUser(@PathVariable("itemId") Long itemId, @PathVariable("userId") Long userId) {
+        Double rating = reviewService.getRatingByUser(itemId, userId);
+        return ResponseEntity.ok(rating);
+    }
 }
 

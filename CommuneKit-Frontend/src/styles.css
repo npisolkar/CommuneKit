@@ -142,7 +142,7 @@ button:hover {
     position: absolute;
     z-index:3;
     right: 10px;
-    top:120px;
+    top:50px;
 }
 
 #menu-popup {
@@ -165,9 +165,49 @@ button:hover {
 }
 
 #sign-out {
-    top:100px;
+    top:120px;
     position:absolute;
     z-index:3;
+}
+
+#borrowing-history {
+    top:70px;
+    position:absolute;
+    z-index:3;
+}
+
+.borrowing-history-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.borrowing-history-page h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.history-section {
+    margin-bottom: 40px;
+}
+
+.history-section h2 {
+    margin-bottom: 10px;
+}
+
+.history-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.history-section th, .history-section td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.history-section tr:hover {
+    background-color: #f1f1f1;
 }
 
 #logo {
@@ -783,4 +823,15 @@ td {
     align-content:flex-start;
     flex-direction:row;
     justify-content:space-around;
+}
+/*owner page stuff*/
+.admin-container{
+    display:flex;
+    padding:10px;
+    gap:10px;
+
+}
+.admin-box{
+    padding: 10px;
+    border: 5px solid green;
 }
