@@ -69,6 +69,7 @@ export default function Notifications() {
         } catch (error) {
             console.error('Error:', error);
         }
+        window.location.reload();
     };
 
     const formatRequestBorrower = (request) => {
