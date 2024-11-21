@@ -124,6 +124,7 @@ button:hover {
     border: 3px solid #22B14C;
     z-index:2;
     width:100%;
+    box-shadow: 10px 10px #22B14C;
 }
 
 #menu-buttons {
@@ -343,6 +344,9 @@ button .fav-button {
     position:absolute;
 }
 
+.new-item-input {
+    width:100%;
+}
 /* notifications */
 #notif-title {
     top:auto;

@@ -3,7 +3,7 @@ import './styles.css'
 import ItemTable from './components/ItemTable.jsx'
 import {useEffect, useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom';
-import {getAllItems, getItemsByUser, getMyBorrows, getMyLent, getSuggestedItems} from "./services/ItemService.jsx";
+import {getItemsByUser, getMyBorrows, getMyLent, getSuggestedItems} from "./services/ItemService.jsx";
 
 export default function Home() {
     const navigate = useNavigate();

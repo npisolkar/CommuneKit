@@ -119,7 +119,6 @@ function MenuBar() {
             <div id="menu-popup">
                 <ul>
                     <li><button id="sign-out" onClick={handleSignout}>Sign Out</button></li>
-                    {/*<li><button>Delete Account</button></li>*/}
                 </ul>
             </div>
         </>

@@ -1,41 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import ItemComponent from './ItemComponent.jsx';
-import { getItemsByPage } from '../services/ItemService.jsx';
+import {Link} from "react-router-dom";
 
 export default function ItemTable({ headName, items, userID }) {
     const [displayItems, setDisplayItems] = useState(items || []);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [hasMoreItems, setHasMoreItems] = useState(false);
-
 
     useEffect(() => {
-        //if (items.length > 0) {
             setDisplayItems(items);
-        //} else if (userID) {
-            //loadItems(currentPage)
-                //.catch (err => console.log(err));
-        //}
-    }, [currentPage, userID, items]);
-
-    const loadItems = async (page) => {
-        try {
-            const response = await getItemsByPage(page, 5);
-            if (response.data && Array.isArray(response.data)) {
-                setDisplayItems(prevItems => [...prevItems, ...response.data]);
-                //setHasMoreItems(response.data.length === 5);
-            }
-        } catch (error) {
-            console.error("Error loading items:", error);
-        }
-    };
-
-    const loadMoreItems = () => {
-        setCurrentPage(prevPage => prevPage + 1);
-    };
+    }, [userID, items]);
 
     return (
         <div className="table-container">
             <div className="table-head"><b>{headName}</b></div>
+            {displayItems.length > 0 ?
             <table className="item-table">
                 <thead>
                     <tr>
@@ -52,6 +29,34 @@ export default function ItemTable({ headName, items, userID }) {
                 ))}
                 </tbody>
             </table>
+                :
+                <>
+                    {headName==="My Posted Items" ?
+                        <div className="no-items">
+                            <p>No posted items...</p>
+                            <Link to="/newitem"><button>Create New Item</button></Link>
+                        </div> : null
+                    }
+                    {headName==="My Borrowed Items" ?
+                        <div>
+                            <p>No borrowed items...</p>
+                            <Link to="/search"><button>To Search</button></Link>
+                        </div> : null
+                    }
+                    {headName==="My Lent Items" ?
+                        <div>
+                            <p>No lent items...</p>
+                            <Link to="/newitem"><button>Create New Item</button></Link>
+                        </div> : null
+                    }
+                    {headName==="Suggested Items" ?
+                        <div>
+                            <p>No items at all...</p>
+                            <Link to="/search"><button>To Search</button></Link>
+                        </div> : null
+                    }
+                </>
+            }
         </div>
     );
 }
