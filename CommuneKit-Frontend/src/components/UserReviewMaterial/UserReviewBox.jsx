@@ -55,7 +55,7 @@ export default function UserReviewBox({username, userID}) {
                 console.log("NOW POSTING: " + JSON.stringify(newReview))
                 const responseData = await createUserReview(newReview);
                 //console.log("submit:" + responseData);
-
+                alert("Successfully submitted review... Thanks for your feedback!")
                 setNewReview({
                     reviewerID: localStorage.getItem("userID"),
                     userID: userID,

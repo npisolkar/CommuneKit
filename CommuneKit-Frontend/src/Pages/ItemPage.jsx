@@ -5,7 +5,7 @@
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
 import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
-import {createDateRequest, createRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
+import {createDateRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
 import ReviewComponent from "../components/ReviewComponent.jsx";
 import {getReviewsById} from "../services/ReviewService.jsx";
 import RequestComponent from "../components/RequestComponent.jsx";
@@ -13,6 +13,7 @@ import {uploadImage} from "../services/ImageService.jsx";
 import {Tooltip} from "react-tooltip";
 import StarRating from "../components/UserReviewMaterial/StarRating.jsx";
 import ItemUserDistance from "../components/ItemUserDistance.jsx";
+import FavoriteButton from "../components/FavoriteButton.jsx";
 
 function EditButton({isOwn, handleClick, bodyText, itemID}) {
     const navigate = useNavigate()
@@ -231,10 +232,16 @@ export default function ItemPage() {
                         <label htmlFor="itemCategory" className="item-member-label"><b>Category</b></label>
                         <select id="item-cat" name="itemCategory" className="item-member" onChange={handleItemChange}
                                 defaultValue={itemData.itemCategory} required>
-                            <option value="Indoor">Indoor</option>
-                            <option value="Outdoor">Outdoor</option>
+                            <option value="Tools">Tools</option>
+                            <option value="Games">Games</option>
                             <option value="Party">Party</option>
-                            <option value="Consumable">Consumable</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Moving">Moving</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Landscaping">Landscaping</option>
+                            <option value="Baby">Baby</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
                         </select>
                         <button type="submit">Submit Changes</button>
                     </form>
@@ -245,6 +252,9 @@ export default function ItemPage() {
                         <div id="edit-item-button">
                             <EditButton isOwn={isOwn} handleClick={onClick} bodyText={"Edit Item"}
                                     itemID={itemData.itemID}/>
+                        </div>
+                        <div>
+                            <FavoriteButton itemID={itemData.itemID} userID={localStorage.getItem("userID")}/>
                         </div>
                         <div id="item-info">
                             <div id="item-name" className="item-member"><h2>{itemData.itemName}</h2></div>
@@ -303,6 +313,7 @@ export default function ItemPage() {
                         }
                         </tbody>
                     </table>
+
                     <ItemUserDistance userID={userID} itemID={itemID}/>
                     <div id="request-form">
                         <form onSubmit={handleSubmitRequest}>
@@ -354,11 +365,11 @@ export default function ItemPage() {
                 <hr id="reviews-underline"></hr>
             </div>
             {hasBorrowed ?
-                <div id="reviews-button">
-                    <Link to={"/item/" + itemID + "/create-review"}>
-                        <button>Leave a Review</button>
-                    </Link>
-                </div>
+                        <div id="reviews-button">
+                            <Link to={"/item/" + itemID + "/create-review"}>
+                                <button>Leave a Review</button>
+                            </Link>
+                        </div>
                 :
                 <div id="reviews-button">
                     <a className="review-anchor" data-tooltip-content={"You need to borrow an item before you can review it!"}>

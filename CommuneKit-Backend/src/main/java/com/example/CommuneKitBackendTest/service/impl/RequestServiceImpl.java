@@ -2,11 +2,16 @@ package com.example.CommuneKitBackendTest.service.impl;
 
 import com.example.CommuneKitBackendTest.dto.RequestDateDto;
 import com.example.CommuneKitBackendTest.dto.RequestDto;
-// import com.example.CommuneKitBackendTest.entity.Item;
+import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.entity.Request;
 import com.example.CommuneKitBackendTest.exception.ResourceNotFoundException;
 import com.example.CommuneKitBackendTest.mapper.RequestMapper;
+import com.example.CommuneKitBackendTest.mapper.ItemMapper;
+
 import com.example.CommuneKitBackendTest.repository.RequestRepository;
+import com.example.CommuneKitBackendTest.repository.ItemRepository;
+
+
 import com.example.CommuneKitBackendTest.service.RequestService;
 import lombok.AllArgsConstructor;
 // import org.springframework.http.ResponseEntity;
@@ -23,6 +28,8 @@ import java.util.stream.Collectors;
 public class RequestServiceImpl implements RequestService {
 
     private RequestRepository requestRepository;
+    private ItemRepository itemRepository;
+
 
     @Override
     public RequestDto createRequest(RequestDto requestDto) {
@@ -256,4 +263,80 @@ public class RequestServiceImpl implements RequestService {
         }
         return false;
     }
+
+    @Override
+    public List<ItemDto> getBorrowedItemsByUser(Long userId) {
+        LocalDateTime now = LocalDateTime.now();
+
+        List<Request> approvedRequests = requestRepository.findAll().stream()
+                .filter(request -> Objects.equals(request.getBorrowingUserId(), userId))
+                .filter(request -> Boolean.TRUE.equals(request.getIsApproved()))
+                .filter(request -> {
+                    LocalDateTime endDate = LocalDateTime.of(
+                            request.getEndYear(),
+                            request.getEndMonth(),
+                            request.getEndDay(),
+                            23, 59, 59);
+                    LocalDateTime startDate = LocalDateTime.of(
+                            request.getStartYear(),
+                            request.getEndMonth(),
+                            request.getStartDay(),
+                            0, 0, 0);
+                    return endDate.isAfter(now) && startDate.isBefore(now);
+                })
+                .collect(Collectors.toList());
+
+        return approvedRequests.stream()
+                .map(request -> itemRepository.findById(request.getItemId())
+                        .map(item -> new ItemDto(
+                                item.getItemID(),
+                                item.getItemName(),
+                                item.getItemDescription(),
+                                item.getItemCategory(),
+                                item.getUserID(),
+                                item.getPicture(),
+                                item.getVisible()))
+                        .orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ItemDto> getLentItemsByUser(Long userId) {
+        LocalDateTime now = LocalDateTime.now();
+
+        List<Request> approvedRequests = requestRepository.findAll().stream()
+                .filter(request -> Objects.equals(request.getLendingUserId(), userId))
+                .filter(request -> Boolean.TRUE.equals(request.getIsApproved()))
+                .filter(request -> {
+                    LocalDateTime endDate = LocalDateTime.of(
+                            request.getEndYear(),
+                            request.getEndMonth(),
+                            request.getEndDay(),
+                            23, 59, 59);
+                    LocalDateTime startDate = LocalDateTime.of(
+                            request.getStartYear(),
+                            request.getEndMonth(),
+                            request.getStartDay(),
+                            0, 0, 0);
+                    return endDate.isAfter(now) && startDate.isBefore(now);
+                })
+                .collect(Collectors.toList());
+
+        return approvedRequests.stream()
+                .map(request -> itemRepository.findById(request.getItemId())
+                        .map(item -> new ItemDto(
+                                item.getItemID(),
+                                item.getItemName(),
+                                item.getItemDescription(),
+                                item.getItemCategory(),
+                                item.getUserID(),
+                                item.getPicture(),
+                                item.getVisible()))
+                        .orElse(null))
+                .filter(Objects::nonNull)
+                .collect(Collectors.toList());
+    }
+
+
 }

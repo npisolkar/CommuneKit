@@ -2,6 +2,8 @@ package com.example.CommuneKitBackendTest.controller;
 
 import com.example.CommuneKitBackendTest.dto.ItemDto;
 import com.example.CommuneKitBackendTest.service.ItemService;
+import com.example.CommuneKitBackendTest.service.RequestService;
+
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,13 +12,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.lang.Exception;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/items")
 @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
 public class ItemController {
 
     private ItemService itemService;
+    private RequestService requestService;
+
+    public ItemController(ItemService itemService, RequestService requestService) {
+        this.itemService = itemService;
+        this.requestService = requestService;
+    }
+
+    @GetMapping("/borrowed/{userId}")
+    public ResponseEntity<List<ItemDto>> getBorrowedItems(@PathVariable Long userId) {
+        List<ItemDto> borrowedItems = requestService.getBorrowedItemsByUser(userId);
+        return ResponseEntity.ok(borrowedItems);
+    }
+
+    @GetMapping("/lent/{userId}")
+    public ResponseEntity<List<ItemDto>> getLentItems(@PathVariable Long userId) {
+        List<ItemDto> lentItems = requestService.getLentItemsByUser(userId);
+        return ResponseEntity.ok(lentItems);
+    }
+
 
     @PostMapping
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
@@ -122,4 +142,6 @@ public class ItemController {
         List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
     }
+
+
 }

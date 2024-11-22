@@ -124,7 +124,7 @@ export default function Search() {
                 </div>
 
                 <div className="search-toggle">
-                    <h4>Distance Range</h4>
+                    <h4>Distance</h4>
                     <select value={distanceRange} onChange={(e) => setDistanceRange(e.target.value)}>
                         <option value="">All</option>
                         <option value="1">Less than 1 mile</option>
@@ -135,7 +135,7 @@ export default function Search() {
                 </div>
 
                 <div className="search-toggle">
-                    <h4>Rating Range</h4>
+                    <h4>Rating</h4>
                     <select value={ratingRange} onChange={(e) => setRatingRange(e.target.value)}>
                         <option value="">All</option>
                         <option value="1">≥ 1 Star</option>
@@ -148,7 +148,7 @@ export default function Search() {
 
             {error && <p className="error-message">{error}</p>}
 
-            <div className="search-results">
+            <div id="search-results">
                 {isLoading ? (
                     <p>Loading...</p>
                 ) : results.length > 0 ? (
