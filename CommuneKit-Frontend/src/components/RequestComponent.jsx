@@ -19,6 +19,7 @@ export default function RequestComponent({data, isLending}) {
                     <tr>
                         <td>{data.startMonth}/{data.startDay}/{data.startYear}</td>
                         <td>{data.endMonth}/{data.endDay}/{data.endYear}</td>
+                        <td><a href={"/profile/" + data.borrowingUserId}>Click 4 Profile</a></td>
                     </tr>
                 }
 

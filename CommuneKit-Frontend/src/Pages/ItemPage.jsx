@@ -320,7 +320,8 @@ export default function ItemPage() {
                         </tbody>
                     </table>
 
-                    <ItemUserDistance userID={userID} itemID={itemID}/>
+                    <ItemUserDistance userID={localStorage.getItem("userID")} itemID={itemID}/>
+
                     <div id="request-form">
                         <form onSubmit={handleSubmitRequest}>
                             <div>
