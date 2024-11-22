@@ -4,7 +4,7 @@
 
 import {useEffect, useState} from 'react';
 import {Link, useParams, useNavigate} from 'react-router-dom';
-import {updateItem, getItemById, deleteItem, updateItemImage} from "../services/ItemService.jsx";
+import {updateItem, getItemById, deleteItem, updateItemImage, deleteItemImage} from "../services/ItemService.jsx";
 import {createDateRequest, getApprovedRequestsById} from "../services/RequestService.jsx";
 import ReviewComponent from "../components/ReviewComponent.jsx";
 import {getReviewsById} from "../services/ReviewService.jsx";
@@ -201,6 +201,11 @@ export default function ItemPage() {
         setItemData({...itemData, [name]: value})
     }
 
+    const deleteImageButton = async (e) => {
+        e.preventDefault();
+        await deleteItemImage(itemID);
+    }
+
     return (
         <>
             {isClicked ?
@@ -216,6 +221,7 @@ export default function ItemPage() {
                             <div>
                                 <label>Item picture upload:</label>
                                 <input type="file" onChange={handleFileChange}/>
+                                <button onClick={deleteImageButton}>Delete item image</button>
                             </div>
                         </>
                     </div>
@@ -276,12 +282,12 @@ export default function ItemPage() {
                 </div>
             }
             {isOwn ?
-
                 <table id="current-requests">
                     <thead>
                     <tr>
                         <td>Start Date</td>
                         <td>End Date</td>
+                        <td>User Page</td>
                     </tr>
                     </thead>
                     <tbody>

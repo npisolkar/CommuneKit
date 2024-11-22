@@ -113,3 +113,12 @@ export function updateItemImage(itemID, imageID) {
         console.log(error);
     }
 }
+
+export function deleteItemImage(itemID) {
+    try {
+        console.log("in deleteImage... itemID: " + itemID);
+        return axios.delete(ITEM_API_BASE_URL + "/updateItemPic" + "/" + itemID, {})
+    } catch (error) {
+        console.log(error);
+    }
+}

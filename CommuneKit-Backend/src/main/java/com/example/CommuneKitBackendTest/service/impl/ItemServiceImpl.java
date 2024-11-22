@@ -334,7 +334,7 @@ public class ItemServiceImpl implements ItemService {
     //TODO: deletes whatever image they previously had. GENIUS.
     public void updateItemImage(Long itemID, Long imageId) {
         Item item = itemRepository.findById(itemID).orElseThrow(() -> new ResourceNotFoundException("Item with given ID not found: " + itemID));
-        item.setPicture( imageId );
+        item.setPicture( imageId==0 ? null : imageId );
         itemRepository.save(item);
     }
 
