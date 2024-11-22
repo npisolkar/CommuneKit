@@ -55,6 +55,7 @@ public class RequestServiceImpl implements RequestService {
     public RequestDto approveRequest(Long requestId) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
         Request updated = requestRepository.save(request);
+
         if(checkOverlap(request)) {
             return null;
         }
@@ -86,7 +87,8 @@ public class RequestServiceImpl implements RequestService {
     public RequestDto updateRequest(Long requestId, RequestDto updatedRequest) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> new ResourceNotFoundException("Request with given id not found: " + requestId));
 
-        if(checkOverlap(request)) {
+        if(updatedRequest.getIsApproved()&&checkOverlap(request)) {
+            request.setIsApproved(false);
             return null;
         }
         request.setIsApproved(updatedRequest.getIsApproved());
