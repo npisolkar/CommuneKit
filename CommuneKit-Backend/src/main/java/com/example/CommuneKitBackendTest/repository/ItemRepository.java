@@ -23,6 +23,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query("SELECT DISTINCT i.itemCategory FROM Item i")
     List<String> findAllDistinctCategories();
 
+    @Query("SELECT i FROM Item i WHERE i.visible = true")
+    List<Item> findAllVisible();
+
 
 
 }

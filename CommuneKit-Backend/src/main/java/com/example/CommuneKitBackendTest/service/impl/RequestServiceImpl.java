@@ -226,7 +226,7 @@ public class RequestServiceImpl implements RequestService {
                             request.getEndMonth(),
                             request.getEndDay(),
                             23, 59, 59);
-                    return endDate.isBefore(today); // Only include requests where the end date is in the past
+                    return endDate.isBefore(today);
                 })
                 .sorted(Comparator.comparing(request -> LocalDateTime.of(
                         request.getEndYear(),

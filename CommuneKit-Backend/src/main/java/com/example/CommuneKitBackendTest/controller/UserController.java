@@ -108,7 +108,7 @@ public class UserController {
     @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<String> unbanUser(@PathVariable("id") long UserID) {
         userService.unbanUser(UserID);
-        return ResponseEntity.ok("User successfully banned");
+        return ResponseEntity.ok("User successfully unbanned");
     }
 
     @PostMapping("/reset-password")
