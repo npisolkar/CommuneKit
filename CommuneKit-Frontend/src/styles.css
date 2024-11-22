@@ -243,6 +243,8 @@ button:hover {
 
 button .fav-button {
     background-color:transparent !important;
+    position: absolute; !important;
+    top:20%; !important;
 }
 
 #home-home {
@@ -431,7 +433,7 @@ td {
     text-align:center;
     font-size:30px;
     background-color:#22B14C;
-    width:700px;
+    width:810px;
 }
 
 .item-comp {
@@ -762,6 +764,11 @@ td {
     top:50%;
     right:10%;
 }
+#item-page-favorite-button {
+    position:absolute;
+    top:15%;
+    right:2%;
+}
 
 /* create items page */
 #new-item-info {
@@ -818,8 +825,8 @@ td {
 }
 
 .actual-message {
-    display:flex;
-    align-content:flex-start;
+    /*display:absolute;*/
+    /*align-content:left;*/
     flex-direction:row;
     justify-content:space-around;
 }

@@ -117,7 +117,20 @@ public class ItemController {
         }
     }
 
+    @DeleteMapping("/updateItemPic/{itemID}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
+    public ResponseEntity<String> updateItemImage(@PathVariable("itemID") Long itemID) {
+        try {
+            itemService.updateItemImage(itemID, 0L);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/suggested/{id}")
+    @CrossOrigin(origins = {"http://localhost:5173", "http://localhost:5174"})
     public ResponseEntity<List<ItemDto>> getSuggestedItems(@PathVariable("id") Long userID) {
         List<ItemDto> suggestedItems = itemService.getCombinedSuggestedItems(userID);
         return ResponseEntity.ok(suggestedItems);
