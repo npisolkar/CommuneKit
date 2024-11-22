@@ -6,19 +6,20 @@ export default function ItemUserDistance({ userID, itemID }) {
     const [itemDistance, setItemDistance] = useState(null);
 
     useEffect(() => {
-        if (!userID) {
-            console.error("User ID is undefined or null");
-            return;
-        }
+
         setIsOwn(localStorage.getItem("userID") === userID)
         console.log("isOwn = " + isOwn)
         // Fetch favorite status when component loads
         const gettingdistance = async () => {
             try {
                 // Fetch all favorite items for the user
+                let apistr = `http://localhost:8080/api/items/distance/${itemID}/${userID}`
+                console.log(apistr);
                 const response = await
-                    axios.get(`http://localhost:8080/api/items/distance/${itemID}/${userID}`);
+                    axios.get(apistr);
+                console.log("DISTANCE response: ", response)
                 const distance = response.data;
+                console.log(distance);
                 setItemDistance(distance);
             } catch (error) {
                 console.error("Error fetching favorite status:", error);
@@ -33,15 +34,20 @@ export default function ItemUserDistance({ userID, itemID }) {
 
     return (
         <>
-            {!isOwn ? (
+            {isOwn ?
                 <>
                     <div id="item-page-distance">
-                    <h3>Your address is {itemDistance} miles away</h3>
+                        <h3>Your address is {itemDistance} miles away</h3>
                     </div>
                 </>
-                )
                 :
-                null
+                (
+                    <>
+                        <div id="item-page-distance">
+                            <h3>Your address is {itemDistance} miles away</h3>
+                        </div>
+                    </>
+                )
             }
         </>
     );
