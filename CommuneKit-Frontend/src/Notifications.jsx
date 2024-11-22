@@ -68,6 +68,10 @@ export default function Notifications() {
                 console.error('Error:', response.statusText);
             }
         } catch (error) {
+            if(error.status === 401||error.status === 500){
+                alert("Request with overlapping time already exists, cannot approve request");
+
+            }
             console.error('Error:', error);
         }
         window.location.reload();

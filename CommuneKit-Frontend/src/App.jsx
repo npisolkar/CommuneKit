@@ -15,7 +15,7 @@ import ResetPasswordPage from "./components/ResetPasswordPage.jsx";
 import { useNavigate } from 'react-router-dom';
 import ReviewPage from "./Pages/ReviewPage.jsx"
 import NewItem from "./NewItem.jsx"
-import AdminPage from "./components/AdminPage.jsx"
+import AdminPage from "./pages/AdminPage.jsx"
 import ReportPage from "./Pages/ReportPage.jsx";
 import LoadProfile from "./LoadProfile.jsx";
 import BorrowHistoryPage from "./Pages/BorrowHistoryPage.jsx";
