@@ -191,10 +191,10 @@ export default function Profile() {
                                        onChange={handleInputChange}/>
                             </label>
                             <label>
-                                <b>Bio</b>
+                                <b>Bio</b></label>
                                 <textarea id="profile-bio" value={formData.bio} name="bio"
                                        onChange={handleInputChange}/>
-                            </label>
+
                             <label>
                                 Address
                                 <div id="profile-address">{formData.address}</div>
@@ -224,22 +224,22 @@ export default function Profile() {
                         <b>Last Name</b>
                         <div> {formData.lastName} </div>
                     </label>
-                    <label>
-                        <b>Email</b>
-                    </label>
-                        <div>{formData.email}</div>
+                    {/*<label>*/}
+                    {/*    <b>Email</b>*/}
+                    {/*</label>*/}
+                    {/*    <div>{formData.email}</div>*/}
                     <label>
                         <b>Bio</b>
                         <div id="profile-bio">{formData.bio}</div>
                     </label>
-                    <label>
-                        <b>Address</b>
-                        <div id="profile-address">{formData.address}</div>
-                    </label>
-                    <label>
-                        <b>Phone Number</b>
-                        <div id="profile-phone">{formData.phone}</div>
-                    </label>
+                    {/*<label>*/}
+                    {/*    <b>Address</b>*/}
+                    {/*    <div id="profile-address">{formData.address}</div>*/}
+                    {/*</label>*/}
+                    {/*<label>*/}
+                    {/*    <b>Phone Number</b>*/}
+                    {/*    <div id="profile-phone">{formData.phone}</div>*/}
+                    {/*</label>*/}
 
                     <EditButton isOwn={userID === localStorage.getItem('userID')}
                                 handleClick={() => setClicked(!isClicked)} bodyText={"Edit Profile"}/>

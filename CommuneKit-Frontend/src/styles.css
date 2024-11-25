@@ -825,8 +825,8 @@ td {
 }
 
 .actual-message {
-    /*display:absolute;*/
-    /*align-content:left;*/
+    /*display:flex;*/
+    /*align-content:flex-start;*/
     flex-direction:row;
     justify-content:space-around;
 }

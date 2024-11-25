@@ -309,6 +309,8 @@ export default function ItemPage() {
                         <tr>
                             <th>Start Date</th>
                             <th>End Date</th>
+                            <th>User Page</th>
+
                         </tr>
                         </thead>
                         <tbody>
